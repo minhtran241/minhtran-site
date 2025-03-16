@@ -2,7 +2,7 @@
     {
         "id": 1,
         "date": "2024-03-01T05:00:00.000Z",
-        "title": "Design and Performance Analysis of Raspberry Pi-Based Computing Prototypes",
+        "title": "A Distributed Edge Computing Prototype Using Raspberry PIs",
         "description": "The research paper focuses on the design, implementation, and performance evaluation of Raspberry Pi-based computing prototypes for diverse practical applications. The study explores various use cases, testing methodologies, and performance benchmarks to optimize prototype performance.",
         "collaborators": [
             {
@@ -10,14 +10,14 @@
                 "link": "https://ieeexplore.ieee.org/author/37087008129"
             }
         ],
-        "status": "In-Progress",
+        "status": "Submitted",
         "created_at": "2024-02-24T09:41:22.055Z",
         "updated_at": "2024-02-24T09:41:22.055Z"
     },
     {
         "id": 2,
         "date": "2024-09-01T05:00:00.000Z",
-        "title": "Deep Learning-Based Coral Species Classification",
+        "title": "Coral Image Classification using Underwater Image Enhancement",
         "description": "The study investigates deep learning techniques for the classification of coral species, leveraging a range of advanced models for accurate classification. The paper discusses the model architecture, dataset preparation, training strategies, and performance evaluation methods.",
         "collaborators": [
             {
