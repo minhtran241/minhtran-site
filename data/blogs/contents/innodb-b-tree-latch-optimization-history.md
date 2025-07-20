@@ -36,7 +36,7 @@ In the 5.6 implementation, the process of B-tree latching is relatively simple, 
     	&page_no, &modify_clock);
     ```
 
-        If the insert fails, a pessimistic insert operation is attempted:
+    If the insert fails, a pessimistic insert operation is attempted:
 
     ```c
     return(row_ins_clust_index_entry_low(

@@ -1,23 +1,172 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
+/* Theme configuration - converted from tailwind.config.js */
+@theme {
+    /* Custom breakpoints */
+    --breakpoint-xs: 475px;
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+    --breakpoint-2xl: 1536px;
+
+    /* Custom fonts */
+    --font-family-mazzardl: var(--font-mazzardl);
+    --font-family-mazzardh: var(--font-mazzardh);
+    --font-family-mazzardm: var(--font-mazzardm);
+
+    /* Custom keyframes */
+    --animate-scroll: scroll 20s linear infinite;
+    --animate-scroll-reverse: scroll-reverse 20s linear infinite;
+    --animate-accordion-down: accordion-down 0.2s ease-out;
+    --animate-accordion-up: accordion-up 0.2s ease-out;
+    --animate-infinite-slider: scroll 20s linear infinite;
+    --animate-infinite-slider-reverse: scroll-reverse 20s linear infinite;
+}
+
+/* Keyframes definitions */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes scroll-reverse {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes accordion-down {
+    from {
+        height: 0;
+    }
+    to {
+        height: var(--radix-accordion-content-height);
+    }
+}
+
+@keyframes accordion-up {
+    from {
+        height: var(--radix-accordion-content-height);
+    }
+    to {
+        height: 0;
+    }
+}
+
+/* Container configuration */
+@layer components {
+    .container {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    @media (min-width: 640px) {
+        .container {
+            max-width: 100%;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .container {
+            max-width: 100%;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .container {
+            max-width: 1024px;
+        }
+    }
+
+    @media (min-width: 1280px) {
+        .container {
+            max-width: 1280px;
+        }
+    }
+}
+
+/* Custom utilities */
 @layer utilities {
+    /* No scrollbar utility */
     .no-scrollbar::-webkit-scrollbar {
         display: none;
     }
-    /* Hide scrollbar for IE, Edge and Firefox */
+
     .no-scrollbar {
         -ms-overflow-style: none; /* IE and Edge */
         scrollbar-width: none; /* Firefox */
     }
+
+    /* Animation utilities */
+    .animate-accordion-down {
+        animation: accordion-down 0.2s ease-out;
+    }
+
+    .animate-accordion-up {
+        animation: accordion-up 0.2s ease-out;
+    }
+
+    .animate-infinite-slider {
+        animation: scroll 20s linear infinite;
+    }
+
+    .animate-infinite-slider-reverse {
+        animation: scroll-reverse 20s linear infinite;
+    }
+
+    .animate-gradient-move {
+        animation: gradientMove 3s ease infinite;
+    }
 }
 
-/* Pointer none (cursor-none) */
-/* * {
-    cursor: none !important;
-} */
+/* Typography plugin overrides - disabling default styles */
+@layer components {
+    /* Disable typography plugin default styles */
+    .prose code::before,
+    .prose code::after,
+    .prose blockquote p:first-of-type::before,
+    .prose blockquote p:last-of-type::after {
+        content: none;
+    }
 
+    .prose pre,
+    .prose code,
+    .prose pre code {
+        background-color: transparent;
+        padding: 0;
+        border-radius: 0;
+        font-weight: inherit;
+        color: inherit;
+        font-size: inherit;
+        font-family: inherit;
+    }
+}
+
+/* Custom cursor styles */
 .custom-cursor {
     position: fixed;
     width: 15px;
@@ -26,3 +175,20 @@
     border-radius: 50%;
     pointer-events: none;
 }
+
+/* Dark mode configuration */
+/* @media (prefers-color-scheme: dark) {
+    :root {
+        color-scheme: dark;
+    }
+} */
+
+/* Plugin imports - Note: These may need to be updated for v4 compatibility */
+@plugin "daisyui" {
+    themes: winter --default, night --prefersdark, lofi, corporate;
+    root: ':root';
+    prefix: '';
+    logs: true;
+}
+@plugin 'tailwind-scrollbar';
+@plugin "@tailwindcss/typography";
