@@ -272,7 +272,7 @@ export default function LLMChat() {
 								</div>
 								<div className="flex flex-col">
 									<h1 className="text-primary-content font-semibold">
-										Minh's Virtual Assistant
+										Minh&apos;s Virtual Assistant
 									</h1>
 									<p className="text-xs text-primary-content/80">
 										{isStreaming ? 'Typing...' : 'Online • Replies in real-time'}
@@ -338,8 +338,7 @@ export default function LLMChat() {
 										onKeyDown={handleKeyPress}
 										rows={1}
 										style={{
-											height: 'auto',
-											height: `${Math.min(Math.max(40, input.split('\n').length * 24), 96)}px`
+											height: `auto ${Math.min(Math.max(40, input.split('\n').length * 24), 96)}px`
 										}}
 										disabled={isLoading}
 									/>
