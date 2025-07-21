@@ -63,20 +63,6 @@ The markdown files are server-side rendered using the [React Markdown](https://g
 As a developer, I have a lot of projects that I have worked on. This section displays the projects I have worked on. The markdown files are stored in the `data/projects` directory and rendered server-side.
 <br /><br />
 
-## Performance
-
-- ### PageSpeed Insights
-
-- Desktop
-
-![Desktop PI](https://github.com/minhtran241/minhtran.com/blob/main/public/about-this-website/lh-rp-desktop.png)
-
-- Mobile
-
-![Mobile PI](https://github.com/minhtran241/minhtran.com/blob/main/public/about-this-website/lh-rp-mobile.png)
-
-<br /><br />
-
 ## Getting Started
 
 If you want to run this project on your local machine, you can do so in just 3 easy steps below. Additionally, update the `.env.example` file to `.env` and replace the variables with your own in the `.env` file.
