@@ -185,7 +185,13 @@
 
 /* Plugin imports - Note: These may need to be updated for v4 compatibility */
 @plugin "daisyui" {
-    themes: winter --default, night --prefersdark, lofi, corporate;
+    themes:
+        light --default,
+        dark --prefersdark,
+        winter,
+        night,
+        lofi,
+        corporate;
     root: ':root';
     prefix: '';
     logs: true;

@@ -30,7 +30,7 @@ const ContactInfoModal = () => (
 			</div>
 
 			<div className="space-y-4">
-				{SOCIAL_MEDIA.map((item, index) => (
+				{SOCIAL_MEDIA.slice(1).map((item, index) => (
 					<div key={index} className="flex items-center gap-4 p-3 rounded-lg bg-base-200/50 hover:bg-base-200 transition-colors">
 						<div className="text-primary text-lg">
 							{item.icon}
@@ -65,7 +65,7 @@ const HeroComponent = () => {
 	};
 
 	return (
-		<div className="pt-28 text-base-content container mx-auto">
+		<div className="pt-28 container mx-auto">
 			<div className="bg-gradient-to-br from-base-100 to-base-200/30 rounded-2xl p-6 md:p-8 shadow-xl border border-base-300/50">
 				<div className="hero-content flex flex-col lg:flex-row items-center gap-12">
 					{/* Profile Picture */}
@@ -94,10 +94,10 @@ const HeroComponent = () => {
 								<h1 className="text-2xl lg:text-3xl font-extrabold leading-tight bg-gradient-to-r from-base-content to-base-content/80 bg-clip-text">
 									{userBasicInfo.fullName}
 								</h1>
-								<span className="inline-flex items-center gap-2 mt-2 px-3 py-1 bg-base-200 rounded-full text-sm font-medium text-base-content/70">
-									<FontAwesomeIcon icon="fa-solid fa-user" className="text-xs" />
+								<div className="badge badge-soft badge-primary">
+									<FontAwesomeIcon icon="fa-solid fa-user" />
 									He/Him
-								</span>
+								</div>
 							</div>
 							<p className="text-lg text-base-content/80 font-medium max-w-2xl leading-relaxed">
 								CS & MATH @ GVSU | SWE/DE @ GVSU Applied Computing Institute
@@ -179,11 +179,11 @@ const HeroComponent = () => {
 								<div className="flex gap-4 mt-2 justify-center lg:justify-start">
 									<div className="text-center">
 										<div className="font-bold text-lg text-primary">CS+MATH</div>
-										<div className="text-xs text-base-content/60">Student</div>
+										<div className="text-xs text-base-content/60">B.S. @GVSU</div>
 									</div>
 									<div className="text-center">
 										<div className="font-bold text-lg text-primary">SWE/DE</div>
-										<div className="text-xs text-base-content/60">@ GVSU ACI</div>
+										<div className="text-xs text-base-content/60">@ACI</div>
 									</div>
 								</div>
 							</div>
