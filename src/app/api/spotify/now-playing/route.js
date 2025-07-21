@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic'; // defaults to auto
 
-export const GET = async (request) => {
+export const GET = async () => {
     try {
         const response = await getNowPlaying();
 
