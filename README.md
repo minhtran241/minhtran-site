@@ -23,18 +23,18 @@ If you have any questions, suggestions, or anything else, don't hesitate to cont
 
 This website is built using these technologies:
 
--   ◼️ Next.js 15
--   💠 Tailwind CSS 3
--   🌺 daisyUI
--   ☀️ Apollo Client
--   ←→ Axios
--   〰️ SWR
--   ➰ Framer Motion
--   🏳️ Font Awesome Icon 6
--   📊 Chart.js
--   🎥 WakaTime API
--   👨🏻‍💻 GitHub API
--   🎵 Spotify API
+- ◼️ Next.js 15
+- 💠 Tailwind CSS 4
+- 🌺 daisyUI
+- ☀️ Apollo Client
+- ←→ Axios
+- 〰️ SWR
+- ➰ Framer Motion
+- 🏳️ Font Awesome Icon 6
+- 📊 Chart.js
+- 🎥 WakaTime API
+- 👨🏻‍💻 GitHub API
+- 🎵 Spotify API
 
 <br />
 
@@ -42,36 +42,36 @@ This website is built using these technologies:
 
 On this website, several features will continue to be updated and added in the future.
 
--   ### 🤖 AI Virtual Assistant
+- ### 🤖 AI Virtual Assistant
 
 The AI virtual assistant is built using the [AI SDK](https://sdk.vercel.ai) provided by Vercel. The AI virtual assistant can answer questions, provide information, and more. The AI virtual assistant is displayed on the bottom right corner of the website.
 
--   ### 🎧 Spotify Status
+- ### 🎧 Spotify Status
 
 Displays song information being played on Spotify in real-time using the Spotify API and SWR.
 
--   ### 🕗 WakaTime Statistics
+- ### 🕗 WakaTime Statistics
 
 Data is retrieved using the WakaTime API and then displayed on the dashboard, built with Next.js API routes deployed as serverless functions.
 
--   ### 📝 Blogs
+- ### 📝 Blogs
 
 The markdown files are server-side rendered using the [React Markdown](https://github.com/remarkjs/react-markdown) and the [remark](https://github.com/remarkjs/react-markdown) library. The markdown files are stored in the `data/blog` directory. The blog posts are displayed on the blog page and the blog details page.
 
--   ### 🗳 Projects
+- ### 🗳 Projects
 
 As a developer, I have a lot of projects that I have worked on. This section displays the projects I have worked on. The markdown files are stored in the `data/projects` directory and rendered server-side.
 <br /><br />
 
 ## Performance
 
--   ### PageSpeed Insights
+- ### PageSpeed Insights
 
--   Desktop
+- Desktop
 
 ![Desktop PI](https://github.com/minhtran241/minhtran.com/blob/main/public/about-this-website/lh-rp-desktop.png)
 
--   Mobile
+- Mobile
 
 ![Mobile PI](https://github.com/minhtran241/minhtran.com/blob/main/public/about-this-website/lh-rp-mobile.png)
 
@@ -160,10 +160,6 @@ SPOTIFY_CLIENT_ID=
 SPOTIFY_CLIENT_SECRET=
 SPOTIFY_REFRESH_TOKEN=
 SPOTIFY_CODE=
-
-# Web3Forms
-CONTACT_FORM_API_KEY=
-HCAPTCHA_SITE_KEY=
 
 # Umami
 UMAMI_API_CLIENT_USER_ID=
