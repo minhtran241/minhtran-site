@@ -5,8 +5,6 @@ import { themeChange } from 'theme-change';
 
 const ThemeChanger = () => {
 	const themeValues = [
-		{ value: 'light', label: 'Light' },
-		{ value: 'dark', label: 'Dark' },
 		{ value: 'winter', label: 'Winter' },
 		{ value: 'night', label: 'Night' },
 		{ value: 'lofi', label: 'Lo-Fi' },
