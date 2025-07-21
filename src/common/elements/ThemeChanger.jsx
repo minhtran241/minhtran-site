@@ -1,6 +1,6 @@
 'use client';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { themeChange } from 'theme-change';
 
 const ThemeChanger = () => {
@@ -11,19 +11,57 @@ const ThemeChanger = () => {
 		{ value: 'corporate', label: 'Corporate' },
 	];
 
+	// Initialize with empty string to prevent hydration mismatch
+	const [currentTheme, setCurrentTheme] = useState('');
+	const [isClient, setIsClient] = useState(false);
+
 	useEffect(() => {
+		// Mark as client-side rendered
+		setIsClient(true);
+
+		// Set initial theme immediately
+		const savedTheme = localStorage.getItem('theme') ||
+			(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'winter');
+
+		document.documentElement.setAttribute('data-theme', savedTheme);
+		localStorage.setItem('theme', savedTheme);
+		setCurrentTheme(savedTheme);
+
+		// Initialize theme-change after setting initial theme
 		themeChange(false);
+
+		// Listen for theme changes on radio inputs
+		const handleThemeChange = (e) => {
+			if (e.target.matches('input[name="theme-dropdown"]')) {
+				setCurrentTheme(e.target.value);
+			}
+		};
+
+		// Listen to clicks on theme radio buttons
+		document.addEventListener('change', handleThemeChange);
+
+		return () => {
+			document.removeEventListener('change', handleThemeChange);
+		};
 	}, []);
+
+	const getCurrentThemeLabel = () => {
+		const theme = themeValues.find(t => t.value === currentTheme);
+		return theme ? theme.label : currentTheme || 'Default';
+	};
 
 	return (
 		<div className="dropdown dropdown-end" data-choose-theme>
 			<div
 				tabIndex={0}
 				role="button"
-				className="btn btn-ghost btn-square"
+				className="btn btn-ghost gap-2"
 				aria-label="Choose theme"
 			>
 				<FontAwesomeIcon icon="fa-duotone fa-solid fa-droplet" />
+				<span className="hidden sm:inline">
+					{isClient ? getCurrentThemeLabel() : 'Theme'}
+				</span>
 			</div>
 			<ul
 				tabIndex={0}
@@ -37,6 +75,7 @@ const ThemeChanger = () => {
 							className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
 							aria-label={theme.label}
 							value={theme.value}
+							defaultChecked={currentTheme === theme.value}
 						/>
 					</li>
 				))}
