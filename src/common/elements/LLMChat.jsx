@@ -13,11 +13,15 @@ import Image from 'next/image';
 const ChatMessage = ({ message, isUser, isStreaming = false }) => {
 	const messageContent = useMemo(() => {
 		if (isUser) {
-			return <div className="chat-bubble chat-bubble-primary">{message.content}</div>;
+			return (
+				<div className="chat-bubble chat-bubble-primary max-w-xs">
+					{message.content}
+				</div>
+			);
 		}
 
 		return (
-			<div className="chat-bubble">
+			<div className="chat-bubble max-w-sm">
 				<ReactMarkdown
 					remarkPlugins={[remarkGfm]}
 					rehypePlugins={[rehypeRaw]}
@@ -27,7 +31,7 @@ const ChatMessage = ({ message, isUser, isStreaming = false }) => {
 								href={href}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="text-blue-400 underline hover:text-blue-500 transition-colors"
+								className="link link-primary"
 							>
 								{children}
 							</a>
@@ -38,25 +42,22 @@ const ChatMessage = ({ message, isUser, isStreaming = false }) => {
 								alt={alt}
 								className="rounded-lg max-w-full h-auto"
 								loading="lazy"
-								width={40}
-								height={40}
+								width={300}
+								height={200}
 							/>
 						),
 						ul: ({ children }) => (
-							<ul className="list-disc list-inside mb-2 space-y-1">
+							<ul className="list-disc list-inside space-y-1">
 								{children}
 							</ul>
 						),
 						ol: ({ children }) => (
-							<ol className="list-decimal list-inside mb-2 space-y-1">
+							<ol className="list-decimal list-inside space-y-1">
 								{children}
 							</ol>
 						),
-						li: ({ children }) => (
-							<li className="mb-1">{children}</li>
-						),
 						blockquote: ({ children }) => (
-							<blockquote className="border-l-4 border-primary/30 pl-3 italic mb-2 bg-base-200/50 py-2 rounded-r-lg">
+							<blockquote className="border-l-4 border-primary pl-4 italic opacity-80">
 								{children}
 							</blockquote>
 						),
@@ -64,50 +65,50 @@ const ChatMessage = ({ message, isUser, isStreaming = false }) => {
 							const isInline = !className;
 							if (isInline) {
 								return (
-									<code className="bg-base-200 px-1 py-0.5 rounded text-sm font-mono">
+									<code className="bg-base-300 px-1.5 py-0.5 rounded text-sm font-mono">
 										{children}
 									</code>
 								);
 							}
 							return (
-								<pre className="bg-base-200 p-3 rounded-lg overflow-x-auto mb-2">
-									<code className="text-sm font-mono">{children}</code>
-								</pre>
+								<div className="mockup-code text-sm my-2">
+									<pre><code>{children}</code></pre>
+								</div>
 							);
 						},
-						h1: ({ children }) => <h1 className="text-lg font-bold mb-2">{children}</h1>,
-						h2: ({ children }) => <h2 className="text-base font-bold mb-2">{children}</h2>,
-						h3: ({ children }) => <h3 className="text-sm font-bold mb-1">{children}</h3>,
-						p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+						h1: ({ children }) => <h1 className="text-xl font-bold my-2">{children}</h1>,
+						h2: ({ children }) => <h2 className="text-lg font-bold my-2">{children}</h2>,
+						h3: ({ children }) => <h3 className="text-md font-bold my-1">{children}</h3>,
+						p: ({ children }) => <p className="my-1 leading-relaxed">{children}</p>,
 					}}
 				>
 					{message.content}
 				</ReactMarkdown>
 				{isStreaming && (
-					<div className="inline-block w-2 h-4 bg-primary animate-pulse ml-1 rounded-sm"></div>
+					<span className="loading loading-dots loading-sm ml-2"></span>
 				)}
 			</div>
 		);
 	}, [message.content, isUser, isStreaming]);
 
 	return (
-		<div className={`chat ${isUser ? 'chat-end' : 'chat-start'} animate-fade-in`}>
+		<div className={`chat ${isUser ? 'chat-end' : 'chat-start'}`}>
 			{!isUser && (
 				<div className="chat-image avatar">
-					<div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+					<div className="w-10 h-10 rounded-full">
 						<Image
-							alt="Assistant avatar"
+							alt="Agent avatar"
 							src="/memoji/memojialo.png"
 							className="w-full h-full rounded-full object-cover"
 							loading="lazy"
-							width={32}
-							height={32}
+							width={40}
+							height={40}
 						/>
 					</div>
 				</div>
 			)}
 			{messageContent}
-			<div className="chat-footer opacity-50 text-xs mt-1">
+			<div className="chat-footer opacity-50 text-xs">
 				{new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
 			</div>
 		</div>
@@ -118,7 +119,7 @@ export default function LLMChat() {
 	const [conversation, setConversation] = useState([
 		{
 			role: 'assistant',
-			content: 'Hello! I\'m Minh\'s virtual assistant. How can I help you today?',
+			content: 'Hello! I\'m Minh\'s AI agent. How can I help you today?',
 		},
 	]);
 	const [input, setInput] = useState('');
@@ -129,26 +130,22 @@ export default function LLMChat() {
 
 	const chatContainerRef = useRef(null);
 	const inputRef = useRef(null);
+	const messagesEndRef = useRef(null);
 
-	// Auto-scroll to bottom when conversation updates
+	// Scroll to bottom function
+	const scrollToBottom = useCallback(() => {
+		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+	}, []);
+
+	// Auto-scroll to bottom when conversation updates or streaming changes
 	useEffect(() => {
-		if (chatContainerRef.current) {
-			const container = chatContainerRef.current;
-			const isNearBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 100;
-
-			if (isNearBottom) {
-				container.scrollTo({
-					top: container.scrollHeight,
-					behavior: 'smooth'
-				});
-			}
-		}
-	}, [conversation]);
+		scrollToBottom();
+	}, [conversation, isStreaming, scrollToBottom]);
 
 	// Focus input when chat opens
 	useEffect(() => {
 		if (isOpen && inputRef.current) {
-			inputRef.current.focus();
+			setTimeout(() => inputRef.current?.focus(), 100);
 		}
 	}, [isOpen]);
 
@@ -208,172 +205,165 @@ export default function LLMChat() {
 		setConversation([
 			{
 				role: 'assistant',
-				content: 'Hello! I\'m Minh\'s virtual assistant. How can I help you today?',
+				content: 'Hello! I\'m Minh\'s AI agent. How can I help you today?',
 			},
 		]);
 		setError(null);
 	}, []);
 
-	return (
-		<>
-			{/* Custom styles for animations */}
-			<style jsx>{`
-				@keyframes fade-in {
-					from { opacity: 0; transform: translateY(10px); }
-					to { opacity: 1; transform: translateY(0); }
-				}
-				.animate-fade-in {
-					animation: fade-in 0.3s ease-out;
-				}
-				.chat-container {
-					backdrop-filter: blur(10px);
-					border: 1px solid hsl(var(--b3) / 0.2);
-				}
-				.bounce-in {
-					animation: bounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-				}
-				@keyframes bounce {
-					0% { transform: scale(0); }
-					50% { transform: scale(1.1); }
-					100% { transform: scale(1); }
-				}
-			`}</style>
+	// Auto-resize textarea
+	const handleInputChange = useCallback((e) => {
+		setInput(e.target.value);
+		// Auto-resize textarea
+		e.target.style.height = 'auto';
+		e.target.style.height = Math.min(e.target.scrollHeight, 96) + 'px';
+	}, []);
 
-			<div className="fixed bottom-0 right-0 z-[99999]">
-				{/* Chat Trigger Button */}
-				{!isOpen && (
-					<div
-						className="m-8 cursor-pointer tooltip tooltip-left tooltip-primary group hover:scale-110 transition-transform duration-200 bg-base-100 rounded-full shadow-lg"
-						onClick={toggleChat}
-						aria-label="Open chat"
-						data-tip="Minh's Virtual Assistant"
-					>
-						<div className="avatar avatar-online bounce-in">
-							<div className="ring-primary ring-offset-base-100 w-[52px] h-[52px] rounded-full ring-2 ring-offset-2 group-hover:ring-4 transition-all duration-200 shadow-lg">
+	return (
+		<div className="fixed bottom-0 right-0 z-[99999]">
+			{/* Chat Trigger Button */}
+			{!isOpen && (
+				<div
+					className="m-6 cursor-pointer group"
+					onClick={toggleChat}
+					role="button"
+					tabIndex={0}
+					onKeyDown={(e) => e.key === 'Enter' && toggleChat()}
+				>
+					<div className="tooltip tooltip-left" data-tip="Chat with Minh's AI Agent">
+						<div className="avatar online placeholder group-hover:scale-110 transition-transform duration-300">
+							<div className="bg-primary text-primary-content w-14 h-14 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 shadow-lg">
 								<Image
 									loading="lazy"
-									width={52}
-									height={52}
+									width={56}
+									height={56}
 									src="/memoji/memojialo.png"
-									alt="virtual assistant"
+									alt="AI Agent"
 									className="rounded-full object-cover"
 								/>
 							</div>
 						</div>
 					</div>
-				)}
+				</div>
+			)}
 
-				{/* Chat Window */}
-				{isOpen && (
-					<div className="chat-container bg-base-100 rounded-box shadow-2xl w-[24rem] h-[32rem] flex flex-col m-4 animate-fade-in">
-						{/* Chat Header */}
-						<div className="h-[4rem] bg-primary flex justify-between items-center px-4 rounded-t-box">
-							<div className="flex items-center gap-3 text-sm">
-								<div className="avatar avatar-online">
+			{/* Chat Window */}
+			{isOpen && (
+				<div className="chat-container bg-base-100 rounded-box shadow-2xl w-96 h-[32rem] flex flex-col m-4">
+					{/* Chat Header */}
+					<div className="bg-gradient-to-r from-primary to-secondary text-primary-content p-4 rounded-t-box">
+						<div className="flex justify-between items-center">
+							<div className="flex items-center gap-3">
+								<div className="avatar online">
 									<div className="w-10 h-10 rounded-full">
 										<Image
 											src="/memoji/memojialo.png"
-											alt="virtual assistant"
+											alt="AI Agent"
 											className="rounded-full object-cover"
 											width={40}
 											height={40}
 										/>
 									</div>
 								</div>
-								<div className="flex flex-col">
-									<h1 className="text-primary-content font-semibold">
-										Minh&apos;s Virtual Assistant
-									</h1>
-									<p className="text-xs text-primary-content/80">
-										{isStreaming ? 'Typing...' : 'Online • Replies in real-time'}
-									</p>
+								<div>
+									<h1 className="font-semibold">Minh&apos;s AI Agent</h1>
+									<div className="text-xs opacity-90 flex items-center gap-2">
+										<div className="inline-grid *:[grid-area:1/1]">
+											<div className="status status-success animate-ping"></div>
+											<div className="status status-success"></div>
+										</div>
+										{isStreaming ? (
+											<span className="flex items-center gap-1">
+												<span className="loading loading-dots loading-xs"></span>
+												Typing...
+											</span>
+										) : (
+											'Online • Ready to help'
+										)}
+									</div>
 								</div>
 							</div>
-							<div className="flex gap-2">
-								<button
-									onClick={clearChat}
-									className="btn btn-sm btn-circle btn-ghost hover:bg-primary-content/20"
-									aria-label="Clear chat"
-									title="Clear conversation"
-								>
-									<FontAwesomeIcon icon="fa-solid fa-trash text-primary-content text-sm" />
-								</button>
-								<button
-									onClick={toggleChat}
-									className="btn btn-sm btn-circle btn-ghost hover:bg-primary-content/20"
-									aria-label="Minimize chat"
-								>
-									<FontAwesomeIcon icon="fa-solid fa-minus text-primary-content" />
-								</button>
-							</div>
-						</div>
-
-						{/* Chat Messages */}
-						<div
-							className="flex-1 overflow-y-auto p-3 space-y-3 scroll-smooth"
-							ref={chatContainerRef}
-						>
-							{conversation.map((message, index) => (
-								<ChatMessage
-									key={`${message.role}-${index}`}
-									message={message}
-									isUser={message.role === 'user'}
-									isStreaming={isStreaming && index === conversation.length - 1 && message.role === 'assistant'}
-								/>
-							))}
-							{error && (
-								<div className="alert alert-error text-sm">
-									<FontAwesomeIcon icon="fa-solid fa-exclamation-triangle" />
-									<span>{error}</span>
+							<div className="flex gap-1">
+								<div className="tooltip tooltip-bottom" data-tip="Clear chat">
+									<button
+										onClick={clearChat}
+										className="btn btn-sm btn-circle btn-ghost hover:bg-white/20"
+									>
+										<FontAwesomeIcon icon="fa-solid fa-trash text-sm" />
+									</button>
 								</div>
-							)}
-						</div>
-
-						{/* Input Area */}
-						<div className="p-3 border-t border-base-300">
-							<form
-								className="flex items-end gap-2"
-								onSubmit={(e) => {
-									e.preventDefault();
-									sendMessage();
-								}}
-							>
-								<div className="flex-1">
-									<textarea
-										ref={inputRef}
-										className="textarea textarea-primary w-full text-sm resize-none min-h-[2.5rem] max-h-24"
-										placeholder="Ask me anything about Minh..."
-										value={input}
-										onChange={(e) => setInput(e.target.value)}
-										onKeyDown={handleKeyPress}
-										rows={1}
-										style={{
-											height: `auto ${Math.min(Math.max(40, input.split('\n').length * 24), 96)}px`
-										}}
-										disabled={isLoading}
-									/>
+								<div className="tooltip tooltip-bottom" data-tip="Close chat">
+									<button
+										onClick={toggleChat}
+										className="btn btn-sm btn-circle btn-ghost hover:bg-white/20"
+									>
+										<FontAwesomeIcon icon="fa-solid fa-times text-sm" />
+									</button>
 								</div>
-								<button
-									type="submit"
-									className={`btn btn-circle btn-primary ${isLoading ? 'loading' : ''
-										} ${!input.trim() ? 'btn-disabled' : ''}`}
-									disabled={isLoading || !input.trim()}
-									aria-label="Send message"
-								>
-									{isLoading ? (
-										<span className="loading loading-spinner loading-sm"></span>
-									) : (
-										<FontAwesomeIcon icon="fa-solid fa-paper-plane text-primary-content text-sm" />
-									)}
-								</button>
-							</form>
-							<div className="text-xs text-base-content/60 mt-1 text-center">
-								Press Enter to send • Shift+Enter for new line
 							</div>
 						</div>
 					</div>
-				)}
-			</div>
-		</>
+
+					{/* Chat Messages */}
+					<div
+						className="flex-1 overflow-y-auto p-4 space-y-4"
+						ref={chatContainerRef}
+					>
+						{conversation.map((message, index) => (
+							<ChatMessage
+								key={`${message.role}-${index}-${message.content.slice(0, 10)}`}
+								message={message}
+								isUser={message.role === 'user'}
+								isStreaming={isStreaming && index === conversation.length - 1 && message.role === 'assistant'}
+							/>
+						))}
+						{error && (
+							<div className="alert alert-error">
+								<FontAwesomeIcon icon="fa-solid fa-exclamation-triangle" />
+								<span>{error}</span>
+							</div>
+						)}
+						{/* Invisible element to scroll to */}
+						<div ref={messagesEndRef} />
+					</div>
+
+					{/* Input Area */}
+					<div className="border-t border-base-300 p-4">
+						<form
+							className="flex gap-2"
+							onSubmit={(e) => {
+								e.preventDefault();
+								sendMessage();
+							}}
+						>
+							<textarea
+								ref={inputRef}
+								className="textarea textarea-bordered textarea-primary flex-1 resize-none min-h-[2.5rem] max-h-24"
+								placeholder="Ask me anything about Minh..."
+								value={input}
+								onChange={handleInputChange}
+								onKeyDown={handleKeyPress}
+								rows={1}
+								disabled={isLoading}
+							/>
+							<button
+								type="submit"
+								className={`btn btn-primary btn-circle ${isLoading ? 'loading' : ''}`}
+								disabled={isLoading || !input.trim()}
+							>
+								{isLoading ? (
+									<span className="loading loading-spinner loading-sm"></span>
+								) : (
+									<FontAwesomeIcon icon="fa-solid fa-paper-plane text-sm" />
+								)}
+							</button>
+						</form>
+						<div className="text-xs text-base-content/60 mt-2 text-center">
+							Press Enter to send • Shift+Enter for new line
+						</div>
+					</div>
+				</div>
+			)}
+		</div>
 	);
 }
