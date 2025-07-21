@@ -100,7 +100,7 @@ const HeroComponent = () => {
 								</div>
 							</div>
 							<p className="text-lg text-base-content/80 font-medium max-w-2xl leading-relaxed">
-								CS & MATH @ GVSU | SWE/DE @ GVSU Applied Computing Institute
+								{userBasicInfo.description}
 							</p>
 						</div>
 

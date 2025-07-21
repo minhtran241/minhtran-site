@@ -6,43 +6,43 @@ import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 const DEVTOOLS = USES.DevTools;
 
 const DevTools = () => {
-    return (
-        <section className="flex flex-col gap-8">
-            <div className="flex flex-row items-center gap-2 font-bold lg:text-2xl md:text-xl sm:text-lg text-lg">
-                <FontAwesomeIcon icon="fa-duotone fa-terminal" />
-                <h1 className="capitalize">Development Tools</h1>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                {DEVTOOLS?.map((item, index) => (
-                    <Link
-                        href={item.href}
-                        target="_blank"
-                        key={index}
-                        className="flex flex-col gap-4 hover:text-primary border dark:border-none bg-base-100 border-gray-200 rounded-box p-4 hover:border-primary"
-                    >
-                        <div className="flex items-center justify-center">
-                            <Image
-                                src={item.image}
-                                alt={item.name}
-                                width={112}
-                                height={112}
-                                className="rounded-box lg:w-20 lg:h-20 md:w-16 md:h-16 w-12 h-12 object-cover"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div className="flex flex-col gap-1 items-center justify-center">
-                            <h3 className="font-semibold lg:text-lg md:text-base text-sm">
-                                {item.name}
-                            </h3>
-                            <p className="lg:text-base md:text-sm text-xs">
-                                {item.metadata}
-                            </p>
-                        </div>
-                    </Link>
-                ))}
-            </div>
-        </section>
-    );
+	return (
+		<section className="space-y-10">
+			<div className="flex items-center gap-3">
+				<div className="p-3 rounded-lg bg-success/10 text-success">
+					<FontAwesomeIcon icon="fa-duotone fa-terminal" className="text-2xl" />
+				</div>
+				<h2 className="text-3xl font-bold">Development Tools</h2>
+			</div>
+
+			<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+				{DEVTOOLS?.map((item, index) => (
+					<div key={index} className="card bg-base-100 shadow-md hover:shadow-lg transition-all duration-300 group">
+						<Link href={item.href} target="_blank" className="block">
+							<figure className="px-4 pt-4">
+								<Image
+									src={item.image}
+									alt={item.name}
+									width={112}
+									height={112}
+									className="rounded-lg w-16 h-16 object-cover group-hover:scale-110 transition-transform duration-300"
+									loading="lazy"
+								/>
+							</figure>
+							<div className="card-body p-4 text-center">
+								<h3 className="font-semibold text-sm group-hover:text-success transition-colors line-clamp-2">
+									{item.name}
+								</h3>
+								<p className="text-xs text-base-content/60 line-clamp-2">
+									{item.metadata}
+								</p>
+							</div>
+						</Link>
+					</div>
+				))}
+			</div>
+		</section>
+	);
 };
 
 export default DevTools;

@@ -2,22 +2,23 @@ import Link from 'next/link';
 import { MENU_TABS } from '@/common/constants/menu';
 
 const Links = () => {
-    return (
-        <>
-            {MENU_TABS.slice(1).map((item, index) => (
-                <li key={index}>
-                    {/* a button that have icon and small text below (flex collumn)*/}
-                    <Link
-                        className="flex flex-col gap-1 items-center justify-center text-base-content hover:text-primary"
-                        href={item.href}
-                    >
-                        {item.icon}
-                        <span className="text-xs">{item.title}</span>
-                    </Link>
-                </li>
-            ))}
-        </>
-    );
+	return (
+		<div className="flex items-center gap-4">
+			{MENU_TABS.slice(1).map((item, index) => (
+				<li key={index}>
+					<Link
+						href={item.href}
+						className="flex flex-col items-center justify-center gap-1 p-1"
+					>
+						<span className="text-lg">
+							{item.icon}
+						</span>
+						<span className="text-xs font-medium">{item.title}</span>
+					</Link>
+				</li>
+			))}
+		</div>
+	);
 };
 
 export default Links;
