@@ -1,7 +1,6 @@
 import Employment from '@/components/Home/employment/employment';
 // import Projects from '@/components/Project/projects/projects';
 import Hero from '@/components/Home/hero/hero';
-import Skills from '@/components/Home/skills/skills';
 import Contribution from '@/components/Home/contribution/contribution';
 import Education from '@/components/Home/education/education';
 import Publications from '@/components/Home/publications/publications';

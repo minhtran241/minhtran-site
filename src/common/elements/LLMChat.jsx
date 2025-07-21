@@ -7,6 +7,7 @@ import { continueConversation } from '@/app/actions';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
+import Image from 'next/image';
 
 // Memoized ChatMessage component to prevent unnecessary re-renders
 const ChatMessage = ({ message, isUser, isStreaming = false }) => {
@@ -32,11 +33,13 @@ const ChatMessage = ({ message, isUser, isStreaming = false }) => {
 							</a>
 						),
 						img: ({ src, alt }) => (
-							<img
+							<Image
 								src={src}
 								alt={alt}
 								className="rounded-lg max-w-full h-auto"
 								loading="lazy"
+								width={40}
+								height={40}
 							/>
 						),
 						ul: ({ children }) => (
@@ -92,11 +95,13 @@ const ChatMessage = ({ message, isUser, isStreaming = false }) => {
 			{!isUser && (
 				<div className="chat-image avatar">
 					<div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-						<img
+						<Image
 							alt="Assistant avatar"
 							src="/memoji/memojialo.png"
 							className="w-full h-full rounded-full object-cover"
 							loading="lazy"
+							width={32}
+							height={32}
 						/>
 					</div>
 				</div>
@@ -238,14 +243,17 @@ export default function LLMChat() {
 				{/* Chat Trigger Button */}
 				{!isOpen && (
 					<div
-						className="m-8 cursor-pointer tooltip tooltip-left tooltip-primary group hover:scale-110 transition-transform duration-200"
+						className="m-8 cursor-pointer tooltip tooltip-left tooltip-primary group hover:scale-110 transition-transform duration-200 bg-base-100 rounded-full shadow-lg"
 						onClick={toggleChat}
 						aria-label="Open chat"
 						data-tip="Minh's Virtual Assistant"
 					>
 						<div className="avatar avatar-online bounce-in">
 							<div className="ring-primary ring-offset-base-100 w-[52px] h-[52px] rounded-full ring-2 ring-offset-2 group-hover:ring-4 transition-all duration-200 shadow-lg">
-								<img
+								<Image
+									loading="lazy"
+									width={52}
+									height={52}
 									src="/memoji/memojialo.png"
 									alt="virtual assistant"
 									className="rounded-full object-cover"
@@ -263,10 +271,12 @@ export default function LLMChat() {
 							<div className="flex items-center gap-3 text-sm">
 								<div className="avatar avatar-online">
 									<div className="w-10 h-10 rounded-full">
-										<img
+										<Image
 											src="/memoji/memojialo.png"
 											alt="virtual assistant"
 											className="rounded-full object-cover"
+											width={40}
+											height={40}
 										/>
 									</div>
 								</div>
