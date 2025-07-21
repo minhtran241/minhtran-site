@@ -12,35 +12,50 @@ import { SOCIAL_MEDIA } from '@/common/constants/menu';
 
 const ContactInfoModal = () => (
 	<dialog id="contact_info_modal" className="modal">
-		<div className="modal-box">
+		<div className="modal-box max-w-md">
 			<form method="dialog">
-				{/* if there is a button in form, it will close the modal */}
-				<button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+				<button className="btn btn-sm btn-circle btn-ghost absolute right-3 top-3 hover:bg-base-200 transition-colors">
 					<FontAwesomeIcon icon="fa-solid fa-times" />
 				</button>
 			</form>
-			<h3 className="text-lg font-bold flex items-center gap-2 mb-4">
-				<span className="text-primary">
+
+			<div className="mb-6">
+				<h3 className="text-xl font-bold flex items-center gap-3">
 					<FontAwesomeIcon icon="fa-solid fa-info-circle" />
-				</span>
-				Contact Information
-			</h3>
-			<ul className="fa-ul space-y-3">
+					Contact Information
+				</h3>
+				<p className="text-sm text-base-content/60 mt-2">
+					Get in touch through any of these channels
+				</p>
+			</div>
+
+			<div className="space-y-4">
 				{SOCIAL_MEDIA.map((item, index) => (
-					<li key={index} className="flex items-center gap-3">
-						<span className="fa-li">{item.icon}</span>
-						<p className="font-medium">{item.name}:</p>
-						<Link
-							href={item.href}
-							target="_blank"
-							className="link link-primary link-hover"
-						>
-							{item.title}
-						</Link>
-					</li>
+					<div key={index} className="flex items-center gap-4 p-3 rounded-lg bg-base-200/50 hover:bg-base-200 transition-colors">
+						<div className="text-primary text-lg">
+							{item.icon}
+						</div>
+						<div className="flex-1">
+							<p className="font-medium text-sm text-base-content/80">{item.name}</p>
+							<Link
+								href={item.href}
+								target="_blank"
+								className="link link-primary link-hover font-semibold"
+							>
+								{item.title}
+							</Link>
+						</div>
+						<FontAwesomeIcon
+							icon="fa-solid fa-external-link"
+							className="text-xs text-base-content/40"
+						/>
+					</div>
 				))}
-			</ul>
+			</div>
 		</div>
+		<form method="dialog" className="modal-backdrop">
+			<button>close</button>
+		</form>
 	</dialog>
 );
 
@@ -51,90 +66,100 @@ const HeroComponent = () => {
 
 	return (
 		<div className="pt-28 text-base-content container mx-auto">
-			<div className="bg-base-100 rounded-box p-4 shadow-lg">
-				<div className="hero-content flex flex-col lg:flex-row items-center gap-10">
+			<div className="bg-gradient-to-br from-base-100 to-base-200/30 rounded-2xl p-6 md:p-8 shadow-xl border border-base-300/50">
+				<div className="hero-content flex flex-col lg:flex-row items-center gap-12">
 					{/* Profile Picture */}
-					<div className="avatar">
-						<div className="ring-primary ring-offset-base-100 rounded-full ring-2 ring-offset-2 w-32 h-32 overflow-hidden">
-							<Image
-								src="/home/headshot.png"
-								alt={`${userBasicInfo.fullName} headshot`}
-								width={128}
-								height={128}
-								className="object-cover"
-							/>
+					<div className="relative group">
+						<div className="avatar">
+							<div className="ring-primary ring-offset-base-100 rounded-full ring-4 ring-offset-4 w-40 h-40 overflow-hidden shadow-2xl transition-all duration-300 group-hover:ring-primary-focus group-hover:scale-105">
+								<Image
+									src="/home/headshot.png"
+									alt={`${userBasicInfo.fullName} headshot`}
+									width={160}
+									height={160}
+									className="object-cover transition-transform duration-300 group-hover:scale-110"
+									priority
+								/>
+							</div>
 						</div>
+						{/* Decorative elements */}
+						<div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
 					</div>
 
 					{/* User Information */}
-					<div className="flex flex-col gap-6 text-center lg:text-left">
+					<div className="flex flex-col gap-8 text-center lg:text-left flex-1">
 						{/* Name and Description */}
-						<div className="space-y-2">
-							<h1 className="text-3xl font-extrabold leading-tight">
-								{userBasicInfo.fullName}
-								<span className="text-sm font-normal ml-2">
-									(He/Him)
+						<div className="space-y-4">
+							<div>
+								<h1 className="text-2xl lg:text-3xl font-extrabold leading-tight bg-gradient-to-r from-base-content to-base-content/80 bg-clip-text">
+									{userBasicInfo.fullName}
+								</h1>
+								<span className="inline-flex items-center gap-2 mt-2 px-3 py-1 bg-base-200 rounded-full text-sm font-medium text-base-content/70">
+									<FontAwesomeIcon icon="fa-solid fa-user" className="text-xs" />
+									He/Him
 								</span>
-							</h1>
-							<p className="text-lg">
-								CS & MATH @ GVSU | SWE/DE @ GVSU Applied
-								Computing Institute
+							</div>
+							<p className="text-lg text-base-content/80 font-medium max-w-2xl leading-relaxed">
+								CS & MATH @ GVSU | SWE/DE @ GVSU Applied Computing Institute
 							</p>
 						</div>
 
 						{/* Contact Information */}
-						<div className="flex flex-col lg:flex-row gap-6 items-center lg:items-start lg:justify-between">
+						<div className="flex flex-col xl:flex-row gap-8 items-center xl:items-start xl:justify-between">
 							{/* Contact Details */}
-							<ul className="fa-ul space-y-3">
-								<li className="flex items-center gap-3">
-									<span className="fa-li">
+							<div className="space-y-4">
+								<div className="flex items-center gap-4 group cursor-default">
+									<div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors">
 										<FontAwesomeIcon icon="fa-solid fa-map-marker-alt" />
-									</span>
-									<span>Grand Rapids, MI, USA</span>
-								</li>
-								<li className="flex items-center gap-3">
-									<span className="fa-li">
+									</div>
+									<span className="font-medium">Grand Rapids, MI, USA</span>
+								</div>
+
+								<div className="flex items-center gap-4 group">
+									<div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors">
 										<FontAwesomeIcon icon="fa-solid fa-envelope" />
-									</span>
+									</div>
 									<Link
 										href={`mailto:${userBasicInfo.email}`}
-										className="link link-primary link-hover"
+										className="link link-primary link-hover font-medium transition-colors"
 									>
 										{userBasicInfo.email}
 									</Link>
-								</li>
-								<li className="flex items-center gap-3">
-									<span className="fa-li">
+								</div>
+
+								{/* <div className="flex items-center gap-4 group">
+									<div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors">
 										<FontAwesomeIcon icon="fa-brands fa-linkedin" />
-									</span>
+									</div>
 									<Link
 										href={userBasicInfo.linkedinLink}
 										target="_blank"
-										className="link link-primary link-hover"
+										className="link link-primary link-hover font-medium transition-colors"
 									>
 										{userBasicInfo.linkedinUsername}
 									</Link>
-								</li>
-								<li className="flex items-center gap-3">
-									<span className="fa-li">
+								</div> */}
+
+								<div className="flex items-center gap-4 group">
+									<div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors">
 										<FontAwesomeIcon icon="fa-solid fa-info-circle" />
-									</span>
+									</div>
 									<button
 										onClick={handleShowModal}
-										className="link link-primary link-hover font-medium"
+										className="link link-primary link-hover font-medium transition-colors"
 									>
-										Contact info
+										More contact info
 									</button>
-								</li>
-							</ul>
+								</div>
+							</div>
 
 							{/* Call-to-Action Buttons */}
-							<div className="flex flex-col gap-4">
+							<div className="flex flex-col gap-4 min-w-fit">
 								<Link
 									href={fileSystemInfo.resumeLink}
 									target="_blank"
 									rel="noopener noreferrer"
-									className="btn btn-primary btn-md flex items-center gap-2"
+									className="btn btn-primary btn-lg"
 								>
 									<FontAwesomeIcon icon="fa-solid fa-file-pdf" />
 									Download Resume
@@ -144,15 +169,30 @@ const HeroComponent = () => {
 									href={userBasicInfo.bookACallLink}
 									target="_blank"
 									rel="noopener noreferrer"
-									className="btn btn-outline btn-primary btn-md flex items-center gap-2"
+									className="btn btn-outline btn-primary btn-lg"
 								>
-									<FontAwesomeIcon icon="fa-solid fa-headset" />
+									<FontAwesomeIcon icon="fa-solid fa-calendar-check" />
 									Book a Call
 								</Link>
+
+								{/* Quick Stats */}
+								<div className="flex gap-4 mt-2 justify-center lg:justify-start">
+									<div className="text-center">
+										<div className="font-bold text-lg text-primary">CS+MATH</div>
+										<div className="text-xs text-base-content/60">Student</div>
+									</div>
+									<div className="text-center">
+										<div className="font-bold text-lg text-primary">SWE/DE</div>
+										<div className="text-xs text-base-content/60">@ GVSU ACI</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+
+				{/* Subtle background pattern */}
+				<div className="absolute inset-0 bg-grid-pattern opacity-5 rounded-2xl pointer-events-none"></div>
 			</div>
 			<ContactInfoModal />
 		</div>
