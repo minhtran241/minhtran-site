@@ -3,6 +3,7 @@ The first obstacles and design choices you will be making when building a RAG sy
 As a refresher, here’s an overview of a RAG system architecture.
 
 ![RAG System Architecture](/blog/images/a-first-intro-to-complex-rag-retrieval-augmented-generation/rag-architecture.webp)
+
 <figcaption>Source: https://blog.griddynamics.com/retrieval-augmented-generation-llm/</figcaption>
 
 ## Relevance vs Similarity
@@ -12,6 +13,7 @@ When discussing effective information retrieval in RAG, it is crucial to underst
 This is an important concept to keep in mind as we explore various RAG techniques below. If you haven’t yet, you should check out Llamaindex’s helpful [video](https://www.youtube.com/watch?v=TRjq7t2Ms5I&ab_channel=AIEngineer) on building production RAG apps. This is a good primer for our discussion on various RAG system development techniques.
 
 ![From Simple to Advanced RAG](/blog/images/a-first-intro-to-complex-rag-retrieval-augmented-generation/rag-2.webp)
+
 <figcaption>Source: https://www.youtube.com/watch?v=TRjq7t2Ms5I&ab_channel=AIEngineer</figcaption>
 
 ## Technical Implementation of RAG
@@ -33,6 +35,7 @@ One limitation is that this strategy assumes that all of the information you mus
 A document hierarchy is a powerful way of organizing your data to improve information retrieval. You can think of a document hierarchy as a table of contents for your RAG system. It organizes chunks in a structured manner that allows RAG systems to efficiently retrieve and process relevant, related data. Document hierarchies play a crucial role in the effectiveness of RAG by helping the LLM decide which chunks contain the most relevant data to extract.
 
 ![Document Hierarchies](/blog/images/a-first-intro-to-complex-rag-retrieval-augmented-generation/rag-3.webp)
+
 <figcaption>A Document Hierarchy — Source: https://www.arcus.co/blog/rag-at-planet-scale</figcaption>
 
 Document hierarchies associate chunks with nodes, and organize nodes in parent-child relationships. Each node contains a summary of the information contained within, making it easier for the RAG system to quickly traverse the data and understand which chunks to extract.
@@ -54,6 +57,7 @@ Knowledge graphs are a great data framework for document hierarchies to enforce 
 Knowledge graphs map relationships using natural language, which means that even non-technical users can build and modify rules and relationships to control their enterprise RAG systems. For example, a rule can look like: "When answering a question about leave policies, first refer to the correct office’s HR policy document, and then within the document, check the section on holidays."
 
 ![Knowledge Graphs](/blog/images/a-first-intro-to-complex-rag-retrieval-augmented-generation/rag-4.webp)
+
 <figcaption>An example of a knowledge graph. Source: https://www.researchgate.net/figure/Control-interfaces-for-Knowledge-graph-and-Hierarchy-More-details-in-Sarrafzadeh-et-al_fig4_318764253</figcaption>
 
 ### Query Augmentation

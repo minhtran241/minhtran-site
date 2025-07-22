@@ -11,6 +11,7 @@ In this article, we will explain how creating an index concurrently works, and h
 PostgreSQL uses multi-version concurrency control (MVCC) for transactions. In this technique, when a row is updated, a new version of the row is created and the old version is left unchanged. Each version has creator and destroyer information and transaction snapshots are used to decide which version should a transaction see. After some time, the old version becomes dead i.e. not visible to any running or new transactions and hence it can be removed from the table. Earlier each of these row versions were separately indexed, thus causing index bloat. Also unless index pointers are removed, one cannot remove the dead heap tuples, which leads to heap bloat. HOT improved this by requiring that new index entries are created only if a column indexed by one or more indexes is changed. In other words, if an update does not change any of the index columns, the existing index entry is used to find the new version of the row by following the TID chain. This chain of tuples is called HOT chain and a unique property of HOT chain is that all row versions in the chain have the same value for every column used in every index of the table. CIC must ensure that this property is always maintained, when the table is receiving constant updates and we will see in the next section how it achieves that.
 
 ![HOT Chain](/blog/images/explaining-create-index-concurrently/hot-chain.jpg)
+
 <figcaption>HOT Chain</figcaption>
 
 ## Create Index Concurrently (CIC)
@@ -32,6 +33,7 @@ In our example, when we start building the new index, we index the version (a, b
 During the second phase, if some other transaction updates the row such that neither the first not the second column is changed, a HOT update is possible. On the other hand, if the update changes the second column (or any other index column for that matter), then a non-HOT update is performed. A new index entry is now added to the existing index, but since the new index is not yet open for inserts, it does not see the new value ‘b2’.
 
 ![CIC Phase 2](/blog/images/explaining-create-index-concurrently/CIC-End-of-Phase-2.jpg)
+
 <figcaption>New index on second column created but the second column is updated</figcaption>
 
 So at the end of the second phase, we now have ‘b1’ in the new index, but version with ‘b2’ is not reachable from the new index since there is no entry for ‘b2’. Also, new HOT chains are created or extended only when HOT property is satisfied with respect to both the indexes. So when ‘b1’ is updated to ‘b2’, a non-HOT update is performed.
@@ -45,6 +47,7 @@ Once the index is built, we update the catalogs and make sure that the index is 
 You must have realised that while second phase was running, there could be transactions inserting new rows in the table or updating existing rows in a non-HOT manner. Since the index was not open for insertion during phase 2, it will be missing entries for all these new rows. In our example, version (a, b2, c3) does not have any appropriate index entry in the new index. This is fixed by taking a new MVCC snapshot and doing another pass over the table. During this pass, we index all rows which are visible to the new snapshot, but are not already in the index. Since the index is now actively maintained by other transactions, we only need to take care of the rows missed during the second phase.
 
 ![CIC Phase 3](/blog/images/explaining-create-index-concurrently/CIC-End-of-phase-3.jpg)
+
 <figcaption>New index for missing column value created</figcaption>
 
 The index is fully ready when the third pass finishes. It’s now being actively maintained by all other backends, following usual HOT rules. But the problem with old transactions, which could see rows which are neither indexed in the second or the third phase, remains. After all, their snapshots could see rows older than what our snapshots used for building the index could see. For example, if there exists a transaction which can see (a, b, c), the new index cannot find that version since there is no entry for ‘b’ in the new index. The new index is not usable for such old transactions. CIC deals with the problem by waiting for all such old transactions to finish before marking the index ready for queries. Remember that the index was marked for insertion at the end of the second phase, but it becomes usable for reads only after the third phase finishes and all old transactions are gone.

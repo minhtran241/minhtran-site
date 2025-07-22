@@ -1,11 +1,12 @@
 ![NGINXvsPingora](/blog/images/cloudflare-ditched-nginx-and-open-sourced-pingora/nginxvspingora.webp)
+
 <figcaption>NGINX's multi-process architecture vs Pingora's multi-threaded architecture</figcaption>
 
 ## Cloudflare Ditched NGINX
 
 ### Memory Safety
 
-NGINX is written in C, and as we all know, C is not memory safe. This means that it is easy to make mistakes that lead to memory safety issues. Pingora is a more memory safe alternative for services that are written in C/C++. While some might argue about memory safety among programming languages, Cloudflare found that the memory safety of Rust was a big win for them.  Besides, as they spend less time struggling with these issues, we are more productive implementing new features.
+NGINX is written in C, and as we all know, C is not memory safe. This means that it is easy to make mistakes that lead to memory safety issues. Pingora is a more memory safe alternative for services that are written in C/C++. While some might argue about memory safety among programming languages, Cloudflare found that the memory safety of Rust was a big win for them. Besides, as they spend less time struggling with these issues, we are more productive implementing new features.
 
 ### Multi-Process vs Multi-Threaded
 
@@ -30,6 +31,7 @@ Now this makes me think if NGINX was multi-threaded as opposed to multi-processe
 The creator on HAProxy (Willy Tarreau) has a good write up on why he chose multi-threaded over multi-processes for HAProxy.
 
 ![Willy's X](/blog/images/cloudflare-ditched-nginx-and-open-sourced-pingora/willy-x.webp)
+
 <figcaption>Willy's X</figcaption>
 
 ### Extensive customization

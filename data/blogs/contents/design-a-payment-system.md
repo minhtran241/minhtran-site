@@ -17,6 +17,7 @@ The high-level design of a payment system is quite simple. It consists of the fo
 After that processes, the transaction follows the same route back to the **Payment Gateway** and then to the **Client**.
 
 ![Payment System](/blog/images/design-a-payment-system/high-level.png)
+
 <figcaption>High-level design of a payment system</figcaption>
 
 ## Establish the Goals
@@ -56,6 +57,7 @@ A payment system is easy to understand at the functional level. It needs to be a
 Below is the flow of a payment system:
 
 ![Payment System Flow](/blog/images/design-a-payment-system/components.png)
+
 <figcaption>Payment System Flow</figcaption>
 
 First, user clicks on the "Pay" button. This will trigger the Payment event. The payment service will then send the payment request to the PSP. The PSP is to send card details to Banks or Card schemes. After the PSP successfully processes the payment, it will send the payment status to the payment service. The payment service will have to do 2 main tasks:
@@ -67,11 +69,12 @@ First, user clicks on the "Pay" button. This will trigger the Payment event. The
 
 - **Reliable and faut-tolerant**: Internal and external services need to talk to each other. We need to make sure that the system is **reliable** and **fault-tolerant**. Differ from synchronous communication, asynchronous communication doesn't wait for the response. It sends the message and continues to do other things (interval of time or be notified by the receiver). This is a good way to make the system more reliable and fault-tolerant.
 
-- **Avoid Tight Coupling**:  Any of the services can fail at any time maybe because of network issues, hardware issues, or software issues. Synchronous communication is not tolerant to failures and big latencies. As a result, it will reduce the **availability** of the system. Therefore, we need to use asynchronous communication to make the system more reliable and fault-tolerant. However, in some cases, we need to use synchronous communication. For example, when the user is in physical store and the payment needs to be processed immediately.
+- **Avoid Tight Coupling**: Any of the services can fail at any time maybe because of network issues, hardware issues, or software issues. Synchronous communication is not tolerant to failures and big latencies. As a result, it will reduce the **availability** of the system. Therefore, we need to use asynchronous communication to make the system more reliable and fault-tolerant. However, in some cases, we need to use synchronous communication. For example, when the user is in physical store and the payment needs to be processed immediately.
 
 - **Easier to deal with Uneven Traffic and Spikes**: Asynchronous communication is also good for dealing with uneven traffic and spikes. For example, when the user is buying a ticket for a concert, there will be a spike in traffic. For this case, we can use **message queues** to handle the traffic. The message queue will store the messages and process them one by one. This will make the system more reliable and fault-tolerant.
 
 ![Kafka Message Queue](/blog/images/design-a-payment-system/kafka1.png)
+
 <figcaption>Kafka Message Queue solving the problem of uneven traffic and spikes</figcaption>
 
 We even have enough time to spin up more instances of the service to handle the traffic. In website, Kafka states that it is used by 7 out of 10 largest banks in the world.
@@ -91,6 +94,7 @@ Fortunately, we have many tools to handle these issues. For example, we can use 
 To guarantee transaction completion, we can use a **message queue** lake Apache Kafka. For any order replaces or paid, we can create an event in Kafka. This will help us persist communication messages so that they are not lost even when things don't go as planned.
 
 ![Kafka Message Queue 2](/blog/images/design-a-payment-system/kafka2.png)
+
 <figcaption>Kafka Message Queue solving the problem of transaction completeness</figcaption>
 
 In this case, the payment operation doesn't complete successfully until the event is safely stored in the message queue. Because the Kafka's availability is 99.99%, we can guarantee that it can store the event safely. Then, these messages can be consumed by the other services to update the balance information of the wallet and update the ledger. Once the message is consumed, the transaction is complete.
@@ -116,24 +120,26 @@ While making a payment, a request might be sent to the fraud check service but l
 For example, we can fall back to a simple business role, if the amount is reasonably small, we can simply let the transactions go through. This is compromise between risk and keeping the customers happy. Next, we will see what we can do if the fallback value is not acceptable.
 
 ![Fallback Pattern](/blog/images/design-a-payment-system/fallback.png)
+
 <figcaption>Fallback Pattern</figcaption>
 
 ## Dealing with Persistent Failures
 
-Some failures can persist for a couple of *minutes* or even **hours**. In those cases, what can we do?
+Some failures can persist for a couple of _minutes_ or even **hours**. In those cases, what can we do?
 
 - **Cancel the Request:** If the failure is acceptable business-wise, we can simply cancel the request.
 
-- **Consider Compatibility Issues:** Sometimes, failures persist because the information is not compatible between the sender and the receiver. These errors may not be retrievable because, no matter how many times we resend the information, it will always fail. Such incompatible messages are also called *poison pill errors*. To isolate the problematic messages, we can save them for later debugging. For instance, we can save them in a dedicated queue so that we get rid of the broken messages. This pattern is also known as the **dead letter queue**. Later, these messages can be inspected to determine why they are not processed successfully.
+- **Consider Compatibility Issues:** Sometimes, failures persist because the information is not compatible between the sender and the receiver. These errors may not be retrievable because, no matter how many times we resend the information, it will always fail. Such incompatible messages are also called _poison pill errors_. To isolate the problematic messages, we can save them for later debugging. For instance, we can save them in a dedicated queue so that we get rid of the broken messages. This pattern is also known as the **dead letter queue**. Later, these messages can be inspected to determine why they are not processed successfully.
 
 - **Handle Service Outages:** In other cases, an error may persist because one of the services is down, maybe for a couple of hours due to a serious problem. In that case, the error is retrievable, so we may still want to accept the request because we know we can process them later when the failed service recovers. Basically, we store all the transactions that have failed and need to be consumed later in a persistent queue. When the crashed service is up again, we can pick the transactions from the queue and process them.
 
 ![Dead Letter Queue](/blog/images/design-a-payment-system/persistent-failures.png)
+
 <figcaption>Dead Letter Queue and Normal flow Queue</figcaption>
 
 ## Idempotency (Avoiding Double Charging)
 
-If a payment request fails due to a *network error* or any other reason, we should have a mechanism to safely retry the operation without charging the customer twice. To achieve this, we'll use the concept of **idempotency**.
+If a payment request fails due to a _network error_ or any other reason, we should have a mechanism to safely retry the operation without charging the customer twice. To achieve this, we'll use the concept of **idempotency**.
 
 From an API perspective, an idempotent operation is one that has no additional effect if it's called more than once with the same input parameters. Let's see a usual scenario to understand how it actually works:
 
@@ -158,6 +164,7 @@ Then, when the receiving server gets the same payment details it will identify t
 To support **hidden potency** we can use the unique key constraint of any database. When the payment system receives a payment it tries to insert a row into the database table. A successful insertion means we have not seen this payment request before. If the request fails it means the key is a duplicate so the second request is ignored. We can also return the latest status of the payment to the user.
 
 ![Hidden Potency](/blog/images/design-a-payment-system/idempotency.png)
+
 <figcaption>Hidden Potency</figcaption>
 
 If multiple concurrent requests are detected with the same hidden potency key, only one request is processed and the others will receive **429 Too Many Requests** status code. In conclusion, an hidden potency key is a good way to avoid double charging.
@@ -194,7 +201,7 @@ Data transmission over networks, particularly the internet, poses inherent risks
 
 - **VPN (Virtual Private Network):** Establishes secure and encrypted connections between devices and networks, safeguarding data from interception or eavesdropping.
 - **TLS Protocol (Transport Layer Security):** Provides a comprehensive security framework encompassing confidentiality, data integrity, and authentication. Unlike its predecessor SSL, TLS ensures robust protection against modern cyber threats.
-- ***HTTPS (Hypertext Transfer Protocol Secure):*** Delivers data over the web in a secure and encrypted manner, ensuring the integrity and confidentiality of transmitted information.
+- **_HTTPS (Hypertext Transfer Protocol Secure):_** Delivers data over the web in a secure and encrypted manner, ensuring the integrity and confidentiality of transmitted information.
 
 ### Access Control: Gatekeeping Data Access
 

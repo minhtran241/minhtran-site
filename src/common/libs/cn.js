@@ -7,5 +7,5 @@ import { twMerge } from 'tailwind-merge'; // Importing twMerge utility for Tailw
  * @returns {string} - Combined class names.
  */
 export function cn(...inputs) {
-    return twMerge(clsx(inputs)); // Merging and returning class names
+  return twMerge(clsx(inputs)); // Merging and returning class names
 }

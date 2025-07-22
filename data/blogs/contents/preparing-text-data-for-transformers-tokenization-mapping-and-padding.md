@@ -141,6 +141,7 @@ Sequence 3: "Hello world [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]"
 ```
 
 ![Padding](/blog/images/preparing-text-data-for-transformers-tokenization-mapping-and-padding/padding.webp)
+
 <figcaption align="center">Padding</figcaption>
 
 For truncation, we would cut off the end of each sequence so that it fits within the maximum length of 5 tokens. The truncated sequences would look like this:
@@ -152,6 +153,7 @@ Sequence 3: "Hello world"
 ```
 
 ![Truncation](/blog/images/preparing-text-data-for-transformers-tokenization-mapping-and-padding/truncating.webp)
+
 <figcaption align="center">Truncation</figcaption>
 
 > Note that the choice of padding or truncation, or a combination of both, will depend on the specific task and the desired trade-off between preserving information from the original sequence and reducing computational overhead.
@@ -176,7 +178,7 @@ checkpoint = 'bert-base-cased' # Pre-trained model checkpoint
 tokernizer = AutoTokenizer.from_pretrained(checkpoint)
 ```
 
-The code is using the `AutoTokenizer` class from the `transformers` library to load a pre-trained tokenizer for the BERT model with the *base* architecture and the *cased* version. The pre-trained tokenizer will be used to convert input sequences of text into numerical representations (tokens) that can be fed into the model. The `checkpoint` variable specifies the name of the pre-trained tokenizer to use, and the `from_pretrained` method is used to load the tokenizer from the `transformers` library's pre-trained models.
+The code is using the `AutoTokenizer` class from the `transformers` library to load a pre-trained tokenizer for the BERT model with the _base_ architecture and the _cased_ version. The pre-trained tokenizer will be used to convert input sequences of text into numerical representations (tokens) that can be fed into the model. The `checkpoint` variable specifies the name of the pre-trained tokenizer to use, and the `from_pretrained` method is used to load the tokenizer from the `transformers` library's pre-trained models.
 
 ### Print tokenizer details
 
@@ -185,7 +187,7 @@ tokenizer
 ```
 
 [Tokenizer object](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*thckulpzyHKzkcNK_RW-jQ.png)
-*Tokenizer object*
+_Tokenizer object_
 
 The `BertTokenizerFast` class is a tokenizer that is specifically designed for BERT-based models and provides tokenization functionalities for text data. The `vocab_size` attribute of the `BertTokenizerFast` instance is set to 28996, which means the vocabulary of the tokenizer consists of 28996 unique tokens.
 
@@ -193,7 +195,7 @@ The `model_max_length` attribute is set to 512, which indicates that the maximum
 
 The `is_fast` attribute is set to True, which means that the tokenization process is optimized for speed and is faster than other tokenization methods.
 
-The `padding_side` attribute is set to *"right"*, which means that the tokenizer will add padding tokens to the right side of the input sequence if it is shorter than the maximum length. The `truncation_side` attribute is set to *"right"*, which means that the tokenizer will truncate the input sequence from the right side if it is longer than the maximum length.
+The `padding_side` attribute is set to _"right"_, which means that the tokenizer will add padding tokens to the right side of the input sequence if it is shorter than the maximum length. The `truncation_side` attribute is set to _"right"_, which means that the tokenizer will truncate the input sequence from the right side if it is longer than the maximum length.
 
 The `special_tokens` attribute is a dictionary that contains the special tokens used in the BERT model, such as the unknown token ([UNK]), the separator token ([SEP]), the padding token ([PAD]), the class token ([CLS]), and the mask token ([MASK]). These special tokens play a crucial role in the BERT model's input and output encoding.
 
