@@ -55,13 +55,7 @@
         "@tailwindcss/typography": "^0.0.0-insiders.0339c42",
         "autoprefixer": "^10.4.17",
         "cross-env": "^7.0.3",
-        "eslint": "^9",
-        "eslint-config-next": "15.4.2",
-        "eslint-config-prettier": "^9.1.0",
-        "eslint-plugin-prettier": "^5.1.0",
         "postcss": "^8.5.6",
-        "prettier": "^3.2.0",
-        "prettier-plugin-tailwindcss": "^0.5.0",
         "tailwind-scrollbar": "^4.0.2",
         "tailwindcss": "^4.1.11",
         "tw-animate-css": "^1.3.5"
