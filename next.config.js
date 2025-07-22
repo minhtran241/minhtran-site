@@ -1,10 +1,8 @@
 // Alternative approach using @next/bundle-analyzer
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
-  openAnalyzer: false, // Set to true to auto-open in browser
+  openAnalyzer: true, // Set to true to auto-open in browser
 });
-
-const path = require('path');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
