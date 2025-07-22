@@ -31,6 +31,7 @@ So, how do they do it?
 They are specifically designed to comprehend context and meaning by analyzing the relationship between different elements, and they rely almost entirely on a mathematical technique called attention to do so.
 
 ![Transformer Architecture](/blog/images/how-transformers-work-a-detailed-exploration-of-transformer-architecture/transformer-models.png)
+
 <figcaption>Transformer Models</figcaption>
 
 ### Historical Context
@@ -45,7 +46,7 @@ In 2020, researchers at OpenAI announced [GPT-3](https://arxiv.org/abs/2005.1416
 
 In a 2021 paper, Stanford scholars aptly termed these innovations [foundation models](https://www.datacamp.com/blog/what-are-foundation-models), underscoring their foundational role in reshaping AI. Their work highlights how transformer models have not only revolutionized the field but also pushed the frontiers of what's achievable in artificial intelligence, heralding a new era of possibilities.
 
-*“We are in a time where simple methods like neural networks are giving us an explosion of new capabilities,”* Ashish Vaswani, an entrepreneur and former senior staff research scientist at Google
+_“We are in a time where simple methods like neural networks are giving us an explosion of new capabilities,”_ Ashish Vaswani, an entrepreneur and former senior staff research scientist at Google
 
 ### The shift from RNN models like LSTM to Transformers for NLP problems
 
@@ -81,6 +82,7 @@ Originally devised for sequence transduction or neural machine translation, tran
 If we start considering a Transformer for language translation as a simple black box, it would take a sentence in one language, English for instance, as an input and output its translation in English.
 
 ![Transformer Overview](/blog/images/how-transformers-work-a-detailed-exploration-of-transformer-architecture/overview.png)
+
 <figcaption>Transformer Input and Output</figcaption>
 
 If we dive a little bit, we observe that this black box is composed of two main parts:
@@ -89,6 +91,7 @@ If we dive a little bit, we observe that this black box is composed of two main 
 - The decoder takes in that encoded representation and iteratively generates an output. In our example, the translated sentence “¿Cómo estás?”
 
 ![Global structure of Encoder-Decoder.](/blog/images/how-transformers-work-a-detailed-exploration-of-transformer-architecture/overview2.png)
+
 <figcaption>Global structure of Encoder-Decoder.</figcaption>
 
 However, both the encoder and the decoder are actually a stack with multiple layers (same number for each). All encoders present the same structure, and the input gets into each of them and is passed to the next one. All decoders present the same structure as well and get the input from the last encoder and the previous decoder.
@@ -96,6 +99,7 @@ However, both the encoder and the decoder are actually a stack with multiple lay
 The original architecture consisted of 6 encoders and 6 decoders, but we can replicate as many layers as we want. So let’s assume N layers of each.
 
 ![Global structure of Encoder-Decoder. Multiple Layers.](/blog/images/how-transformers-work-a-detailed-exploration-of-transformer-architecture/overview3.png)
+
 <figcaption>Global structure of Encoder-Decoder. Multiple Layers.</figcaption>
 
 So now that we have a generic idea of the overall Transformer architecture, let’s focus on both Encoders and Decoders to understand better their working flow:
@@ -107,6 +111,7 @@ The encoder is a fundamental component of the Transformer architecture. The prim
 Its structure composition consists as follows:
 
 ![Global structure of Encoders.](/blog/images/how-transformers-work-a-detailed-exploration-of-transformer-architecture/encoder.png)
+
 <figcaption>Global structure of Encoders.</figcaption>
 
 So let’s break its workflow into its most basic steps:
@@ -118,6 +123,7 @@ The embedding only happens in the bottom-most encoder. The encoder begins by con
 All the encoders receive a list of vectors, each of size 512 (fixed-sized). In the bottom encoder, that would be the word embeddings, but in other encoders, it would be the output of the encoder that’s directly below them.
 
 ![Encoder’s workflow. Input embedding.](/blog/images/how-transformers-work-a-detailed-exploration-of-transformer-architecture/input-embeddings.png)
+
 <figcaption>Encoder’s workflow. Input embedding.</figcaption>
 
 #### STEP 2: Positional Encoding
@@ -129,6 +135,7 @@ To do so, the researchers suggested employing a combination of various sine and 
 In this approach, each dimension is represented by unique frequencies and offsets of the wave, with the values ranging from -1 to 1, effectively representing each position.
 
 ![Encoder’s workflow. Positional encoding.](/blog/images/how-transformers-work-a-detailed-exploration-of-transformer-architecture/positional-encoding.png)
+
 <figcaption>Encoder’s workflow. Positional encoding.</figcaption>
 
 #### STEP 3: Stack of Encoder Layers
@@ -143,6 +150,7 @@ The encoder layer serves to transform all input sequences into a continuous, abs
 Additionally, it incorporates residual connections around each sublayer, which are then followed by layer normalization.
 
 ![Encoder’s workflow. Stack of Encoder Layers](/blog/images/how-transformers-work-a-detailed-exploration-of-transformer-architecture/stack-of-encoder-layers.png)
+
 <figcaption>Encoder’s workflow. Stack of Encoder Layers</figcaption>
 
 #### STEP 3.1 Multi-Headed Self-Attention Mechanism
@@ -170,6 +178,7 @@ The score matrix establishes the degree of emphasis each word should place on ot
 This process effectively maps the queries to their corresponding keys.
 
 ![Encoder’s workflow. Attention mechanism - Matrix Multiplication.](/blog/images/how-transformers-work-a-detailed-exploration-of-transformer-architecture/matmul.png)
+
 <figcaption>Encoder’s workflow. Attention mechanism - Matrix Multiplication.</figcaption>
 
 ##### Reducing the Magnitude of attention scores
@@ -177,6 +186,7 @@ This process effectively maps the queries to their corresponding keys.
 The scores are then scaled down by dividing them by the square root of the dimension of the query and key vectors. This step is implemented to ensure more stable gradients, as the multiplication of values can lead to excessively large effects.
 
 ![Encoder’s workflow. Reducing the attention scores.](/blog/images/how-transformers-work-a-detailed-exploration-of-transformer-architecture/scale.png)
+
 <figcaption>Encoder’s workflow. Reducing the attention scores.</figcaption>
 
 ##### Applying Softmax to the Adjusted Scores
@@ -184,6 +194,7 @@ The scores are then scaled down by dividing them by the square root of the dimen
 Subsequently, a softmax function is applied to the adjusted scores to obtain the attention weights. This results in probability values ranging from 0 to 1. The softmax function emphasizes higher scores while diminishing lower scores, thereby enhancing the model's ability to effectively determine which words should receive more attention.
 
 ![Encoder’s workflow. Softmax adjusted scores.](/blog/images/how-transformers-work-a-detailed-exploration-of-transformer-architecture/softmax.png)
+
 <figcaption>Encoder’s workflow. Softmax adjusted scores.</figcaption>
 
 ##### Combining Softmax Results with the Value Vector
@@ -193,6 +204,7 @@ The following step of the attention mechanism is that weights derived from the s
 In this process, only the words that present high softmax scores are preserved. Finally, this output vector is fed into a linear layer for further processing.
 
 ![Encoder’s workflow. Combining Softmax results with the value vector.](/blog/images/how-transformers-work-a-detailed-exploration-of-transformer-architecture/combine-softmax.png)
+
 <figcaption>Encoder’s workflow. Combining Softmax results with the value vector.</figcaption>
 
 And we finally get the output of the Attention mechanism!
@@ -208,6 +220,7 @@ This ensemble passes through a final linear layer, much like a filter that fine-
 Each sub-layer in an encoder layer is followed by a normalization step. Also, each sub-layer output is added to its input (residual connection) to help mitigate the vanishing gradient problem, allowing deeper models. This process will be repeated after the Feed-Forward Neural Network too.
 
 ![Encoder’s workflow. Normalization and residual connection after Multi-Head Attention.](/blog/images/how-transformers-work-a-detailed-exploration-of-transformer-architecture/normalization.png)
+
 <figcaption>Encoder’s workflow. Normalization and residual connection after Multi-Head Attention.</figcaption>
 
 #### STEP 3.3 Feed-Forward Neural Network
@@ -219,6 +232,7 @@ Picture this network as a duo of linear layers, with a ReLU activation nestled i
 This reunion is followed by another round of normalization, ensuring everything is well-adjusted and in sync for the next steps.
 
 ![Encoder’s workflow. Feed-Forward Neural Network sub-layer.](/blog/images/how-transformers-work-a-detailed-exploration-of-transformer-architecture/feed-forward.png)
+
 <figcaption>Encoder’s workflow. Feed-Forward Neural Network sub-layer.</figcaption>
 
 #### STEP 4 - Output of the Encoder
@@ -234,6 +248,7 @@ Think of it like building a tower, where you can stack up N encoder layers. Each
 The decoder's role centers on crafting text sequences. Mirroring the encoder, the decoder is equipped with a similar set of sub-layers. It boasts two multi-headed attention layers, a pointwise feed-forward layer, and incorporates both residual connections and layer normalization after each sub-layer.
 
 ![Global structure of Decoders.](/blog/images/how-transformers-work-a-detailed-exploration-of-transformer-architecture/decoder.png)
+
 <figcaption>Global structure of Decoders.</figcaption>
 
 These components function in a way akin to the encoder's layers, yet with a twist: each multi-headed attention layer in the decoder has its unique mission.
@@ -267,6 +282,7 @@ This is similar to the self-attention mechanism in the encoder but with a crucia
 For instance, when the attention scores for the word "are" are being computed, it's important that "are" doesn't get a peek at "you", which is a subsequent word in the sequence.
 
 ![Decoder’s workflow. First Multi-Head Attention Mask.](/blog/images/how-transformers-work-a-detailed-exploration-of-transformer-architecture/masked-self-attention.png)
+
 <figcaption>Decoder’s workflow. First Multi-Head Attention Mask.</figcaption>
 
 This masking ensures that the predictions for a particular position can only depend on known outputs at positions before it.
@@ -280,6 +296,7 @@ This setup effectively aligns the encoder's input with the decoder's, empowering
 Following this, the output from this second layer of multi-headed attention is then refined through a pointwise feedforward layer, enhancing the processing further.
 
 ![Decoder’s workflow. Encoder-Decoder Attention.](/blog/images/how-transformers-work-a-detailed-exploration-of-transformer-architecture/encoder-decoder-attention.png)
+
 <figcaption>Decoder’s workflow. Encoder-Decoder Attention.</figcaption>
 
 In this sub-layer, the queries come from the previous decoder layer, and the keys and values come from the output of the encoder. This allows every position in the decoder to attend over all positions in the input sequence, effectively integrating information from the encoder with the information in the decoder.
@@ -297,6 +314,7 @@ The size of this classifier corresponds to the total number of classes involved 
 This output is then introduced to a softmax layer, which transforms it into a range of probability scores, each lying between 0 and 1. The highest of these probability scores is key,its corresponding index directly points to the word that the model predicts as the next in the sequence.
 
 ![Decoder’s workflow. Transformer’s final output.](/blog/images/how-transformers-work-a-detailed-exploration-of-transformer-architecture/linear-softmax.png)
+
 <figcaption>Decoder’s workflow. Transformer’s final output.</figcaption>
 
 ##### Normalization and Residual Connections
@@ -318,6 +336,7 @@ Such a multi-layered approach can significantly enhance the model’s ability to
 And the final architecture is something similar like this (form the original paper)
 
 ![Original structure of Transformers.](/blog/images/how-transformers-work-a-detailed-exploration-of-transformer-architecture/transformer-architecture.png)
+
 <figcaption>Original structure of Transformers.</figcaption>
 
 To better understand this architecture, I recommend trying to apply a Transformer from scratch following this [tutorial to build a transformer with PyTorch](https://www.datacamp.com/tutorial/building-a-transformer-with-py-torch).

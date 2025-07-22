@@ -28,12 +28,13 @@ It implements MVCC, the feature that allows multiple connected users to see diff
 5. **Index-organized tables:** Oriole stores table rows in the leafs of primary key index making primary key lookups very cheap. In many cases, this saves significant storage space.
 
 ![I/O comparison](/blog/images/orioledb-solving-postgresql-wicked-problems/io-comparison.webp)
+
 <figcaption>Reads and writes are significantly faster with Oriole</figcaption>
 
 ## Pluggable storage in Postgres
 
-Pluggable Storage gives developers the ability to use different storage engines for different tables *within the same database*. This system is [available in MySQL](https://en.wikipedia.org/wiki/Comparison_of_MySQL_database_engines), which uses the [InnoDB](https://en.wikipedia.org/wiki/InnoDB) as the default storage engine since MySQL 5.5 (replacing p).
-Pluggable Storage gives developers the ability to use different storage engines for different tables *within the same database*. This system is [available in MySQL](https://en.wikipedia.org/wiki/Comparison_of_MySQL_database_engines), which uses the [InnoDB](https://en.wikipedia.org/wiki/InnoDB) as the default storage engine since MySQL 5.5 (replacing [MyISAM]()).
+Pluggable Storage gives developers the ability to use different storage engines for different tables _within the same database_. This system is [available in MySQL](https://en.wikipedia.org/wiki/Comparison_of_MySQL_database_engines), which uses the [InnoDB](https://en.wikipedia.org/wiki/InnoDB) as the default storage engine since MySQL 5.5 (replacing p).
+Pluggable Storage gives developers the ability to use different storage engines for different tables _within the same database_. This system is [available in MySQL](https://en.wikipedia.org/wiki/Comparison_of_MySQL_database_engines), which uses the [InnoDB](https://en.wikipedia.org/wiki/InnoDB) as the default storage engine since MySQL 5.5 (replacing [MyISAM]()).
 
 Oriole aims to be a drop-in replacement for Postgres' default storage engine and supports similar use-cases with improved performance. Other storage engines, to name a few possibilities, could implement columnar storage for OLAP workloads, highly compressed timeseries storage for event data, or compressed storage for minimizing disk usage.
 

@@ -17,6 +17,7 @@ We are seeing the next generation of vector databases introduce more sophisticat
 With a vector database, we can add knowledge to our AIs, like semantic information retrieval, long-term memory, and more. The diagram below gives us a better understanding of the role of vector databases in this type of application:
 
 ![Vector DB Flow](/blog/images/how-does-vector-database-work/vector-db-flow.png)
+
 <figcaption>Vector Database Flow</figcaption>
 
 Let’s break this down:
@@ -60,6 +61,7 @@ These algorithms are assembled into a pipeline that provides fast and accurate r
 Here’s a common pipeline for a vector database:
 
 ![Vector DB Pipeline](/blog/images/how-does-vector-database-work/vector-db-pipeline.png)
+
 <figcaption>Vector Database Pipeline</figcaption>
 
 1. **Indexing**: The vector database indexes vectors using an algorithm such as PQ, LSH, or HNSW (more on these below). This step maps the vectors to a data structure that will enable faster searching.
@@ -78,20 +80,22 @@ First-generation vector DBs have three critical pain points that a serverless ve
 
 - **Multitenancy**: Handling namespaces in indexes to ensure infrequently queried namespaces do not increase costs.
 
-- **Freshness**: A vector DB needs to provide fresh data, meaning within a few seconds of inserting new data, it is queryable. *Note, for Pinecone Serverless freshness can be delayed when inserting large amounts of data.*
+- **Freshness**: A vector DB needs to provide fresh data, meaning within a few seconds of inserting new data, it is queryable. _Note, for Pinecone Serverless freshness can be delayed when inserting large amounts of data._
 
 To separate storage from compute highly sophisticated geometric partitioning algorithms can break an index into sub-indices, allowing us to focus the search on specific partitions:
 
 ![Vector DB Partitioning](/blog/images/how-does-vector-database-work/partition.png)
+
 <figcaption>Partitioning of the search space</figcaption>
 
 With these partitions, the search space of a query can focus on just a few parts of a vector index rather than the full search space. Typical search behaviors will show that certain partitions are accessed more frequently than others, allowing us to dial between compute costs and cold startup times to find an optimal balance between cost and latency.
 
-When we do this partitioning, we solve the **separation of compute and storage** problem. However, geometric partitioning is a slower process at index build time. Meaning we can run into *freshness* problems as we must wait for new data to be correctly stored in the index.
+When we do this partitioning, we solve the **separation of compute and storage** problem. However, geometric partitioning is a slower process at index build time. Meaning we can run into _freshness_ problems as we must wait for new data to be correctly stored in the index.
 
 To solve this problem, a vector database needs another separate layer called a freshness layer. The freshness layer acts as a temporary “cache” of vectors that can be queried. At the same time, we wait for an index builder to place new vectors into the geometrically partitioned index.
 
 ![Vector DB Freshness](/blog/images/how-does-vector-database-work/freshness-layer.png)
+
 <figcaption>The freshness layer keeps our data up to date so we can begin querying quickly.</figcaption>
 
 During this process, a query router can send queries to both the index and the freshness layer — [solving the freshness problem](https://www.pinecone.io/blog/serverless-architecture/). However, it’s worth noting that the freshness layer exists in compute instances, so we cannot store the full index there. Instead, we wait for the new vectors to be inserted into the index — once complete, they are removed from the freshness layer.
@@ -119,6 +123,7 @@ The following sections will explore several algorithms and their unique approach
 The basic idea behind random projection is to project the high-dimensional vectors to a lower-dimensional space using a **random projection matrix**. We create a matrix of random numbers. The size of the matrix is going to be the target low-dimension value we want. We then calculate the dot product of the input vectors and the matrix, which results in a **projected matrix** that has fewer dimensions than our original vectors but still preserves their similarity.
 
 ![Random Projection](/blog/images/how-does-vector-database-work/random-projection.png)
+
 <figcaption>Random Projection</figcaption>
 
 When we query, we use the same projection matrix to project the query vector onto the lower-dimensional space. Then, we compare the projected query vector to the projected vectors in the database to find the nearest neighbors. Since the dimensionality of the data is reduced, the search process is significantly faster than searching the entire high-dimensional space.
@@ -130,6 +135,7 @@ Just keep in mind that random projection is an approximate method, and the proje
 Another way to build an index is product quantization (PQ), which is a lossy compression technique for high-dimensional vectors (like vector embeddings). It takes the original vector, breaks it up into smaller chunks, simplifies the representation of each chunk by creating a representative “code” for each chunk, and then puts all the chunks back together - without losing information that is vital for similarity operations. The process of PQ can be broken down into four steps: splitting, training, encoding, and querying.
 
 ![Product Quantization](/blog/images/how-does-vector-database-work/product-quantization.png)
+
 <figcaption>Product Quantization</figcaption>
 
 1. **Splitting**: The vectors are broken into segments.
@@ -147,6 +153,7 @@ The number of representative vectors in the codebook is a trade-off between the 
 Locality-Sensitive Hashing (LSH) is a technique for indexing in the context of an approximate nearest-neighbor search. It is optimized for speed while still delivering an approximate, non-exhaustive result. LSH maps similar vectors into “buckets” using a set of hashing functions, as seen below:
 
 ![Locality-Sensitive Hashing](/blog/images/how-does-vector-database-work/lsh.png)
+
 <figcaption>Locality-Sensitive Hashing</figcaption>
 
 To find the nearest neighbors for a given query vector, we use the same hashing functions used to “bucket” similar vectors into hash tables. The query vector is hashed to a particular table and then compared with the other vectors in that same table to find the closest matches. This method is much faster than searching through the entire dataset because there are far fewer vectors in each hash table than in the whole space.
@@ -158,6 +165,7 @@ It’s important to remember that LSH is an approximate method, and the quality 
 HNSW creates a hierarchical, tree-like structure where each node of the tree represents a set of vectors. The edges between the nodes represent the **similarity** between the vectors. The algorithm starts by creating a set of nodes, each with a small number of vectors. This could be done randomly or by clustering the vectors with algorithms like k-means, where each cluster becomes a node.
 
 ![Hierarchical Navigable Small World](/blog/images/how-does-vector-database-work/hnsw.png)
+
 <figcaption>Hierarchical Navigable Small World</figcaption>
 
 The algorithm then examines the vectors of each node and draws an edge between that node and the nodes that have the most similar vectors to the one it has.h
@@ -201,6 +209,7 @@ To optimize the filtering process, vector databases use various techniques, such
 Unlike vector indexes, vector databases are equipped with a set of capabilities that makes them better qualified to be used in high scale production settings. Let’s take a look at an overall overview of the components that are involved in operating the database.
 
 ![Database Operations](/blog/images/how-does-vector-database-work/database-operations.png)
+
 <figcaption>Database Operations</figcaption>
 
 #### Performance and Fault Tolerance

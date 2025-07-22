@@ -4,12 +4,12 @@ import { NextResponse } from 'next/server';
 export const dynamic = 'force-dynamic'; // defaults to auto
 
 export const GET = async () => {
-    try {
-        const response = await getNowPlaying();
+  try {
+    const response = await getNowPlaying();
 
-        return NextResponse.json(response?.data);
-    } catch (error) {
-        console.error(error);
-        return NextResponse.json(error);
-    }
+    return NextResponse.json(response?.data);
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(error);
+  }
 };

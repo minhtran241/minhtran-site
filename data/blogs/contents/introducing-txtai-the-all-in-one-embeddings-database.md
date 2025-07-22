@@ -7,6 +7,7 @@ This article introduces txtai, an all-in-one embeddings database that enables Na
 ## Introducing txtai
 
 ![Introduction to txtai](/blog/images/introducing-txtai-the-all-in-one-embeddings-database/intro-txtai.webp)
+
 <figcaption>txtai is an all-in-one embeddings database for semantic search, LLM orchestration and language model workflows.</figcaption>
 
 txtai is an all-in-one embeddings database for semantic search, LLM orchestration and language model workflows.
@@ -42,6 +43,7 @@ pip install txtai
 ## Semantic search
 
 ![Semantic search with txtai](/blog/images/introducing-txtai-the-all-in-one-embeddings-database/semantic-search.webp)
+
 <figcaption>txtai enables semantic search with SQL and object storage.</figcaption>
 
 Embeddings databases are the engine that delivers semantic search. Data is transformed into embeddings vectors where similar concepts will produce similar vectors. Indexes both large and small are built with these vectors. The indexes are used to find results that have the same meaning, not necessarily the same keywords.
@@ -71,7 +73,7 @@ print("%-20s %s" % ("Query", "Best Match"))
 print("-" * 50)
 
 # Run an embeddings search for each query
-for query in ("feel good story", "climate change", 
+for query in ("feel good story", "climate change",
     "public health story", "war", "wildlife", "asia",
     "lucky", "dishonest junk"):
   # Extract uid of first result
@@ -83,6 +85,7 @@ for query in ("feel good story", "climate change",
 ```
 
 ![Semantic search results](/blog/images/introducing-txtai-the-all-in-one-embeddings-database/semantic-search-output.webp)
+
 <figcaption>Results from semantic search example.</figcaption>
 
 The example above shows that for all of the queries, the query text isn’t in the data. This is the true power of transformers models over token based search.
@@ -161,7 +164,7 @@ print("%-20s %s" % ("Query", "Best Match"))
 print("-" * 50)
 
 # Run an embeddings search for each query
-for query in ("feel good story", "climate change", 
+for query in ("feel good story", "climate change",
     "public health story", "war", "wildlife", "asia",
     "lucky", "dishonest junk"):
   # Extract uid of first result
@@ -173,6 +176,7 @@ for query in ("feel good story", "climate change",
 ```
 
 ![Hybrid search results](/blog/images/introducing-txtai-the-all-in-one-embeddings-database/hybrid-search-output.webp)
+
 <figcaption>Results from hybrid search example.</figcaption>
 
 Same results as with semantic search. Let’s run the same example with just a keyword index to view those results.
@@ -275,11 +279,13 @@ Image(result.getvalue(), width=600)
 ```
 
 ![Search with object storage](/blog/images/introducing-txtai-the-all-in-one-embeddings-database/object-storage.gif)
+
 <figcaption>Searching with txtai.</figcaption>
 
 ## Topic modeling
 
 ![Topic modeling with txtai](/blog/images/introducing-txtai-the-all-in-one-embeddings-database/topic-modeling.webp)
+
 <figcaption>txtai enables topic modeling with semantic graphs.</figcaption>
 
 Topic modeling is enabled via semantic graphs. Semantic graphs, also known as knowledge graphs or semantic networks, build a graph network with semantic relationships connecting the nodes. In txtai, they can take advantage of the relationships inherently learned within an embeddings index.
@@ -371,6 +377,7 @@ Once again, this example demonstrates the difference between keyword and semanti
 ## LLM orchestration
 
 ![LLM orchestration with txtai](/blog/images/introducing-txtai-the-all-in-one-embeddings-database/llm-orchestration.webp)
+
 <figcaption>txtai enables LLM orchestration with a pipeline that extracts knowledge from content by joining a prompt, context data store and generative model together.</figcaption>
 
 txtai is an all-in-one embeddings database. It is the only vector database that also supports sparse indexes, graph networks and relational databases with inline SQL support. In addition to this, txtai has support for LLM orchestration.
@@ -406,8 +413,8 @@ embeddings.index(data)
 # Create and run extractor instance
 extractor = Extractor(
   embeddings,
-  "google/flan-t5-large", 
-  torch_dtype=torch.bfloat16, 
+  "google/flan-t5-large",
+  torch_dtype=torch.bfloat16,
   output="reference"
 )
 extractor(prompt("What country is having issues with climate change?"))[0]
@@ -447,6 +454,7 @@ national museum of american history
 ## Language model workflows
 
 ![Language model workflows with txtai](/blog/images/introducing-txtai-the-all-in-one-embeddings-database/language-model-workflows.webp)
+
 <figcaption>txtai enables language model workflows.</figcaption>
 
 Language model workflows, also known as semantic workflows, connect language models together to build intelligent applications.
@@ -460,7 +468,7 @@ embeddings:
   path: sentence-transformers/nli-mpnet-base-v2
   content: true
   functions:
-    - {name: translation, argcount: 2, function: translation}
+    - { name: translation, argcount: 2, function: translation }
 
 # Translation pipeline
 translation:
@@ -474,7 +482,7 @@ workflow:
         args:
           target: fr
         task: template
-        template: "{text}"
+        template: '{text}'
 ```
 
 The workflow above loads an embeddings index and defines a search workflow. The search workflow runs a search and then passes the results to a translation pipeline. The translation pipeline translates results to French.
@@ -489,7 +497,7 @@ app.index()
 
 # Run workflow
 list(app.workflow(
-  "search", 
+  "search",
   ["select text from txtai where similar('feel good story') limit 1"]
 ))
 ```

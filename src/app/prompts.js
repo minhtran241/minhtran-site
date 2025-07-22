@@ -97,5 +97,5 @@ Keep responses professional, engaging, and visitor-focused.
 const getChatbotSystemPrompt = () => chatbotSystemPrompt;
 
 module.exports = {
-	getChatbotSystemPrompt,
+  getChatbotSystemPrompt,
 };

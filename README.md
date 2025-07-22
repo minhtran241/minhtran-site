@@ -29,7 +29,6 @@ This website is built using these technologies:
 - ☀️ Apollo Client
 - ←→ Axios
 - 〰️ SWR
-- ➰ Framer Motion
 - 🏳️ Font Awesome Icon 6
 - 📊 Chart.js
 - 🎥 WakaTime API
@@ -71,26 +70,26 @@ If you want to run this project on your local machine, you can do so in just 3 e
 
 1. Clone using git
 
-    ```bash
-    git clone https://github.com/minhtran241/minhtran.com.git
-    ```
+   ```bash
+   git clone https://github.com/minhtran241/minhtran.com.git
+   ```
 
 2. Using `create-next-app`
 
-    ```bash
-    npx create-next-app -e https://github.com/minhtran241/minhtran.com project-name
-    ```
+   ```bash
+   npx create-next-app -e https://github.com/minhtran241/minhtran.com project-name
+   ```
 
 3. Using `degit`
 
-    ```bash
-    npx degit minhtran241/minhtran.com YOUR_APP_NAME
-    ```
+   ```bash
+   npx degit minhtran241/minhtran.com YOUR_APP_NAME
+   ```
 
 4. Deploy to Vercel or Netlify, etc
 
-    [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/minhtran241/minhtran.com)
-    [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/minhtran241/minhtran.com)
+   [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/minhtran241/minhtran.com)
+   [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/minhtran241/minhtran.com)
 
 ### 2. Install dependencies
 
@@ -106,22 +105,22 @@ This repository uses several constants. Please check the `src/common/constants` 
 
 ```javascript
 export const userBasicInfo = {
-    fullName: FULL_NAME,
-    currentJob: CURRENT_JOB,
-    currentOrg: CURRENT_ORG,
-    currentOrgLink: CURRENT_ORG_LINK,
-    currentRole: CURRENT_ROLE,
-    githubUsername: GITHUB_USERNAME,
-    githubLink: GITHUB_LINK,
-    linkedinUsername: LINKEDIN_USERNAME,
-    linkedinLink: LINKEDIN_LINK,
-    facebookUsername: FACEBOOK_USERNAME,
-    facebookLink: FACEBOOK_LINK,
-    instagramUsername: INSTAGRAM_USERNAME,
-    instagramLink: INSTAGRAM_LINK,
-    twitterUsername: TWITTER_USERNAME,
-    twitterLink: TWITTER_LINK,
-    email: EMAIL,
+  fullName: FULL_NAME,
+  currentJob: CURRENT_JOB,
+  currentOrg: CURRENT_ORG,
+  currentOrgLink: CURRENT_ORG_LINK,
+  currentRole: CURRENT_ROLE,
+  githubUsername: GITHUB_USERNAME,
+  githubLink: GITHUB_LINK,
+  linkedinUsername: LINKEDIN_USERNAME,
+  linkedinLink: LINKEDIN_LINK,
+  facebookUsername: FACEBOOK_USERNAME,
+  facebookLink: FACEBOOK_LINK,
+  instagramUsername: INSTAGRAM_USERNAME,
+  instagramLink: INSTAGRAM_LINK,
+  twitterUsername: TWITTER_USERNAME,
+  twitterLink: TWITTER_LINK,
+  email: EMAIL,
 };
 ```
 

@@ -4,84 +4,87 @@ import React, { useEffect, useState } from 'react';
 import { themeChange } from 'theme-change';
 
 const ThemeChanger = () => {
-	const themeValues = [
-		{ value: 'winter', label: 'Winter' },
-		{ value: 'night', label: 'Night' },
-		{ value: 'lofi', label: 'Lo-Fi' },
-		{ value: 'corporate', label: 'Corporate' },
-	];
+  const themeValues = [
+    { value: 'winter', label: 'Winter' },
+    { value: 'night', label: 'Night' },
+    { value: 'lofi', label: 'Lo-Fi' },
+    { value: 'corporate', label: 'Corporate' },
+  ];
 
-	// Initialize with empty string to prevent hydration mismatch
-	const [currentTheme, setCurrentTheme] = useState('');
-	const [isClient, setIsClient] = useState(false);
+  // Initialize with empty string to prevent hydration mismatch
+  const [currentTheme, setCurrentTheme] = useState('');
+  const [isClient, setIsClient] = useState(false);
 
-	useEffect(() => {
-		// Mark as client-side rendered
-		setIsClient(true);
+  useEffect(() => {
+    // Mark as client-side rendered
+    setIsClient(true);
 
-		// Set initial theme immediately
-		const savedTheme = localStorage.getItem('theme') ||
-			(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'winter');
+    // Set initial theme immediately
+    const savedTheme =
+      localStorage.getItem('theme') ||
+      (window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'night'
+        : 'winter');
 
-		document.documentElement.setAttribute('data-theme', savedTheme);
-		localStorage.setItem('theme', savedTheme);
-		setCurrentTheme(savedTheme);
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    localStorage.setItem('theme', savedTheme);
+    setCurrentTheme(savedTheme);
 
-		// Initialize theme-change after setting initial theme
-		themeChange(false);
+    // Initialize theme-change after setting initial theme
+    themeChange(false);
 
-		// Listen for theme changes on radio inputs
-		const handleThemeChange = (e) => {
-			if (e.target.matches('input[name="theme-dropdown"]')) {
-				setCurrentTheme(e.target.value);
-			}
-		};
+    // Listen for theme changes on radio inputs
+    const handleThemeChange = (e) => {
+      if (e.target.matches('input[name="theme-dropdown"]')) {
+        setCurrentTheme(e.target.value);
+      }
+    };
 
-		// Listen to clicks on theme radio buttons
-		document.addEventListener('change', handleThemeChange);
+    // Listen to clicks on theme radio buttons
+    document.addEventListener('change', handleThemeChange);
 
-		return () => {
-			document.removeEventListener('change', handleThemeChange);
-		};
-	}, []);
+    return () => {
+      document.removeEventListener('change', handleThemeChange);
+    };
+  }, []);
 
-	const getCurrentThemeLabel = () => {
-		const theme = themeValues.find(t => t.value === currentTheme);
-		return theme ? theme.label : currentTheme || 'Default';
-	};
+  const getCurrentThemeLabel = () => {
+    const theme = themeValues.find((t) => t.value === currentTheme);
+    return theme ? theme.label : currentTheme || 'Default';
+  };
 
-	return (
-		<div className="dropdown dropdown-end" data-choose-theme>
-			<div
-				tabIndex={0}
-				role="button"
-				className="btn btn-ghost gap-2"
-				aria-label="Choose theme"
-			>
-				<FontAwesomeIcon icon="fa-duotone fa-solid fa-droplet" />
-				<span className="hidden sm:inline">
-					{isClient ? getCurrentThemeLabel() : 'Theme'}
-				</span>
-			</div>
-			<ul
-				tabIndex={0}
-				className="dropdown-content menu rounded-box z-[1] p-2 shadow-lg bg-base-100 border border-base-200 min-w-40"
-			>
-				{themeValues.map((theme) => (
-					<li key={theme.value}>
-						<input
-							type="radio"
-							name="theme-dropdown"
-							className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-							aria-label={theme.label}
-							value={theme.value}
-							defaultChecked={currentTheme === theme.value}
-						/>
-					</li>
-				))}
-			</ul>
-		</div>
-	);
+  return (
+    <div className='dropdown dropdown-end' data-choose-theme>
+      <div
+        tabIndex={0}
+        role='button'
+        className='btn btn-ghost gap-2'
+        aria-label='Choose theme'
+      >
+        <FontAwesomeIcon icon='fa-duotone fa-solid fa-droplet' />
+        <span className='hidden sm:inline'>
+          {isClient ? getCurrentThemeLabel() : 'Theme'}
+        </span>
+      </div>
+      <ul
+        tabIndex={0}
+        className='dropdown-content menu rounded-box bg-base-100 border-base-200 z-[1] min-w-40 border p-2 shadow-lg'
+      >
+        {themeValues.map((theme) => (
+          <li key={theme.value}>
+            <input
+              type='radio'
+              name='theme-dropdown'
+              className='theme-controller btn btn-sm btn-block btn-ghost justify-start'
+              aria-label={theme.label}
+              value={theme.value}
+              defaultChecked={currentTheme === theme.value}
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default ThemeChanger;

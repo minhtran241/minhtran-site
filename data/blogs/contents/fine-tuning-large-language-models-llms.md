@@ -9,6 +9,7 @@ The **key upside** of this approach is that models can achieve better performanc
 While strictly self-supervised base models can exhibit impressive performance on a wide variety of tasks with the help of prompt engineering [2], they are still word predictors and may generate completions that are not entirely helpful or accurate. For example, let’s compare the completions of davinci (base GPT-3 model) and text-davinci-003 (a fine-tuned model).
 
 ![BasevsFineTuned](/blog/images/fine-tuning-large-language-models-llms/base-vs-fine-tuned.png)
+
 <figcaption align="center">Completion comparison of davinci (base GPT-3 model) and text-davinci-003 (a fine-tuned model)</figcaption>
 
 Notice the base model is simply trying to complete the text by listing a set of questions like a Google search or homework assignment, while the **fine-tuned model gives a more helpful response**. The flavor of fine-tuning used for text-davinci-003 is **alignment tuning**, which aims to make the rLLM’s responses more helpful, honest, and harmless, but more on that later [3,4].
@@ -51,7 +52,7 @@ Finally, one can use **reinforcement learning (RL)** to fine-tune models. RL **u
 
 An example of how RL can be used for model fine-tuning is demonstrated by OpenAI’s InstructGPT models, which were developed through **3 key steps** [4].
 
-1. Generate high-quality prompt-response pairs and fine-tune a pre-trained model using supervised learning. (~13k training prompts) *Note: One can (alternatively) skip to step 2 with the pre-trained model [3]*.
+1. Generate high-quality prompt-response pairs and fine-tune a pre-trained model using supervised learning. (~13k training prompts) _Note: One can (alternatively) skip to step 2 with the pre-trained model [3]_.
 
 2. Use the fine-tuned model to generate completions and have human-labelers rank responses based on their preferences. Use these preferences to train the reward model. (~33k training prompts).
 
@@ -77,7 +78,7 @@ Let's focus on **step 4** in this article.
 
 ## 3 Options for Parameter Training
 
-When it comes to fine-tuning a model with ~100M-100B parameters, one needs to be thoughtful of computational costs. Toward this end, an important question is — *which parameters do we (re)train?*
+When it comes to fine-tuning a model with ~100M-100B parameters, one needs to be thoughtful of computational costs. Toward this end, an important question is — _which parameters do we (re)train?_
 
 With the mountain of parameters at play, we have countless choices for which ones we train. Here, I will focus on **three generic options** of which to choose.
 
@@ -89,7 +90,7 @@ One way we can mitigate the downsides of Option 1 is to freeze a large portion o
 
 ### Option 2: Transfer Learning
 
-The big idea with **transfer learning (TL)** is to preserve the useful representations/features the model has learned from past training when applying the model to a new task. This generally consists of **dropping “the head” of a neural network (NN) and replacing it with a new one** (e.g. adding new layers with randomized weights). *Note: The head of an NN includes its final layers, which translate the model’s internal representations to output values.*
+The big idea with **transfer learning (TL)** is to preserve the useful representations/features the model has learned from past training when applying the model to a new task. This generally consists of **dropping “the head” of a neural network (NN) and replacing it with a new one** (e.g. adding new layers with randomized weights). _Note: The head of an NN includes its final layers, which translate the model’s internal representations to output values._
 
 While leaving the majority of parameters untouched mitigates the huge computational cost of training an LLM, TL may not necessarily resolve the problem of catastrophic forgetting. To better handle both of these issues, we can turn to a different set of approaches.
 
@@ -100,13 +101,14 @@ While leaving the majority of parameters untouched mitigates the huge computatio
 PEFT encapsulates a family of techniques, one of which is the popular **LoRA (Low-Rank Adaptation)** method [6]. The basic idea behind LoRA is to pick a subset of layers in an existing model and modify their weights according to the following equation.
 
 ![LoRA](/blog/images/fine-tuning-large-language-models-llms/lora.webp)
+
 <figcaption align="center">
   Equation showing how weight matrices are modified for fine-tuning using LoRA
 </figcaption>
 
 Where h() = a hidden layer that will be tuned, x = the input to h(), W₀ = the original weight matrix for the h, and ΔW = a matrix of trainable parameters injected into h. ΔW is decomposed according to ΔW=BA, where ΔW is a d by k matrix, B is d by r, and A is r by k. r is the assumed “intrinsic rank” of ΔW (which can be as small as 1 or 2) [6].
 
-The **key point is the (d * k) weights in W₀ are frozen and, thus, not included in optimization**. Instead, the ((d *r) + (r* k)) weights making up matrices B and A are the only ones that are trained.
+The **key point is the (d \* k) weights in W₀ are frozen and, thus, not included in optimization**. Instead, the ((d _r) + (r_ k)) weights making up matrices B and A are the only ones that are trained.
 
 Plugging in some made-up numbers for d=100, k=100, and r=2 to get a sense of the efficiency gains, the **number of trainable parameters drops from 10,000 to 400** in that layer. In practice, the authors of the LoRA paper cited a 1**0,000x reduction in parameter checkpoint size** using LoRA fine-tune GPT-3 compared to full parameter tuning [6].
 
@@ -125,7 +127,7 @@ from datasets import load_dataset, DatasetDict, Dataset
 
 from transformers import (
     AutoTokenizer,
-    AutoConfig, 
+    AutoConfig,
     AutoModelForSequenceClassification,
     DataCollatorWithPadding,
     TrainingArguments,
@@ -162,7 +164,7 @@ We can then load our [training and validation](https://huggingface.co/datasets/s
 dataset = load_dataset("shawhin/imdb-truncated")
 dataset
 
-# dataset = 
+# dataset =
 # DatasetDict({
 #     train: Dataset({
 #         features: ['label', 'text'],
@@ -172,7 +174,7 @@ dataset
 #         features: ['label', 'text'],
 #         num_rows: 1000
 #     })
-# }) 
+# })
 ```
 
 ### Preprocess data
@@ -212,7 +214,7 @@ if tokenizer.pad_token is None:
 tokenized_dataset = dataset.map(tokenize_function, batched=True)
 tokenized_dataset
 
-# tokenized_dataset = 
+# tokenized_dataset =
 # DatasetDict({
 #     train: Dataset({
 #        features: ['label', 'text', 'input_ids', 'attention_mask'],
@@ -254,8 +256,8 @@ Before training our model, we can evaluate how the base model with a randomly in
 
 ```python
 # define list of examples
-text_list = ["It was good.", "Not a fan, don't recommed.", 
-"Better than the first one.", "This is not worth watching even once.", 
+text_list = ["It was good.", "Not a fan, don't recommed.",
+"Better than the first one.", "This is not worth watching even once.",
 "This one is a pass."]
 
 print("Untrained model predictions:")
@@ -307,7 +309,7 @@ Next, we define hyperparameters for model training.
 
 ```python
 # hyperparameters
-lr = 1e-3 # size of optimization step 
+lr = 1e-3 # size of optimization step
 batch_size = 4 # number of examples processed per optimziation step
 num_epochs = 10 # number of times model runs through training data
 
@@ -315,7 +317,7 @@ num_epochs = 10 # number of times model runs through training data
 training_args = TrainingArguments(
     output_dir= model_checkpoint + "-lora-text-classification",
     learning_rate=lr,
-    per_device_train_batch_size=batch_size, 
+    per_device_train_batch_size=batch_size,
     per_device_eval_batch_size=batch_size,
     num_train_epochs=num_epochs,
     weight_decay=0.01,
@@ -346,6 +348,7 @@ trainer.train()
 The above code will generate the following table of metrics during training.
 
 ![TrainingMetrics](/blog/images/fine-tuning-large-language-models-llms/training-metrics.webp)
+
 <figcaption align="center">
   Model training metrics
 </figcaption>
