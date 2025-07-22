@@ -40,8 +40,8 @@ export default function manifest() {
         purpose: 'any maskable',
       },
       {
-        src: '/favicon/android-chrome-512x512.png',
-        sizes: '512x512',
+        src: '/favicon/android-chrome-384x384.png',
+        sizes: '384x384',
         type: 'image/png',
         purpose: 'any maskable',
       },
@@ -68,6 +68,13 @@ export default function manifest() {
         short_name: 'Projects',
         description: 'View my projects',
         url: '/projects',
+        icons: [{ src: '/favicon/favicon-32x32.png', sizes: '32x32' }],
+      },
+      {
+        name: 'Blog',
+        short_name: 'Blog',
+        description: 'Read my blog posts',
+        url: '/blog',
         icons: [{ src: '/favicon/favicon-32x32.png', sizes: '32x32' }],
       },
       {

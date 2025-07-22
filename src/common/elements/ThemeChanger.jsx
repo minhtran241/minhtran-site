@@ -79,6 +79,14 @@ const ThemeChanger = () => {
               aria-label={theme.label}
               value={theme.value}
               defaultChecked={currentTheme === theme.value}
+              onChange={(e) => {
+                document.documentElement.setAttribute(
+                  'data-theme',
+                  e.target.value,
+                );
+                localStorage.setItem('theme', e.target.value);
+                setCurrentTheme(e.target.value);
+              }}
             />
           </li>
         ))}
