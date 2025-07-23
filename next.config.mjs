@@ -86,7 +86,6 @@ const nextConfig = {
         },
       };
     }
-    config.externals = [...config.externals, { sharp: 'commonjs sharp' }];
     return config;
   },
 
