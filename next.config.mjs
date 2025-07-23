@@ -47,6 +47,7 @@ const nextConfig = {
       'reading-time',
       'rehype-raw',
       '@umami/api-client',
+      'chartjs-adapter-date-fns',
     ],
   },
 

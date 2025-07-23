@@ -95,7 +95,7 @@ const ProjectCard = async ({ project }) => {
         {/* Stats Section */}
         <div className='mt-auto'>
           {/* Main Stats */}
-          <div className='mb-4 grid grid-cols-2 gap-3'>
+          <div className='mb-4 flex items-center justify-between gap-4 text-sm font-medium'>
             {/* Language */}
             {project?.primaryLanguage && (
               <div className='flex items-center gap-1.5'>
