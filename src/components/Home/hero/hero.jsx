@@ -29,7 +29,6 @@ const HeroComponent = async () => {
                   width={160}
                   height={160}
                   className='object-cover transition-transform duration-300 group-hover:scale-110'
-                  priority
                   placeholder='blur'
                   blurDataURL={base64}
                 />
