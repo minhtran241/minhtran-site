@@ -1,5 +1,6 @@
 import { getPlaiceholder } from 'plaiceholder';
 import fs from 'fs/promises';
+import path from 'path';
 
 // receive array of strings (image local paths)
 export const getImages = async (images) => {
@@ -22,9 +23,10 @@ export const getBase64 = async (src, options = {}) => {
   const { local = true } = options;
   let buffer;
   if (local) {
-    buffer = await fs.readFile(
-      src.startsWith('./public') ? src : `./public${src}`,
-    );
+    // get project root path
+    console.log(process.cwd());
+    const projectRoot = path.resolve(process.cwd());
+    buffer = await fs.readFile(path.join(projectRoot, 'public', src));
   } else {
     try {
       const response = await fetch(src);
