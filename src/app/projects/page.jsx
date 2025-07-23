@@ -7,6 +7,8 @@ import axios from 'axios';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 import { getBase64 } from '@/common/libs/plaiceholder';
 
+export const dynamic = 'force-dynamic'; // Ensures this route is always server-rendered
+
 const PAGE_TITLE = 'Development Projects';
 const PAGE_DESCRIPTION =
   'Diverse array of my projects, including open-source side projects, professional work, and research initiatives.';

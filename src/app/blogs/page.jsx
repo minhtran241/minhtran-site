@@ -8,6 +8,8 @@ import Breadcrumbs from '@/common/elements/Breadcrumbs';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 import { getBase64 } from '@/common/libs/plaiceholder';
 
+export const dynamic = 'force-dynamic'; // Ensures this route is always server-rendered
+
 const PAGE_TITLE = 'Tech Blogs';
 const PAGE_DESCRIPTION =
   'My write-ups on various topics, including software technologies, data related concepts and AI world.';

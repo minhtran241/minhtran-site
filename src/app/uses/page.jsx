@@ -4,6 +4,8 @@ import Breadcrumbs from '@/common/elements/Breadcrumbs';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 import Softwares from '@/components/Uses/software';
 
+export const dynamic = 'force-dynamic'; // Ensures this route is always server-rendered
+
 const PAGE_TITLE = 'Used Devices and Tools';
 const PAGE_DESCRIPTION =
   'List of devices and tools that I use for development and daily tasks.';

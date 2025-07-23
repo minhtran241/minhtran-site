@@ -5,6 +5,8 @@ import Contribution from '@/components/Home/contribution/contribution';
 import Education from '@/components/Home/education/education';
 import Publications from '@/components/Home/publications/publications';
 
+export const dynamic = 'force-dynamic'; // Ensures this route is always server-rendered
+
 export const generateMetadata = async () => {
   return {
     title: 'Minh Tran - Software Engineer & Data Engineer',

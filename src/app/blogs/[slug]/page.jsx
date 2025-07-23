@@ -13,6 +13,8 @@ import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 import MarkdownRender from '@/common/elements/MarkdownRenderer';
 import { getBase64 } from '@/common/libs/plaiceholder';
 
+export const dynamic = 'force-dynamic'; // Ensures this route is always server-rendered
+
 // SEO metadata
 export const generateMetadata = async (props) => {
   const params = await props.params;
