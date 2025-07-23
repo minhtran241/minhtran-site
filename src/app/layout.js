@@ -206,13 +206,6 @@ export default function RootLayout({ children }) {
       <head>
         <link rel='preconnect' href='https://cloud.umami.is' />
         <link rel='dns-prefetch' href='https://cloud.umami.is' />
-        <link
-          rel='preload'
-          href='/memoji/memojihello.png'
-          as='image'
-          type='image/png'
-        />
-
         {/* Structured Data for SEO */}
         <script
           type='application/ld+json'
