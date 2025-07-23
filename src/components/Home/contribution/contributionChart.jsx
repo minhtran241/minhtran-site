@@ -23,6 +23,7 @@ import {
 import Loading from '@/app/loading';
 import Image from 'next/image';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
+import Link from 'next/link';
 
 // Register ChartJS components
 ChartJS.register(
@@ -286,12 +287,12 @@ const ContributionChart = ({ contributionCollection }) => {
             >
               {Object.entries(CHART_TYPES).map(([type, config]) => (
                 <li key={type}>
-                  <a
+                  <button
                     onClick={() => setSelectedChartType(type)}
                     className={selectedChartType === type ? 'active' : ''}
                   >
                     {config.icon} {config.name}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -310,13 +311,13 @@ const ContributionChart = ({ contributionCollection }) => {
             >
               {Object.keys(GET_CHART_DATA).map((range) => (
                 <li key={range}>
-                  <a
+                  <button
                     onClick={() => setSelectedTimeRange(range)}
                     className={selectedTimeRange === range ? 'active' : ''}
                   >
                     <FontAwesomeIcon icon='fa-duotone fa-calendar' />
                     {range.charAt(0).toUpperCase() + range.slice(1)}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
