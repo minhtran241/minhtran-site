@@ -27,15 +27,9 @@ export const getBase64 = async (src, options = {}) => {
     const projectRoot = path.resolve(process.cwd());
     buffer = await fs.readFile(path.join(projectRoot, 'public', src));
   } else {
-    try {
-      const response = await fetch(src);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch image from ${src}`);
-      }
-      buffer = await response.arrayBuffer();
-    } catch (error) {
-      console.error(`Failed to fetch image from ${src}:`, error);
-    }
+    buffer = await fetch(src).then(async (res) => {
+      return Buffer.from(await res.arrayBuffer());
+    });
   }
   const { base64 } = await getPlaiceholder(buffer);
   return base64;

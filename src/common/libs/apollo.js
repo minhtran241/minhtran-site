@@ -1,4 +1,9 @@
-import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
+import {
+  ApolloClient,
+  createHttpLink,
+  InMemoryCache,
+  defaultDataIdFromObject,
+} from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
 const httpLink = createHttpLink({
@@ -17,6 +22,19 @@ const authLink = setContext((_, { headers }) => {
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    dataIdFromObject: (object) => {
+      switch (object.__typename) {
+        case 'User':
+          return `User:${object.login}`; // Use GitHub username as the unique identifier
+        case 'Repository':
+          return `Repo:${object.id}`; // Use repository ID as the unique identifier
+        case 'RepositoryConnection':
+          return object.nodes.map((repo) => `Repo:${repo.id}`).join(','); // Use a combination
+        default:
+          return defaultDataIdFromObject(object); // Fallback for other types
+      }
+    },
+  }),
 });
 export default client;

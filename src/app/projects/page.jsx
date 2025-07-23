@@ -7,7 +7,7 @@ import axios from 'axios';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 import { getBase64 } from '@/common/libs/plaiceholder';
 
-export const dynamic = 'force-dynamic'; // Ensures this route is always server-rendered
+export const dynamic = 'force-dynamic';
 
 const PAGE_TITLE = 'Development Projects';
 const PAGE_DESCRIPTION =
@@ -21,7 +21,6 @@ const BREADCRUMBS = [
   },
 ];
 
-// SEO metadata
 export const generateMetadata = async () => {
   return {
     title: PAGE_TITLE,
@@ -65,23 +64,23 @@ const ProjectPage = async () => {
         : getBase64(project.openGraphImageUrl, { local: false }),
     ),
   );
+
   projects = projects.map((project, index) => ({
     ...project,
     base64: base64s[index],
   }));
 
   return (
-    <>
-      <div className='container mt-16 flex flex-col gap-8 py-12'>
-        <Breadcrumbs breadcrumbs={BREADCRUMBS} />
-        <div className='flex flex-col gap-6'>
-          {projects.map((project, index) => (
-            // same height for all cards
-            <ProjectCard key={index} project={project} />
-          ))}
-        </div>
+    <div className='container mt-16 flex flex-col gap-8 py-12'>
+      <Breadcrumbs breadcrumbs={BREADCRUMBS} />
+
+      {/* Grid Layout */}
+      <div className='grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3'>
+        {projects.map((project, index) => (
+          <ProjectCard key={index} project={project} />
+        ))}
       </div>
-    </>
+    </div>
   );
 };
 

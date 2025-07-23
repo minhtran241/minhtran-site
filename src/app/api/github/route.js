@@ -26,6 +26,7 @@ export const GET = async (request) => {
       query: gql`
         query GetGitHubUserInfo($username: String!, $reposNum: Int) {
           user(login: $username) {
+            login
             name
             bio
             company
@@ -40,6 +41,7 @@ export const GET = async (request) => {
             ) {
               totalCount
               nodes {
+                id
                 name
                 description
                 url
