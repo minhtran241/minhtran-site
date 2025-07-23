@@ -68,6 +68,8 @@ const Milestone = ({ milestone }) => {
                   width={64}
                   height={64}
                   className='object-cover'
+                  placeholder='blur'
+                  blurDataURL={milestone.base64}
                 />
               </div>
             </div>

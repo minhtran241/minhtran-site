@@ -11,6 +11,7 @@ import { fileSystemInfo } from '@/common/constants/fileSystem';
 import Breadcrumbs from '@/common/elements/Breadcrumbs';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 import MarkdownRender from '@/common/elements/MarkdownRenderer';
+import { getBase64 } from '@/common/libs/plaiceholder';
 
 // SEO metadata
 export const generateMetadata = async (props) => {
@@ -51,6 +52,7 @@ const getPost = async (slug) => {
     const postsData = await fs.readFile(DATA_ATTRS_FILE, 'utf-8');
     const posts = JSON.parse(postsData);
     const post = posts.find((post) => post.slug === slug);
+    post.base64 = await getBase64(post.thumbnail);
 
     if (!post) throw new Error('Post not found');
 
@@ -126,6 +128,8 @@ const SinglePostContent = ({ post }) => {
               height={600}
               className='h-auto w-full rounded-lg shadow-lg'
               priority
+              placeholder='blur'
+              blurDataURL={post.base64}
             />
           </div>
 

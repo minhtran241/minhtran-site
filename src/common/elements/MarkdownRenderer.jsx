@@ -122,9 +122,7 @@ const MarkdownRender = ({ mdString }) => (
               <code className={className} {...props} />
             );
           },
-          image: (props) => {
-            return <Image {...props} alt={props.alt} />;
-          },
+          image: (props) => <Image {...props} alt={props.alt} loading='lazy' />,
           a: (props) => {
             return (
               <Link

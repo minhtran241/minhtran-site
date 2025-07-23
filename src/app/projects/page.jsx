@@ -5,6 +5,7 @@ import Loading from '../loading';
 import { PROJECT_LIST } from '../../../data/projectList';
 import axios from 'axios';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
+import { getBase64 } from '@/common/libs/plaiceholder';
 
 const PAGE_TITLE = 'Development Projects';
 const PAGE_DESCRIPTION =
@@ -54,6 +55,18 @@ const ProjectPage = async () => {
       ...projectData,
     };
   });
+
+  const base64s = await Promise.all(
+    projects.map((project) =>
+      project.thumbnail
+        ? getBase64(`/projects/${project.thumbnail}`)
+        : getBase64(project.openGraphImageUrl, { local: false }),
+    ),
+  );
+  projects = projects.map((project, index) => ({
+    ...project,
+    base64: base64s[index],
+  }));
 
   return (
     <>

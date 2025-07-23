@@ -1,5 +1,8 @@
+import withPlaiceholder from '@plaiceholder/next';
+import withBundleAnalyzer from '@next/bundle-analyzer';
+
 // Alternative approach using @next/bundle-analyzer
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
+const nextBundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
   openAnalyzer: true, // Set to true to auto-open in browser
 });
@@ -135,4 +138,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withBundleAnalyzer(nextConfig);
+export default nextBundleAnalyzer(withPlaiceholder(nextConfig));

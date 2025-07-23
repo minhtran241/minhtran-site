@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { fileSystemInfo } from '@/common/constants/fileSystem';
 import Breadcrumbs from '@/common/elements/Breadcrumbs';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
+import { getBase64 } from '@/common/libs/plaiceholder';
 
 const PAGE_TITLE = 'Tech Blogs';
 const PAGE_DESCRIPTION =
@@ -28,9 +29,13 @@ const getPosts = async (limit) => {
   try {
     const postsData = await fs.readFile(path.join(DATA_ATTRS_FILE), 'utf-8');
     let posts = JSON.parse(postsData);
-    posts = posts.map((post) => ({
+    const base64s = await Promise.all(
+      posts.map((post) => getBase64(post.thumbnail)),
+    );
+    posts = posts.map((post, index) => ({
       ...post,
       tags: post.tags.split(',').map((tag) => tag.trim()),
+      base64: base64s[index],
     }));
 
     posts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
@@ -100,7 +105,14 @@ const BlogPage = async () => {
                 width={600}
                 height={320}
                 priority
+                placeholder='blur'
+                blurDataURL={firstPost.base64}
               />
+              {/* <div
+								aria-hidden="true"
+								className='h-64 w-full rounded-2xl object-cover transition-transform duration-300 hover:scale-105 lg:h-80'
+								style={images[0].css}
+							/> */}
             </Link>
           </figure>
 
