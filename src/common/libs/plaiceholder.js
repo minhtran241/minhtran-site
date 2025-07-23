@@ -24,7 +24,6 @@ export const getBase64 = async (src, options = {}) => {
   let buffer;
   if (local) {
     // get project root path
-    console.log(process.cwd());
     const projectRoot = path.resolve(process.cwd());
     buffer = await fs.readFile(path.join(projectRoot, 'public', src));
   } else {
