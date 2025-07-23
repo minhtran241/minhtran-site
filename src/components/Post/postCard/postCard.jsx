@@ -17,7 +17,9 @@ const PostCard = ({ post }) => {
             alt={post.title}
             width={320}
             height={192}
-            loading='lazy'
+            priority
+            placeholder='blur'
+            blurDataURL={post.base64}
           />
           {/* Date Badge */}
           <div className='bg-secondary text-secondary-content border-base-100 absolute top-4 right-4 flex h-14 w-14 flex-col items-center justify-center rounded-full border-2 shadow-lg'>

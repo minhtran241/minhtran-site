@@ -1,71 +1,19 @@
-'use client';
-
 import { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import {
+  ContactInfoModal,
+  ShowContactInfoButton,
+} from '@/components/Home/hero/contactInfoModal';
 import { userBasicInfo } from '@/common/constants/userBasic';
 import { fileSystemInfo } from '@/common/constants/fileSystem';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 import Loading from '@/app/loading';
-import { SOCIAL_MEDIA } from '@/common/constants/menu';
-// import ResumeViewer from './resumeViewer';
+import { getBase64 } from '@/common/libs/plaiceholder';
 
-const ContactInfoModal = () => (
-  <dialog id='contact_info_modal' className='modal'>
-    <div className='modal-box max-w-md'>
-      <form method='dialog'>
-        <button className='btn btn-sm btn-circle btn-ghost hover:bg-base-200 absolute top-3 right-3 transition-colors'>
-          <FontAwesomeIcon icon='fa-solid fa-times' />
-        </button>
-      </form>
-
-      <div className='mb-6'>
-        <h3 className='flex items-center gap-3 text-xl font-bold'>
-          <FontAwesomeIcon icon='fa-solid fa-info-circle' />
-          Contact Information
-        </h3>
-        <p className='text-base-content/60 mt-2 text-sm'>
-          Get in touch through any of these channels
-        </p>
-      </div>
-
-      <div className='space-y-4'>
-        {SOCIAL_MEDIA.slice(1).map((item, index) => (
-          <div
-            key={index}
-            className='bg-base-200/50 hover:bg-base-200 flex items-center gap-4 rounded-lg p-3 transition-colors'
-          >
-            <div className='text-primary text-lg'>{item.icon}</div>
-            <div className='flex-1'>
-              <p className='text-base-content/80 text-sm font-medium'>
-                {item.name}
-              </p>
-              <Link
-                href={item.href}
-                target='_blank'
-                className='link link-primary link-hover font-semibold'
-              >
-                {item.title}
-              </Link>
-            </div>
-            <FontAwesomeIcon
-              icon='fa-solid fa-external-link'
-              className='text-base-content/40 text-xs'
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-    <form method='dialog' className='modal-backdrop'>
-      <button>close</button>
-    </form>
-  </dialog>
-);
-
-const HeroComponent = () => {
-  const handleShowModal = () => {
-    document.getElementById('contact_info_modal')?.showModal();
-  };
+const HeroComponent = async () => {
+  const headshotSrc = '/home/headshot.png'; // Path to the headshot image
+  const base64 = await getBase64(headshotSrc);
 
   return (
     <div className='container mx-auto pt-28'>
@@ -76,12 +24,14 @@ const HeroComponent = () => {
             <div className='avatar'>
               <div className='ring-primary ring-offset-base-100 group-hover:ring-primary-focus h-40 w-40 overflow-hidden rounded-full shadow-2xl ring-4 ring-offset-4 transition-all duration-300 group-hover:scale-105'>
                 <Image
-                  src='/home/headshot.png'
+                  src={headshotSrc}
                   alt={`${userBasicInfo.fullName} headshot`}
                   width={160}
                   height={160}
                   className='object-cover transition-transform duration-300 group-hover:scale-110'
                   priority
+                  placeholder='blur'
+                  blurDataURL={base64}
                 />
               </div>
             </div>
@@ -147,12 +97,7 @@ const HeroComponent = () => {
                   <div className='bg-primary/10 text-primary group-hover:bg-primary/20 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full transition-colors'>
                     <FontAwesomeIcon icon='fa-solid fa-info-circle' />
                   </div>
-                  <button
-                    onClick={handleShowModal}
-                    className='link link-primary link-hover font-medium transition-colors'
-                  >
-                    More contact info
-                  </button>
+                  <ShowContactInfoButton />
                 </div>
               </div>
 

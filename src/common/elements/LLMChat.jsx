@@ -41,7 +41,6 @@ const ChatMessage = ({ message, isUser, isStreaming = false }) => {
                 src={src}
                 alt={alt}
                 className='h-auto max-w-full rounded-lg'
-                loading='lazy'
                 width={300}
                 height={200}
               />
@@ -106,9 +105,9 @@ const ChatMessage = ({ message, isUser, isStreaming = false }) => {
               alt='Agent avatar'
               src='/memoji/memojialo.png'
               className='h-full w-full rounded-full object-cover'
-              loading='lazy'
               width={40}
               height={40}
+              priority
             />
           </div>
         </div>
@@ -250,12 +249,12 @@ export default function LLMChat() {
             <div className='avatar online placeholder transition-transform duration-300 group-hover:scale-110'>
               <div className='bg-primary text-primary-content ring-primary ring-offset-base-100 h-14 w-14 rounded-full shadow-lg ring ring-offset-2'>
                 <Image
-                  loading='lazy'
                   width={56}
                   height={56}
                   src='/memoji/memojialo.png'
                   alt='AI Agent'
                   className='rounded-full object-cover'
+                  priority
                 />
               </div>
             </div>

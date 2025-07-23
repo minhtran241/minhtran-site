@@ -2,10 +2,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { USES } from '../../../data/uses';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
+import { getBase64 } from '@/common/libs/plaiceholder';
 
 const DEVICES = USES.Devices;
 
-const Devices = () => {
+const Devices = async () => {
+  const base64s = await Promise.all(
+    DEVICES.map((device) => getBase64(device.image)),
+  );
   return (
     <section className='space-y-10'>
       <div className='flex items-center gap-3'>
@@ -33,7 +37,9 @@ const Devices = () => {
                 width={800}
                 height={400}
                 className='rounded-xl object-cover'
-                loading='lazy'
+                priority
+                placeholder='blur'
+                blurDataURL={base64s[0]}
               />
             </figure>
             <div className='card-body text-center'>
@@ -60,6 +66,9 @@ const Devices = () => {
                     width={192}
                     height={192}
                     className='h-48 w-48 rounded-lg object-cover'
+                    priority
+                    placeholder='blur'
+                    blurDataURL={base64s[index + 1]}
                   />
                 </figure>
                 <div className='card-body text-center'>

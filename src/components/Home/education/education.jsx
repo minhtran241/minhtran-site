@@ -6,6 +6,7 @@ import { Suspense } from 'react';
 import SectionLabel from '../sectionLabel/sectionLabel';
 import { fileSystemInfo } from '@/common/constants/fileSystem';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
+import { getBase64 } from '@/common/libs/plaiceholder';
 
 // * FETCH MILESTONES FROM LOCAL JSON
 const DATA_ATTRS_FILE = path.join(
@@ -15,6 +16,10 @@ const DATA_ATTRS_FILE = path.join(
 const getMilestones = async () => {
   const milestonesData = await fs.readFile(path.join(DATA_ATTRS_FILE), 'utf-8');
   const milestones = JSON.parse(milestonesData);
+  const bases64s = await Promise.all(milestones.map((m) => getBase64(m.logo)));
+  milestones.forEach((m, index) => {
+    m.base64 = bases64s[index];
+  });
   const sortedMilestones = milestones.sort((a, b) => {
     return new Date(b.start_date) - new Date(a.start_date);
   });
