@@ -8,6 +8,11 @@ const bundleAnalyzer = withBundleAnalyzer({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  compiler: {
+    removeConsole: {
+      exclude: ['error', 'warn'],
+    },
+  },
   // Build Configuration
   eslint: {
     dirs: ['src'],
@@ -25,12 +30,27 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: [
       '@apollo/client',
+      'ai',
+      '@ai-sdk/cohere',
+      'axios',
+      'chart.js',
+      'react',
       'chart.js',
       'react-chartjs-2',
       'date-fns',
       'react-syntax-highlighter',
+      'daisyui',
+      'next-share',
+      'react-dom',
+      'react-markdown',
+      'jsdom',
+      'reading-time',
+      'rehype-raw',
+      '@umami/api-client',
     ],
   },
+
+  productionBrowserSourceMaps: true,
 
   compress: true,
   poweredByHeader: false,
@@ -60,19 +80,12 @@ const nextConfig = {
 
   // Image Optimization
   images: {
-    formats: ['image/webp', 'image/avif'],
-    dangerouslyAllowSVG: true,
-    contentDispositionType: 'attachment',
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: [
       {
         protocol: 'https',
         hostname: '**',
       },
     ],
-    minimumCacheTTL: 31536000,
   },
 
   // Server Configuration
@@ -84,4 +97,4 @@ const nextConfig = {
   },
 };
 
-export default bundleAnalyzer(withPlaiceholder(nextConfig));
+export default withPlaiceholder(bundleAnalyzer(nextConfig));

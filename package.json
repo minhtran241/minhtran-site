@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "NEXT_TURBOPACK_TRACING=1 next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint --no-cache",
     "lint:fix": "next lint --no-cache --fix",
