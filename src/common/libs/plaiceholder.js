@@ -5,7 +5,7 @@ import fs from 'fs/promises';
 export const getImages = async (images) => {
   const imagePromises = images.map(async (src) => {
     const buffer = await fs.readFile(
-      src.startsWith('/public') ? src : `/public${src}`,
+      src.startsWith('./public') ? src : `./public${src}`,
     );
     const {
       metadata: { height, width },
@@ -23,7 +23,7 @@ export const getBase64 = async (src, options = {}) => {
   let buffer;
   if (local) {
     buffer = await fs.readFile(
-      src.startsWith('/public') ? src : `/public${src}`,
+      src.startsWith('./public') ? src : `./public${src}`,
     );
   } else {
     try {
