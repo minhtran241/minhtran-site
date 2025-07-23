@@ -1,46 +1,27 @@
 import withPlaiceholder from '@plaiceholder/next';
 import withBundleAnalyzer from '@next/bundle-analyzer';
 
-// Alternative approach using @next/bundle-analyzer
-const nextBundleAnalyzer = withBundleAnalyzer({
+const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
-  openAnalyzer: true, // Set to true to auto-open in browser
+  openAnalyzer: true,
 });
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Build Configuration
   eslint: {
-    // Lint these directories during build
     dirs: ['src'],
-    // Set to false to prevent ESLint from running during production builds
-    // ignoreDuringBuilds: false, // Keep this commented for production
+    ignoreDuringBuilds: false,
   },
-  // Turbopack configuration
+
+  // Development Configuration
   turbopack: {
-    // Configure custom root if needed (uncomment if your project structure requires it)
-    // root: path.join(__dirname, '..'),
-
-    // Configure any webpack loaders you need with Turbopack
-    rules: {
-      // Example: SVG loader configuration
-      // '*.svg': {
-      //   loaders: ['@svgr/webpack'],
-      //   as: '*.js',
-      // },
-    },
-
-    // Module resolution aliases (equivalent to webpack's resolve.alias)
-    resolveAlias: {
-      // Add any module aliases you need
-      // '@': path.resolve(__dirname, 'src'),
-      // '@components': path.resolve(__dirname, 'src/components'),
-    },
-
-    // Custom file extensions to resolve
+    rules: {},
+    resolveAlias: {},
     resolveExtensions: ['.mdx', '.tsx', '.ts', '.jsx', '.js', '.mjs', '.json'],
   },
 
-  // Experimental features for better performance
+  // Performance Optimizations
   experimental: {
     optimizePackageImports: [
       '@apollo/client',
@@ -49,44 +30,27 @@ const nextConfig = {
       'date-fns',
       'react-syntax-highlighter',
     ],
-    // Enable Turbopack for development (if you want to use it)
-    // turbo: {
-    //   rules: {},
-    // },
   },
 
-  // Performance optimizations
   compress: true,
   poweredByHeader: false,
 
-  // Security headers
+  // Security Configuration
   async headers() {
     return [
       {
         source: '/(.*)',
         headers: [
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin',
-          },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
-          },
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'origin-when-cross-origin' },
+          { key: 'X-XSS-Protection', value: '1; mode=block' },
         ],
       },
     ];
   },
 
-  // Image optimization
+  // Image Optimization
   images: {
     formats: ['image/webp', 'image/avif'],
     dangerouslyAllowSVG: true,
@@ -100,14 +64,12 @@ const nextConfig = {
         hostname: '**',
       },
     ],
-    minimumCacheTTL: 31536000, // 1 year
+    minimumCacheTTL: 31536000,
   },
 
-  // Custom webpack config for additional optimizations
-  // Note: This will only apply when using webpack (production builds by default)
+  // Webpack Optimization
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {
-      // Optimize chunk splitting for better caching
       config.optimization.splitChunks = {
         ...config.optimization.splitChunks,
         cacheGroups: {
@@ -127,15 +89,13 @@ const nextConfig = {
     return config;
   },
 
-  // Server-side package exclusions
-  serverExternalPackages: [
-    // Add packages that should remain external on server
-  ],
+  // Server Configuration
+  serverExternalPackages: [],
 
-  // Redirects for SEO
+  // Routing Configuration
   async redirects() {
     return [];
   },
 };
 
-export default nextBundleAnalyzer(withPlaiceholder(nextConfig));
+export default bundleAnalyzer(withPlaiceholder(nextConfig));
