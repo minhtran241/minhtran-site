@@ -65,7 +65,7 @@ export async function continueConversation(history) {
   (async () => {
     // Set up the text stream using the AI SDK
     const { textStream } = streamText({
-      model: cohere('command-light'),
+      model: cohere('command'),
       system: getChatbotSystemPrompt(),
       messages: history,
       // maxTokens: 300,
