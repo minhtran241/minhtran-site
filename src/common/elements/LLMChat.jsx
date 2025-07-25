@@ -180,7 +180,9 @@ export default function LLMChat() {
 
       let textContent = '';
       for await (const delta of readStreamableValue(newMessage)) {
+        // console.error('Received delta:', delta);
         textContent += delta;
+        // console.error('Text content:', textContent);
         setConversation([
           ...messages,
           { role: 'assistant', content: textContent },

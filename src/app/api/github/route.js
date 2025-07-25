@@ -120,7 +120,7 @@ export const GET = async (request) => {
       },
     });
 
-    console.error('GitHub API response:', queryResult.data);
+    // console.error('GitHub API response:', queryResult.data);
 
     return NextResponse.json({
       user: queryResult.data.user,

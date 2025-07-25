@@ -65,7 +65,7 @@ export async function continueConversation(history) {
   (async () => {
     // Set up the text stream using the AI SDK
     const { textStream } = streamText({
-      model: cohere('command-nightly'),
+      model: cohere('command-light'),
       system: getChatbotSystemPrompt(),
       messages: history,
       // maxTokens: 300,
@@ -82,6 +82,7 @@ export async function continueConversation(history) {
   })();
 
   // Return the conversation history and new streamed message
+  // console.error('New message stream:', stream.value); // Debugging line --- IGNORE ---
   return {
     messages: history,
     newMessage: stream.value,
