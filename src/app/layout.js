@@ -200,8 +200,9 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang='en'
-      className={cn('scroll-smooth antialiased')}
+      className={cn('antialiased')}
       suppressHydrationWarning
+      data-scroll-behavior='smooth'
     >
       <head>
         <link rel='preconnect' href='https://cloud.umami.is' />
