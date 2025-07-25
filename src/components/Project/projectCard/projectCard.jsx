@@ -46,6 +46,7 @@ const ProjectCard = async ({ project }) => {
             loading='lazy'
             width={400}
             height={192}
+            style={{ width: 'auto', height: 'auto' }}
           />
           <div className='absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100' />
         </Link>
