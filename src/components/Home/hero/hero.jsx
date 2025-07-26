@@ -107,6 +107,7 @@ const HeroComponent = async () => {
                   target='_blank'
                   rel='noopener noreferrer'
                   className='btn btn-primary btn-lg'
+                  download
                 >
                   <FontAwesomeIcon icon='fa-solid fa-file-pdf' />
                   Download Resume
