@@ -119,19 +119,6 @@ export const metadata = {
   authors: [{ name: 'Minh Tran', url: SITE_URL }],
   creator: 'Minh Tran',
   publisher: 'Minh Tran',
-  robots: {
-    index: true,
-    follow: true,
-    nocache: false,
-    googleBot: {
-      index: true,
-      follow: true,
-      noimageindex: false,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
   manifest: '/favicon/site.webmanifest',
   alternates: {
     canonical: SITE_URL,
@@ -145,7 +132,7 @@ export const metadata = {
     siteName: SITE_NAME,
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
         alt: SITE_DESCRIPTION,
@@ -159,7 +146,7 @@ export const metadata = {
     description: SITE_DESCRIPTION,
     site: '@minhtran241',
     creator: '@minhtran241',
-    images: ['/images/og-image.jpg'],
+    images: ['/og-image.jpg'],
   },
   icons: {
     icon: [
