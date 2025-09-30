@@ -1,17 +1,19 @@
 [
   {
     "id": 1,
-    "date": "2024-03-01T05:00:00.000Z",
+    "date": "2025-05-01T05:00:00.000Z",
     "title": "A Distributed Edge Computing Prototype Using Raspberry PIs",
-    "description": "The research paper focuses on the design, implementation, and performance evaluation of Raspberry Pi-based computing prototypes for diverse practical applications. The study explores various use cases, testing methodologies, and performance benchmarks to optimize prototype performance.",
+    "description": "Edge computing has recently become a widely used computing model. In edge computing, people deploy edge servers at locations closer to devices, which generate large amounts of data. Hence, edge computing can improve application performances by reducing the server latency and response time. Nowadays, Raspberry Pi is a small device for many Internet of Things (IoT) applications. In this paper, we investigate the concept of distributed edge computing, design a prototype, and implement that using Raspberry Pi devices. We utilize the parallel computing feature offered by our prototype and Raspberry Pis to show the benefits of distributed edge computing. We conduct extensive hands-on experiments for multiple applications and compare the performances among different computing models. Our evaluation results show that our distributed edge computing prototype can improve the performance with multiple edge servers.",
     "collaborators": [
       {
         "name": "Dr. Xiang Cao",
         "link": "https://ieeexplore.ieee.org/author/37087008129"
       }
     ],
-    "status": "Submitted",
-    "created_at": "2024-02-24T09:41:22.055Z",
+    "journal": "2025 IEEE World AI IoT Congress (AIIoT)",
+    "doi": "10.1109/AIIoT65859.2025.11105362",
+    "status": "Published",
+    "created_at": "2025-05-24T09:41:22.055Z",
     "updated_at": "2024-02-24T09:41:22.055Z"
   },
   {

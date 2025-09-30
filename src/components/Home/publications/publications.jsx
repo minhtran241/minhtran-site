@@ -57,7 +57,7 @@ const renderDOI = (doi) => (
   <div className='text-base-content/80 text-sm'>
     <span className='text-base-content font-semibold'>DOI:</span>{' '}
     <Link
-      href={doi}
+      href={`https://doi.org/${doi.replace('https://doi.org/', '')}`}
       className='link link-primary bg-base-200 hover:bg-base-300 rounded px-2 py-1 font-mono text-xs transition-colors duration-200'
       target='_blank'
     >
@@ -134,7 +134,7 @@ const Publications = async () => {
                   )}
 
                   {/* Description */}
-                  <p className='text-base-content/80 mb-4 leading-relaxed'>
+                  <p className='text-base-content/80 mb-4 text-sm leading-relaxed'>
                     {milestone.description}
                   </p>
 
@@ -143,7 +143,7 @@ const Publications = async () => {
                     {milestone.journal && (
                       <div className='text-sm'>
                         <span className='text-base-content font-semibold'>
-                          Journal:
+                          Published in:
                         </span>{' '}
                         <span className='text-base-content/80 italic'>
                           {milestone.journal}
