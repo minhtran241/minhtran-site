@@ -6,7 +6,7 @@ import Image from 'next/image';
 const formatDate = (date) =>
   new Date(date).toLocaleDateString('en-US', {
     year: 'numeric',
-    month: 'long',
+    month: 'short',
   });
 
 // Helper function to calculate exact duration
@@ -49,24 +49,23 @@ const Milestone = ({ milestone }) => {
   const paragraphs = getParagraphs(milestone.description);
 
   return (
-    // <div className="bg-gradient-to-r from-base-100 to-base-50 rounded-2xl p-6 shadow-lg border border-base-300/30 group-hover:shadow-xl group-hover:scale-[1.02] transition-all duration-300 hover:border-primary/20">
     <div className='p-3'>
       <Link
         href={milestone.link}
         target='_blank'
-        className='group/link flex flex-col items-start gap-6 md:flex-row'
+        className='group/link flex flex-col items-start gap-4 md:flex-row'
       >
-        {/* Company Avatar with enhanced styling */}
+        {/* Company Avatar */}
         {milestone.logo && (
           <div className='flex-shrink-0'>
             <div className='avatar'>
-              <div className='ring-base-300/50 ring-offset-base-100 group-hover/link:ring-primary/30 h-16 w-16 rounded-xl ring-2 ring-offset-2'>
+              <div className='ring-base-300/50 ring-offset-base-100 group-hover/link:ring-primary/30 h-12 w-12 rounded-lg ring-1 ring-offset-1 transition-all'>
                 <Image
                   src={milestone.logo}
                   alt={`${milestone.title} logo`}
                   loading='lazy'
-                  width={64}
-                  height={64}
+                  width={48}
+                  height={48}
                   className='object-cover'
                   placeholder='blur'
                   blurDataURL={milestone.base64}
@@ -77,31 +76,31 @@ const Milestone = ({ milestone }) => {
         )}
 
         {/* Milestone Content */}
-        <div className='flex min-w-0 flex-1 flex-col gap-3'>
-          {/* Date with enhanced styling */}
-          <div className='flex items-center gap-2'>
-            <div className='badge badge-primary badge-sm opacity-80'>
+        <div className='flex min-w-0 flex-1 flex-col gap-2'>
+          {/* Date */}
+          <div className='flex flex-wrap items-center gap-1.5'>
+            <div className='badge badge-primary'>
               <FontAwesomeIcon
                 icon='fa-solid fa-calendar'
-                className='mr-1 h-3 w-3'
+                className='mr-1 h-2.5 w-2.5'
               />
               {milestone.current ? 'Current' : 'Past'}
             </div>
-            <time className='text-primary text-sm font-semibold'>
-              {milestone.current ? `${timeStr}` : `${timeStr} (${durationStr})`}
+            <time className='text-primary text-xs font-semibold'>
+              {milestone.current ? `${timeStr}` : `${timeStr} · ${durationStr}`}
             </time>
           </div>
 
-          {/* Title & Link with hover effect */}
-          <div className='space-y-1'>
-            <h1 className='group-hover/link:text-primary flex items-center gap-2 text-xl font-bold'>
+          {/* Title & Link */}
+          <div className='space-y-0.5'>
+            <h1 className='group-hover/link:text-primary flex items-center gap-1.5 text-base font-bold transition-colors'>
               {milestone.title}
               <FontAwesomeIcon
-                icon='fa-solid fa-sm fa-external-link'
-                className='opacity-0 group-hover/link:opacity-100'
+                icon='fa-solid fa-external-link'
+                className='opacity-0 transition-opacity group-hover/link:opacity-100'
               />
             </h1>
-            <p className='text-base-content/80 text-base'>
+            <p className='text-sm'>
               {milestone.sub_title}{' '}
               {milestone.employment_type && (
                 <span className='text-primary'>
@@ -111,8 +110,8 @@ const Milestone = ({ milestone }) => {
             </p>
           </div>
 
-          {/* Location with icon */}
-          <div className='text-base-content/60 flex items-center gap-2 text-sm'>
+          {/* Location */}
+          <div className='flex items-center gap-1.5'>
             <FontAwesomeIcon
               icon='fa-solid fa-map-marker-alt'
               className='text-primary'
@@ -127,34 +126,39 @@ const Milestone = ({ milestone }) => {
             </span>
           </div>
 
-          {/* Grade with enhanced styling */}
+          {/* Grade */}
           {milestone.grade && (
             <div className='flex items-center gap-2'>
-              <div className='badge badge-secondary badge-outline'>
+              <div className='badge badge-outline badge-secondary'>
                 <FontAwesomeIcon
                   icon='fa-solid fa-star'
-                  className='mr-1 h-3 w-3'
+                  className='mr-1 h-2.5 w-2.5'
                 />
                 Grade: {milestone.grade}
               </div>
             </div>
           )}
 
-          {/* Description with better spacing */}
+          {/* Collapsible Description */}
           {paragraphs.length > 0 && (
-            <div className='mt-4 space-y-3'>
-              {paragraphs.map((p, index) => (
-                <div key={index} className='flex items-start gap-2'>
+            <details className='group/details mt-1'>
+              <summary className='text-primary hover:text-primary-focus cursor-pointer font-semibold transition-colors'>
+                <span className='inline-flex items-center gap-1'>
                   <FontAwesomeIcon
-                    icon='fa-solid fa-quote-left'
-                    className='text-base-content/60 mt-1 h-4 w-4'
+                    icon='fa-solid fa-chevron-right'
+                    className='transition-transform group-open/details:rotate-90'
                   />
-                  <p className='text-base-content/80 text-base leading-relaxed'>
-                    {p.trim()}
+                  Details ({paragraphs.length})
+                </span>
+              </summary>
+              <div className='mt-2 space-y-2'>
+                {paragraphs.map((p, index) => (
+                  <p key={index} className='text-sm leading-relaxed'>
+                    · {p.trim()}
                   </p>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            </details>
           )}
         </div>
       </Link>

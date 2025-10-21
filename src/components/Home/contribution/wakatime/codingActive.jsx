@@ -3,7 +3,7 @@ import Overview from './overview';
 
 const CodingActive = ({ data }) => {
   return (
-    <section className='flex flex-col gap-y-2'>
+    <section className='flex flex-col gap-y-3'>
       <Overview data={data} />
       <CodingActiveList data={data} />
     </section>

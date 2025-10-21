@@ -1,7 +1,6 @@
 import Loading from '@/app/loading';
 import { sumTotalFromArray } from '@/common/helpers';
 import Progress from './progress';
-import clsx from 'clsx';
 import Link from 'next/link';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { toZonedTime, fromZonedTime } from 'date-fns-tz';
@@ -51,18 +50,12 @@ const CodingActiveList = ({ data }) => {
       title: 'Languages',
       total: getLanguagesTotalTimeDisplay,
       data: data?.languages,
-      styles: {
-        // bg: 'bg-gradient-to-r from-primary to-secondary',
-      },
     },
     {
       icon: <FontAwesomeIcon icon='fa-duotone fa-solid fa-laptop' />,
       title: 'Categories',
       total: getEditorTotalTimeDisplay,
       data: data?.categories,
-      styles: {
-        // bg: 'bg-gradient-to-r from-primary to-secondary',
-      },
     },
   ];
 
@@ -74,24 +67,21 @@ const CodingActiveList = ({ data }) => {
     <Link
       href={`https://wakatime.com/@${process.env.WAKATIME_USERNAME}`}
       target='_blank'
-      className='mt-2 flex flex-col gap-6 sm:flex-row sm:gap-4'
+      className='flex flex-col gap-3 sm:flex-row sm:gap-3'
     >
       {actives.map((item) => (
         <div
           key={item?.title}
-          className={clsx(
-            // item?.styles?.bg,
-            'border-base-300 bg-base-100 rounded-box relative flex h-full w-full flex-1 flex-col border p-4',
-          )}
+          className='rounded-box border-base-300 bg-base-100 relative flex h-full w-full flex-1 flex-col border p-3'
         >
-          <p className='card-title text-base lg:text-lg'>
+          <p className='flex items-center gap-1.5 text-sm font-bold'>
             {item?.icon} {item?.title}
           </p>
-          <p className='text-sm'>Last updated {distance}</p>
-          <ul className='flex flex-col gap-1 py-3'>
+          <p className='text-xs opacity-70'>Updated {distance}</p>
+          <ul className='flex flex-col gap-1 py-2'>
             {item?.data?.slice(0, 3)?.map((subItem) => (
               <li key={subItem?.name}>
-                <Progress data={subItem} className={item?.styles?.bg} />
+                <Progress data={subItem} />
               </li>
             ))}
           </ul>

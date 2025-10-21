@@ -12,139 +12,196 @@ import Loading from '@/app/loading';
 import { getBase64 } from '@/common/libs/plaiceholder';
 
 const HeroComponent = async () => {
-  const headshotSrc = '/home/headshot.png'; // Path to the headshot image
+  const headshotSrc = '/home/headshot.png';
   const base64 = await getBase64(headshotSrc);
 
   return (
     <div className='container mx-auto pt-28'>
-      <div className='from-base-100 to-base-200/30 border-base-300/50 rounded-2xl border bg-gradient-to-br p-6 shadow-xl md:p-8'>
-        <div className='hero-content flex flex-col items-center gap-12 lg:flex-row'>
-          {/* Profile Picture */}
-          <div className='group relative'>
-            <div className='avatar'>
-              <div className='ring-primary ring-offset-base-100 group-hover:ring-primary-focus h-40 w-40 overflow-hidden rounded-full shadow-2xl ring-4 ring-offset-4 transition-all duration-300 group-hover:scale-105'>
-                <Image
-                  src={headshotSrc}
-                  alt={`${userBasicInfo.fullName} headshot`}
-                  width={160}
-                  height={160}
-                  className='object-cover transition-transform duration-300 group-hover:scale-110'
-                  placeholder='blur'
-                  blurDataURL={base64}
-                />
-              </div>
-            </div>
-            {/* Decorative elements */}
-            <div className='from-primary/20 to-secondary/20 absolute -inset-4 rounded-full bg-gradient-to-r opacity-30 blur-xl transition-opacity duration-300 group-hover:opacity-50'></div>
-          </div>
+      <div className='border-base-300/50 bg-base-100 relative overflow-hidden rounded-2xl border shadow-lg'>
+        {/* Academic background pattern */}
+        <div className='absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:20px_20px]'></div>
 
-          {/* User Information */}
-          <div className='flex flex-1 flex-col gap-8 text-center lg:text-left'>
-            {/* Name and Description */}
-            <div className='space-y-4'>
-              <div>
-                <h1 className='from-base-content to-base-content/80 bg-gradient-to-r bg-clip-text text-2xl leading-tight font-extrabold lg:text-3xl'>
-                  {userBasicInfo.fullName}
-                </h1>
-                <div className='badge badge-soft badge-primary'>
-                  <FontAwesomeIcon icon='fa-solid fa-user' />
-                  He/Him
+        {/* Gradient overlay */}
+        <div className='from-primary/5 to-secondary/5 absolute inset-0 bg-gradient-to-br via-transparent'></div>
+
+        <div className='relative p-6 md:p-8'>
+          <div className='flex flex-col items-center gap-8 lg:flex-row lg:items-start lg:gap-10'>
+            {/* Profile Picture */}
+            <div className='group relative flex-shrink-0'>
+              <div className='relative'>
+                {/* Geometric accent */}
+                <div className='border-primary/20 absolute -inset-4 rotate-3 rounded-xl border transition-transform duration-500 group-hover:rotate-6'></div>
+                <div className='border-secondary/20 absolute -inset-4 -rotate-3 rounded-xl border transition-transform duration-500 group-hover:-rotate-6'></div>
+
+                <div className='border-base-100 ring-primary/30 group-hover:ring-primary/50 relative z-10 h-32 w-32 overflow-hidden rounded-xl border-2 shadow-lg ring-1 transition-all duration-300 group-hover:shadow-xl'>
+                  <Image
+                    src={headshotSrc}
+                    alt={`${userBasicInfo.fullName} headshot`}
+                    width={128}
+                    height={128}
+                    className='h-full w-full object-cover transition-transform duration-500 group-hover:scale-110'
+                    placeholder='blur'
+                    blurDataURL={base64}
+                  />
                 </div>
               </div>
-              <p className='text-base-content/80 max-w-2xl text-lg leading-relaxed font-medium'>
+            </div>
+
+            {/* User Information */}
+            <div className='flex flex-1 flex-col gap-5'>
+              {/* Name and Title */}
+              <div className='space-y-2'>
+                <div className='flex flex-col items-center gap-2 lg:flex-row lg:items-center'>
+                  <h1 className='text-base-content text-2xl font-bold tracking-tight lg:text-3xl'>
+                    {userBasicInfo.fullName}
+                  </h1>
+                  <div className='badge badge-primary gap-1.5 text-xs font-semibold'>
+                    <FontAwesomeIcon
+                      icon='fa-solid fa-user'
+                      className='text-xs'
+                    />
+                    He/Him
+                  </div>
+                </div>
+
+                {/* Academic credentials */}
+                <div className='flex flex-wrap items-center justify-center gap-1.5 lg:justify-start'>
+                  <div className='badge badge-outline badge-sm gap-1.5'>
+                    <FontAwesomeIcon icon='fa-solid fa-graduation-cap' />
+                    CS + Mathematics
+                  </div>
+                  <div className='badge badge-outline badge-sm gap-1.5'>
+                    <FontAwesomeIcon icon='fa-solid fa-building' />
+                    GVSU
+                  </div>
+                  <div className='badge badge-outline badge-sm gap-1.5'>
+                    <FontAwesomeIcon icon='fa-solid fa-briefcase' />
+                    SWE/DE @ ACI
+                  </div>
+                </div>
+              </div>
+
+              {/* Description */}
+              <p className='text-base-content/80 max-w-3xl text-center text-sm leading-relaxed lg:text-left'>
                 {userBasicInfo.description}
               </p>
-            </div>
 
-            {/* Contact Information */}
-            <div className='flex flex-col items-center gap-8 xl:flex-row xl:items-start xl:justify-between'>
-              {/* Contact Details */}
-              <div className='space-y-4'>
-                <div className='group flex cursor-default items-center gap-4'>
-                  <div className='bg-primary/10 text-primary group-hover:bg-primary/20 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full transition-colors'>
-                    <FontAwesomeIcon icon='fa-solid fa-map-marker-alt' />
+              {/* Divider */}
+              <div className='divider my-0'></div>
+
+              {/* Contact Information Grid */}
+              <div className='grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3'>
+                <div className='group bg-base-200/50 hover:bg-base-200 flex items-center gap-2.5 rounded-lg p-2.5 transition-all duration-200'>
+                  <div className='bg-primary/10 text-primary group-hover:bg-primary/20 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg transition-colors'>
+                    <FontAwesomeIcon
+                      icon='fa-solid fa-map-marker-alt'
+                      className='text-sm'
+                    />
                   </div>
-                  <span className='font-medium'>Grand Rapids, MI, USA</span>
+                  <div>
+                    <div className='text-base-content/60 text-xs font-medium'>
+                      Location
+                    </div>
+                    <div className='text-xs font-semibold'>
+                      Grand Rapids, MI
+                    </div>
+                  </div>
                 </div>
 
-                <div className='group flex items-center gap-4'>
-                  <div className='bg-primary/10 text-primary group-hover:bg-primary/20 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full transition-colors'>
-                    <FontAwesomeIcon icon='fa-solid fa-envelope' />
+                <div className='group bg-base-200/50 hover:bg-base-200 flex items-center gap-2.5 rounded-lg p-2.5 transition-all duration-200'>
+                  <div className='bg-primary/10 text-primary group-hover:bg-primary/20 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg transition-colors'>
+                    <FontAwesomeIcon
+                      icon='fa-solid fa-envelope'
+                      className='text-sm'
+                    />
                   </div>
-                  <Link
-                    href={`mailto:${userBasicInfo.email}`}
-                    className='link link-primary link-hover font-medium transition-colors'
-                  >
-                    {userBasicInfo.email}
-                  </Link>
+                  <div className='min-w-0 flex-1'>
+                    <div className='text-base-content/60 text-xs font-medium'>
+                      Email
+                    </div>
+                    <Link
+                      href={`mailto:${userBasicInfo.email}`}
+                      className='link link-primary link-hover truncate text-xs font-semibold'
+                    >
+                      {userBasicInfo.email}
+                    </Link>
+                  </div>
                 </div>
 
-                {/* <div className="flex items-center gap-4 group">
-									<div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors">
-										<FontAwesomeIcon icon="fa-brands fa-linkedin" />
-									</div>
-									<Link
-										href={userBasicInfo.linkedinLink}
-										target="_blank"
-										className="link link-primary link-hover font-medium transition-colors"
-									>
-										{userBasicInfo.linkedinUsername}
-									</Link>
-								</div> */}
-
-                <div className='group flex items-center gap-4'>
-                  <div className='bg-primary/10 text-primary group-hover:bg-primary/20 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full transition-colors'>
-                    <FontAwesomeIcon icon='fa-solid fa-info-circle' />
+                <div className='group bg-base-200/50 hover:bg-base-200 flex items-center gap-2.5 rounded-lg p-2.5 transition-all duration-200 sm:col-span-2 lg:col-span-1'>
+                  <div className='bg-primary/10 text-primary group-hover:bg-primary/20 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg transition-colors'>
+                    <FontAwesomeIcon
+                      icon='fa-solid fa-info-circle'
+                      className='text-sm'
+                    />
                   </div>
-                  <ShowContactInfoButton />
+                  <div className='flex-1'>
+                    <div className='text-base-content/60 text-xs font-medium'>
+                      More Info
+                    </div>
+                    <ShowContactInfoButton />
+                  </div>
                 </div>
               </div>
 
               {/* Call-to-Action Buttons */}
-              <div className='flex min-w-fit flex-col gap-4'>
+              <div className='flex flex-col items-center gap-2.5 sm:flex-row lg:justify-start'>
                 <Link
                   href={fileSystemInfo.resumeLink}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='btn btn-primary btn-lg'
+                  className='btn btn-primary btn-sm w-full gap-2 sm:w-auto'
                   download
                 >
                   <FontAwesomeIcon icon='fa-solid fa-file-pdf' />
-                  Download Resume
+                  Download CV
                 </Link>
-                {/* <ResumeViewer /> */}
                 <Link
                   href={userBasicInfo.bookACallLink}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='btn btn-outline btn-primary btn-lg'
+                  className='btn btn-outline btn-primary btn-sm w-full gap-2 sm:w-auto'
                 >
                   <FontAwesomeIcon icon='fa-solid fa-calendar-check' />
-                  Book a Call
+                  Schedule Meeting
                 </Link>
+              </div>
 
-                {/* Quick Stats */}
-                <div className='mt-2 flex justify-center gap-4 lg:justify-start'>
-                  <div className='text-center'>
-                    <div className='text-primary text-lg font-bold'>
-                      CS+MATH
-                    </div>
-                    <div className='text-base-content/60 text-xs'>
-                      B.S. @GVSU
-                    </div>
-                  </div>
-                  <div className='text-center'>
-                    <div className='text-primary text-lg font-bold'>SWE/DE</div>
-                    <div className='text-base-content/60 text-xs'>@ACI</div>
-                  </div>
+              {/* Research Interests */}
+              <div className='flex flex-wrap gap-1.5'>
+                <div className='badge badge-sm bg-primary/10 text-primary'>
+                  <FontAwesomeIcon
+                    icon='fa-solid fa-code'
+                    className='mr-1 text-xs'
+                  />
+                  Software Engineering
+                </div>
+                <div className='badge badge-sm bg-secondary/10 text-secondary'>
+                  <FontAwesomeIcon
+                    icon='fa-solid fa-cloud'
+                    className='mr-1 text-xs'
+                  />
+                  Edge Computing
+                </div>
+                <div className='badge badge-sm bg-accent/10 text-accent'>
+                  {/* // text-accent changed to text-secondary */}
+                  <FontAwesomeIcon
+                    icon='fa-solid fa-database'
+                    className='mr-1 text-xs'
+                  />
+                  Database Systems
+                </div>
+                <div className='badge badge-sm bg-primary/10 text-primary'>
+                  <FontAwesomeIcon
+                    icon='fa-solid fa-brain'
+                    className='mr-1 text-xs'
+                  />
+                  Deep Learning &amp; AI
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Subtle background pattern */}
-        <div className='bg-grid-pattern pointer-events-none absolute inset-0 rounded-2xl opacity-5'></div>
       </div>
       <ContactInfoModal />
     </div>

@@ -27,7 +27,7 @@ const getMilestones = async () => {
 };
 
 const SECTION_TITLE = 'Education';
-const SECTION_DESCRIPTION = '';
+const SECTION_DESCRIPTION = 'My academic background and qualifications.';
 
 const EducationComponent = async () => {
   const milestones = await getMilestones();

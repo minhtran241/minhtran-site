@@ -6,7 +6,7 @@
     "description": "Edge computing has recently become a widely used computing model. In edge computing, people deploy edge servers at locations closer to devices, which generate large amounts of data. Hence, edge computing can improve application performances by reducing the server latency and response time. Nowadays, Raspberry Pi is a small device for many Internet of Things (IoT) applications. In this paper, we investigate the concept of distributed edge computing, design a prototype, and implement that using Raspberry Pi devices. We utilize the parallel computing feature offered by our prototype and Raspberry Pis to show the benefits of distributed edge computing. We conduct extensive hands-on experiments for multiple applications and compare the performances among different computing models. Our evaluation results show that our distributed edge computing prototype can improve the performance with multiple edge servers.",
     "collaborators": [
       {
-        "name": "Dr. Xiang Cao",
+        "name": "Xiang Cao",
         "link": "https://ieeexplore.ieee.org/author/37087008129"
       }
     ],
@@ -14,7 +14,10 @@
     "doi": "10.1109/AIIoT65859.2025.11105362",
     "status": "Published",
     "created_at": "2025-05-24T09:41:22.055Z",
-    "updated_at": "2024-02-24T09:41:22.055Z"
+    "updated_at": "2024-02-24T09:41:22.055Z",
+    "images": [
+      "/home/publication/AIIoT65859.2025.11105362/Our-Distributed-Edge-Computing-Prototype_W640.jpg"
+    ]
   },
   {
     "id": 2,
@@ -23,19 +26,19 @@
     "description": "The study investigates deep learning techniques for the classification of coral species, leveraging a range of advanced models for accurate classification. The paper discusses the model architecture, dataset preparation, training strategies, and performance evaluation methods.",
     "collaborators": [
       {
-        "name": "Dr. Denton Bobeldyk",
-        "link": "https://scholar.google.com/citations?user=rF6upEIAAAAJ&hl=en"
+        "name": "Dat Nguyen",
+        "link": "https://www.linkedin.com/in/dat-nguyen-32606917b"
       },
       {
-        "name": "Dr. Jonathan P. Leidig",
+        "name": "Jonathan P. Leidig",
         "link": "https://scholar.google.com/citations?user=a0_mOU0AAAAJ&hl=en"
       },
       {
-        "name": "Dat Nguyen",
-        "link": "https://www.linkedin.com/in/dat-nguyen-32606917b"
+        "name": "Denton Bobeldyk",
+        "link": "https://scholar.google.com/citations?user=rF6upEIAAAAJ&hl=en"
       }
     ],
-    "status": "In-Progress",
+    "status": "Submitted",
     "created_at": "2024-02-24T09:41:22.055Z",
     "updated_at": "2024-02-24T09:41:22.055Z"
   },
@@ -46,15 +49,15 @@
     "description": "The research project aims to develop an AI-driven method for optimizing the selection of applicants in a competitive recruitment process. The study involves data analysis, model development, and performance evaluation to enhance the efficiency and effectiveness of applicant selection procedures, with the goal of presenting the findings at a prestigious industry conference.",
     "collaborators": [
       {
-        "name": "Dr. Rahat Ibn Rafiq",
-        "link": "https://scholar.google.com/citations?user=nkjWthMAAAAJ&hl=en"
-      },
-      {
         "name": "Leo Ho",
         "link": "https://www.linkedin.com/in/quocleoho"
+      },
+      {
+        "name": "Rahat Ibn Rafiq",
+        "link": "https://scholar.google.com/citations?user=nkjWthMAAAAJ&hl=en"
       }
     ],
-    "status": "In-Progress",
+    "status": "Submitted",
     "created_at": "2024-02-24T09:41:22.055Z",
     "updated_at": "2024-02-24T09:41:22.055Z"
   }

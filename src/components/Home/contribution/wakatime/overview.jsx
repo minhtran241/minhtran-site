@@ -1,5 +1,4 @@
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
-
 const { formatDate } = require('@/common/helpers');
 
 const Overview = ({ data }) => {
@@ -15,7 +14,7 @@ const Overview = ({ data }) => {
     : 'N/A';
 
   return (
-    <div className='mb-1 grid gap-3 py-2 md:grid-cols-3'>
+    <div className='grid gap-2 md:grid-cols-3'>
       <OverviewItem
         icon=<FontAwesomeIcon icon='fa-duotone fa-calendar-day' />
         label='Start Date'
@@ -28,22 +27,22 @@ const Overview = ({ data }) => {
       />
       <OverviewItem
         icon=<FontAwesomeIcon icon='fa-duotone fa-clock' />
-        label='Daily Coding Average'
+        label='Daily Average'
         value={dailyAverage}
       />
       <OverviewItem
         icon=<FontAwesomeIcon icon='fa-duotone fa-clock' />
-        label='This Week Coding Time'
+        label='This Week'
         value={dailyTotal}
       />
       <OverviewItem
         icon=<FontAwesomeIcon icon='fa-duotone fa-calendar-star' />
-        label='Best Day Coding Time'
+        label='Best Day'
         value={bestDay}
       />
       <OverviewItem
         icon=<FontAwesomeIcon icon='fa-duotone fa-clock' />
-        label='All Time Since Today'
+        label='All Time'
         value={allTimeSinceToday}
       />
     </div>
@@ -51,12 +50,12 @@ const Overview = ({ data }) => {
 };
 
 const OverviewItem = ({ icon, label, value }) => (
-  <div className='stats border-base-300 bg-base-100 rounded-box border'>
-    <div className='stat'>
-      <div className='stat-label gap-2 text-sm'>
+  <div className='stats rounded-box border-base-300 bg-base-100 border'>
+    <div className='stat p-3'>
+      <div className='stat-label flex items-center gap-1.5 text-xs'>
         {icon} {label}
       </div>
-      <div className='stat-value text-primary text-base lg:text-lg'>
+      <div className='stat-value text-primary text-sm lg:text-base'>
         {value}
       </div>
     </div>

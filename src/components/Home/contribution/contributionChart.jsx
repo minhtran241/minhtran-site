@@ -23,9 +23,7 @@ import {
 import Loading from '@/app/loading';
 import Image from 'next/image';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
-import Link from 'next/link';
 
-// Register ChartJS components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -38,7 +36,6 @@ ChartJS.register(
   Legend,
 );
 
-// Constants
 const GET_CHART_DATA = {
   daily: getDailyChartData,
   weekly: getWeeklyChartData,
@@ -66,10 +63,6 @@ const CHART_TYPES = {
 const DEFAULT_TIME_RANGE = Object.keys(GET_CHART_DATA)[0];
 const DEFAULT_CHART_TYPE = Object.keys(CHART_TYPES)[0];
 
-/**
- * ContributionChart component renders various chart types displaying user contributions over time.
- * @param {Object} contributionCollection - Collection of user contributions.
- */
 const ContributionChart = ({ contributionCollection }) => {
   const contrCalendar = contributionCollection.contributionCalendar;
   const [selectedTimeRange, setSelectedTimeRange] =
@@ -78,7 +71,6 @@ const ContributionChart = ({ contributionCollection }) => {
     useState(DEFAULT_CHART_TYPE);
   const [chartData, setChartData] = useState(null);
 
-  // Effect to update chart data when selected time range or chart type changes
   useEffect(() => {
     const data = GET_CHART_DATA[selectedTimeRange](contrCalendar);
 
@@ -88,7 +80,6 @@ const ContributionChart = ({ contributionCollection }) => {
       if (ctx) {
         let processedData = { ...data };
 
-        // Create different styling based on chart type
         if (selectedChartType === 'line') {
           const gradient = ctx.createLinearGradient(0, 0, 0, 300);
           gradient.addColorStop(0, 'rgba(45, 186, 78, 0.3)');
@@ -101,9 +92,9 @@ const ContributionChart = ({ contributionCollection }) => {
             borderWidth: 2,
             pointBackgroundColor: 'rgb(45, 186, 78)',
             pointBorderColor: 'rgb(255, 255, 255)',
-            pointBorderWidth: 2,
-            pointRadius: 4,
-            pointHoverRadius: 6,
+            pointBorderWidth: 1,
+            pointRadius: 3,
+            pointHoverRadius: 5,
             tension: 0.4,
           };
         } else if (selectedChartType === 'bar') {
@@ -118,11 +109,10 @@ const ContributionChart = ({ contributionCollection }) => {
             backgroundColor: colors,
             borderColor: 'rgb(45, 186, 78)',
             borderWidth: 1,
-            borderRadius: 4,
+            borderRadius: 3,
             borderSkipped: false,
           };
         } else if (selectedChartType === 'doughnut') {
-          // For doughnut, we'll show a summary of contribution ranges
           const contributions = data.datasets[0].data;
           const ranges = {
             'High (10+)': contributions.filter((c) => c >= 10).length,
@@ -149,7 +139,7 @@ const ContributionChart = ({ contributionCollection }) => {
                   'rgb(74, 222, 128)',
                   'rgb(134, 239, 172)',
                 ],
-                borderWidth: 2,
+                borderWidth: 1,
               },
             ],
           };
@@ -160,7 +150,6 @@ const ContributionChart = ({ contributionCollection }) => {
     }
   }, [selectedTimeRange, selectedChartType, contrCalendar]);
 
-  // Chart options based on type
   const getChartOptions = () => {
     const baseOptions = {
       maintainAspectRatio: false,
@@ -170,11 +159,9 @@ const ContributionChart = ({ contributionCollection }) => {
           display: selectedChartType === 'doughnut',
           position: 'bottom',
           labels: {
-            padding: 20,
+            padding: 12,
             usePointStyle: true,
-            font: {
-              size: 12,
-            },
+            font: { size: 10 },
           },
         },
         tooltip: {
@@ -183,8 +170,8 @@ const ContributionChart = ({ contributionCollection }) => {
           bodyColor: 'white',
           borderColor: 'rgb(45, 186, 78)',
           borderWidth: 1,
-          cornerRadius: 8,
-          padding: 12,
+          cornerRadius: 6,
+          padding: 8,
           callbacks: {
             label: function (context) {
               if (selectedChartType === 'doughnut') {
@@ -200,7 +187,7 @@ const ContributionChart = ({ contributionCollection }) => {
     if (selectedChartType === 'doughnut') {
       return {
         ...baseOptions,
-        cutout: '60%',
+        cutout: '65%',
         plugins: {
           ...baseOptions.plugins,
           legend: {
@@ -215,27 +202,17 @@ const ContributionChart = ({ contributionCollection }) => {
       ...baseOptions,
       scales: {
         x: {
-          grid: {
-            display: false,
-          },
+          grid: { display: false },
           ticks: {
             maxRotation: 0,
-            autoSkipPadding: 20,
-            font: {
-              size: 11,
-            },
+            autoSkipPadding: 15,
+            font: { size: 10 },
           },
         },
         y: {
           beginAtZero: true,
-          grid: {
-            color: 'rgba(0, 0, 0, 0.1)',
-          },
-          ticks: {
-            font: {
-              size: 11,
-            },
-          },
+          grid: { color: 'rgba(0, 0, 0, 0.1)' },
+          ticks: { font: { size: 10 } },
           suggestedMax: chartData
             ? Math.max(...chartData.datasets[0].data) + 5
             : 10,
@@ -247,49 +224,48 @@ const ContributionChart = ({ contributionCollection }) => {
   const ChartComponent = CHART_TYPES[selectedChartType].component;
 
   return (
-    <div className='rounded-box border-base-300 bg-base-100 flex flex-col gap-4 border p-4'>
-      {/* Header with controls */}
-      <div className='flex flex-wrap justify-between gap-4'>
-        <div className='flex flex-row items-center justify-center gap-4'>
+    <div className='border-base-300 bg-base-100 flex flex-col gap-3 rounded-lg border p-3'>
+      {/* Header */}
+      <div className='flex flex-wrap items-center justify-between gap-3'>
+        <div className='flex items-center gap-3'>
           <div className='avatar'>
-            <div className='h-10 w-10 rounded-full'>
+            <div className='h-8 w-8 rounded-full'>
               <Image
                 src='/memoji/memojifocus-styled.png'
                 alt='avatar'
-                width={100}
-                height={100}
+                width={32}
+                height={32}
                 loading='lazy'
               />
             </div>
           </div>
           <div className='flex flex-col'>
-            <h2 className='card-title text-base lg:text-lg'>
+            <h2 className='text-sm font-bold'>
               {selectedTimeRange.charAt(0).toUpperCase() +
                 selectedTimeRange.slice(1)}{' '}
               Contributions
             </h2>
-            <p className='text-sm opacity-70'>
-              {contrCalendar.totalContributions} Total Contributions
+            <p className='text-xs opacity-70'>
+              {contrCalendar.totalContributions} Total
             </p>
           </div>
         </div>
 
-        <div className='flex gap-2'>
-          {/* Chart Type Selector */}
+        <div className='flex gap-1.5'>
+          {/* Chart Type */}
           <div className='dropdown dropdown-end'>
-            <div tabIndex={0} role='button' className='btn btn-outline btn-sm'>
-              {CHART_TYPES[selectedChartType].icon}{' '}
-              {CHART_TYPES[selectedChartType].name}
+            <div tabIndex={0} role='button' className='btn btn-xs btn-outline'>
+              {CHART_TYPES[selectedChartType].icon}
             </div>
             <ul
               tabIndex={0}
-              className='dropdown-content menu bg-base-100 rounded-box z-[1] w-32 p-2 shadow'
+              className='dropdown-content menu rounded-box bg-base-100 z-[1] w-28 p-1.5 shadow'
             >
               {Object.entries(CHART_TYPES).map(([type, config]) => (
                 <li key={type}>
                   <button
                     onClick={() => setSelectedChartType(type)}
-                    className={selectedChartType === type ? 'active' : ''}
+                    className={`text-xs ${selectedChartType === type ? 'active' : ''}`}
                   >
                     {config.icon} {config.name}
                   </button>
@@ -298,24 +274,21 @@ const ContributionChart = ({ contributionCollection }) => {
             </ul>
           </div>
 
-          {/* Time Range Selector */}
+          {/* Time Range */}
           <div className='dropdown dropdown-end'>
-            <div tabIndex={0} role='button' className='btn btn-outline btn-sm'>
+            <div tabIndex={0} role='button' className='btn btn-xs btn-outline'>
               <FontAwesomeIcon icon='fa-duotone fa-calendar' />
-              {selectedTimeRange.charAt(0).toUpperCase() +
-                selectedTimeRange.slice(1)}
             </div>
             <ul
               tabIndex={0}
-              className='dropdown-content menu bg-base-100 rounded-box z-[1] w-32 p-2 shadow'
+              className='dropdown-content menu rounded-box bg-base-100 z-[1] w-28 p-1.5 shadow'
             >
               {Object.keys(GET_CHART_DATA).map((range) => (
                 <li key={range}>
                   <button
                     onClick={() => setSelectedTimeRange(range)}
-                    className={selectedTimeRange === range ? 'active' : ''}
+                    className={`text-xs ${selectedTimeRange === range ? 'active' : ''}`}
                   >
-                    <FontAwesomeIcon icon='fa-duotone fa-calendar' />
                     {range.charAt(0).toUpperCase() + range.slice(1)}
                   </button>
                 </li>
@@ -325,10 +298,10 @@ const ContributionChart = ({ contributionCollection }) => {
         </div>
       </div>
 
-      {/* Chart Container */}
+      {/* Chart */}
       <div
-        className='bg-base-50 rounded-lg p-4'
-        style={{ height: '300px', width: '100%' }}
+        className='bg-base-50 rounded-lg p-3'
+        style={{ height: '220px', width: '100%' }}
       >
         {chartData ? (
           <ChartComponent
@@ -343,10 +316,10 @@ const ContributionChart = ({ contributionCollection }) => {
         )}
       </div>
 
-      {/* Stats Footer */}
+      {/* Stats */}
       {chartData && selectedChartType !== 'doughnut' && (
         <div className='stats stats-horizontal bg-base-200 shadow-sm'>
-          <div className='stat px-4 py-2'>
+          <div className='stat px-3 py-2'>
             <div className='stat-title text-xs'>Average</div>
             <div className='stat-value text-sm'>
               {Math.round(
@@ -355,13 +328,13 @@ const ContributionChart = ({ contributionCollection }) => {
               )}
             </div>
           </div>
-          <div className='stat px-4 py-2'>
+          <div className='stat px-3 py-2'>
             <div className='stat-title text-xs'>Peak</div>
             <div className='stat-value text-sm'>
               {Math.max(...chartData.datasets[0].data)}
             </div>
           </div>
-          <div className='stat px-4 py-2'>
+          <div className='stat px-3 py-2'>
             <div className='stat-title text-xs'>Active Days</div>
             <div className='stat-value text-sm'>
               {chartData.datasets[0].data.filter((d) => d > 0).length}

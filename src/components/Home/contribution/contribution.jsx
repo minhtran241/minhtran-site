@@ -1,7 +1,5 @@
 'use client';
 import SectionLabel from '../sectionLabel/sectionLabel';
-// import PublicReposCard from './publicReposCard';
-// import GHUserCard from './ghUserCard';
 import ContributionChart from './contributionChart';
 import useSWR from 'swr';
 import { GITHUB_REPOS_NUM } from '@/common/constants/githubAPI';
@@ -31,22 +29,15 @@ const Contribution = () => {
 
   return (
     <div className='container items-center justify-center'>
-      <div className='from-base-100 to-base-200/30 border-base-300/50 rounded-2xl border bg-gradient-to-br p-6 shadow-xl md:p-8'>
+      <div className='border-base-300/50 bg-base-100 rounded-2xl border p-5 shadow-lg md:p-6'>
         <SectionLabel
           title={sectionTitle}
           description={sectionDescription}
           icon=<FontAwesomeIcon icon='fa-duotone fa-code-pull-request' />
         />
-        <div className='flex flex-col gap-8'>
+        <div className='flex flex-col gap-5'>
           {ghData && wkData ? (
-            <div className='flex flex-col gap-8'>
-              {/* <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 md:gap-x-6 lg:gap-x-8 xl:grid-cols-2">
-                                <GHUserCard
-                                    ghInfo={ghData}
-                                    username={username}
-                                />
-                                <PublicReposCard ghInfo={ghData} />
-                            </div> */}
+            <div className='flex flex-col gap-5'>
               <ContributionChart
                 contributionCollection={ghData?.user?.contributionsCollection}
               />

@@ -27,15 +27,16 @@ const getMilestones = async () => {
 };
 
 const SECTION_TITLE = 'Employment History';
-const SECTION_DESCRIPTION = '';
+const SECTION_DESCRIPTION =
+  'A timeline of my professional experiences and roles in the tech industry.';
 
 const EmploymentComponent = async () => {
   const milestones = await getMilestones();
 
   return (
     <div className='container mx-auto px-4'>
-      <div className='from-base-100 to-base-200/30 border-base-300/50 rounded-2xl border bg-gradient-to-br p-6 shadow-xl md:p-8'>
-        <div className='mb-8'>
+      <div className='border-base-300/50 bg-base-100 rounded-2xl border p-5 shadow-lg md:p-6'>
+        <div className='mb-4'>
           <SectionLabel
             title={SECTION_TITLE}
             description={SECTION_DESCRIPTION}
@@ -43,20 +44,16 @@ const EmploymentComponent = async () => {
           />
         </div>
 
-        {/* <div className="relative"> */}
-        {/* Timeline line with gradient */}
-        {/* <div className="absolute left-7 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-primary/60 to-transparent"></div> */}
-
-        <ul className='timeline timeline-compact timeline-vertical'>
+        <ul className='timeline timeline-compact timeline-vertical timeline-snap-icon'>
           {milestones.map((milestone, index) => (
-            <li key={index} className=''>
+            <li key={index}>
               {index !== 0 && <hr className='bg-primary' />}
               <div className='timeline-middle'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   viewBox='0 0 20 20'
                   fill='currentColor'
-                  className='text-primary h-5 w-5'
+                  className='text-primary h-4 w-4'
                 >
                   <path
                     fillRule='evenodd'
@@ -65,11 +62,8 @@ const EmploymentComponent = async () => {
                   />
                 </svg>
               </div>
-              {/* Timeline dot */}
-              {/* <div className="absolute left-5 w-4 h-4 bg-primary rounded-full border-4 border-base-100 shadow-lg z-10"></div> */}
 
-              {/* Content card */}
-              <div className='timeline-end timeline-box w-full'>
+              <div className='timeline-end timeline-box w-full p-0'>
                 <Milestone
                   milestone={milestone}
                   first={index === 0}
@@ -81,8 +75,6 @@ const EmploymentComponent = async () => {
             </li>
           ))}
         </ul>
-        {/* </div>
-			</div> */}
       </div>
     </div>
   );
