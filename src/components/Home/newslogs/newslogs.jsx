@@ -84,61 +84,63 @@ const LogLine = ({ log }) => {
 
   return (
     <div
-      className={`flex items-start gap-3 rounded-lg border ${config.borderColor} ${config.bgColor} px-4 py-2.5 transition-colors hover:brightness-95`}
+      className={`${config.borderColor} ${config.bgColor} flex items-start gap-3 rounded-md border-l-4 px-4 py-2 transition-colors hover:brightness-95`}
     >
       {/* Icon */}
-      <FontAwesomeIcon
-        icon={`fa-duotone ${config.icon}`}
-        className={`flex-shrink-0 ${config.iconColor}`}
-      />
+      <div className='shrink-0'>
+        <FontAwesomeIcon
+          icon={`fa-duotone ${config.icon}`}
+          // className={`shrink-0 mt-0.5 ${config.iconColor} text-base sm:text-lg`}
+        />
+      </div>
 
-      {/* Date */}
-      <time
-        className='text-base-content/70 w-28 flex-shrink-0 text-xs font-semibold'
-        dateTime={new Date(log.date).toISOString()}
-      >
-        {date}
-      </time>
-
-      {/* Content with Markdown support */}
-      <div className='prose prose-sm text-base-content max-w-none flex-1 leading-relaxed'>
-        <ReactMarkdown
-          components={{
-            p: ({ children }) => (
-              <span className='text-base-content inline text-sm leading-relaxed font-medium'>
-                {children}
-              </span>
-            ),
-            a: ({ href, children }) => (
-              <Link
-                href={href || '#'}
-                className='link-primary link font-medium'
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                {children}
-              </Link>
-            ),
-            em: ({ children }) => <em className='italic'>{children}</em>,
-            strong: ({ children }) => (
-              <strong className='font-bold'>{children}</strong>
-            ),
-            code: ({ children }) => (
-              <code className='bg-base-300 rounded px-1.5 py-0.5 font-mono text-xs'>
-                {children}
-              </code>
-            ),
-          }}
-        >
-          {log.title}
-        </ReactMarkdown>
+      {/* Content wrapper that flows naturally */}
+      <div className='min-w-0 flex-1'>
+        <div className='prose prose-sm text-base-content max-w-none leading-relaxed'>
+          <time
+            className='text-base-content/70 mr-2 text-xs font-semibold'
+            dateTime={new Date(log.date).toISOString()}
+          >
+            {date}
+          </time>
+          <ReactMarkdown
+            components={{
+              p: ({ children }) => (
+                <span className='text-base-content inline text-sm leading-relaxed font-medium'>
+                  {children}
+                </span>
+              ),
+              a: ({ href, children }) => (
+                <Link
+                  href={href || '#'}
+                  className='link-primary link font-medium'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  {children}
+                </Link>
+              ),
+              em: ({ children }) => <em className='italic'>{children}</em>,
+              strong: ({ children }) => (
+                <strong className='font-bold'>{children}</strong>
+              ),
+              code: ({ children }) => (
+                <code className='bg-base-300 rounded px-1.5 py-0.5 font-mono text-xs'>
+                  {children}
+                </code>
+              ),
+            }}
+          >
+            {log.title}
+          </ReactMarkdown>
+        </div>
       </div>
 
       {/* External Link Icon */}
       {log.link && (
         <Link
           href={log.link}
-          className={`mt-0.5 flex-shrink-0 ${config.iconColor} hover:opacity-70`}
+          className={`shrink-0 ${config.iconColor} hover:opacity-70`}
           target='_blank'
           rel='noopener noreferrer'
           title='View link'
@@ -158,8 +160,8 @@ const NewsLogs = async () => {
   const logs = await getNewsLogs();
 
   return (
-    <div className='container mx-auto px-4'>
-      <div className='border-base-300/50 bg-base-100 rounded-2xl border p-6 shadow-lg'>
+    <div className='w-full px-4'>
+      <div className='border-base-300/50 bg-base-100 rounded-2xl border p-4 shadow-lg sm:p-6'>
         <SectionLabel
           title={SECTION_TITLE}
           description={SECTION_DESCRIPTION}
@@ -175,13 +177,17 @@ const NewsLogs = async () => {
           <div className='text-base-content/60 py-12 text-center'>
             <FontAwesomeIcon
               icon='fa-duotone fa-inbox'
-              className='text-base-content/40 mb-4 text-5xl'
+              className='text-base-content/40 mb-4 text-4xl sm:text-5xl'
             />
-            <p className='text-lg'>No updates available at the moment.</p>
-            <p className='mt-2 text-base'>Check back soon for news!</p>
+            <p className='text-base sm:text-lg'>
+              No updates available at the moment.
+            </p>
+            <p className='mt-2 text-sm sm:text-base'>
+              Check back soon for news!
+            </p>
           </div>
         ) : (
-          <div className='mt-6 max-h-[600px] space-y-2 overflow-y-auto pr-2'>
+          <div className='mt-4 flex flex-col gap-3'>
             {logs.map((log, index) => (
               <LogLine key={index} log={log} />
             ))}
