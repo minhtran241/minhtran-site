@@ -13,11 +13,6 @@ const nextConfig = {
       exclude: ['error', 'warn'],
     },
   },
-  // Build Configuration
-  eslint: {
-    dirs: ['src'],
-    ignoreDuringBuilds: false,
-  },
 
   // Development Configuration
   turbopack: {
