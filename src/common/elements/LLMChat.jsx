@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { readStreamableValue } from 'ai/rsc';
+import { readStreamableValue } from '@ai-sdk/rsc';
 import { continueConversation } from '@/app/actions';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 import rehypeRaw from 'rehype-raw';
@@ -21,7 +21,7 @@ const ChatMessage = ({ message, isUser, isStreaming = false }) => {
     }
 
     return (
-      <div className='chat-bubble max-w-sm'>
+      <div className='chat-bubble max-w-sm text-sm'>
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw]}
@@ -41,8 +41,8 @@ const ChatMessage = ({ message, isUser, isStreaming = false }) => {
                 src={src}
                 alt={alt}
                 className='h-auto max-w-full rounded-lg'
-                width={300}
-                height={200}
+                width={200}
+                height={100}
               />
             ),
             ul: ({ children }) => (
@@ -100,7 +100,7 @@ const ChatMessage = ({ message, isUser, isStreaming = false }) => {
     <div className={`chat ${isUser ? 'chat-end' : 'chat-start'}`}>
       {!isUser && (
         <div className='chat-image avatar'>
-          <div className='h-10 w-10 rounded-full'>
+          <div className='h-8 w-8 rounded-full'>
             <Image
               alt='Agent avatar'
               src='/memoji/memojialo.png'
@@ -268,11 +268,11 @@ export default function LLMChat() {
       {isOpen && (
         <div className='chat-container bg-base-100 rounded-box m-4 flex h-[32rem] w-96 flex-col shadow-2xl'>
           {/* Chat Header */}
-          <div className='from-primary to-secondary text-primary-content rounded-t-box bg-gradient-to-r p-4'>
+          <div className='from-primary to-secondary text-primary-content rounded-t-box bg-gradient-to-r p-3'>
             <div className='flex items-center justify-between'>
               <div className='flex items-center gap-3'>
                 <div className='avatar online'>
-                  <div className='h-10 w-10 rounded-full'>
+                  <div className='h-8 w-8 rounded-full'>
                     <Image
                       src='/memoji/memojialo.png'
                       alt='AI Agent'
@@ -283,7 +283,7 @@ export default function LLMChat() {
                   </div>
                 </div>
                 <div>
-                  <h1 className='font-semibold'>Minh&apos;s AI Agent</h1>
+                  <h1 className='text-base'>Minh&apos;s AI Agent</h1>
                   <div className='flex items-center gap-2 text-xs opacity-90'>
                     <div className='inline-grid *:[grid-area:1/1]'>
                       <div className='status status-success animate-ping'></div>

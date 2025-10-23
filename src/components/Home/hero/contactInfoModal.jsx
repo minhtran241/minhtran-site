@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 import { SOCIAL_MEDIA } from '@/common/constants/menu';
+import Image from 'next/image';
 
 const ContactInfoModal = () => (
   <dialog id='contact_info_modal' className='modal'>
@@ -29,7 +30,14 @@ const ContactInfoModal = () => (
             key={index}
             className='bg-base-200/50 hover:bg-base-200 flex items-center gap-4 rounded-lg p-3 transition-colors'
           >
-            <div className='text-primary text-lg'>{item.icon}</div>
+            {/* <div className='text-primary text-lg'>{item.icon}</div> */}
+            <Image
+              src={item.img}
+              alt={item.name}
+              width={24}
+              height={24}
+              className='text-primary text-lg'
+            />
             <div className='flex-1'>
               <p className='text-base-content/80 text-sm font-medium'>
                 {item.name}
@@ -63,9 +71,9 @@ const ShowContactInfoButton = () => {
   return (
     <button
       onClick={handleShowModal}
-      className='link link-primary link-hover font-medium transition-colors'
+      className='link link-primary link-hover text-sm font-medium transition-colors'
     >
-      More contact info
+      Click here for more contact info
     </button>
   );
 };

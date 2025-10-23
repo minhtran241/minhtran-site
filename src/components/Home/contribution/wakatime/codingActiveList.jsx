@@ -74,7 +74,7 @@ const CodingActiveList = ({ data }) => {
           key={item?.title}
           className='rounded-box border-base-300 bg-base-100 relative flex h-full w-full flex-1 flex-col border p-3'
         >
-          <p className='flex items-center gap-1.5 text-sm font-bold'>
+          <p className='flex items-center gap-1.5 text-base font-semibold'>
             {item?.icon} {item?.title}
           </p>
           <p className='text-xs opacity-70'>Updated {distance}</p>

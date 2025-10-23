@@ -37,6 +37,8 @@ export const userBasicInfo = {
   instagramLink: INSTAGRAM_LINK,
   twitterUsername: getUsername('twitter.com/', TWITTER_LINK),
   twitterLink: TWITTER_LINK,
+  googleScholarLink: 'https://scholar.google.com/citations?user=EiLVS6UAAAAJ', // replace XXXXXX with actual ID
+  orcidLink: 'https://orcid.org/0009-0008-9607-0834', // replace with actual ORCID
   email: EMAIL,
   bookACallLink: 'https://cal.com/minhtran/30min',
 };

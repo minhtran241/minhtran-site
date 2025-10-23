@@ -1,4 +1,4 @@
-export default function middleware(req, res, next) {
+export default function proxy(req, res, next) {
   // // If user is authenticated, redirect to dashboard
   // const token =
   //     typeof req.cookies.token === 'string' ? req.cookies.token : null;

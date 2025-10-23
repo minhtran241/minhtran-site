@@ -3,7 +3,7 @@
 import { JSDOM } from 'jsdom';
 import { streamText } from 'ai';
 import { cohere } from '@ai-sdk/cohere';
-import { createStreamableValue } from 'ai/rsc';
+import { createStreamableValue } from '@ai-sdk/rsc';
 import { getChatbotSystemPrompt } from './prompts';
 
 // Function to fetch Open Graph details for a given URL
@@ -65,7 +65,7 @@ export async function continueConversation(history) {
   (async () => {
     // Set up the text stream using the AI SDK
     const { textStream } = streamText({
-      model: cohere('command'),
+      model: cohere('command-a-03-2025'),
       system: getChatbotSystemPrompt(),
       messages: history,
       // maxTokens: 300,

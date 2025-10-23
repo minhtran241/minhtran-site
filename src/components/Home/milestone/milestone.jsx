@@ -79,14 +79,14 @@ const Milestone = ({ milestone }) => {
         <div className='flex min-w-0 flex-1 flex-col gap-2'>
           {/* Date */}
           <div className='flex flex-wrap items-center gap-1.5'>
-            <div className='badge badge-primary'>
+            <div className='badge badge-primary badge-outline flex items-center gap-1.5'>
               <FontAwesomeIcon
                 icon='fa-solid fa-calendar'
                 className='mr-1 h-2.5 w-2.5'
               />
               {milestone.current ? 'Current' : 'Past'}
             </div>
-            <time className='text-primary text-xs font-semibold'>
+            <time className='text-primary text-sm font-semibold'>
               {milestone.current ? `${timeStr}` : `${timeStr} · ${durationStr}`}
             </time>
           </div>
@@ -100,7 +100,7 @@ const Milestone = ({ milestone }) => {
                 className='opacity-0 transition-opacity group-hover/link:opacity-100'
               />
             </h1>
-            <p className='text-sm'>
+            <p className='text-base'>
               {milestone.sub_title}{' '}
               {milestone.employment_type && (
                 <span className='text-primary'>
@@ -111,7 +111,7 @@ const Milestone = ({ milestone }) => {
           </div>
 
           {/* Location */}
-          <div className='flex items-center gap-1.5'>
+          <div className='flex items-center gap-1.5 text-sm'>
             <FontAwesomeIcon
               icon='fa-solid fa-map-marker-alt'
               className='text-primary'
@@ -141,7 +141,7 @@ const Milestone = ({ milestone }) => {
 
           {/* Collapsible Description */}
           {paragraphs.length > 0 && (
-            <details className='group/details mt-1'>
+            <details className='group/details mt-1 text-sm'>
               <summary className='text-primary hover:text-primary-focus cursor-pointer font-semibold transition-colors'>
                 <span className='inline-flex items-center gap-1'>
                   <FontAwesomeIcon
@@ -153,8 +153,8 @@ const Milestone = ({ milestone }) => {
               </summary>
               <div className='mt-2 space-y-2'>
                 {paragraphs.map((p, index) => (
-                  <p key={index} className='text-sm leading-relaxed'>
-                    · {p.trim()}
+                  <p key={index} className='leading-relaxed'>
+                    &bull; {p.trim()}
                   </p>
                 ))}
               </div>

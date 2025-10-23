@@ -245,7 +245,7 @@ const ContributionChart = ({ contributionCollection }) => {
                 selectedTimeRange.slice(1)}{' '}
               Contributions
             </h2>
-            <p className='text-xs opacity-70'>
+            <p className='opacity-70'>
               {contrCalendar.totalContributions} Total
             </p>
           </div>
@@ -254,8 +254,9 @@ const ContributionChart = ({ contributionCollection }) => {
         <div className='flex gap-1.5'>
           {/* Chart Type */}
           <div className='dropdown dropdown-end'>
-            <div tabIndex={0} role='button' className='btn btn-xs btn-outline'>
-              {CHART_TYPES[selectedChartType].icon}
+            <div tabIndex={0} role='button' className='btn btn-sm btn-outline'>
+              {CHART_TYPES[selectedChartType].icon}{' '}
+              {CHART_TYPES[selectedChartType].name}
             </div>
             <ul
               tabIndex={0}
@@ -265,7 +266,7 @@ const ContributionChart = ({ contributionCollection }) => {
                 <li key={type}>
                   <button
                     onClick={() => setSelectedChartType(type)}
-                    className={`text-xs ${selectedChartType === type ? 'active' : ''}`}
+                    className={`${selectedChartType === type ? 'active' : ''}`}
                   >
                     {config.icon} {config.name}
                   </button>
@@ -276,8 +277,10 @@ const ContributionChart = ({ contributionCollection }) => {
 
           {/* Time Range */}
           <div className='dropdown dropdown-end'>
-            <div tabIndex={0} role='button' className='btn btn-xs btn-outline'>
-              <FontAwesomeIcon icon='fa-duotone fa-calendar' />
+            <div tabIndex={0} role='button' className='btn btn-sm btn-outline'>
+              <FontAwesomeIcon icon='fa-duotone fa-calendar' />{' '}
+              {selectedTimeRange.charAt(0).toUpperCase() +
+                selectedTimeRange.slice(1)}
             </div>
             <ul
               tabIndex={0}
@@ -287,7 +290,7 @@ const ContributionChart = ({ contributionCollection }) => {
                 <li key={range}>
                   <button
                     onClick={() => setSelectedTimeRange(range)}
-                    className={`text-xs ${selectedTimeRange === range ? 'active' : ''}`}
+                    className={`${selectedTimeRange === range ? 'active' : ''}`}
                   >
                     {range.charAt(0).toUpperCase() + range.slice(1)}
                   </button>
@@ -320,7 +323,7 @@ const ContributionChart = ({ contributionCollection }) => {
       {chartData && selectedChartType !== 'doughnut' && (
         <div className='stats stats-horizontal bg-base-200 shadow-sm'>
           <div className='stat px-3 py-2'>
-            <div className='stat-title text-xs'>Average</div>
+            <div className='stat-title'>Average</div>
             <div className='stat-value text-sm'>
               {Math.round(
                 chartData.datasets[0].data.reduce((a, b) => a + b, 0) /
@@ -329,13 +332,13 @@ const ContributionChart = ({ contributionCollection }) => {
             </div>
           </div>
           <div className='stat px-3 py-2'>
-            <div className='stat-title text-xs'>Peak</div>
+            <div className='stat-title'>Peak</div>
             <div className='stat-value text-sm'>
               {Math.max(...chartData.datasets[0].data)}
             </div>
           </div>
           <div className='stat px-3 py-2'>
-            <div className='stat-title text-xs'>Active Days</div>
+            <div className='stat-title'>Active Days</div>
             <div className='stat-value text-sm'>
               {chartData.datasets[0].data.filter((d) => d > 0).length}
             </div>

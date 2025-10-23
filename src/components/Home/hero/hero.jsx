@@ -82,7 +82,7 @@ const HeroComponent = async () => {
               </div>
 
               {/* Description */}
-              <p className='text-base-content/80 max-w-3xl text-center text-sm leading-relaxed lg:text-left'>
+              <p className='text-base-content/80 max-w-3xl text-center leading-relaxed lg:text-left'>
                 {userBasicInfo.description}
               </p>
 
@@ -99,10 +99,10 @@ const HeroComponent = async () => {
                     />
                   </div>
                   <div>
-                    <div className='text-base-content/60 text-xs font-medium'>
+                    <div className='text-base-content/60 text-sm font-medium'>
                       Location
                     </div>
-                    <div className='text-xs font-semibold'>
+                    <div className='text-sm font-semibold'>
                       Grand Rapids, MI
                     </div>
                   </div>
@@ -116,12 +116,12 @@ const HeroComponent = async () => {
                     />
                   </div>
                   <div className='min-w-0 flex-1'>
-                    <div className='text-base-content/60 text-xs font-medium'>
+                    <div className='text-base-content/60 text-sm font-medium'>
                       Email
                     </div>
                     <Link
                       href={`mailto:${userBasicInfo.email}`}
-                      className='link link-primary link-hover truncate text-xs font-semibold'
+                      className='link link-primary link-hover truncate text-sm font-semibold'
                     >
                       {userBasicInfo.email}
                     </Link>
@@ -136,7 +136,7 @@ const HeroComponent = async () => {
                     />
                   </div>
                   <div className='flex-1'>
-                    <div className='text-base-content/60 text-xs font-medium'>
+                    <div className='text-base-content/60 text-sm font-medium'>
                       More Info
                     </div>
                     <ShowContactInfoButton />
@@ -150,7 +150,7 @@ const HeroComponent = async () => {
                   href={fileSystemInfo.resumeLink}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='btn btn-primary btn-sm w-full gap-2 sm:w-auto'
+                  className='btn btn-primary w-full gap-2 sm:w-auto'
                   download
                 >
                   <FontAwesomeIcon icon='fa-solid fa-file-pdf' />
@@ -160,7 +160,7 @@ const HeroComponent = async () => {
                   href={userBasicInfo.bookACallLink}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='btn btn-outline btn-primary btn-sm w-full gap-2 sm:w-auto'
+                  className='btn btn-outline btn-primary w-full gap-2 sm:w-auto'
                 >
                   <FontAwesomeIcon icon='fa-solid fa-calendar-check' />
                   Schedule Meeting

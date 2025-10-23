@@ -52,10 +52,10 @@ const Overview = ({ data }) => {
 const OverviewItem = ({ icon, label, value }) => (
   <div className='stats rounded-box border-base-300 bg-base-100 border'>
     <div className='stat p-3'>
-      <div className='stat-label flex items-center gap-1.5 text-xs'>
+      <div className='stat-label flex items-center gap-1.5 text-sm'>
         {icon} {label}
       </div>
-      <div className='stat-value text-primary text-sm lg:text-base'>
+      <div className='stat-value text-primary text-sm font-semibold'>
         {value}
       </div>
     </div>
