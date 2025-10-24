@@ -3,12 +3,12 @@
     "date": "2025-07-01",
     "type": "achievement",
     "title": "**Accepted** into [Vingroup AI Engineer Training Program - Cohort 5](https://www.facebook.com/VGR.AIProgram) after passing 5 rounds of selection process among about 1,000 applicants.",
-    "link": "https://www.facebook.com/VinAIProgram"
+    "link": "https://www.facebook.com/VGR.AIProgram"
   },
   {
     "date": "2025-04-08",
     "type": "publication",
     "title": "Paper [A Distributed Edge Computing Prototype Using Raspberry PIs](https://doi.org/10.1109/AIIoT65859.2025.11105362) has been accepted to 2025 IEEE AIIoT.",
-    "link": "https://example.com/certificate"
+    "link": "https://doi.org/10.1109/AIIoT65859.2025.11105362"
   }
 ]
