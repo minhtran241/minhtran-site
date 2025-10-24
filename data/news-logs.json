@@ -10,5 +10,17 @@
     "type": "publication",
     "title": "Paper [A Distributed Edge Computing Prototype Using Raspberry PIs](https://doi.org/10.1109/AIIoT65859.2025.11105362) has been accepted to 2025 IEEE AIIoT.",
     "link": "https://doi.org/10.1109/AIIoT65859.2025.11105362"
+  },
+  {
+    "date": "2025-04-09",
+    "type": "talk",
+    "title": "Presented *Coral Image Classification using Underwater Image Enhancement* at [GVSU Student Scholars Day 2025](https://www.gvsu.edu/ssd), co-authored with [Dat Nguyen](https://www.linkedin.com/in/imtiendat0311/) under mentorship of [Dr. Denton Bobeldyk](https://scholar.google.com/citations?user=rF6upEIAAAAJ&hl=en) and [Dr. Jonathan P. Leidig](https://scholar.google.com/citations?user=a0_mOU0AAAAJ&hl=en). The project achieved **94.89% accuracy** on 10 coral species and **82.06%** across 27 species.",
+    "link": "https://www.gvsu.edu/ssd"
+  },
+  {
+    "date": "2024-04-12",
+    "type": "event",
+    "title": "Showcased *Blue Nucleus: Democratization of Experiential Learning in the Computing Disciplines* at the [Reach Higher Showcase 2024](https://www.gvsu.edu/reachhigher/), hosted by the Office of the President at Grand Valley State University, representing the Applied Computing Institute under the direction of [Dr. Jonathan Engelsma](https://scholar.google.com/citations?user=JOAflX8AAAAJ&hl=en).",
+    "link": "https://www.gvsu.edu/reachhigher/"
   }
 ]
