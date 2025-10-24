@@ -135,12 +135,7 @@ const HeroComponent = async () => {
                       className='text-sm'
                     />
                   </div>
-                  <div className='flex-1'>
-                    <div className='text-base-content/60 text-sm font-medium'>
-                      More Info
-                    </div>
-                    <ShowContactInfoButton />
-                  </div>
+                  <ShowContactInfoButton />
                 </div>
               </div>
 

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { MENU_TABS } from '@/common/constants/menu';
 import { HOSTED_ON, TECHSTACK } from '@/common/constants/site';
 import SpotifyStatus from './SpotifyStatus';
+import Image from 'next/image';
 
 const Footer = () => {
   const techStackEntries = Object.entries(TECHSTACK);
@@ -32,7 +33,7 @@ const Footer = () => {
                 className='hover:text-primary fill-current'
                 aria-label={item.name}
               >
-                {item.icon}
+                <Image src={item.img} alt={item.name} width={24} height={24} />
               </Link>
             ),
           )}

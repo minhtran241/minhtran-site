@@ -9,6 +9,7 @@ export const SOCIAL_MEDIA = [
     type: 'sw', // social and work
     // icon: <Mail className="lg:w-5 lg:h-5 w-4 h-4" />,
     icon: <FontAwesomeIcon icon='fa-brands fa-google' />,
+    img: '/brands/gmail.png',
     className: '!bg-gradient-to-r from-[#D44638] to-[#D44638] border',
   },
 

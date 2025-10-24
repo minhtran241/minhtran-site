@@ -45,6 +45,7 @@ const Home = () => {
       {/* <Projects /> */}
     </div>
   );
+  pa;
 };
 
 export default Home;

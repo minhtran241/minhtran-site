@@ -4,7 +4,7 @@ const Loading = ({ fullPage = true }) => {
   return (
     <div
       className={`grid w-full place-items-center overflow-x-scroll lg:overflow-visible ${
-        fullPage ? 'h-dvh' : 'p-6'
+        fullPage ? 'h-screen' : 'p-6'
       }`}
     >
       <div className='flex flex-col items-center gap-4'>

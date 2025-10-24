@@ -16,11 +16,11 @@ const ContactInfoModal = () => (
 
       <div className='mb-6'>
         <h3 className='flex items-center gap-3 text-xl font-bold'>
-          <FontAwesomeIcon icon='fa-solid fa-info-circle' />
-          Contact Information
+          <FontAwesomeIcon icon='fa-solid fa-address-card' />
+          Minh's Links
         </h3>
         <p className='text-base-content/60 mt-2 text-sm'>
-          Get in touch through any of these channels
+          Find me on the following platforms:
         </p>
       </div>
 
@@ -71,9 +71,9 @@ const ShowContactInfoButton = () => {
   return (
     <button
       onClick={handleShowModal}
-      className='link link-primary link-hover text-sm font-medium transition-colors'
+      className='link link-primary link-hover font-medium transition-colors'
     >
-      Click here for more contact info
+      More info
     </button>
   );
 };
