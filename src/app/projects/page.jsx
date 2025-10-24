@@ -73,7 +73,7 @@ const ProjectPage = async () => {
   console.log('Base64 images generated for projects:', base64s);
 
   return (
-    <div className='container mt-16 flex flex-col gap-8 py-12'>
+    <div className='flex flex-col gap-8'>
       <Breadcrumbs breadcrumbs={BREADCRUMBS} />
 
       {/* Grid Layout */}

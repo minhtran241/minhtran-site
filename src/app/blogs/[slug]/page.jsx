@@ -97,14 +97,14 @@ const SinglePostContent = ({ post }) => {
   });
 
   return (
-    <div className='container mt-16 flex flex-col gap-4 py-12'>
+    <div className='flex flex-col gap-4'>
       <Breadcrumbs breadcrumbs={BREADCRUMBS} />
 
-      <article className='bg-base-100 text-base-content rounded-box container py-8'>
-        <div className='mx-auto max-w-4xl px-4'>
+      <article>
+        <div className='mx-auto max-w-6xl'>
           {/* Header Section */}
           <header className='mb-8 text-center'>
-            <h1 className='text-primary mb-4 text-3xl leading-tight font-bold md:text-4xl lg:text-5xl'>
+            <h1 className='text-primary mb-4 text-xl leading-tight font-bold md:text-2xl lg:text-3xl'>
               {post.title}
             </h1>
             <time

@@ -16,18 +16,18 @@ const HeroComponent = async () => {
   const base64 = await getBase64(headshotSrc);
 
   return (
-    <div className='container mx-auto pt-28'>
-      <div className='border-base-300/50 bg-base-100 relative overflow-hidden rounded-2xl border shadow-lg'>
+    <div>
+      <div className='border-base-300/50 bg-base-100 relative overflow-hidden rounded-2xl border'>
         {/* Academic background pattern */}
-        <div className='absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:20px_20px]'></div>
+        <div className='absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[20px_20px]'></div>
 
         {/* Gradient overlay */}
-        <div className='from-primary/5 to-secondary/5 absolute inset-0 bg-gradient-to-br via-transparent'></div>
+        <div className='from-primary/5 to-secondary/5 absolute inset-0 bg-linear-to-br via-transparent'></div>
 
         <div className='relative p-6 md:p-8'>
           <div className='flex flex-col items-center gap-8 lg:flex-row lg:items-start lg:gap-10'>
             {/* Profile Picture */}
-            <div className='group relative flex-shrink-0'>
+            <div className='group relative shrink-0'>
               <div className='relative'>
                 {/* Geometric accent */}
                 <div className='border-primary/20 absolute -inset-4 rotate-3 rounded-xl border transition-transform duration-500 group-hover:rotate-6'></div>

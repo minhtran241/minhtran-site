@@ -28,26 +28,26 @@ const Contribution = () => {
   const sectionDescription = `Total of ${ghData?.user?.contributionsCollection?.contributionCalendar?.totalContributions} commits across ${ghData?.user?.repositories?.totalCount} public repositories.`;
 
   return (
-    <div className='container items-center justify-center'>
-      <div className='border-base-300/50 bg-base-100 rounded-2xl border p-5 shadow-lg md:p-6'>
-        <SectionLabel
-          title={sectionTitle}
-          description={sectionDescription}
-          icon=<FontAwesomeIcon icon='fa-duotone fa-code-pull-request' />
-        />
-        <div className='flex flex-col gap-5'>
-          {ghData && wkData ? (
-            <div className='flex flex-col gap-5'>
-              <ContributionChart
-                contributionCollection={ghData?.user?.contributionsCollection}
-              />
-              <CodingActive data={wkData} />
-            </div>
-          ) : (
-            <Loading fullPage={false} />
-          )}
-        </div>
+    <div>
+      {/* <div className='border-base-300/50 bg-base-100 rounded-2xl border p-5 shadow-lg md:p-6'> */}
+      <SectionLabel
+        title={sectionTitle}
+        description={sectionDescription}
+        icon=<FontAwesomeIcon icon='fa-duotone fa-code-pull-request' />
+      />
+      <div className='flex flex-col gap-5'>
+        {ghData && wkData ? (
+          <div className='flex flex-col gap-5'>
+            <ContributionChart
+              contributionCollection={ghData?.user?.contributionsCollection}
+            />
+            <CodingActive data={wkData} />
+          </div>
+        ) : (
+          <Loading fullPage={false} />
+        )}
       </div>
+      {/* </div> */}
     </div>
   );
 };

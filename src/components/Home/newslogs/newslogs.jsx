@@ -30,43 +30,43 @@ const getEventConfig = (type) => {
     achievement: {
       icon: 'fa-trophy',
       iconColor: 'text-success',
-      bgColor: 'bg-success/5',
+      bgColor: 'bg-success/10',
       borderColor: 'border-success/20',
     },
     publication: {
       icon: 'fa-file-lines',
       iconColor: 'text-primary',
-      bgColor: 'bg-primary/5',
+      bgColor: 'bg-primary/10',
       borderColor: 'border-primary/20',
     },
     talk: {
       icon: 'fa-microphone-stand',
       iconColor: 'text-secondary',
-      bgColor: 'bg-secondary/5',
+      bgColor: 'bg-secondary/10',
       borderColor: 'border-secondary/20',
     },
     award: {
       icon: 'fa-medal',
       iconColor: 'text-warning',
-      bgColor: 'bg-warning/5',
+      bgColor: 'bg-warning/10',
       borderColor: 'border-warning/20',
     },
     event: {
       icon: 'fa-calendar-star',
       iconColor: 'text-accent',
-      bgColor: 'bg-accent/5',
+      bgColor: 'bg-accent/10',
       borderColor: 'border-accent/20',
     },
     news: {
       icon: 'fa-newspaper',
       iconColor: 'text-info',
-      bgColor: 'bg-info/5',
+      bgColor: 'bg-info/10',
       borderColor: 'border-info/20',
     },
     milestone: {
       icon: 'fa-flag-checkered',
       iconColor: 'text-purple-500',
-      bgColor: 'bg-purple-500/5',
+      bgColor: 'bg-purple-500/10',
       borderColor: 'border-purple-500/20',
     },
   };
@@ -160,40 +160,38 @@ const NewsLogs = async () => {
   const logs = await getNewsLogs();
 
   return (
-    <div className='w-full px-4'>
-      <div className='border-base-300/50 bg-base-100 rounded-2xl border p-4 shadow-lg sm:p-6'>
-        <SectionLabel
-          title={SECTION_TITLE}
-          description={SECTION_DESCRIPTION}
-          icon={
-            <FontAwesomeIcon
-              icon='fa-duotone fa-bullhorn'
-              className='text-primary'
-            />
-          }
-        />
+    <div>
+      {/* <div className=''> */}
+      <SectionLabel
+        title={SECTION_TITLE}
+        description={SECTION_DESCRIPTION}
+        icon={
+          <FontAwesomeIcon
+            icon='fa-duotone fa-bullhorn'
+            className='text-primary'
+          />
+        }
+      />
 
-        {logs.length === 0 ? (
-          <div className='text-base-content/60 py-12 text-center'>
-            <FontAwesomeIcon
-              icon='fa-duotone fa-inbox'
-              className='text-base-content/40 mb-4 text-4xl sm:text-5xl'
-            />
-            <p className='text-base sm:text-lg'>
-              No updates available at the moment.
-            </p>
-            <p className='mt-2 text-sm sm:text-base'>
-              Check back soon for news!
-            </p>
-          </div>
-        ) : (
-          <div className='mt-4 flex flex-col gap-3'>
-            {logs.map((log, index) => (
-              <LogLine key={index} log={log} />
-            ))}
-          </div>
-        )}
-      </div>
+      {logs.length === 0 ? (
+        <div className='text-base-content/60 py-12 text-center'>
+          <FontAwesomeIcon
+            icon='fa-duotone fa-inbox'
+            className='text-base-content/40 mb-4 text-4xl sm:text-5xl'
+          />
+          <p className='text-base sm:text-lg'>
+            No updates available at the moment.
+          </p>
+          <p className='mt-2 text-sm sm:text-base'>Check back soon for news!</p>
+        </div>
+      ) : (
+        <div className='mt-4 flex flex-col gap-3'>
+          {logs.map((log, index) => (
+            <LogLine key={index} log={log} />
+          ))}
+        </div>
+      )}
+      {/* </div> */}
     </div>
   );
 };

@@ -31,6 +31,11 @@ export const getBase64 = async (src, options = {}) => {
       return Buffer.from(await res.arrayBuffer());
     });
   }
-  const { base64 } = await getPlaiceholder(buffer);
-  return base64;
+  try {
+    const { base64 } = await getPlaiceholder(buffer);
+    return base64;
+  } catch (error) {
+    console.error('Error generating base64 placeholder:', error);
+    return null;
+  }
 };

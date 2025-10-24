@@ -31,7 +31,7 @@ export const generateMetadata = async () => {
 
 const Home = () => {
   return (
-    <div className='flex flex-col gap-6'>
+    <div className='flex flex-col gap-10'>
       <Hero />
       {/* <Skills /> */}
       <NewsLogs />

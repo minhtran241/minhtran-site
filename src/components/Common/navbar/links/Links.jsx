@@ -8,10 +8,10 @@ const Links = () => {
         <li key={index}>
           <Link
             href={item.href}
-            className='flex flex-col items-center justify-center gap-1 px-4'
+            className='btn btn-ghost font-semibold capitalize'
+            role='button'
           >
-            <span className='text-lg'>{item.icon}</span>
-            <span className='text-xs font-medium'>{item.title}</span>
+            {item.title}
           </Link>
         </li>
       ))}

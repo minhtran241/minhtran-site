@@ -95,11 +95,11 @@ export const MENU_TABS = [
   //     title: 'Reads',
   //     href: '/reads',
   // },
-  {
-    title: 'Uses',
-    href: '/uses',
-    icon: <FontAwesomeIcon icon='fa-duotone fa-tools' />,
-  },
+  //   {
+  //     title: 'Uses',
+  //     href: '/uses',
+  //     icon: <FontAwesomeIcon icon='fa-duotone fa-tools' />,
+  //   },
   // {
   //     title: 'Contact',
   //     href: '/contact',

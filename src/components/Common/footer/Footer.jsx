@@ -9,7 +9,7 @@ import SpotifyStatus from './SpotifyStatus';
 const Footer = () => {
   const techStackEntries = Object.entries(TECHSTACK);
   return (
-    <footer className='footer footer-horizontal footer-center bg-base-300 text-base-content rounded p-10'>
+    <footer className='footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10'>
       <nav className='grid grid-flow-col gap-4'>
         {/* <Link href="/" className="link link-hover">
                     Minh
@@ -21,7 +21,7 @@ const Footer = () => {
         ))}
       </nav>
       <nav>
-        <div className='fa-lg grid grid-flow-col gap-4'>
+        <div className='grid grid-flow-col gap-4'>
           {SOCIAL_MEDIA?.filter((item) => item.type.includes('s')).map(
             (item, index) => (
               <Link

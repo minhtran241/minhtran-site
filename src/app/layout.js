@@ -232,7 +232,7 @@ export default function RootLayout({ children }) {
           MazzardM.variable,
           // Base styles
           'font-mazzardh',
-          'bg-base-300',
+          //   'bg-base-300',
           'scroll-smooth',
           'antialiased',
           // Prevent layout shift
@@ -243,7 +243,9 @@ export default function RootLayout({ children }) {
         suppressHydrationWarning
       >
         <Navbar />
-        <main className='container mx-auto px-4 py-6 sm:px-8'>{children}</main>
+        <main className='container mt-24 mb-16 flex-1 px-4 sm:px-6 lg:px-8'>
+          {children}
+        </main>
         <LLMChat />
         <SpeedInsights />
         <Analytics />

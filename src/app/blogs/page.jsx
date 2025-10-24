@@ -92,7 +92,7 @@ const BlogPage = async () => {
   });
 
   return (
-    <div className='container mx-auto mt-16 space-y-12 px-4 py-12'>
+    <div className='space-y-12'>
       <Breadcrumbs breadcrumbs={BREADCRUMBS} />
 
       {/* Featured Post */}
@@ -171,7 +171,7 @@ const BlogPage = async () => {
                 <h2 className='text-2xl font-bold lg:text-3xl'>
                   {category.name}
                 </h2>
-                <div className='from-base-300 h-px flex-1 bg-gradient-to-r to-transparent'></div>
+                <div className='from-base-300 h-px flex-1 bg-linear-to-r to-transparent'></div>
               </div>
 
               <div className='grid gap-6'>

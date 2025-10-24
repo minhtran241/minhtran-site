@@ -68,7 +68,7 @@ const ThemeChanger = () => {
       </div>
       <ul
         tabIndex={0}
-        className='dropdown-content menu rounded-box bg-base-100 border-base-200 z-[1] min-w-40 border p-2 shadow-lg'
+        className='dropdown-content menu rounded-box border-base-200 bg-base-100 text-base-content z-1 min-w-40 border p-2 shadow-lg'
       >
         {themeValues.map((theme) => (
           <li key={theme.value}>
