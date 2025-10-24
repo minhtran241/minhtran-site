@@ -17,7 +17,7 @@ const ContactInfoModal = () => (
       <div className='mb-6'>
         <h3 className='flex items-center gap-3 text-xl font-bold'>
           <FontAwesomeIcon icon='fa-solid fa-address-card' />
-          Minh's Links
+          Minh&#39;s Links
         </h3>
         <p className='text-base-content/60 mt-2 text-sm'>
           Find me on the following platforms:
