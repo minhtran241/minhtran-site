@@ -250,8 +250,14 @@ const PublicationCard = ({ publication }) => {
           {renderTypeBadge(publication.type)}
         </div>
 
-        {publication.status && (
-          <span className='badge badge-outline'>{publication.status}</span>
+        {publication.location && (
+          <span className='badge badge-outline gap-1.5'>
+            <FontAwesomeIcon
+              icon='fa-duotone fa-location-dot'
+              className='text-sm'
+            />
+            {publication.location}
+          </span>
         )}
       </div>
 
@@ -300,11 +306,14 @@ const PublicationCard = ({ publication }) => {
             <span className='text-base-content font-semibold'>
               Published in:
             </span>{' '}
-            <span>
+            <Link
+              href={publication.published_in_link}
+              className='link-primary link-hover link'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
               {publication.published_in}
-              {/* location */}
-              {publication.location && ` - ${publication.location}`}
-            </span>
+            </Link>
           </div>
         )}
 

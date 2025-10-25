@@ -7,16 +7,20 @@
     "description": "Edge computing has recently become a widely used computing model. In edge computing, people deploy edge servers at locations closer to devices, which generate large amounts of data. Hence, edge computing can improve application performances by reducing the server latency and response time. Nowadays, Raspberry Pi is a small device for many Internet of Things (IoT) applications. In this paper, we investigate the concept of distributed edge computing, design a prototype, and implement that using Raspberry Pi devices. We utilize the parallel computing feature offered by our prototype and Raspberry Pis to show the benefits of distributed edge computing. We conduct extensive hands-on experiments for multiple applications and compare the performances among different computing models. Our evaluation results show that our distributed edge computing prototype can improve the performance with multiple edge servers.",
     "collaborators": [
       {
+        "name": "Minh Tran",
+        "link": "https://scholar.google.com/citations?user=EiLVS6UAAAAJ"
+      },
+      {
         "name": "Xiang Cao",
         "link": "https://ieeexplore.ieee.org/author/37087008129"
       }
     ],
     "journal": "",
     "published_in": "2025 IEEE World AI IoT Congress (AIIoT)",
+    "published_in_link": "https://www.worldaiiotcongress.org/aiiot-2025/",
     "location": "Seattle, WA, USA",
     "doi": "10.1109/AIIoT65859.2025.11105362",
     "citations": 0,
-    "status": "Published",
     "created_at": "2025-05-24T09:41:22.055Z",
     "updated_at": "2024-02-24T09:41:22.055Z",
     "images": [

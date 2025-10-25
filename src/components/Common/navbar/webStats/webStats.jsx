@@ -11,7 +11,7 @@ const WebStats = async () => {
       endAt: new Date().getTime(),
     },
   );
-  console.error(data);
+  //   console.error(data);
 
   if (!ok || error) {
     console.error('Error fetching website stats', status, error);
