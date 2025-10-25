@@ -11,14 +11,15 @@ const WebStats = async () => {
       endAt: new Date().getTime(),
     },
   );
+  console.error(data);
 
   if (!ok || error) {
     console.error('Error fetching website stats', status, error);
   }
 
   const webstats = {
-    Pageviews: data?.pageviews?.value,
-    Visitors: data?.visitors?.value,
+    Pageviews: data?.pageviews,
+    Visitors: data?.visitors,
   };
 
   return (
