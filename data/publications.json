@@ -24,9 +24,12 @@
     "created_at": "2025-05-24T09:41:22.055Z",
     "updated_at": "2024-02-24T09:41:22.055Z",
     "images": [
-      "/home/publication/AIIoT65859.2025.11105362/Our-Distributed-Edge-Computing-Prototype_W640.jpg"
+      "/home/publication/AIIoT65859.2025.11105362/Our-Distributed-Edge-Computing-Prototype_W640.jpg",
+      "/home/publication/AIIoT65859.2025.11105362/image2.png",
+      "/home/publication/AIIoT65859.2025.11105362/image3.png",
+      "/home/publication/AIIoT65859.2025.11105362/image4.png"
     ],
-    "paper_link": "",
+    "paper_link": "https://www.researchgate.net/publication/394657478_A_Distributed_Edge_Computing_Prototype_Using_Raspberry_PIs",
     "code_link": "https://github.com/minhtran241/edge-computing-models",
     "supplementary_link": "",
     "bibtex": "@INPROCEEDINGS{\n 11105362,\n author={Tran, Minh and Cao, Xiang},\n booktitle={2025 IEEE World AI IoT Congress (AIIoT)},\n title={A Distributed Edge Computing Prototype Using Raspberry PIs},\n year={2025},\n volume={},\n number={},\n pages={0662-0668},\n keywords={Performance evaluation;Computational modeling;Prototypes;Parallel processing;Servers;Internet of Things;Time factors;Distributed computing;Artificial intelligence;Edge computing;Edge Computing;Raspberry Pi;Prototype;Distributed Computing},\n doi={10.1109/AIIoT65859.2025.11105362}}"
