@@ -88,10 +88,7 @@ const LogLine = ({ log }) => {
     >
       {/* Icon */}
       <div className='shrink-0'>
-        <FontAwesomeIcon
-          icon={`fa-duotone ${config.icon}`}
-          // className={`shrink-0 mt-0.5 ${config.iconColor} text-base sm:text-lg`}
-        />
+        <FontAwesomeIcon icon={`fa-duotone ${config.icon}`} />
       </div>
 
       {/* Content wrapper that flows naturally */}
@@ -161,7 +158,6 @@ const NewsLogs = async () => {
 
   return (
     <div>
-      {/* <div className=''> */}
       <SectionLabel
         title={SECTION_TITLE}
         description={SECTION_DESCRIPTION}
@@ -185,13 +181,14 @@ const NewsLogs = async () => {
           <p className='mt-2 text-sm sm:text-base'>Check back soon for news!</p>
         </div>
       ) : (
-        <div className='mt-4 flex flex-col gap-3'>
-          {logs.map((log, index) => (
-            <LogLine key={index} log={log} />
-          ))}
+        <div className='scrollbar-thin scrollbar-thumb-base-content/20 scrollbar-track-transparent hover:scrollbar-thumb-base-content/30 mt-4 max-h-[600px] overflow-y-auto pr-2'>
+          <div className='flex flex-col gap-3'>
+            {logs.map((log, index) => (
+              <LogLine key={index} log={log} />
+            ))}
+          </div>
         </div>
       )}
-      {/* </div> */}
     </div>
   );
 };

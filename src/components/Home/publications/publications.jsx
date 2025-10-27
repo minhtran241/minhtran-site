@@ -410,7 +410,7 @@ const Publications = async () => {
       ) : (
         <>
           {/* All Publications - Scrollable Container */}
-          <div className='mt-6 max-h-[800px] space-y-4 overflow-y-auto pr-2'>
+          <div className='scrollbar-thin scrollbar-thumb-base-content/20 scrollbar-track-transparent hover:scrollbar-thumb-base-content/30 mt-6 max-h-[800px] space-y-4 overflow-y-auto pr-2'>
             {publications.map((publication, index) => (
               <PublicationCard key={index} publication={publication} />
             ))}
