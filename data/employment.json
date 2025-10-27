@@ -55,7 +55,7 @@
     "employment_type": "Part-time",
     "location": "Grand Rapids, Michigan, United States",
     "location_type": "On-site",
-    "description": "Winter 2024: Developed and implemented a microservice architecture for a web application that allows users to extract themes from reviews using LLM.#Fall 2024: Built a CI/CD pipeline for the official LakerMobile application of Grand Valley State University using Fastlane and GitHub Actions.",
+    "description": "Winter 2024: Collaborated with Eli Review and GVSU faculty to design and implement an AI-powered writing feedback microservice using Cohere and Mistral LLMs. Integrated with AWS SQS for asynchronous processing and deployed on GPU-backed infrastructure to enhance automated writing assessment within learning platforms.#Fall 2024: Kicked off the Laker Mobile CI/CD Modernization Project. Tasked with automating iOS app build and deployment using Fastlane, integrating modern CI/CD workflows, and creating a developer onboarding tutorial for future student teams.",
     "created_at": "2024-03-24T09:41:22.056Z",
     "updated_at": "2024-03-24T09:41:22.056Z"
   }

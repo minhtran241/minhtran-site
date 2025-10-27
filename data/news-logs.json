@@ -22,17 +22,5 @@
     "type": "event",
     "title": "Showcased *Blue Nucleus: Democratization of Experiential Learning in the Computing Disciplines* at the [Reach Higher Showcase 2024](https://www.gvsu.edu/reachhigher/), hosted by the Office of the President at Grand Valley State University, representing the Applied Computing Institute under the direction of [Dr. Jonathan Engelsma](https://scholar.google.com/citations?user=JOAflX8AAAAJ&hl=en).",
     "link": "https://www.gvsu.edu/reachhigher/"
-  },
-  {
-    "date": "2024-03-14",
-    "type": "milestone",
-    "title": "Collaborated with [Eli Review](https://elireview.com/) on an **AI-driven writing feedback microservice**, integrating **Cohere** and **Mistral** LLMs with **AWS SQS** for scalable asynchronous processing.",
-    "link": "https://elireview.com/"
-  },
-  {
-    "date": "2024-09-20",
-    "type": "milestone",
-    "title": "Started the **Laker Mobile CI/CD Modernization Project** under [Blue Nucleus](https://www.gvsu.edu/bluenucleus/), automating iOS deployment pipelines using **GitHub Actions** and **Fastlane**.",
-    "link": "https://www.gvsu.edu/aci/"
   }
 ]
