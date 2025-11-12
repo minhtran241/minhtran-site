@@ -181,7 +181,7 @@ bun run prettier
 
 Create a `.env.local` file for local development:
 
-```
+```bash
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_GITHUB_USERNAME=minhtran241
 ```
@@ -233,14 +233,6 @@ bun run start
 
 This project is licensed under the GNU General Public License v3.0 - see the LICENSE file for details.
 
-## Author
-
-**Minh Tran**
-
-- Website: [https://minhtran.com](https://minhtran.com)
-- GitHub: [https://github.com/minhtran241](https://github.com/minhtran241)
-- Professional Focus: Software Engineering, Data Engineering, Machine Learning
-
 ## Contributing
 
 For bug reports and feature requests, please open an issue on the GitHub repository. The repository is primarily maintained as a personal portfolio but welcomes technical discussions and suggestions.
@@ -258,7 +250,3 @@ Current performance metrics:
 ## Support
 
 For technical questions or feedback regarding the website, please refer to the GitHub issues page or contact through the website's contact methods.
-
----
-
-**Last Updated**: November 2025
