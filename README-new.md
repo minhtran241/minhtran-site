@@ -10,63 +10,120 @@ This is the source repository for minhtran.com, a professional portfolio and kno
 
 ### Core Framework
 
-- [Next.js 16.0.0](https://nextjs.org) - React framework for production-grade applications with server-side rendering and static generation
-- [React 19.2.0](https://react.dev) - Modern UI library with latest features and concurrent rendering
-- [Tailwind CSS 4.1.11](https://tailwindcss.com) - Utility-first CSS framework for responsive design
-- [DaisyUI 5.3.8](https://daisyui.com) - Tailwind CSS component library
+- **Next.js 16.0.0** - React framework with server-side rendering and static generation
+- **React 19.2.0** - Modern UI library with concurrent rendering capabilities
+- **Tailwind CSS 4.1.11** - Utility-first CSS framework for responsive design
+- **DaisyUI 5.3.8** - Tailwind CSS component library for enhanced UI
 
-### Content & Media
+### Content & Media Processing
 
 - **Markdown Processing**
-  - [react-markdown](https://github.com/remarkjs/react-markdown) - Markdown to React component conversion
-  - [remark-gfm](https://github.com/remarkjs/remark-gfm) - GitHub Flavored Markdown support
-  - [rehype-raw](https://github.com/rehypejs/rehype-raw) - Raw HTML in markdown
-  - [reading-time](https://github.com/ngryman/reading-time) - Article reading time estimation
-- **Image Optimization**
-  - [next/image](https://nextjs.org/docs/app/api-reference/components/image) - Next.js optimized image component
-  - [sharp](https://sharp.pixelplumbing.com) - Image processing and optimization
-  - [Plaiceholder](https://plaiceholder.co) - Responsive placeholder generation
+  - `react-markdown` - Markdown to React component conversion
+  - `remark-gfm` - GitHub Flavored Markdown support
+  - `rehype-raw` - Raw HTML in markdown
+  - `reading-time` - Article reading time estimation
 
-### Data & Services
+- **Image Optimization**
+  - `next/image` - Next.js optimized image component
+  - `sharp` - Image processing and optimization
+  - `@plaiceholder/next` - Responsive placeholder generation
+
+### Data & Services Integration
 
 - **API Integration**
-  - [Apollo Client](https://www.apollographql.com/docs/react) - GraphQL client for data fetching
-  - [SWR](https://swr.vercel.app) - Data fetching with caching and revalidation
-  - [Axios](https://axios-http.com) - HTTP client
+  - `@apollo/client` - GraphQL client for data fetching
+  - `swr` - Data fetching with caching and revalidation
+  - `axios` - HTTP client
+
 - **External Services**
-  - [Spotify API](https://developer.spotify.com/documentation/web-api) - Music tracking
-  - [WakaTime API](https://wakatime.com/api) - Coding activity metrics
-  - [Vercel AI](https://sdk.vercel.ai/) - AI-powered agent capabilities
+  - Spotify API integration for music tracking
+  - WakaTime API integration for coding activity metrics
+  - Cohere AI integration for content generation
 
 ### Monitoring & Analytics
 
-- [Vercel Analytics](https://vercel.com/analytics) - Web analytics
-- [Vercel Speed Insights](https://vercel.com/docs/speed-insights) - Performance monitoring
-- [Umami](https://umami.is) - Privacy-focused analytics
+- `@vercel/analytics` - Web analytics
+- `@vercel/speed-insights` - Performance monitoring
+- `@umami/api-client` - Privacy-focused analytics
 
 ### Development Tools
 
-- **Package Manager**: [Bun 1.3.0](https://bun.sh)
-- **Node Version**: >=18.18.0 ([Node.js](https://nodejs.org))
-- **Build Tool**: [Turbopack](https://turbo.build/pack) - Next.js bundler
+- **Package Manager**: Bun 1.3.0
+- **Node Version**: >=18.18.0
+- **Build Tool**: Turbopack for rapid development
+
 - **Code Quality**
-  - [ESLint](https://eslint.org) - JavaScript linting
-  - [Prettier](https://prettier.io) - Code formatting
-  - [Husky](https://typicode.github.io/husky) - Git hooks management
-  - [lint-staged](https://github.com/okonet/lint-staged) - Pre-commit linting
+  - ESLint - JavaScript linting
+  - Prettier - Code formatting
+  - Husky - Git hooks management
+  - lint-staged - Pre-commit linting
 
 ### UI & Utilities
 
 - **Data Visualization**
-  - [Recharts](https://recharts.org) - React charting library
+  - `recharts` - React charting library
 
 - **Utilities**
-  - [clsx](https://github.com/lukeed/clsx) - Conditional className management
-  - [tailwind-merge](https://github.com/dcastil/tailwind-merge) - Tailwind CSS class merging
-  - [date-fns](https://date-fns.org) - Date manipulation library
-  - [date-fns-tz](https://date-fns.org/docs/Locale) - Timezone support
-  - [theme-change](https://github.com/saadeglamr/theme-change) - Dark mode switching
-  - [jsdom](https://github.com/jsdom/jsdom) - DOM implementation for server-side rendering
+  - `clsx` - Conditional className management
+  - `tailwind-merge` - Tailwind CSS class merging
+  - `date-fns` - Date manipulation library
+  - `date-fns-tz` - Timezone support
+  - `theme-change` - Dark mode switching
+  - `jsdom` - DOM implementation for server-side rendering
+
+## Project Structure
+
+```text
+/
+├── src/
+│   ├── app/                    # Next.js app router
+│   │   ├── page.jsx           # Home page
+│   │   ├── layout.js          # Root layout
+│   │   ├── api/               # API routes
+│   │   ├── blogs/             # Blog routes
+│   │   ├── projects/          # Projects routes
+│   │   ├── uses/              # Uses/tech stack routes
+│   │   └── globals.css        # Global styles
+│   ├── components/            # React components
+│   │   ├── Common/            # Shared components
+│   │   ├── Home/              # Homepage components
+│   │   ├── Post/              # Blog post components
+│   │   ├── Project/           # Project components
+│   │   └── Uses/              # Uses/tech components
+│   ├── common/                # Shared utilities
+│   │   ├── constants/         # Application constants
+│   │   ├── elements/          # Reusable elements
+│   │   ├── helpers/           # Utility functions
+│   │   └── libs/              # Library wrappers
+│   └── services/              # External service integrations
+│       ├── spotify.js         # Spotify API service
+│       └── wakatime.js        # WakaTime API service
+├── data/                      # Static data files
+│   ├── employment.json        # Employment history
+│   ├── education.json         # Education background
+│   ├── publications.json      # Research publications
+│   ├── projectList.js         # Featured projects
+│   ├── uses.js                # Technology stack
+│   ├── blogs/                 # Blog content
+│   │   ├── blogs.json         # Blog metadata
+│   │   └── contents/          # Markdown blog posts
+│   └── news-logs.json         # News and updates
+├── public/                    # Static assets
+│   ├── blog/                  # Blog assets
+│   ├── projects/              # Project assets
+│   ├── home/                  # Homepage assets
+│   ├── memoji/                # Avatar images
+│   └── favicon/               # Web app icons
+├── assets/                    # Additional assets
+│   ├── fa6/                   # FontAwesome 6 icons
+│   └── font/                  # Custom fonts
+├── next.config.mjs            # Next.js configuration
+├── tailwind.config.js         # Tailwind CSS configuration
+├── postcss.config.js          # PostCSS configuration
+├── eslint.config.mjs          # ESLint configuration
+├── package.json               # Project dependencies
+└── README.md                  # This file
+```
 
 ## Getting Started
 
@@ -153,7 +210,7 @@ bun run prettier
 
 ### Performance Optimizations
 
-- Turbopack for fast builds and HMR
+- Turbopack for fast builds and hot module replacement
 - Image optimization with responsive sizing
 - CSS and JavaScript code splitting
 - Caching strategies for static assets
@@ -181,7 +238,7 @@ bun run prettier
 
 Create a `.env.local` file for local development:
 
-```
+```text
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_GITHUB_USERNAME=minhtran241
 ```
@@ -235,7 +292,7 @@ This project is licensed under the GNU General Public License v3.0 - see the LIC
 
 ## Author
 
-**Minh Tran**
+### Minh Tran
 
 - Website: [https://minhtran.com](https://minhtran.com)
 - GitHub: [https://github.com/minhtran241](https://github.com/minhtran241)
@@ -254,6 +311,11 @@ Current performance metrics:
 - Real-time monitoring via Vercel Speed Insights
 - Responsive image optimization with sharp
 - Automatic code splitting and lazy loading
+
+## Version History
+
+- **v4.0.0** - Current version
+- See git history for detailed changelog
 
 ## Support
 
