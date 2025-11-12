@@ -1,4 +1,5 @@
 'use client';
+
 import SectionLabel from '../sectionLabel/sectionLabel';
 import ContributionChart from './contributionChart';
 import useSWR from 'swr';
@@ -17,29 +18,28 @@ const Contribution = () => {
       ? 'http://localhost:3000'
       : process.env.NEXT_PUBLIC_BASE_URL;
 
-  const ghData = useSWR(
+  const { data: ghData } = useSWR(
     `${BASE_URL}/api/github?username=${username}&reposNum=${reposNum}`,
     fetcher,
-  )?.data;
+  );
 
-  const wkData = useSWR(`${BASE_URL}/api/wakatime`, fetcher)?.data;
+  const { data: wkData } = useSWR(`${BASE_URL}/api/wakatime`, fetcher);
 
   const sectionTitle = 'Contribution Stats';
-  const sectionDescription = `Total of ${ghData?.user?.contributionsCollection?.contributionCalendar?.totalContributions} commits across ${ghData?.user?.repositories?.totalCount} public repositories.`;
+  const sectionDescription = `Total of ${ghData?.user?.contributionsCollection?.contributionCalendar?.totalContributions || 0} commits across ${ghData?.user?.repositories?.totalCount || 0} public repositories.`;
 
   return (
     <div>
-      {/* <div className='border-base-300/50 bg-base-100 rounded-2xl border p-5 shadow-lg md:p-6'> */}
       <SectionLabel
         title={sectionTitle}
         description={sectionDescription}
-        icon=<FontAwesomeIcon icon='fa-duotone fa-code-pull-request' />
+        icon={<FontAwesomeIcon icon='fa-duotone fa-code-pull-request' />}
       />
       <div className='flex flex-col gap-5'>
         {ghData && wkData ? (
           <div className='flex flex-col gap-5'>
             <ContributionChart
-              contributionCollection={ghData?.user?.contributionsCollection}
+              contributionCollection={ghData.user.contributionsCollection}
             />
             <CodingActive data={wkData} />
           </div>
@@ -47,7 +47,6 @@ const Contribution = () => {
           <Loading fullPage={false} />
         )}
       </div>
-      {/* </div> */}
     </div>
   );
 };

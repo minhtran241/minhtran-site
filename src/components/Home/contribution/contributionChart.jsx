@@ -2,19 +2,20 @@
 
 import { useEffect, useState } from 'react';
 import {
-  Chart as ChartJS,
-  Filler,
-  CategoryScale,
-  LinearScale,
+  AreaChart,
+  Area,
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
   Tooltip,
-  PointElement,
-  LineElement,
-  BarElement,
-  ArcElement,
   Legend,
-} from 'chart.js';
-import { Line, Bar, Doughnut } from 'react-chartjs-2';
-import 'chartjs-adapter-date-fns';
+  ResponsiveContainer,
+} from 'recharts';
 import {
   getDailyChartData,
   getMonthlyChartData,
@@ -24,18 +25,6 @@ import Loading from '@/app/loading';
 import Image from 'next/image';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  ArcElement,
-  Tooltip,
-  Filler,
-  Legend,
-);
-
 const GET_CHART_DATA = {
   daily: getDailyChartData,
   weekly: getWeeklyChartData,
@@ -44,17 +33,14 @@ const GET_CHART_DATA = {
 
 const CHART_TYPES = {
   line: {
-    component: Line,
     icon: <FontAwesomeIcon icon='fa-duotone fa-chart-line' />,
     name: 'Line',
   },
   bar: {
-    component: Bar,
     icon: <FontAwesomeIcon icon='fa-duotone fa-chart-column' />,
     name: 'Bar',
   },
   doughnut: {
-    component: Doughnut,
     icon: <FontAwesomeIcon icon='fa-duotone fa-donut' />,
     name: 'Doughnut',
   },
@@ -70,158 +56,226 @@ const ContributionChart = ({ contributionCollection }) => {
   const [selectedChartType, setSelectedChartType] =
     useState(DEFAULT_CHART_TYPE);
   const [chartData, setChartData] = useState(null);
+  const [primaryColor, setPrimaryColor] = useState('');
+
+  // Get the primary color from CSS variables and watch for theme changes
+  useEffect(() => {
+    const updatePrimaryColor = () => {
+      const computedStyle = getComputedStyle(document.documentElement);
+      const primary = computedStyle.getPropertyValue('--color-primary').trim();
+      setPrimaryColor(primary || 'oklch(0.7206 0.191 231.3)');
+    };
+
+    // Initial color
+    updatePrimaryColor();
+
+    // Watch for theme changes via MutationObserver
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'data-theme') {
+          updatePrimaryColor();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Generate color variations based on primary color with better contrast
+  const getColorVariations = () => {
+    return [
+      `oklch(from ${primaryColor} l c h)`, // Full primary
+      `oklch(from ${primaryColor} calc(l * 1.15) calc(c * 0.8) h)`, // Lighter
+      `oklch(from ${primaryColor} calc(l * 1.3) calc(c * 0.6) h)`, // Even lighter
+      `oklch(from ${primaryColor} calc(l * 1.45) calc(c * 0.4) h)`, // Lightest
+    ];
+  };
 
   useEffect(() => {
     const data = GET_CHART_DATA[selectedTimeRange](contrCalendar);
 
-    if (typeof window !== 'undefined' && data) {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      if (ctx) {
-        let processedData = { ...data };
+    if (data && data.datasets && data.datasets[0]) {
+      if (selectedChartType === 'doughnut') {
+        const contributions = data.datasets[0].data;
+        const ranges = {
+          'High (10+)': contributions.filter((c) => c >= 10).length,
+          'Medium (5-9)': contributions.filter((c) => c >= 5 && c < 10).length,
+          'Low (1-4)': contributions.filter((c) => c >= 1 && c < 5).length,
+          'None (0)': contributions.filter((c) => c === 0).length,
+        };
 
-        if (selectedChartType === 'line') {
-          const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-          gradient.addColorStop(0, 'rgba(45, 186, 78, 0.3)');
-          gradient.addColorStop(1, 'rgba(45, 186, 78, 0.02)');
+        const pieData = Object.entries(ranges).map(([name, value]) => ({
+          name,
+          value,
+        }));
 
-          processedData.datasets[0] = {
-            ...processedData.datasets[0],
-            backgroundColor: gradient,
-            borderColor: 'rgb(45, 186, 78)',
-            borderWidth: 2,
-            pointBackgroundColor: 'rgb(45, 186, 78)',
-            pointBorderColor: 'rgb(255, 255, 255)',
-            pointBorderWidth: 1,
-            pointRadius: 3,
-            pointHoverRadius: 5,
-            tension: 0.4,
-          };
-        } else if (selectedChartType === 'bar') {
-          const maxValue = Math.max(...data.datasets[0].data);
-          const colors = data.datasets[0].data.map((value) => {
-            const opacity = Math.max(0.3, value / maxValue);
-            return `rgba(45, 186, 78, ${opacity})`;
-          });
+        setChartData({ pieData });
+      } else {
+        const formattedData = data.labels.map((label, index) => ({
+          name: label,
+          contributions: data.datasets[0].data[index],
+        }));
 
-          processedData.datasets[0] = {
-            ...processedData.datasets[0],
-            backgroundColor: colors,
-            borderColor: 'rgb(45, 186, 78)',
-            borderWidth: 1,
-            borderRadius: 3,
-            borderSkipped: false,
-          };
-        } else if (selectedChartType === 'doughnut') {
-          const contributions = data.datasets[0].data;
-          const ranges = {
-            'High (10+)': contributions.filter((c) => c >= 10).length,
-            'Medium (5-9)': contributions.filter((c) => c >= 5 && c < 10)
-              .length,
-            'Low (1-4)': contributions.filter((c) => c >= 1 && c < 5).length,
-            'None (0)': contributions.filter((c) => c === 0).length,
-          };
-
-          processedData = {
-            labels: Object.keys(ranges),
-            datasets: [
-              {
-                data: Object.values(ranges),
-                backgroundColor: [
-                  'rgb(45, 186, 78)',
-                  'rgb(74, 222, 128)',
-                  'rgb(134, 239, 172)',
-                  'rgb(220, 252, 231)',
-                ],
-                borderColor: [
-                  'rgb(34, 158, 62)',
-                  'rgb(45, 186, 78)',
-                  'rgb(74, 222, 128)',
-                  'rgb(134, 239, 172)',
-                ],
-                borderWidth: 1,
-              },
-            ],
-          };
-        }
-
-        setChartData(processedData);
+        setChartData({ lineBarData: formattedData });
       }
     }
   }, [selectedTimeRange, selectedChartType, contrCalendar]);
 
-  const getChartOptions = () => {
-    const baseOptions = {
-      maintainAspectRatio: false,
-      responsive: true,
-      plugins: {
-        legend: {
-          display: selectedChartType === 'doughnut',
-          position: 'bottom',
-          labels: {
-            padding: 12,
-            usePointStyle: true,
-            font: { size: 10 },
-          },
-        },
-        tooltip: {
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
-          titleColor: 'white',
-          bodyColor: 'white',
-          borderColor: 'rgb(45, 186, 78)',
-          borderWidth: 1,
-          cornerRadius: 6,
-          padding: 8,
-          callbacks: {
-            label: function (context) {
-              if (selectedChartType === 'doughnut') {
-                return `${context.label}: ${context.raw} days`;
-              }
-              return `Contributions: ${context.raw}`;
-            },
-          },
-        },
-      },
-    };
+  const renderChart = () => {
+    if (!chartData || !primaryColor) return null;
+    const COLORS = getColorVariations();
 
-    if (selectedChartType === 'doughnut') {
-      return {
-        ...baseOptions,
-        cutout: '65%',
-        plugins: {
-          ...baseOptions.plugins,
-          legend: {
-            ...baseOptions.plugins.legend,
-            display: true,
-          },
-        },
-      };
+    if (selectedChartType === 'line') {
+      if (!chartData.lineBarData) return null;
+
+      return (
+        <ResponsiveContainer width='100%' height='100%'>
+          <AreaChart data={chartData.lineBarData}>
+            <defs>
+              <linearGradient
+                id='colorContributions'
+                x1='0'
+                y1='0'
+                x2='0'
+                y2='1'
+              >
+                <stop offset='5%' stopColor={primaryColor} stopOpacity={0.3} />
+                <stop
+                  offset='95%'
+                  stopColor={primaryColor}
+                  stopOpacity={0.02}
+                />
+              </linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray='3 3' className='stroke-base-300' />
+            <XAxis
+              dataKey='name'
+              tick={{ fontSize: 10 }}
+              angle={0}
+              textAnchor='middle'
+              className='fill-base-content'
+            />
+            <YAxis tick={{ fontSize: 10 }} className='fill-base-content' />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: 'oklch(var(--b1))',
+                border: `1px solid ${primaryColor}`,
+                borderRadius: '6px',
+                color: 'oklch(var(--bc))',
+              }}
+            />
+            <Area
+              type='monotone'
+              dataKey='contributions'
+              stroke={primaryColor}
+              strokeWidth={2}
+              fill='url(#colorContributions)'
+              dot={{ fill: primaryColor, r: 3 }}
+              activeDot={{ r: 5 }}
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      );
     }
 
-    return {
-      ...baseOptions,
-      scales: {
-        x: {
-          grid: { display: false },
-          ticks: {
-            maxRotation: 0,
-            autoSkipPadding: 15,
-            font: { size: 10 },
-          },
-        },
-        y: {
-          beginAtZero: true,
-          grid: { color: 'rgba(0, 0, 0, 0.1)' },
-          ticks: { font: { size: 10 } },
-          suggestedMax: chartData
-            ? Math.max(...chartData.datasets[0].data) + 5
-            : 10,
-        },
-      },
-    };
+    if (selectedChartType === 'bar') {
+      if (!chartData.lineBarData) return null;
+
+      return (
+        <ResponsiveContainer width='100%' height='100%'>
+          <BarChart data={chartData.lineBarData}>
+            <CartesianGrid strokeDasharray='3 3' className='stroke-base-300' />
+            <XAxis
+              dataKey='name'
+              tick={{ fontSize: 10 }}
+              angle={0}
+              textAnchor='middle'
+              className='fill-base-content'
+            />
+            <YAxis tick={{ fontSize: 10 }} className='fill-base-content' />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: 'oklch(var(--b1))',
+                border: `1px solid ${primaryColor}`,
+                borderRadius: '6px',
+                color: 'oklch(var(--bc))',
+              }}
+            />
+            <Bar
+              dataKey='contributions'
+              fill={primaryColor}
+              radius={[3, 3, 0, 0]}
+            />
+          </BarChart>
+        </ResponsiveContainer>
+      );
+    }
+
+    if (selectedChartType === 'doughnut') {
+      if (!chartData.pieData || !Array.isArray(chartData.pieData)) return null;
+
+      return (
+        <ResponsiveContainer width='100%' height='100%'>
+          <PieChart>
+            <Pie
+              data={chartData.pieData}
+              dataKey='value'
+              nameKey='name'
+              cx='50%'
+              cy='50%'
+              innerRadius='60%'
+              outerRadius='80%'
+              paddingAngle={2}
+            >
+              {chartData.pieData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
+            <Tooltip
+              contentStyle={{
+                backgroundColor: 'oklch(var(--b1))',
+                border: `1px solid ${primaryColor}`,
+                borderRadius: '6px',
+                color: 'oklch(var(--bc))',
+              }}
+              formatter={(value) => `${value} days`}
+            />
+            <Legend
+              verticalAlign='bottom'
+              height={36}
+              iconType='circle'
+              wrapperStyle={{ fontSize: '10px', paddingTop: '12px' }}
+            />
+          </PieChart>
+        </ResponsiveContainer>
+      );
+    }
+
+    return null;
   };
 
-  const ChartComponent = CHART_TYPES[selectedChartType].component;
+  const getStats = () => {
+    if (!chartData || !chartData.lineBarData) return null;
+
+    const contributions = chartData.lineBarData.map((d) => d.contributions);
+    const average = Math.round(
+      contributions.reduce((a, b) => a + b, 0) / contributions.length,
+    );
+    const peak = Math.max(...contributions);
+    const activeDays = contributions.filter((d) => d > 0).length;
+
+    return { average, peak, activeDays };
+  };
+
+  const stats = getStats();
 
   return (
     <div className='border-base-300 bg-base-100 flex flex-col gap-3 rounded-lg border p-3'>
@@ -245,7 +299,7 @@ const ContributionChart = ({ contributionCollection }) => {
                 selectedTimeRange.slice(1)}{' '}
               Contributions
             </h2>
-            <p className='opacity-70'>
+            <p className='text-base-content/70 text-xs'>
               {contrCalendar.totalContributions} Total
             </p>
           </div>
@@ -260,7 +314,7 @@ const ContributionChart = ({ contributionCollection }) => {
             </div>
             <ul
               tabIndex={0}
-              className='dropdown-content menu rounded-box bg-base-100 z-[1] w-28 p-1.5 shadow'
+              className='dropdown-content menu rounded-box bg-base-100 z-1 w-28 p-1.5 shadow'
             >
               {Object.entries(CHART_TYPES).map(([type, config]) => (
                 <li key={type}>
@@ -284,7 +338,7 @@ const ContributionChart = ({ contributionCollection }) => {
             </div>
             <ul
               tabIndex={0}
-              className='dropdown-content menu rounded-box bg-base-100 z-[1] w-28 p-1.5 shadow'
+              className='dropdown-content menu rounded-box bg-base-100 z-1 w-28 p-1.5 shadow'
             >
               {Object.keys(GET_CHART_DATA).map((range) => (
                 <li key={range}>
@@ -303,15 +357,11 @@ const ContributionChart = ({ contributionCollection }) => {
 
       {/* Chart */}
       <div
-        className='bg-base-50 rounded-lg p-3'
+        className='rounded-lg p-3'
         style={{ height: '220px', width: '100%' }}
       >
         {chartData ? (
-          <ChartComponent
-            options={getChartOptions()}
-            data={chartData}
-            key={`${selectedChartType}-${selectedTimeRange}`}
-          />
+          renderChart()
         ) : (
           <div className='flex h-full items-center justify-center'>
             <Loading />
@@ -320,27 +370,24 @@ const ContributionChart = ({ contributionCollection }) => {
       </div>
 
       {/* Stats */}
-      {chartData && selectedChartType !== 'doughnut' && (
+      {stats && selectedChartType !== 'doughnut' && (
         <div className='stats stats-horizontal bg-base-200 shadow-sm'>
           <div className='stat px-3 py-2'>
-            <div className='stat-title'>Average</div>
-            <div className='stat-value text-sm'>
-              {Math.round(
-                chartData.datasets[0].data.reduce((a, b) => a + b, 0) /
-                  chartData.datasets[0].data.length,
-              )}
+            <div className='stat-title text-base-content/70'>Average</div>
+            <div className='stat-value text-base-content text-sm'>
+              {stats.average}
             </div>
           </div>
           <div className='stat px-3 py-2'>
-            <div className='stat-title'>Peak</div>
-            <div className='stat-value text-sm'>
-              {Math.max(...chartData.datasets[0].data)}
+            <div className='stat-title text-base-content/70'>Peak</div>
+            <div className='stat-value text-base-content text-sm'>
+              {stats.peak}
             </div>
           </div>
           <div className='stat px-3 py-2'>
-            <div className='stat-title'>Active Days</div>
-            <div className='stat-value text-sm'>
-              {chartData.datasets[0].data.filter((d) => d > 0).length}
+            <div className='stat-title text-base-content/70'>Active Days</div>
+            <div className='stat-value text-base-content text-sm'>
+              {stats.activeDays}
             </div>
           </div>
         </div>
