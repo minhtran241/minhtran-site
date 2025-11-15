@@ -1,10 +1,10 @@
 import Breadcrumbs from '@/common/elements/Breadcrumbs';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
-import ProjectCard from '@/components/Project/projectCard/ProjectCard';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileSystemInfo } from '@/common/constants/fileSystem';
 import { getBase64 } from '@/common/libs/plaiceholder';
+import ProjectCard from '@/components/Project/projectCard/projectCard';
 
 const PAGE_TITLE = 'My Projects';
 const PAGE_DESCRIPTION =
