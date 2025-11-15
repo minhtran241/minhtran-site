@@ -1,7 +1,7 @@
-import ProjectCard from '@/components/Project/projectCard/ProjectCard';
 import Breadcrumbs from '@/common/elements/Breadcrumbs';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 import projectsData from '../../../data/projects.json';
+import ProjectCard from '@/components/Project/projectCard/ProjectCard';
 
 const PAGE_TITLE = 'My Projects';
 const PAGE_DESCRIPTION =
