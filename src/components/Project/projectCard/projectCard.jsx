@@ -1,14 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
-import { getBase64 } from '@/common/libs/plaiceholder';
 
-const ProjectCard = async ({ project }) => {
-  let base64 = '';
-  if (project.thumbnail) {
-    base64 = await getBase64(`/projects/${project.thumbnail}`);
-  }
-
+const ProjectCard = ({ project }) => {
   return (
     <div className='group border-base-300 bg-base-100 hover:border-primary/30 hover:shadow-primary/10 flex h-full flex-col overflow-hidden rounded-xl border shadow-md hover:shadow-xl'>
       {/* Project Image */}
@@ -19,7 +13,7 @@ const ProjectCard = async ({ project }) => {
             alt={project.name}
             className='h-full w-full object-cover transition-transform duration-500 group-hover:scale-110'
             placeholder='blur'
-            blurDataURL={base64}
+            blurDataURL={project.base64}
             loading='lazy'
             fill
             style={{ objectFit: 'cover' }}

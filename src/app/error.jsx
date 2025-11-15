@@ -1,7 +1,7 @@
 'use client';
 
-import Link from 'next/link';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
+import Link from 'next/link';
 
 const Error = () => {
   return (

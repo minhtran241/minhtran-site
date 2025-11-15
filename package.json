@@ -39,7 +39,7 @@
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
     "jsdom": "^26.1.0",
-    "next": "16.0.3",
+    "next": "16.0.0",
     "next-share": "^0.27.0",
     "plaiceholder": "^3.0.0",
     "react": "19.2.0",
