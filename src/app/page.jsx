@@ -36,16 +36,13 @@ const Home = () => {
       {/* <Skills /> */}
       <NewsLogs />
       <Publications />
-      <Contribution />
       <Employment />
       <Education />
-      {/* <Publications /> */}
       {/* <Contribution /> */}
       {/* <Skills /> */}
       {/* <Projects /> */}
     </div>
   );
-  pa;
 };
 
 export default Home;

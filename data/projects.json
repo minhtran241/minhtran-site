@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "mindmeter.ai",
+    "thumbnail": "mindmeter.png",
+    "description": "AI-powered verbal assessment platform enabling instructors to evaluate student comprehension through 30-second audio responses, preventing AI-generated submissions and testing genuine understanding. Implemented real-time speech-to-text transcription and AI-driven question generation from rubrics and assignments, providing instant feedback and detailed analytics for both students and instructors.",
+    "code": "",
+    "demo": "",
+    "tech": "Next.js, FastAPI, PostgreSQL, OpenAI API, Pydantic AI, Vercel Blob",
+    "year": 2025
+  },
+  {
+    "id": 2,
+    "name": "ISATS Carbon Credit Verification API",
+    "thumbnail": "isats-carbon.png",
+    "description": "Architected carbon credit management system with a Fastify web service and Quarkus data service, implementing JWT authentication with RBAC and comprehensive monitoring via Prometheus and Grafana. Designed scalable infrastructure with DiceDB caching layer, Flyway migrations, and PM2 clustering for high-performance emission tracking and credit management operations.",
+    "code": "",
+    "demo": "",
+    "tech": "Fastify, Quarkus, PostgreSQL, DiceDB, Flyway, Docker, Prometheus, Grafana",
+    "year": 2025
+  },
+  {
+    "id": 3,
+    "name": "Elireview AI Summary Microservice",
+    "thumbnail": "elireview-easm.png",
+    "description": "A Flask microservice that consumes SQS messages containing review_activity_id, fetches associated reviews from a MySQL mock/database, constructs LLM prompts and generates concise summaries using LLMs (Cohere, Google Gemini, Ollama Mistral). Stores generated summaries back to the Elireview system and notifies via SQS. Packaged with Docker and designed for integration into a larger review-processing pipeline.",
+    "code": "",
+    "demo": "",
+    "tech": "Flask, Docker, MySQL, SQS, Cohere API, Google Gemini, Ollama Mistral, Hugging Face",
+    "year": 2024
+  },
+  {
+    "id": 4,
+    "name": "Laker Mobile — Fastlane CI/CD Automation",
+    "thumbnail": "laker-ci.png",
+    "description": "CI/CD exploration and tutorial for automating iOS builds and App Store submission for the GVSU Laker mobile app. Includes a placeholder iOS app with CocoaPods dependencies, Fastlane configuration for automated builds and deployments, and a written tutorial/backlog to help future student teams adopt Fastlane and a reproducible GitHub workflow for native app release automation.",
+    "code": "",
+    "demo": "",
+    "tech": "Fastlane, Xcode, CocoaPods, GitHub Actions, iOS, Fastlane Match",
+    "year": 2024
+  }
+]

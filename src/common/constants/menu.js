@@ -88,6 +88,11 @@ export const MENU_TABS = [
     icon: <FontAwesomeIcon icon='fa-duotone fa-project-diagram' />,
   },
   {
+    title: 'GitHub',
+    href: '/github',
+    icon: <FontAwesomeIcon icon='fa-brands fa-github' />,
+  },
+  {
     title: 'Blogs',
     href: '/blogs',
     icon: <FontAwesomeIcon icon='fa-duotone fa-blog' />,
