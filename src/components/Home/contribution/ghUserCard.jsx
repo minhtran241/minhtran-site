@@ -29,8 +29,8 @@ const detailsData = (data) => {
 
 const GHUserCard = ({ ghInfo, username }) => {
   return (
-    <div className='rounded-box border border-gray-200 p-4 shadow'>
-      <div className='flex flex-col items-start gap-3'>
+    <div className='card bg-base-100 shadow-sm'>
+      <div className='card-body'>
         <div className='flex flex-row items-center justify-center gap-4'>
           <div className='avatar'>
             <div className='h-10 w-10 rounded-full'>
@@ -43,9 +43,7 @@ const GHUserCard = ({ ghInfo, username }) => {
             </div>
           </div>
           <div className='flex flex-col'>
-            <h1 className='card-title text-base lg:text-lg'>
-              {ghInfo.user.name}
-            </h1>
+            <h2 className='card-title'>{ghInfo.user.name}</h2>
             <div className='badge badge-sm badge-primary'>
               <Link
                 href={`https://github.com/${username}`}

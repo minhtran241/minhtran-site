@@ -1,62 +1,71 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 
 const PostCard = ({ post }) => {
   const createdAt = new Date(post.created_at);
-  const month = createdAt.toLocaleString('default', { month: 'short' });
-  const date = createdAt.getDate();
+  const formattedDate = createdAt.toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  });
 
   return (
-    <article className='card lg:card-side bg-base-100 border-base-300 group border shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl'>
-      {/* Image Section */}
-      <figure className='relative w-full overflow-hidden lg:w-80'>
-        <Link href={`/blogs/${post.slug}`}>
-          <Image
-            className='h-48 w-full object-cover lg:h-full'
-            src={post.thumbnail}
-            alt={post.title}
-            width={320}
-            height={192}
-            placeholder='blur'
-            blurDataURL={post.base64}
-            loading='lazy'
-          />
-          {/* Date Badge */}
-          <div className='bg-secondary text-secondary-content border-base-100 absolute top-4 right-4 flex h-14 w-14 flex-col items-center justify-center rounded-full border-2 shadow-lg'>
-            <span className='text-sm font-bold'>{date}</span>
-            <span className='text-xs uppercase'>{month}</span>
-          </div>
-        </Link>
+    <article className='card bg-base-100 group shadow-sm'>
+      <figure className='relative h-48'>
+        <Image
+          src={post.thumbnail}
+          alt={post.title}
+          className='h-full w-full object-cover'
+          placeholder='blur'
+          blurDataURL={post.base64}
+          loading='lazy'
+          fill
+          style={{ objectFit: 'cover' }}
+        />
+
+        {/* Category Badge */}
+        <div className='absolute top-4 left-4'>
+          <span className='badge badge-primary gap-1.5 px-3 py-2.5 shadow-lg'>
+            <FontAwesomeIcon icon='fa-duotone fa-folder' className='text-xs' />
+            {post.category}
+          </span>
+        </div>
       </figure>
 
-      {/* Content Section */}
-      <div className='card-body p-6 lg:flex-1'>
-        <Link
-          href={`/blogs/${post.slug}`}
-          className='card-title hover:text-primary line-clamp-2 text-xl font-bold'
-        >
-          {post.title}
-        </Link>
+      <div className='card-body'>
+        {/* Date */}
+        <div className='mb-3 flex items-center gap-1.5 text-sm'>
+          <FontAwesomeIcon
+            icon='fa-duotone fa-calendar-days'
+            className='text-primary text-xs'
+          />
+          <time dateTime={post.created_at} className='font-medium'>
+            {formattedDate}
+          </time>
+        </div>
 
-        <p className='text-base-content/70 line-clamp-3 leading-relaxed'>
+        {/* Title */}
+        <h3 className='card-title group-hover:text-primary line-clamp-2'>
+          <Link href={`/blogs/${post.slug}`}>{post.title}</Link>
+        </h3>
+
+        {/* Description */}
+        <p className='mb-4 line-clamp-3 flex-1 text-sm leading-relaxed'>
           {post.description}
         </p>
 
         {/* Tags */}
         {post.tags && post.tags.length > 0 && (
-          <div className='card-actions mt-4 justify-start'>
-            {post.tags.slice(0, 3).map((tag, index) => (
-              <div
-                key={index}
-                className='badge badge-ghost hover:badge-primary cursor-pointer gap-1'
-              >
-                <span className='text-xs'>#</span>
+          <div className='card-actions'>
+            {post.tags.slice(0, 4).map((tag, index) => (
+              <div key={index} className='badge badge-outline badge-sm'>
                 {tag}
               </div>
             ))}
-            {post.tags.length > 3 && (
-              <div className='badge badge-outline'>
-                +{post.tags.length - 3} more
+            {post.tags.length > 4 && (
+              <div className='badge badge-ghost badge-xs'>
+                +{post.tags.length - 4}
               </div>
             )}
           </div>

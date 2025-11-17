@@ -28,16 +28,15 @@ const GitHubProjectCard = async ({ project }) => {
   const remainingTopics = topics.length > 4 ? topics.length - 4 : 0;
 
   return (
-    <div className='card bg-base-100 border-base-300 group hover:border-primary flex h-full flex-col border shadow-sm transition-all duration-300 hover:shadow-lg'>
-      {/* Content */}
-      <div className='card-body flex flex-1 flex-col p-5'>
+    <div className='card bg-base-100 group shadow-sm transition-shadow hover:shadow-lg'>
+      <div className='card-body'>
         {/* Header */}
         <div className='flex-1'>
           <Link
             href={projectUrl}
             target='_blank'
             rel='noopener noreferrer'
-            className='card-title hover:text-primary group/title mb-3 inline-flex items-center gap-2 text-lg transition-colors duration-200'
+            className='card-title hover:text-primary group/title transition-colors'
           >
             <span className='line-clamp-2'>{projectName}</span>
             <FontAwesomeIcon

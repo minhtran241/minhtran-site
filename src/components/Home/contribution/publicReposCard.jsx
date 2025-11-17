@@ -8,8 +8,8 @@ import Image from 'next/image';
 
 const PublicReposCard = ({ ghInfo }) => {
   return (
-    <div className='rounded-box border border-gray-200 p-4 shadow'>
-      <div className='flex flex-col items-start gap-3'>
+    <div className='card bg-base-100 shadow-sm'>
+      <div className='card-body'>
         <div className='flex flex-row items-center justify-center gap-4'>
           <div className='avatar'>
             <div className='h-10 w-10 rounded-full'>
@@ -22,9 +22,9 @@ const PublicReposCard = ({ ghInfo }) => {
             </div>
           </div>
           <div className='flex flex-col'>
-            <h1 className='card-title text-base lg:text-lg'>
+            <h2 className='card-title'>
               {userBasicInfo.fullName}&apos;s Repositories
-            </h1>
+            </h2>
             <p className='text-sm'>
               {ghInfo.user.repositories.nodes.length}/
               {ghInfo.user.repositories.totalCount} Repositories

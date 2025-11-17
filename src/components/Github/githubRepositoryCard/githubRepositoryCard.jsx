@@ -28,16 +28,15 @@ const GitHubRepositoryCard = async ({ project }) => {
   const remainingTopics = topics.length > 4 ? topics.length - 4 : 0;
 
   return (
-    <div className='card group hover:border-primary border-base-300 bg-base-100 flex h-full flex-col overflow-hidden rounded-xl border shadow-sm hover:shadow-md'>
-      {/* Content */}
-      <div className='card-body flex flex-1 flex-col p-5'>
+    <div className='card group bg-base-200 text-base-content'>
+      <div className='card-body'>
         {/* Header */}
         <div className='flex-1'>
           <Link
             href={projectUrl}
             target='_blank'
             rel='noopener noreferrer'
-            className='card-title hover:text-primary group/title mb-3 inline-flex items-center gap-2 text-lg'
+            className='card-title hover:text-primary group/title transition-colors'
           >
             <span className='line-clamp-2'>{projectName}</span>
             <FontAwesomeIcon
@@ -56,7 +55,7 @@ const GitHubRepositoryCard = async ({ project }) => {
               {displayTopics.map((node, index) => (
                 <span
                   key={index}
-                  className='badge badge-sm badge-soft badge-primary'
+                  className='badge badge-sm badge-dash badge-primary'
                 >
                   {node?.topic?.name}
                 </span>
@@ -124,7 +123,7 @@ const GitHubRepositoryCard = async ({ project }) => {
           </div>
 
           {/* Footer */}
-          <div className='border-base-200 space-y-2 border-t pt-3 text-xs'>
+          <div className='border-primary/20 space-y-2 border-t pt-3 text-xs'>
             <div className='flex items-center justify-between'>
               {project?.createdAt && (
                 <div className='flex items-center gap-1.5'>

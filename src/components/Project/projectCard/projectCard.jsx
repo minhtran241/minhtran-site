@@ -4,90 +4,102 @@ import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 
 const ProjectCard = ({ project }) => {
   return (
-    <div className='group border-base-300 bg-base-100 flex h-full flex-col overflow-hidden rounded-xl border shadow-md'>
-      {/* Project Image */}
+    <article className='card bg-base-100 group shadow-sm'>
       {project.thumbnail && (
-        <div className='from-base-200 to-base-300 relative h-48 w-full overflow-hidden bg-linear-to-b'>
+        <figure className='relative h-48'>
           <Image
             src={`/projects/${project.thumbnail}`}
             alt={project.name}
-            className='h-full w-full object-cover transition-transform duration-500 group-hover:scale-110'
+            className='h-full w-full object-cover'
             placeholder='blur'
             blurDataURL={project.base64}
             loading='lazy'
             fill
             style={{ objectFit: 'cover' }}
           />
-          <div className='absolute inset-0 bg-linear-to-t from-black/40 via-black/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100' />
-        </div>
+
+          {/* Year Badge */}
+          {project?.year && (
+            <div className='absolute top-4 left-4'>
+              <span className='badge badge-primary gap-1.5 px-3 py-2.5 shadow-lg'>
+                <FontAwesomeIcon
+                  icon='fa-duotone fa-calendar'
+                  className='text-xs'
+                />
+                {project.year}
+              </span>
+            </div>
+          )}
+        </figure>
       )}
 
-      {/* Content */}
-      <div className='flex flex-1 flex-col p-5'>
-        {/* Title with Year Badge */}
-        <div className='mb-4 flex items-start justify-between gap-3'>
-          <h3 className='text-base-content group-hover:text-primary flex-1 text-lg leading-snug font-bold'>
-            {project.name}
-          </h3>
-          {project?.year && (
-            <span className='badge badge-sm badge-outline badge-primary'>
-              {project.year}
-            </span>
-          )}
-        </div>
-
-        {/* Tech Stack Badges */}
+      <div className='card-body'>
+        {/* Tech Stack */}
         {project?.tech && (
-          <div className='mb-4 flex flex-wrap gap-2'>
+          <div className='card-actions mb-3 justify-start'>
             {project.tech.split(',').map((tech, index) => (
-              <span
-                key={index}
-                className='badge badge-sm badge-soft badge-primary'
-              >
+              <div key={index} className='badge badge-outline badge-sm'>
                 {tech.trim()}
-              </span>
+              </div>
             ))}
           </div>
         )}
 
+        {/* Title */}
+        <h3 className='card-title group-hover:text-primary line-clamp-2'>
+          {project?.code ? (
+            <Link href={project.code} target='_blank' rel='noopener noreferrer'>
+              {project.name}
+            </Link>
+          ) : project?.demo ? (
+            <Link href={project.demo} target='_blank' rel='noopener noreferrer'>
+              {project.name}
+            </Link>
+          ) : (
+            <span>{project.name}</span>
+          )}
+        </h3>
+
         {/* Description */}
-        <p className='mb-5 flex-1 text-sm leading-relaxed'>
+        <p className='mb-4 flex-1 text-sm leading-relaxed'>
           {project?.description}
         </p>
 
-        {/* Divider */}
-        <div className='from-base-200 via-base-200 mb-4 h-px bg-linear-to-r to-transparent' />
-
         {/* Action Buttons */}
-        <div className='flex gap-3'>
-          {project?.code && (
-            <Link
-              href={project.code}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='border-primary/40 bg-primary/8 text-primary hover:border-primary/60 hover:bg-primary/15 hover:shadow-primary/20 focus-visible:ring-primary/50 flex flex-1 items-center justify-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-semibold transition-all duration-300 hover:shadow-md focus-visible:ring-2 focus-visible:outline-none'
-            >
-              <FontAwesomeIcon icon='fa-duotone fa-code' className='text-xs' />
-              Code
-            </Link>
-          )}
-          {project?.demo && (
-            <Link
-              href={project.demo}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='from-primary to-primary/80 text-primary-content hover:shadow-primary/30 focus-visible:ring-primary/50 flex flex-1 items-center justify-center gap-2 rounded-lg bg-linear-to-r px-4 py-2.5 text-sm font-semibold transition-all duration-300 hover:shadow-lg focus-visible:ring-2 focus-visible:outline-none active:scale-95'
-            >
-              <FontAwesomeIcon
-                icon='fa-duotone fa-arrow-up-right-from-square'
-                className='text-xs'
-              />
-              Demo
-            </Link>
-          )}
-        </div>
+        {(project?.code || project?.demo) && (
+          <div className='card-actions justify-end'>
+            {project?.code && (
+              <Link
+                href={project.code}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='btn btn-outline btn-primary btn-sm gap-2'
+              >
+                <FontAwesomeIcon
+                  icon='fa-duotone fa-code'
+                  className='text-xs'
+                />
+                Code
+              </Link>
+            )}
+            {project?.demo && (
+              <Link
+                href={project.demo}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='btn btn-primary btn-sm gap-2'
+              >
+                <FontAwesomeIcon
+                  icon='fa-duotone fa-arrow-up-right-from-square'
+                  className='text-xs'
+                />
+                Demo
+              </Link>
+            )}
+          </div>
+        )}
       </div>
-    </div>
+    </article>
   );
 };
 
