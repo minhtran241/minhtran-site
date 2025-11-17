@@ -4,7 +4,7 @@ import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 
 const ProjectCard = ({ project }) => {
   return (
-    <div className='group border-base-300 bg-base-100 hover:border-primary/30 hover:shadow-primary/10 flex h-full flex-col overflow-hidden rounded-xl border shadow-md hover:shadow-xl'>
+    <div className='group border-base-300 bg-base-100 flex h-full flex-col overflow-hidden rounded-xl border shadow-md'>
       {/* Project Image */}
       {project.thumbnail && (
         <div className='from-base-200 to-base-300 relative h-48 w-full overflow-hidden bg-linear-to-b'>

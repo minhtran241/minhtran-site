@@ -23,7 +23,7 @@ const DevTools = async () => {
         {DEVTOOLS?.map((item, index) => (
           <div
             key={index}
-            className='card bg-base-100 group shadow-md transition-all duration-300 hover:shadow-lg'
+            className='card bg-base-100 border-base-300 group border shadow-md transition-all duration-300 hover:shadow-lg'
           >
             <Link href={item.href} target='_blank' className='block'>
               <figure className='px-4 pt-4'>

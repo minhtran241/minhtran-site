@@ -286,7 +286,7 @@ const PublicationCard = ({ publication }) => {
       )}
 
       {/* Abstract with expand/collapse */}
-      <div className='bg-base-200/50 mb-4 rounded-lg p-4'>
+      <div className='bg-base-200 mb-4 rounded-lg p-4'>
         <div className='mb-2 flex items-center gap-2'>
           <FontAwesomeIcon
             icon='fa-duotone fa-align-left'
@@ -300,7 +300,7 @@ const PublicationCard = ({ publication }) => {
       </div>
 
       {/* Publication Details */}
-      <div className='bg-base-200/50 mb-4 space-y-2 rounded-lg p-4'>
+      <div className='bg-base-200 mb-4 space-y-2 rounded-lg p-4'>
         {publication.published_in && (
           <div className='text-sm'>
             <span className='text-base-content font-semibold'>

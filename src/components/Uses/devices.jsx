@@ -24,7 +24,7 @@ const Devices = async () => {
 
       <div className='space-y-12'>
         {/* Featured Device */}
-        <div className='card bg-base-100 shadow-xl transition-all duration-300 hover:shadow-2xl'>
+        <div className='card bg-base-100 border-base-300 border shadow-xl transition-all duration-300 hover:shadow-2xl'>
           <Link
             href={DEVICES[0]?.href || '#'}
             target='_blank'
@@ -56,7 +56,7 @@ const Devices = async () => {
           {DEVICES?.slice(1)?.map((item, index) => (
             <div
               key={index}
-              className='card bg-base-100 group shadow-lg transition-all duration-300 hover:shadow-xl'
+              className='card bg-base-100 border-base-300 group border shadow-lg transition-all duration-300 hover:shadow-xl'
             >
               <Link href={item.href} target='_blank' className='block'>
                 <figure className='px-4 pt-4'>

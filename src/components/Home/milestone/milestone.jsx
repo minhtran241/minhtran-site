@@ -49,7 +49,7 @@ const Milestone = ({ milestone }) => {
   const paragraphs = getParagraphs(milestone.description);
 
   return (
-    <div className='p-3'>
+    <div className='px-4 py-2'>
       <Link
         href={milestone.link}
         target='_blank'
@@ -57,7 +57,7 @@ const Milestone = ({ milestone }) => {
       >
         {/* Company Avatar */}
         {milestone.logo && (
-          <div className='flex-shrink-0'>
+          <div className='shrink-0'>
             <div className='avatar'>
               <div className='ring-base-300/50 ring-offset-base-100 group-hover/link:ring-primary/30 h-12 w-12 rounded-lg ring-1 ring-offset-1 transition-all'>
                 <Image

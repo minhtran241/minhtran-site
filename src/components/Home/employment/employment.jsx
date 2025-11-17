@@ -63,7 +63,7 @@ const EmploymentComponent = async () => {
               </svg>
             </div>
 
-            <div className='timeline-end timeline-box w-full p-0'>
+            <div className='timeline-end timeline-box w-full'>
               <Milestone
                 milestone={milestone}
                 first={index === 0}
