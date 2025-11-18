@@ -43,7 +43,7 @@ const WebStats = async () => {
             <div key={key} className='text-center'>
               <div className='text-xs'>{key}</div>
               <div className='text-sm font-semibold'>
-                {webstats[key]?.toLocaleString() || '0'}
+                {webstats[key]?.toLocaleString() || 'N/A'}
               </div>
             </div>
           ))}
