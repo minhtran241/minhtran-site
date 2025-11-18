@@ -15,36 +15,6 @@
     "updated_at": "2024-02-24T09:41:22.055Z"
   },
   {
-    "id": 4,
-    "start_date": "2023-04-01T04:00:00.000Z",
-    "end_date": "2023-11-01T04:00:00.000Z",
-    "sub_title": "Thien Khoi Real Estate Company",
-    "link": "https://thienkhoi.com",
-    "logo": "/home/employment/thienkhoi.png",
-    "title": "Database Administrator",
-    "employment_type": "Freelance",
-    "location": "Hanoi, Vietnam",
-    "location_type": "Remote",
-    "description": "Optimized database performance to ensure the smooth operation of real estate systems that serve 10,000+ users.#Wrote SQL to generate daily and monthly requested reports; implemented procedures to meet the needs of the company.",
-    "created_at": "2024-02-24T09:41:22.056Z",
-    "updated_at": "2024-02-24T09:41:22.056Z"
-  },
-  {
-    "id": 3,
-    "start_date": "2023-04-01T04:00:00.000Z",
-    "end_date": "2024-01-01T04:00:00.000Z",
-    "sub_title": "Pama Media & Informatic Co., Ltd",
-    "link": "https://pama.com.vn",
-    "logo": "/home/employment/pama.jpeg",
-    "title": "Software Engineer",
-    "employment_type": "Contract",
-    "location": "Hai Bà Trưng district, Hanoi, Vietnam",
-    "location_type": "Hybrid",
-    "description": "Worked well with Strapi, designed UI/UX, implemented the frontend, and monitored the system.#Contributed to the development of innovative software solutions that meet the specific needs and requirements of the company.",
-    "created_at": "2024-02-24T09:41:22.055Z",
-    "updated_at": "2024-02-24T09:41:22.055Z"
-  },
-  {
     "id": 5,
     "start_date": "2024-03-01T04:00:00.000Z",
     "end_date": "2024-12-15T04:00:00.000Z",

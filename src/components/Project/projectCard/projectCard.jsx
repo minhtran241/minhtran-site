@@ -4,80 +4,102 @@ import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 
 const ProjectCard = ({ project }) => {
   return (
-    <article className='card bg-base-100 group shadow-sm'>
+    <article className='border-base-200/80 bg-base-100/95 flex h-full flex-col overflow-hidden rounded-2xl border p-5 shadow-sm'>
       {project.thumbnail && (
-        <figure className='relative h-48'>
+        <div className='bg-base-200 relative mb-5 overflow-hidden rounded-xl'>
           <Image
             src={`/projects/${project.thumbnail}`}
             alt={project.name}
-            className='h-full w-full object-cover'
+            className='h-52 w-full object-cover'
             placeholder='blur'
             blurDataURL={project.base64}
             loading='lazy'
-            fill
+            width={640}
+            height={360}
             style={{ objectFit: 'cover' }}
           />
 
-          {/* Year Badge */}
           {project?.year && (
-            <div className='absolute top-4 left-4'>
-              <span className='badge badge-primary gap-1.5 px-3 py-2.5 shadow-lg'>
-                <FontAwesomeIcon
-                  icon='fa-duotone fa-calendar'
-                  className='text-xs'
-                />
-                {project.year}
-              </span>
-            </div>
+            <span className='badge badge-primary border-primary/40 text-primary-content absolute top-4 right-4 gap-2 rounded-full border px-3 py-1 text-xs font-semibold tracking-wide uppercase shadow-md'>
+              <FontAwesomeIcon
+                icon='fa-duotone fa-calendar-alt'
+                className='text-[10px]'
+              />
+              {project.year}
+            </span>
           )}
-        </figure>
+        </div>
       )}
 
-      <div className='card-body'>
-        {/* Tech Stack */}
+      <div className='flex flex-1 flex-col gap-4'>
+        {project?.partner && (
+          <div className='text-primary flex items-center gap-2 text-sm'>
+            <FontAwesomeIcon icon='fa-duotone fa-handshake' />
+            {project?.partner_url ? (
+              <Link
+                href={project.partner_url}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='underline-offset-2 hover:underline'
+              >
+                {project.partner}
+              </Link>
+            ) : (
+              <span>{project.partner}</span>
+            )}
+          </div>
+        )}
+
+        <div className='space-y-3'>
+          <h3 className='text-xl leading-tight font-semibold'>
+            {project?.code ? (
+              <Link
+                href={project.code}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                {project.name}
+              </Link>
+            ) : project?.demo ? (
+              <Link
+                href={project.demo}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                {project.name}
+              </Link>
+            ) : (
+              <span>{project.name}</span>
+            )}
+          </h3>
+          <p className='text-sm leading-relaxed'>{project?.description}</p>
+        </div>
+
         {project?.tech && (
-          <div className='card-actions mb-3 justify-start'>
+          <div className='flex flex-wrap gap-2 text-xs'>
             {project.tech.split(',').map((tech, index) => (
-              <div key={index} className='badge badge-outline badge-sm'>
+              <span
+                key={index}
+                className='badge badge-soft badge-sm px-3 py-2 font-semibold tracking-wide uppercase'
+              >
                 {tech.trim()}
-              </div>
+              </span>
             ))}
           </div>
         )}
 
-        {/* Title */}
-        <h3 className='card-title group-hover:text-primary line-clamp-2'>
-          {project?.code ? (
-            <Link href={project.code} target='_blank' rel='noopener noreferrer'>
-              {project.name}
-            </Link>
-          ) : project?.demo ? (
-            <Link href={project.demo} target='_blank' rel='noopener noreferrer'>
-              {project.name}
-            </Link>
-          ) : (
-            <span>{project.name}</span>
-          )}
-        </h3>
-
-        {/* Description */}
-        <p className='mb-4 flex-1 text-sm leading-relaxed'>
-          {project?.description}
-        </p>
-
-        {/* Action Buttons */}
         {(project?.code || project?.demo) && (
-          <div className='card-actions justify-end'>
+          <div className='mt-auto flex flex-wrap gap-2'>
             {project?.code && (
               <Link
                 href={project.code}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='btn btn-outline btn-primary btn-sm gap-2'
+                className='btn btn-outline btn-sm border-base-200/80 text-xs font-semibold tracking-wide uppercase'
               >
                 <FontAwesomeIcon
                   icon='fa-duotone fa-code'
-                  className='text-xs'
+                  className='text-[10px]'
                 />
                 Code
               </Link>
@@ -87,11 +109,11 @@ const ProjectCard = ({ project }) => {
                 href={project.demo}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='btn btn-primary btn-sm gap-2'
+                className='btn btn-primary btn-sm text-xs font-semibold tracking-wide uppercase'
               >
                 <FontAwesomeIcon
                   icon='fa-duotone fa-arrow-up-right-from-square'
-                  className='text-xs'
+                  className='text-[10px]'
                 />
                 Demo
               </Link>

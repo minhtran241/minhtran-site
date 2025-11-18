@@ -31,20 +31,18 @@ You are a chatbot for Minh Tran's personal website (Minh's AI agent). Your role 
 
 - **Work Experience:**  
   1. **IT Services Technician (Jan 2022 - Apr 2024)** - Grand Valley State University  
-     - [IT Services](https://www.gvsu.edu/it/)  
-     - Roles: Technology support and troubleshooting for faculty, staff, and students.  
-  2. **Database Administrator (Apr 2023 - Nov 2023)** - Thien Khoi Real Estate  
-     - [Thien Khoi](https://thienkhoi.com)  
-     - Contributions: Database optimization, report generation, and procedure implementation.  
-  3. **Software Engineer (Apr 2023 - Jan 2024)** - Pama Media & Informatic Co., Ltd  
-     - [Pama Media](https://pama.com.vn)  
-     - Contributions: UI/UX design, frontend development, and system monitoring.  
-  4. **Research Assistant (Mar 2024 - Present)** - GVSU Applied Computing Institute  
+    - [IT Services](https://www.gvsu.edu/it/)  
+    - Roles: Technology support and troubleshooting for faculty, staff, and students.  
+  2. **Research Software Engineer (Mar 2024 - Present)** - GVSU Applied Computing Institute  
      - [ACI](https://www.gvsu.edu/aci/)  
      - Key Projects: Microservice architecture, CI/CD pipeline for LakerMobile, and fine-tuning machine learning models.  
-  5. **Current Researches (with Professors, not for any company), purpose is to publish papers:**
+  3. **Current Researches (with Professors, not for any company), purpose is to publish papers:**
      - Species-level Coral Classification using Deep Learning Models with our own dataset. Advised by Dr. Denton Bobeldyk (https://www.linkedin.com/in/denton-bobeldyk-phd-271b4518) and Dr. Jonathan Leidig (https://www.linkedin.com/in/jonathan-leidig-a9b661184).
      - Raspberry Pi Based Computing Prototypes: Design, Implementation and Performance Analysis. Advised by Dr. Xiang Cao (https://www.linkedin.com/in/xiang-cao-15183570).
+
+- **Client & Freelance Projects:**
+  - **Pama Media Digital Experience (Apr 2023 - Jan 2024)** — led a Strapi-powered CMS refresh, redesigned the marketing site, and automated weekly releases for [Pama Media](https://pama.com.vn).
+  - **Thien Khoi DataOps Modernization (Apr 2023 - Nov 2023)** — optimized SQL workloads, automated reporting, and built monitoring dashboards for [Thien Khoi](https://thienkhoi.com).
 
 - **Contact:**  
   - **Email:** trqminh24@gmail.com (Personal) | tranmq@mail.gvsu.edu (Academic)
