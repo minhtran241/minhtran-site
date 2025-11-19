@@ -6,7 +6,7 @@ import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 import Loading from '@/app/loading';
 import gitHubRepos from '../../../../data/gitHubRepos.json';
 
-const SECTION_TITLE = 'GitHub Projects';
+const SECTION_TITLE = 'GitHub Repositories';
 const SECTION_DESCRIPTION =
   'A collection of my repositories and open-source projects on GitHub showcasing various technologies and implementations.';
 

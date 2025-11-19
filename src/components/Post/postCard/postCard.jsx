@@ -11,27 +11,29 @@ const PostCard = ({ post }) => {
   });
 
   return (
-    <article className='card bg-base-100 group shadow-sm'>
-      <figure className='relative h-48'>
+    <article className='border-base-200/80 bg-base-100 flex h-full flex-col rounded-2xl border shadow-sm'>
+      <div className='bg-base-200 relative overflow-hidden rounded-t-2xl'>
         <Image
           src={post.thumbnail}
           alt={post.title}
-          className='h-full w-full object-cover'
+          className='h-48 w-full object-cover'
           placeholder='blur'
           blurDataURL={post.base64}
           loading='lazy'
-          fill
+          width={640}
+          height={360}
           style={{ objectFit: 'cover' }}
         />
+        <div className='absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent' />
 
         {/* Category Badge */}
         <div className='absolute top-4 left-4'>
-          <span className='badge badge-primary gap-1.5 px-3 py-2.5 shadow-lg'>
+          <span className='badge badge-secondary gap-1.5 px-3 py-2.5 shadow-lg'>
             <FontAwesomeIcon icon='fa-duotone fa-folder' className='text-xs' />
             {post.category}
           </span>
         </div>
-      </figure>
+      </div>
 
       <div className='card-body'>
         {/* Date */}
@@ -59,12 +61,15 @@ const PostCard = ({ post }) => {
         {post.tags && post.tags.length > 0 && (
           <div className='card-actions'>
             {post.tags.slice(0, 4).map((tag, index) => (
-              <div key={index} className='badge badge-outline badge-sm'>
+              <div
+                key={index}
+                className='badge badge-soft badge-secondary badge-sm'
+              >
                 {tag}
               </div>
             ))}
             {post.tags.length > 4 && (
-              <div className='badge badge-ghost badge-xs'>
+              <div className='badge badge-ghost badge-sm'>
                 +{post.tags.length - 4}
               </div>
             )}

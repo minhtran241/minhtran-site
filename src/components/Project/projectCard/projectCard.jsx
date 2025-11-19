@@ -96,7 +96,7 @@ const ProjectCard = ({ project }) => {
                     href={project.partner_url}
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='text-primary font-medium hover:underline'
+                    className='link link-primary font-medium'
                   >
                     {project.partner}
                   </Link>

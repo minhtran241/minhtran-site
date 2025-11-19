@@ -5,10 +5,14 @@ import { themeChange } from 'theme-change';
 
 const ThemeChanger = () => {
   const themeValues = [
+    { value: 'light', label: 'Light' },
+    { value: 'dark', label: 'Dark' },
     { value: 'winter', label: 'Winter' },
     { value: 'night', label: 'Night' },
     { value: 'lofi', label: 'Lo-Fi' },
     { value: 'corporate', label: 'Corporate' },
+    { value: 'nord', label: 'Nord' },
+    { value: 'silk', label: 'Silk' },
   ];
 
   // Initialize with empty string to prevent hydration mismatch
