@@ -212,9 +212,7 @@
     winter,
     night,
     lofi,
-    corporate,
-    nord,
-    silk;
+    corporate;
   root: ':root';
   prefix: '';
   logs: true;

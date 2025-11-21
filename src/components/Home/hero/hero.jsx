@@ -14,7 +14,7 @@ const HeroComponent = () => {
 
   return (
     <article aria-label='Hero section'>
-      <div className='bg-base-300/50 border-base-300 relative overflow-hidden rounded-2xl border shadow-sm'>
+      <div className='border-primary/20 bg-base-100/50 relative overflow-hidden rounded-2xl border shadow-sm backdrop-blur-sm'>
         <div className='relative p-8 md:p-10'>
           <div className='flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:gap-12'>
             {/* Profile Picture */}

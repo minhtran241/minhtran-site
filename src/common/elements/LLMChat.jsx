@@ -15,7 +15,7 @@ const ChatMessage = memo(
     const messageContent = useMemo(() => {
       if (isUser) {
         return (
-          <div className='chat-bubble chat-bubble-primary max-w-xs wrap-break-word'>
+          <div className='chat-bubble chat-bubble-primary max-w-sm text-sm wrap-break-word'>
             {message.content}
           </div>
         );
