@@ -11,18 +11,18 @@ import Image from 'next/image';
 
 // Memoized ChatMessage component to prevent unnecessary re-renders
 const ChatMessage = memo(
-  ({ message, isUser, isStreaming = false }) => {
+  ({ message, isUser, isStreaming = false, onCopy }) => {
     const messageContent = useMemo(() => {
       if (isUser) {
         return (
-          <div className='chat-bubble chat-bubble-primary max-w-xs'>
+          <div className='chat-bubble chat-bubble-primary max-w-xs wrap-break-word'>
             {message.content}
           </div>
         );
       }
 
       return (
-        <div className='chat-bubble max-w-sm text-sm'>
+        <div className='chat-bubble bg-base-200 text-base-content group/message relative max-w-sm text-sm wrap-break-word'>
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw]}
@@ -93,11 +93,24 @@ const ChatMessage = memo(
             {message.content}
           </ReactMarkdown>
           {isStreaming && (
-            <span className='loading loading-dots loading-sm ml-2'></span>
+            <div className='text-base-content/50 mt-2 flex items-center gap-2'>
+              <span className='loading loading-dots loading-sm'></span>
+              <span className='text-xs'>typing...</span>
+            </div>
+          )}
+          {!isStreaming && (
+            <button
+              onClick={() => onCopy(message.content)}
+              className='btn btn-xs btn-circle btn-ghost bg-base-100 border-base-300 absolute -top-1 -right-1 border opacity-0 transition-opacity group-hover/message:opacity-100'
+              aria-label='Copy message'
+              title='Copy to clipboard'
+            >
+              <FontAwesomeIcon icon='fa-solid fa-copy' className='text-xs' />
+            </button>
           )}
         </div>
       );
-    }, [message.content, isUser, isStreaming]);
+    }, [message.content, isUser, isStreaming, onCopy]);
 
     return (
       <div className={`chat ${isUser ? 'chat-end' : 'chat-start'}`}>
@@ -130,10 +143,19 @@ const ChatMessage = memo(
     return (
       prevProps.message.content === nextProps.message.content &&
       prevProps.isUser === nextProps.isUser &&
-      prevProps.isStreaming === nextProps.isStreaming
+      prevProps.isStreaming === nextProps.isStreaming &&
+      prevProps.onCopy === nextProps.onCopy
     );
   },
 );
+
+// Suggested prompts for quick start
+const SUGGESTED_PROMPTS = [
+  "Tell me about Minh's experience",
+  "What are Minh's technical skills?",
+  'Show me recent projects',
+  'How can I contact Minh?',
+];
 
 export default function LLMChat() {
   const INITIAL_MESSAGE = useMemo(
@@ -251,6 +273,70 @@ export default function LLMChat() {
     setError(null);
   }, [INITIAL_MESSAGE]);
 
+  // Copy message to clipboard
+  const handleCopyMessage = useCallback((text) => {
+    navigator.clipboard.writeText(text).then(() => {
+      // Could add a toast notification here
+    });
+  }, []);
+
+  // Retry last message on error
+  const retryLastMessage = useCallback(() => {
+    if (conversation.length > 1) {
+      const lastUserMessage = [...conversation]
+        .reverse()
+        .find((msg) => msg.role === 'user');
+      if (lastUserMessage) {
+        setInput(lastUserMessage.content);
+        setError(null);
+      }
+    }
+  }, [conversation]);
+
+  // Send suggested prompt
+  const sendSuggestedPrompt = useCallback(
+    async (prompt) => {
+      setInput(prompt);
+      // Need to manually trigger send since input state won't update in time
+      const userMessage = { role: 'user', content: prompt };
+      const newConversation = [...conversation, userMessage];
+
+      setConversation(newConversation);
+      setInput('');
+      setIsLoading(true);
+      setIsStreaming(true);
+      setError(null);
+
+      try {
+        const { messages, newMessage } =
+          await continueConversation(newConversation);
+
+        let textContent = '';
+        for await (const delta of readStreamableValue(newMessage)) {
+          textContent += delta;
+          setConversation([
+            ...messages,
+            { role: 'assistant', content: textContent },
+          ]);
+        }
+      } catch (err) {
+        console.error('Chat error:', err);
+        setError('Sorry, I encountered an error. Please try again.');
+        setConversation((prev) => [
+          ...prev,
+          {
+            role: 'assistant',
+            content: 'Sorry, I encountered an error. Please try again.',
+          },
+        ]);
+      } finally {
+        setIsLoading(false);
+        setIsStreaming(false);
+      }
+    },
+    [conversation],
+  );
+
   // Auto-resize textarea
   const handleInputChange = useCallback((e) => {
     setInput(e.target.value);
@@ -294,16 +380,16 @@ export default function LLMChat() {
       {/* Chat Window */}
       {isOpen && (
         <div
-          className='chat-container bg-base-100 rounded-box border-base-300 animate-in slide-in-from-bottom-4 m-2 flex h-[calc(100vh-5rem)] max-h-[600px] w-[calc(100vw-1rem)] flex-col border shadow-2xl transition-all duration-300 sm:m-4 sm:h-128 sm:w-96'
+          className='chat-container bg-base-100 rounded-box border-base-300 animate-in slide-in-from-bottom-4 m-2 flex h-[calc(100vh-3rem)] max-h-[500px] w-[calc(100vw-1rem)] flex-col border shadow-xl transition-all duration-300 sm:m-4 sm:h-[450px] sm:w-[360px]'
           role='dialog'
           aria-label='Chat with AI Agent'
           aria-modal='true'
         >
           {/* Chat Header */}
-          <div className='from-primary to-secondary text-primary-content rounded-t-box shrink-0 bg-linear-to-r p-3'>
+          <div className='bg-primary rounded-t-box shrink-0 p-2.5 shadow-sm'>
             <div className='flex items-center justify-between'>
-              <div className='flex items-center gap-3'>
-                <div className='avatar online'>
+              <div className='flex items-center gap-2'>
+                <div className='avatar'>
                   <div className='h-8 w-8 rounded-full'>
                     <Image
                       src='/memoji/memojialo.png'
@@ -315,51 +401,48 @@ export default function LLMChat() {
                   </div>
                 </div>
                 <div>
-                  <h1 className='text-base-content font-semibold'>
+                  <h1 className='text-primary-content text-sm font-semibold'>
                     Minh&apos;s AI Agent
                   </h1>
-                  <div className='text-base-content/70 flex items-center gap-2 text-xs'>
-                    <div className='inline-grid *:[grid-area:1/1]'>
-                      <div className='status status-success animate-ping'></div>
-                      <div className='status status-success'></div>
-                    </div>
+                  <div className='text-primary-content/70 flex items-center gap-1.5 text-xs'>
+                    <div className='bg-success h-2 w-2 animate-pulse rounded-full'></div>
                     {isStreaming ? (
                       <span className='flex items-center gap-1'>
                         <span className='loading loading-dots loading-xs'></span>
                         Typing...
                       </span>
                     ) : (
-                      'Online • Ready to help'
+                      <span>Online</span>
                     )}
                   </div>
                 </div>
               </div>
-              <div className='text-base-content/70 flex gap-1'>
-                <div className='tooltip tooltip-bottom' data-tip='Clear chat'>
-                  <button
-                    onClick={clearChat}
-                    className='btn btn-sm btn-circle btn-ghost hover:bg-base-200 focus-visible:ring-primary transition-transform hover:scale-110 focus-visible:ring-2 active:scale-95'
-                    aria-label='Clear chat history'
-                    disabled={isLoading}
-                  >
-                    <FontAwesomeIcon
-                      icon='fa-solid fa-trash text-sm'
-                      aria-hidden='true'
-                    />
-                  </button>
-                </div>
-                <div className='tooltip tooltip-left' data-tip='Close chat'>
-                  <button
-                    onClick={toggleChat}
-                    className='btn btn-sm btn-circle btn-ghost hover:bg-base-200 focus-visible:ring-primary transition-transform hover:scale-110 focus-visible:ring-2 active:scale-95'
-                    aria-label='Close chat'
-                  >
-                    <FontAwesomeIcon
-                      icon='fa-solid fa-times text-sm'
-                      aria-hidden='true'
-                    />
-                  </button>
-                </div>
+              <div className='flex gap-1'>
+                <button
+                  onClick={clearChat}
+                  className='btn btn-xs btn-circle btn-ghost text-primary-content/70'
+                  aria-label='Clear chat history'
+                  disabled={isLoading}
+                  title='Clear chat'
+                >
+                  <FontAwesomeIcon
+                    icon='fa-solid fa-trash'
+                    className='text-xs'
+                    aria-hidden='true'
+                  />
+                </button>
+                <button
+                  onClick={toggleChat}
+                  className='btn btn-xs btn-circle btn-ghost text-primary-content/70'
+                  aria-label='Close chat'
+                  title='Close chat'
+                >
+                  <FontAwesomeIcon
+                    icon='fa-solid fa-times'
+                    className='text-xs'
+                    aria-hidden='true'
+                  />
+                </button>
               </div>
             </div>
           </div>
@@ -382,29 +465,71 @@ export default function LLMChat() {
                   index === conversation.length - 1 &&
                   message.role === 'assistant'
                 }
+                onCopy={handleCopyMessage}
               />
             ))}
+            {/* Show typing indicator when loading but no streamed content yet */}
+            {isLoading &&
+              conversation.length > 1 &&
+              conversation[conversation.length - 1].role === 'user' && (
+                <div className='chat chat-start'>
+                  <div className='chat-image avatar'>
+                    <div className='h-8 w-8 rounded-full'>
+                      <Image
+                        alt='Agent avatar'
+                        src='/memoji/memojialo.png'
+                        className='h-full w-full rounded-full object-cover'
+                        width={40}
+                        height={40}
+                      />
+                    </div>
+                  </div>
+                  <div className='chat-bubble bg-base-200 text-base-content flex items-center gap-2'>
+                    <span className='loading loading-dots loading-sm'></span>
+                    <span className='text-base-content/60 text-xs'>
+                      Thinking...
+                    </span>
+                  </div>
+                </div>
+              )}
             {error && (
               <div
-                className='alert alert-error animate-in fade-in slide-in-from-top-2 shadow-lg'
+                className='bg-error/10 border-error/20 animate-in fade-in slide-in-from-top-2 rounded-lg border p-2'
                 role='alert'
                 aria-live='assertive'
               >
-                <FontAwesomeIcon
-                  icon='fa-solid fa-exclamation-triangle'
-                  aria-hidden='true'
-                />
-                <span>{error}</span>
-                <button
-                  className='btn btn-sm btn-circle btn-ghost focus-visible:ring-error transition-transform hover:scale-110 focus-visible:ring-2 active:scale-95'
-                  onClick={() => setError(null)}
-                  aria-label='Dismiss error message'
-                >
+                <div className='flex items-start gap-2'>
                   <FontAwesomeIcon
-                    icon='fa-solid fa-times'
+                    icon='fa-solid fa-exclamation-circle'
+                    className='text-error mt-0.5 shrink-0 text-sm'
                     aria-hidden='true'
                   />
-                </button>
+                  <span className='text-error flex-1 text-sm font-medium'>
+                    {error}
+                  </span>
+                  <div className='flex shrink-0 gap-1'>
+                    <button
+                      className='btn btn-xs btn-ghost text-error hover:bg-error/20'
+                      onClick={retryLastMessage}
+                      aria-label='Retry last message'
+                    >
+                      <FontAwesomeIcon
+                        icon='fa-solid fa-rotate-right'
+                        className='text-xs'
+                      />
+                    </button>
+                    <button
+                      className='btn btn-xs btn-circle btn-ghost text-error hover:bg-error/20'
+                      onClick={() => setError(null)}
+                      aria-label='Dismiss error message'
+                    >
+                      <FontAwesomeIcon
+                        icon='fa-solid fa-times'
+                        className='text-xs'
+                      />
+                    </button>
+                  </div>
+                </div>
               </div>
             )}
             {/* Invisible element to scroll to */}
@@ -412,7 +537,24 @@ export default function LLMChat() {
           </div>
 
           {/* Input Area */}
-          <div className='border-base-300 bg-base-100 shrink-0 border-t p-3 sm:p-4'>
+          <div className='border-base-300 bg-base-100 shrink-0 border-t p-2.5'>
+            {/* Suggested prompts - show when conversation is empty */}
+            {conversation.length === 1 && (
+              <div className='mb-2'>
+                <div className='flex flex-wrap gap-1.5'>
+                  {SUGGESTED_PROMPTS.map((prompt, index) => (
+                    <button
+                      key={index}
+                      onClick={() => sendSuggestedPrompt(prompt)}
+                      className='btn btn-xs btn-ghost bg-base-200 hover:bg-primary hover:text-primary-content border-0 font-normal normal-case'
+                      disabled={isLoading}
+                    >
+                      {prompt}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
             <form
               className='flex gap-2'
               onSubmit={(e) => {
@@ -420,21 +562,34 @@ export default function LLMChat() {
                 sendMessage();
               }}
             >
-              <textarea
-                ref={inputRef}
-                className='textarea textarea-bordered textarea-primary focus:textarea-primary max-h-24 min-h-10 flex-1 resize-none text-sm transition-colors focus:outline-none sm:text-base'
-                placeholder='Ask me anything about Minh...'
-                value={input}
-                onChange={handleInputChange}
-                onKeyDown={handleKeyPress}
-                rows={1}
-                disabled={isLoading}
-                aria-label='Message input'
-                maxLength={1000}
-              />
+              <div className='relative flex-1'>
+                <textarea
+                  ref={inputRef}
+                  className='textarea textarea-bordered textarea-primary focus:textarea-primary max-h-20 min-h-9 w-full resize-none text-sm focus:outline-none'
+                  placeholder='Ask me anything about Minh...'
+                  value={input}
+                  onChange={handleInputChange}
+                  onKeyDown={handleKeyPress}
+                  rows={1}
+                  disabled={isLoading}
+                  aria-label='Message input'
+                  maxLength={1000}
+                />
+                {input.length > 800 && (
+                  <div
+                    className={`absolute right-2 bottom-2 rounded px-1.5 py-0.5 font-mono text-[10px] font-semibold ${
+                      input.length > 950
+                        ? 'text-error bg-error/10'
+                        : 'text-base-content/40 bg-base-200'
+                    }`}
+                  >
+                    {input.length}/1000
+                  </div>
+                )}
+              </div>
               <button
                 type='submit'
-                className={`btn btn-primary btn-circle focus-visible:ring-primary h-12 min-h-12 w-12 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 ${isLoading ? 'loading' : 'hover:scale-105 active:scale-95'}`}
+                className={`btn btn-primary btn-circle focus-visible:ring-primary h-10 min-h-10 w-10 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 ${isLoading ? 'loading' : 'hover:scale-105 active:scale-95'}`}
                 disabled={isLoading || !input.trim()}
                 aria-label='Send message'
                 title={isLoading ? 'Sending...' : 'Send message'}
@@ -452,8 +607,11 @@ export default function LLMChat() {
                 )}
               </button>
             </form>
-            <div className='text-base-content/60 mt-2 hidden text-center text-xs sm:block'>
-              Press Enter to send • Shift+Enter for new line
+            <div className='text-base-content/50 mt-1.5 text-[10px]'>
+              <span className='hidden sm:inline'>
+                <kbd className='kbd kbd-xs'>Enter</kbd> send •{' '}
+                <kbd className='kbd kbd-xs'>Shift + Enter</kbd> new line
+              </span>
             </div>
           </div>
         </div>
