@@ -84,11 +84,11 @@ const LogLine = ({ log }) => {
 
   return (
     <div
-      className={`${config.borderColor} ${config.bgColor} flex items-start gap-3 rounded-md border-l-4 px-4 py-2 transition-colors hover:brightness-95`}
+      className={`${config.borderColor} ${config.bgColor} flex items-start gap-3 rounded-md border-l-4 px-2 py-1 transition-colors hover:brightness-95`}
     >
       {/* Icon */}
       <div className='shrink-0'>
-        <FontAwesomeIcon icon={`fa-duotone ${config.icon}`} />
+        <FontAwesomeIcon icon={`fa-duotone fa-sm ${config.icon}`} />
       </div>
 
       {/* Content wrapper that flows naturally */}
@@ -110,7 +110,7 @@ const LogLine = ({ log }) => {
               a: ({ href, children }) => (
                 <Link
                   href={href || '#'}
-                  className='link-primary link font-medium'
+                  className='link-primary link link-hover font-medium'
                   target='_blank'
                   rel='noopener noreferrer'
                 >
@@ -142,10 +142,7 @@ const LogLine = ({ log }) => {
           rel='noopener noreferrer'
           title='View link'
         >
-          <FontAwesomeIcon
-            icon='fa-solid fa-arrow-up-right-from-square'
-            className='text-sm'
-          />
+          <FontAwesomeIcon icon='fa-solid fa-sm fa-arrow-up-right-from-square' />
         </Link>
       )}
     </div>

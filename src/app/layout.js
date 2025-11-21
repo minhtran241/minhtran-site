@@ -194,6 +194,7 @@ export default function RootLayout({ children }) {
       <head>
         <link rel='preconnect' href='https://cloud.umami.is' />
         <link rel='dns-prefetch' href='https://cloud.umami.is' />
+        <meta name='color-scheme' content='light dark' />
         {/* Structured Data for SEO */}
         <script
           type='application/ld+json'
@@ -242,8 +243,18 @@ export default function RootLayout({ children }) {
         )}
         suppressHydrationWarning
       >
+        {/* Skip to main content link for keyboard navigation */}
+        <a
+          href='#main-content'
+          className='focus:bg-primary focus:text-primary-content focus:ring-primary-focus sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100 focus:rounded-lg focus:px-4 focus:py-2 focus:shadow-lg focus:ring-2 focus:outline-none'
+        >
+          Skip to main content
+        </a>
         <Navbar />
-        <main className='container mt-24 mb-16 flex-1 px-4 sm:px-6 lg:px-8'>
+        <main
+          id='main-content'
+          className='container mt-24 mb-16 flex-1 px-4 sm:px-6 lg:px-8'
+        >
           {children}
         </main>
         <LLMChat />

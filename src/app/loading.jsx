@@ -3,12 +3,15 @@ import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 const Loading = ({ fullPage = true }) => {
   return (
     <div
-      className={`grid w-full place-items-center overflow-x-scroll lg:overflow-visible ${
+      className={`grid w-full place-items-center overflow-x-hidden ${
         fullPage ? 'h-screen' : 'p-6'
       }`}
+      role='status'
+      aria-live='polite'
+      aria-label='Loading content'
     >
       <div className='flex flex-col items-center gap-4'>
-        <div className='relative'>
+        <div className='relative' aria-hidden='true'>
           {/* Outer ring */}
           <div className='border-primary/20 absolute inset-0 animate-pulse rounded-full border-4'></div>
 

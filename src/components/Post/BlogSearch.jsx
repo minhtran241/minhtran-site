@@ -37,33 +37,44 @@ const BlogSearch = ({ posts }) => {
   return (
     <div className='space-y-8'>
       {/* Search Bar */}
-      <label className='input input-bordered flex w-full items-center gap-2'>
-        <FontAwesomeIcon
-          icon='fa-duotone fa-magnifying-glass'
-          className='text-base-content/50'
-        />
-        <input
-          type='text'
-          placeholder='Search blogs by title, description, or tags...'
-          value={searchQuery}
-          onChange={handleSearchChange}
-          className='grow'
-        />
-        {searchQuery && (
-          <button
-            onClick={() => {
-              setSearchQuery('');
-              setCurrentPage(1);
-            }}
-            className='flex items-center'
-          >
-            <FontAwesomeIcon
-              icon='fa-duotone fa-circle-xmark'
-              className='text-base-content/50 hover:text-base-content transition-colors'
-            />
-          </button>
-        )}
-      </label>
+      <div className='relative'>
+        <label htmlFor='blog-search' className='sr-only'>
+          Search blogs
+        </label>
+        <div className='input input-bordered focus-within:input-primary flex w-full items-center gap-2 transition-colors'>
+          <FontAwesomeIcon
+            icon='fa-duotone fa-magnifying-glass'
+            className='text-base-content/50'
+            aria-hidden='true'
+          />
+          <input
+            id='blog-search'
+            type='search'
+            placeholder='Search blogs by title, description, or tags...'
+            value={searchQuery}
+            onChange={handleSearchChange}
+            className='grow outline-none'
+            aria-label='Search blogs'
+            autoComplete='off'
+          />
+          {searchQuery && (
+            <button
+              onClick={() => {
+                setSearchQuery('');
+                setCurrentPage(1);
+              }}
+              className='focus-visible:ring-primary flex items-center rounded transition-transform hover:scale-110 focus-visible:ring-2 focus-visible:outline-none active:scale-95'
+              aria-label='Clear search'
+            >
+              <FontAwesomeIcon
+                icon='fa-duotone fa-circle-xmark'
+                className='text-base-content/50 hover:text-base-content transition-colors'
+                aria-hidden='true'
+              />
+            </button>
+          )}
+        </div>
+      </div>
 
       {/* Results Count */}
       <div className='flex items-center justify-between'>
@@ -112,14 +123,19 @@ const BlogSearch = ({ posts }) => {
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className='flex justify-center'>
+            <nav
+              className='flex justify-center'
+              role='navigation'
+              aria-label='Blog pagination'
+            >
               <div className='join'>
                 <button
-                  className='join-item btn'
+                  className='join-item btn hover:btn-primary focus-visible:ring-primary focus-visible:ring-2'
                   onClick={() =>
                     setCurrentPage((prev) => Math.max(prev - 1, 1))
                   }
                   disabled={currentPage === 1}
+                  aria-label='Previous page'
                 >
                   «
                 </button>
@@ -134,10 +150,12 @@ const BlogSearch = ({ posts }) => {
                     return (
                       <button
                         key={page}
-                        className={`join-item btn ${
+                        className={`join-item btn hover:btn-primary focus-visible:ring-primary focus-visible:ring-2 ${
                           currentPage === page ? 'btn-active' : ''
                         }`}
                         onClick={() => setCurrentPage(page)}
+                        aria-label={`Go to page ${page}`}
+                        aria-current={currentPage === page ? 'page' : undefined}
                       >
                         {page}
                       </button>
@@ -147,7 +165,11 @@ const BlogSearch = ({ posts }) => {
                     page === currentPage + 2
                   ) {
                     return (
-                      <button key={page} className='join-item btn btn-disabled'>
+                      <button
+                        key={page}
+                        className='join-item btn btn-disabled'
+                        aria-hidden='true'
+                      >
                         ...
                       </button>
                     );
@@ -155,16 +177,17 @@ const BlogSearch = ({ posts }) => {
                   return null;
                 })}
                 <button
-                  className='join-item btn'
+                  className='join-item btn hover:btn-primary focus-visible:ring-primary focus-visible:ring-2'
                   onClick={() =>
                     setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                   }
                   disabled={currentPage === totalPages}
+                  aria-label='Next page'
                 >
                   »
                 </button>
               </div>
-            </div>
+            </nav>
           )}
         </>
       )}

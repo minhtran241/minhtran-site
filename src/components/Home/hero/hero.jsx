@@ -16,10 +16,13 @@ const HeroComponent = async () => {
   const base64 = await getBase64(headshotSrc);
 
   return (
-    <div>
+    <article aria-label='Hero section'>
       <div className='border-base-300/50 bg-base-100 relative overflow-hidden rounded-2xl border'>
         {/* Academic background pattern */}
-        <div className='absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[20px_20px]'></div>
+        <div
+          className='absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[20px_20px]'
+          aria-hidden='true'
+        ></div>
 
         {/* Gradient overlay */}
         <div className='from-primary/5 to-secondary/5 absolute inset-0 bg-linear-to-br via-transparent'></div>
@@ -42,6 +45,8 @@ const HeroComponent = async () => {
                     className='h-full w-full object-cover transition-transform duration-500 group-hover:scale-110'
                     placeholder='blur'
                     blurDataURL={base64}
+                    priority
+                    sizes='128px'
                   />
                 </div>
               </div>
@@ -92,7 +97,7 @@ const HeroComponent = async () => {
               {/* Contact Information Grid */}
               <div className='grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3'>
                 <div className='group bg-base-200/50 hover:bg-base-200 flex items-center gap-2.5 rounded-lg p-2.5 transition-all duration-200'>
-                  <div className='bg-primary/10 text-primary group-hover:bg-primary/20 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg transition-colors'>
+                  <div className='bg-primary/10 text-primary group-hover:bg-primary/20 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors'>
                     <FontAwesomeIcon
                       icon='fa-solid fa-map-marker-alt'
                       className='text-sm'
@@ -109,7 +114,7 @@ const HeroComponent = async () => {
                 </div>
 
                 <div className='group bg-base-200/50 hover:bg-base-200 flex items-center gap-2.5 rounded-lg p-2.5 transition-all duration-200'>
-                  <div className='bg-primary/10 text-primary group-hover:bg-primary/20 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg transition-colors'>
+                  <div className='bg-primary/10 text-primary group-hover:bg-primary/20 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors'>
                     <FontAwesomeIcon
                       icon='fa-solid fa-envelope'
                       className='text-sm'
@@ -129,7 +134,7 @@ const HeroComponent = async () => {
                 </div>
 
                 <div className='group bg-base-200/50 hover:bg-base-200 flex items-center gap-2.5 rounded-lg p-2.5 transition-all duration-200 sm:col-span-2 lg:col-span-1'>
-                  <div className='bg-primary/10 text-primary group-hover:bg-primary/20 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg transition-colors'>
+                  <div className='bg-primary/10 text-primary group-hover:bg-primary/20 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors'>
                     <FontAwesomeIcon
                       icon='fa-solid fa-info-circle'
                       className='text-sm'
@@ -145,19 +150,27 @@ const HeroComponent = async () => {
                   href={fileSystemInfo.resumeLink}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='btn btn-primary w-full gap-2 sm:w-auto'
+                  className='btn btn-primary focus-visible:ring-primary w-full gap-2 transition-transform hover:scale-105 focus-visible:ring-2 focus-visible:ring-offset-2 active:scale-95 sm:w-auto'
                   download
+                  aria-label='Download CV as PDF'
                 >
-                  <FontAwesomeIcon icon='fa-solid fa-file-pdf' />
+                  <FontAwesomeIcon
+                    icon='fa-solid fa-file-pdf'
+                    aria-hidden='true'
+                  />
                   Download CV
                 </Link>
                 <Link
                   href={userBasicInfo.bookACallLink}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='btn btn-outline btn-primary w-full gap-2 sm:w-auto'
+                  className='btn btn-outline btn-primary focus-visible:ring-primary w-full gap-2 transition-transform hover:scale-105 focus-visible:ring-2 focus-visible:ring-offset-2 active:scale-95 sm:w-auto'
+                  aria-label='Schedule a meeting with Minh'
                 >
-                  <FontAwesomeIcon icon='fa-solid fa-calendar-check' />
+                  <FontAwesomeIcon
+                    icon='fa-solid fa-calendar-check'
+                    aria-hidden='true'
+                  />
                   Schedule Meeting
                 </Link>
               </div>
@@ -199,7 +212,7 @@ const HeroComponent = async () => {
         </div>
       </div>
       <ContactInfoModal />
-    </div>
+    </article>
   );
 };
 

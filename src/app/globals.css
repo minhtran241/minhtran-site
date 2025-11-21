@@ -121,6 +121,27 @@
     scrollbar-width: none; /* Firefox */
   }
 
+  /* Focus visible utilities for better keyboard navigation */
+  .focus-visible-ring {
+    @apply focus-visible:ring-primary focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none;
+  }
+
+  /* Smooth transitions */
+  .transition-smooth {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
   /* Animation utilities */
   .animate-accordion-down {
     animation: accordion-down 0.2s ease-out;

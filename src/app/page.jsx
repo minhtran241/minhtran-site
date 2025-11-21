@@ -12,7 +12,7 @@ export const generateMetadata = async () => {
   return {
     title: 'Minh Tran - Software Engineer & Data Engineer',
     description:
-      "Welcome to Minh Tran's personal website. Explore insights on software engineering, data engineer, and more.",
+      "Welcome to Minh Tran's personal website. Explore insights on software engineering, data engineering, and technology.",
     keywords: [
       'minhtran',
       'minh tran',
@@ -22,10 +22,24 @@ export const generateMetadata = async () => {
       'personal website',
       'software engineering',
       'data science',
+      'portfolio',
+      'web development',
     ],
-    author: 'Minh Tran',
-    url: 'https://minhtran.com',
-    image: '/minhtran-ava.png',
+    authors: [{ name: 'Minh Tran' }],
+    openGraph: {
+      title: 'Minh Tran - Software Engineer & Data Engineer',
+      description:
+        "Welcome to Minh Tran's personal website. Explore insights on software engineering, data engineering, and technology.",
+      type: 'website',
+      images: ['/og-image.jpg'],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Minh Tran - Software Engineer & Data Engineer',
+      description:
+        "Welcome to Minh Tran's personal website. Explore insights on software engineering, data engineering, and technology.",
+      images: ['/og-image.jpg'],
+    },
   };
 };
 

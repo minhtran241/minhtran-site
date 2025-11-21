@@ -1,65 +1,185 @@
-// prompts.js
+const fs = require('fs');
+const path = require('path');
+
+/**
+ * Load and format data from JSON files
+ */
+function loadData() {
+  try {
+    const dataDir = path.join(process.cwd(), 'data');
+
+    // Load JSON files
+    const personalInfo = JSON.parse(
+      fs.readFileSync(path.join(dataDir, 'personal-info.json'), 'utf8'),
+    );
+    const education = JSON.parse(
+      fs.readFileSync(path.join(dataDir, 'education.json'), 'utf8'),
+    );
+    const employment = JSON.parse(
+      fs.readFileSync(path.join(dataDir, 'employment.json'), 'utf8'),
+    );
+    const projects = JSON.parse(
+      fs.readFileSync(path.join(dataDir, 'projects.json'), 'utf8'),
+    );
+    const publications = JSON.parse(
+      fs.readFileSync(path.join(dataDir, 'publications.json'), 'utf8'),
+    );
+
+    // Format education data
+    const educationText = education
+      .map((edu) => {
+        const startYear = new Date(edu.start_date).getFullYear();
+        const endYear = new Date(edu.end_date).getFullYear();
+        const description = edu.description
+          ? `\n    - ${edu.description.replace(/#/g, '\n    - ')}`
+          : '';
+        return `  - **${edu.title}** (${startYear}–${endYear})
+    - ${edu.sub_title}
+    - Grade: ${edu.grade}
+    - Location: ${edu.location}${description}`;
+      })
+      .join('\n\n');
+
+    // Format employment data
+    const employmentText = employment
+      .map((job, idx) => {
+        const startDate = new Date(job.start_date).toLocaleDateString('en-US', {
+          month: 'short',
+          year: 'numeric',
+        });
+        const endDate = job.end_date
+          ? new Date(job.end_date).toLocaleDateString('en-US', {
+              month: 'short',
+              year: 'numeric',
+            })
+          : 'Present';
+        const description = job.description
+          ? `\n    - ${job.description.replace(/#/g, '\n    - ')}`
+          : '';
+        return `  ${idx + 1}. **${job.title}** (${startDate} - ${endDate}) - ${job.sub_title}
+    - [${job.sub_title}](${job.link})
+    - Type: ${job.employment_type} | Location: ${job.location} (${job.location_type})${description}`;
+      })
+      .join('\n\n');
+
+    // Format recent projects (top 5)
+    const projectsText = projects
+      .slice(0, 5)
+      .map((proj, idx) => {
+        return `  ${idx + 1}. **${proj.name}** (${proj.year}) - ${proj.type}
+    - Role: ${proj.role}
+    - Status: ${proj.status}
+    - Description: ${proj.description.substring(0, 200)}...
+    - Tech: ${proj.tech}`;
+      })
+      .join('\n\n');
+
+    // Format recent publications (top 3)
+    const publicationsText = publications
+      .slice(0, 3)
+      .map((pub, idx) => {
+        return `  ${idx + 1}. **${pub.name}**
+    - Authors: ${pub.authors}
+    - Published: ${pub.published}${pub.doi ? `\n    - DOI: ${pub.doi}` : ''}`;
+      })
+      .join('\n\n');
+
+    return {
+      personalInfo,
+      education: educationText,
+      employment: employmentText,
+      projects: projectsText,
+      publications: publicationsText,
+    };
+  } catch (error) {
+    console.error('Error loading data for chatbot prompt:', error);
+    // Return empty strings if data can't be loaded
+    return {
+      personalInfo: {},
+      education: 'Education data not available',
+      employment: 'Employment data not available',
+      projects: 'Projects data not available',
+      publications: 'Publications data not available',
+    };
+  }
+}
 
 /**
  * The system prompt used for the chatbot.
  */
-const chatbotSystemPrompt = `
+function buildChatbotSystemPrompt() {
+  const data = loadData();
+  const info = data.personalInfo;
+
+  // Format current research
+  const researchText =
+    info.currentResearch
+      ?.map((research, idx) => {
+        const advisors = research.advisors
+          .map((adv) => `[${adv.name}](${adv.linkedin})`)
+          .join(' and ');
+        const desc = research.description ? ` ${research.description}.` : '';
+        return `     - ${research.title}.${desc} Advised by ${advisors}.`;
+      })
+      .join('\n') || '';
+
+  return `
 You are a chatbot for Minh Tran's personal website (Minh's AI agent). Your role is to assist visitors, including job seekers, recruiters, and others, by answering questions and sharing information about Minh Tran. You are provided with detailed information about Minh Tran and should use it to respond accurately and professionally.
 
 ### About Minh Tran:
-- **Full Name:** Minh Quang Tran
-- **Preferred Name:** Minh or Minh Tran
-- **Gender:** Male
-- **Pronouns:** He/Him/His
-- **Languages:** Vietnamese (native), English (fluent)
-- **Nationality:** Vietnamese  
-- **From:** Hanoi, Vietnam
-- **Current Location:** Grand Rapids, Michigan, USA (Grand Valley State University)
-- **Pets:** Two hamsters (Fat and Squirrel)
-- **Education:**
-  - **Primary School:** Lê Ngọc Hân Primary School, Vietnam (Aug 2009–Jun 2014)
-	- Grade: Excellent (All years)
-  - **Secondary School:** Trưng Vương Secondary School, Vietnam (Aug 2014–Jun 2018)
-    - Grade: Excellent (All years)
-  - **High School:** Tran Phu - Hoan Kiem High School, Vietnam (Aug 2017–Jun 2021)
-    - Grade: Excellent (All years)
-    - Awards: Third Prize (Grade 10) and Second Prize (Grade 11) in District Physics competitions.  
-  - **University:** Grand Valley State University, USA (Aug 2021–Fall 2025)  
-    - Dean's List (all semesters), GPA: 3.95/4.0  
-    - Scholarships: International Merit Award, GVSU International Scholarship  
-    - Major: Computer Science | Minor: Mathematics
+- **Full Name:** ${info.fullName || 'Minh Quang Tran'}
+- **Preferred Name:** ${info.preferredName || 'Minh or Minh Tran'}
+- **Gender:** ${info.gender || 'Male'}
+- **Pronouns:** ${info.pronouns || 'He/Him/His'}
+- **Languages:** ${info.languages?.join(', ') || 'Vietnamese (native), English (fluent)'}
+- **Nationality:** ${info.nationality || 'Vietnamese'}
+- **From:** ${info.hometown || 'Hanoi, Vietnam'}
+- **Current Location:** ${info.currentLocation || 'Grand Rapids, Michigan, USA'}
+- **Pets:** ${info.pets?.join(', ') || 'Two hamsters (Fat and Squirrel)'}
 
-- **Work Experience:**  
-  1. **IT Services Technician (Jan 2022 - Apr 2024)** - Grand Valley State University  
-    - [IT Services](https://www.gvsu.edu/it/)  
-    - Roles: Technology support and troubleshooting for faculty, staff, and students.  
-  2. **Research Software Engineer (Mar 2024 - Present)** - GVSU Applied Computing Institute  
-     - [ACI](https://www.gvsu.edu/aci/)  
-     - Key Projects: Microservice architecture, CI/CD pipeline for LakerMobile, and fine-tuning machine learning models.  
-  3. **Current Researches (with Professors, not for any company), purpose is to publish papers:**
-     - Species-level Coral Classification using Deep Learning Models with our own dataset. Advised by Dr. Denton Bobeldyk (https://www.linkedin.com/in/denton-bobeldyk-phd-271b4518) and Dr. Jonathan Leidig (https://www.linkedin.com/in/jonathan-leidig-a9b661184).
-     - Raspberry Pi Based Computing Prototypes: Design, Implementation and Performance Analysis. Advised by Dr. Xiang Cao (https://www.linkedin.com/in/xiang-cao-15183570).
+### Education:
+${data.education}
 
-- **Client & Freelance Projects:**
-  - **Pama Media Digital Experience (Apr 2023 - Jan 2024)** — led a Strapi-powered CMS refresh, redesigned the marketing site, and automated weekly releases for [Pama Media](https://pama.com.vn).
-  - **Thien Khoi DataOps Modernization (Apr 2023 - Nov 2023)** — optimized SQL workloads, automated reporting, and built monitoring dashboards for [Thien Khoi](https://thienkhoi.com).
+### Work Experience:
+${data.employment}
 
-- **Contact:**  
-  - **Email:** trqminh24@gmail.com (Personal) | tranmq@mail.gvsu.edu (Academic)
-  - **Phone:** +1 (616) 299-3810 USA  
-  - **Social Media:** [LinkedIn](https://www.linkedin.com/in/tranmiq/) | [GitHub](https://github.com/minhtran241) | [Instagram](https://www.instagram.com/minhtran.ig/) | [Facebook](https://www.facebook.com/minhtran.venus.dev/) | [X](https://x.com/QuangMi17303138)  
-  - **Resume:** [View Resume](https://tranmq.vercel.app/home/minhtran-resume.pdf)
-  
-- **Current devices:** Macbook Pro M1 16 inch, 2021 (16GB RAM, 1TB SSD); iPhone 13 Pro Max (256GB); iPad Pro 12.9 inch, 2021 (256GB); AirPods Pro (2nd Gen)
-- **Current development tools:** VS Code, Jupyter Notebook, Xcode, Android Studio, Ghostty Terminal, DBeaver, Docker, Insomnia (API client), Cloudflare, AWS, Digital Ocean, Catppuccin theme for VS Code.
-- **Preferred Fields:** Software Engineering, Data Engineering, Machine Learning, Deep Learning, Distributed Systems, System Design.
-- **Hobbies:** Coffee, tech news, fashion, traveling, workout, and cooking.
-- **Skills:**
-  - **Programming Languages:** Python, JavaScript, Java, C++, Swift, Kotlin, SQL, HTML, CSS, GraphQL, Scala, TypeScript, Go, C.
-  - **Frameworks/Libraries:** React, Next.js, Node.js, Express, Keras, PyTorch, Scikit-learn, Pandas, NumPy, OpenCV, Matplotlib, Tailwind CSS, Bootstrap, DaisyUI, Bun, SwiftUI, Quarkus, Fastify, Django, Flask, Express.js, Fastlane.
-  - **Tools/Technologies:** Git, Docker, AWS, Firebase, MongoDB, MySQL, PostgreSQL, SQLite, REST APIs, GraphQL, CI/CD, Neo4j, Apache Kafka, Redis, MariaDB, RabbitMQ, ZeroMQ, Nginx, Github Actions, Digital Ocean, Apache Hadoop, Apache Spark, Raspberry Pi.
-  - **Others:** Machine Learning, Deep Learning, Computer Vision, Natural Language Processing, Microservices, System Design, Distributed Systems, Data Structures, Algorithms, Object-Oriented Programming, Functional Programming, Test-Driven Development, Agile Methodologies.
-- Minh can learn new technologies quickly and adapt to new environments. He is passionate about technology, innovation, and continuous learning.
+### Notable Projects:
+${data.projects}
+
+### Recent Publications:
+${data.publications}
+
+### Current Research:
+${researchText}
+
+### Contact Information:
+- **Email:** ${info.contact?.email?.personal || 'trqminh24@gmail.com'} (Personal) | ${info.contact?.email?.academic || 'tranmq@mail.gvsu.edu'} (Academic)
+- **Phone:** ${info.contact?.phone || '+1 (616) 299-3810'}
+- **Social Media:** [LinkedIn](${info.contact?.socialMedia?.linkedin}) | [GitHub](${info.contact?.socialMedia?.github}) | [Instagram](${info.contact?.socialMedia?.instagram}) | [Facebook](${info.contact?.socialMedia?.facebook}) | [X](${info.contact?.socialMedia?.twitter})
+- **Resume:** [View Resume](${info.contact?.resume})
+
+### Current Devices:
+- **Laptop:** ${info.devices?.laptop}
+- **Phone:** ${info.devices?.phone}
+- **Tablet:** ${info.devices?.tablet}
+- **Audio:** ${info.devices?.audio}
+
+### Development Tools:
+${info.developmentTools?.map((tool) => `- ${tool}`).join('\n') || ''}
+
+### Preferred Fields:
+${info.preferredFields?.join(', ') || ''}
+
+### Hobbies:
+${info.hobbies?.join(', ') || ''}
+
+### Skills:
+- **Programming Languages:** ${info.skills?.programmingLanguages?.join(', ') || ''}
+- **Frameworks/Libraries:** ${info.skills?.frameworks?.join(', ') || ''}
+- **Tools/Technologies:** ${info.skills?.tools?.join(', ') || ''}
+- **Specialties:** ${info.skills?.specialties?.join(', ') || ''}
+
+Minh can learn new technologies quickly and adapt to new environments. He is passionate about technology, innovation, and continuous learning.
 
 ### About the Website:
 This website, built with **Next.js 15**, **Tailwind CSS 4**, and various APIs (e.g., Spotify, GitHub, Umami, WakaTime, and Cohere), is Minh Tran's portfolio. It showcases personal information, projects, blogs, and tools Minh uses. Hosted on Vercel, the site is responsive, clean, and user-friendly. Visitors can explore these sections:  
@@ -87,12 +207,13 @@ When answering questions:
 
 Keep responses professional, engaging, and visitor-focused.
 `;
+}
 
 /**
  * Function to get the chatbot's system prompt.
  * @returns {string} - The system prompt for the chatbot.
  */
-const getChatbotSystemPrompt = () => chatbotSystemPrompt;
+const getChatbotSystemPrompt = () => buildChatbotSystemPrompt();
 
 module.exports = {
   getChatbotSystemPrompt,

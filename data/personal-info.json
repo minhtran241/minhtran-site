@@ -1,0 +1,168 @@
+{
+  "fullName": "Minh Quang Tran",
+  "preferredName": "Minh or Minh Tran",
+  "gender": "Male",
+  "pronouns": "He/Him/His",
+  "languages": ["Vietnamese (native)", "English (fluent)"],
+  "nationality": "Vietnamese",
+  "hometown": "Hanoi, Vietnam",
+  "currentLocation": "Grand Rapids, Michigan, USA",
+  "pets": ["Two hamsters (Fat and Squirrel)"],
+  "contact": {
+    "email": {
+      "personal": "trqminh24@gmail.com",
+      "academic": "tranmq@mail.gvsu.edu"
+    },
+    "phone": "+1 (616) 299-3810",
+    "socialMedia": {
+      "linkedin": "https://www.linkedin.com/in/tranmiq/",
+      "github": "https://github.com/minhtran241",
+      "instagram": "https://www.instagram.com/minhtran.ig/",
+      "facebook": "https://www.facebook.com/minhtran.venus.dev/",
+      "twitter": "https://x.com/QuangMi17303138"
+    },
+    "resume": "https://tranmq.vercel.app/home/minhtran-resume.pdf"
+  },
+  "devices": {
+    "laptop": "Macbook Pro M1 16 inch, 2021 (16GB RAM, 1TB SSD)",
+    "phone": "iPhone 13 Pro Max (256GB)",
+    "tablet": "iPad Pro 12.9 inch, 2021 (256GB)",
+    "audio": "AirPods Pro (2nd Gen)"
+  },
+  "developmentTools": [
+    "VS Code",
+    "Jupyter Notebook",
+    "Xcode",
+    "Android Studio",
+    "Ghostty Terminal",
+    "DBeaver",
+    "Docker",
+    "Insomnia",
+    "Cloudflare",
+    "AWS",
+    "Digital Ocean",
+    "Catppuccin theme"
+  ],
+  "preferredFields": [
+    "Software Engineering",
+    "Data Engineering",
+    "Machine Learning",
+    "Deep Learning",
+    "Distributed Systems",
+    "System Design"
+  ],
+  "hobbies": [
+    "Coffee",
+    "Tech news",
+    "Fashion",
+    "Traveling",
+    "Workout",
+    "Cooking"
+  ],
+  "skills": {
+    "programmingLanguages": [
+      "Python",
+      "JavaScript",
+      "Java",
+      "C++",
+      "Swift",
+      "Kotlin",
+      "SQL",
+      "HTML",
+      "CSS",
+      "GraphQL",
+      "Scala",
+      "TypeScript",
+      "Go",
+      "C"
+    ],
+    "frameworks": [
+      "React",
+      "Next.js",
+      "Node.js",
+      "Express",
+      "Keras",
+      "PyTorch",
+      "Scikit-learn",
+      "Pandas",
+      "NumPy",
+      "OpenCV",
+      "Matplotlib",
+      "Tailwind CSS",
+      "Bootstrap",
+      "DaisyUI",
+      "Bun",
+      "SwiftUI",
+      "Quarkus",
+      "Fastify",
+      "Django",
+      "Flask",
+      "Fastlane"
+    ],
+    "tools": [
+      "Git",
+      "Docker",
+      "AWS",
+      "Firebase",
+      "MongoDB",
+      "MySQL",
+      "PostgreSQL",
+      "SQLite",
+      "REST APIs",
+      "GraphQL",
+      "CI/CD",
+      "Neo4j",
+      "Apache Kafka",
+      "Redis",
+      "MariaDB",
+      "RabbitMQ",
+      "ZeroMQ",
+      "Nginx",
+      "Github Actions",
+      "Digital Ocean",
+      "Apache Hadoop",
+      "Apache Spark",
+      "Raspberry Pi"
+    ],
+    "specialties": [
+      "Machine Learning",
+      "Deep Learning",
+      "Computer Vision",
+      "Natural Language Processing",
+      "Microservices",
+      "System Design",
+      "Distributed Systems",
+      "Data Structures",
+      "Algorithms",
+      "Object-Oriented Programming",
+      "Functional Programming",
+      "Test-Driven Development",
+      "Agile Methodologies"
+    ]
+  },
+  "currentResearch": [
+    {
+      "title": "Species-level Coral Classification using Deep Learning Models",
+      "description": "Using our own dataset",
+      "advisors": [
+        {
+          "name": "Dr. Denton Bobeldyk",
+          "linkedin": "https://www.linkedin.com/in/denton-bobeldyk-phd-271b4518"
+        },
+        {
+          "name": "Dr. Jonathan Leidig",
+          "linkedin": "https://www.linkedin.com/in/jonathan-leidig-a9b661184"
+        }
+      ]
+    },
+    {
+      "title": "Raspberry Pi Based Computing Prototypes: Design, Implementation and Performance Analysis",
+      "advisors": [
+        {
+          "name": "Dr. Xiang Cao",
+          "linkedin": "https://www.linkedin.com/in/xiang-cao-15183570"
+        }
+      ]
+    }
+  ]
+}
