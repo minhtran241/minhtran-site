@@ -370,8 +370,8 @@ export default function LLMChat() {
             </div>
             {/* Pulse animation indicator */}
             <span className='absolute top-0 right-0 flex h-3 w-3'>
-              <span className='bg-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75'></span>
-              <span className='bg-primary relative inline-flex h-3 w-3 rounded-full'></span>
+              <span className='bg-success absolute inline-flex h-full w-full animate-ping rounded-full opacity-75'></span>
+              <span className='bg-success relative inline-flex h-3 w-3 rounded-full'></span>
             </span>
           </div>
         </button>
@@ -420,26 +420,24 @@ export default function LLMChat() {
               <div className='flex gap-1'>
                 <button
                   onClick={clearChat}
-                  className='btn btn-xs btn-circle btn-ghost text-primary-content/70'
+                  className='text-primary-content btn btn-xs btn-circle btn-ghost hover:bg-base-200/20'
                   aria-label='Clear chat history'
                   disabled={isLoading}
                   title='Clear chat'
                 >
                   <FontAwesomeIcon
-                    icon='fa-solid fa-trash'
-                    className='text-xs'
+                    icon='fa-solid fa-sm fa-trash'
                     aria-hidden='true'
                   />
                 </button>
                 <button
                   onClick={toggleChat}
-                  className='btn btn-xs btn-circle btn-ghost text-primary-content/70'
+                  className='text-primary-content btn btn-xs btn-circle btn-ghost hover:bg-base-200/20'
                   aria-label='Close chat'
                   title='Close chat'
                 >
                   <FontAwesomeIcon
-                    icon='fa-solid fa-times'
-                    className='text-xs'
+                    icon='fa-solid fa-sm fa-times'
                     aria-hidden='true'
                   />
                 </button>

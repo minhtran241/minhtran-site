@@ -118,18 +118,6 @@ const HeroComponent = () => {
                   Schedule Meeting
                 </Link>
               </div>
-              {/* Focus Areas */}
-              {/* <div className='flex flex-wrap items-center justify-center gap-2 lg:justify-start'>
-								<div className='badge badge-sm bg-primary/15 border-2 border-primary/30 text-primary'>
-									Software Engineering
-								</div>
-								<div className='badge badge-sm bg-secondary/15 border-2 border-secondary/30 text-secondary'>
-									Data Engineering
-								</div>
-								<div className='badge badge-sm bg-accent/15 border-2 border-accent/30 text-accent'>
-									AI & Machine Learning
-								</div>
-							</div> */}
             </div>
           </div>
         </div>
