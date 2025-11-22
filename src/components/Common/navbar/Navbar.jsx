@@ -1,6 +1,5 @@
 import Links from './links/Links';
 import Link from 'next/link';
-import WebStats from './webStats/webStats';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 import ThemeChanger from '@/common/elements/ThemeChanger';
 
@@ -46,7 +45,6 @@ const Navbar = () => {
       </div>
       <div className='navbar-end gap-2'>
         <ThemeChanger />
-        <WebStats />
       </div>
     </nav>
   );

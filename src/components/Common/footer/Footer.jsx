@@ -1,4 +1,3 @@
-'use client';
 import { SOCIAL_MEDIA } from '@/common/constants/menu';
 import { userBasicInfo } from '@/common/constants/userBasic';
 import Link from 'next/link';
@@ -6,15 +5,17 @@ import { MENU_TABS } from '@/common/constants/menu';
 import { HOSTED_ON, TECHSTACK } from '@/common/constants/site';
 import SpotifyStatus from './SpotifyStatus';
 import Image from 'next/image';
+import WebStats from './webStats/webStats';
 
-const Footer = () => {
+const Footer = async () => {
   const techStackEntries = Object.entries(TECHSTACK);
   return (
     <footer
-      className='footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10'
+      className='footer footer-horizontal footer-center bg-base-200 text-base-content gap-3 rounded p-10'
       role='contentinfo'
       aria-label='Site footer'
     >
+      <WebStats />
       <nav className='grid grid-flow-col gap-4' aria-label='Footer navigation'>
         {MENU_TABS.slice(1).map((item, index) => (
           <Link
