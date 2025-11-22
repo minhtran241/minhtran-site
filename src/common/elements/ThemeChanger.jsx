@@ -63,7 +63,7 @@ const ThemeChanger = () => {
         className='btn btn-ghost gap-2'
         aria-label='Choose theme'
       >
-        <FontAwesomeIcon icon='fa-duotone fa-solid fa-droplet' />
+        <FontAwesomeIcon icon='fa-duotone fa-solid fa-palette' />
         <span className='hidden sm:inline'>
           {isClient ? getCurrentThemeLabel() : 'Theme'}
         </span>

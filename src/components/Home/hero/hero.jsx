@@ -4,8 +4,10 @@ import { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ContactInfoModal } from '@/components/Home/hero/contactInfoModal';
+import { LocationModal } from '@/components/Home/hero/locationModal';
 import { userBasicInfo } from '@/common/constants/userBasic';
 import { fileSystemInfo } from '@/common/constants/fileSystem';
+import { getLocationText } from '@/common/constants/location';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 import Loading from '@/app/loading';
 
@@ -52,15 +54,25 @@ const HeroComponent = () => {
               </div>
               {/* Quick Info Pills */}
               <div className='flex flex-wrap items-center justify-center gap-2 lg:justify-start'>
-                <div className='bg-primary/10 border-primary/30 flex items-center gap-2 rounded-full border-2 px-4 py-2'>
+                <button
+                  onClick={() =>
+                    document.getElementById('location_modal')?.showModal()
+                  }
+                  className='bg-primary/10 hover:bg-primary/20 border-primary/30 hover:border-primary/40 group flex items-center gap-2 rounded-full border-2 px-4 py-2 transition-all hover:scale-105'
+                  aria-label='View location on map'
+                >
                   <FontAwesomeIcon
                     icon='fa-solid fa-map-marker-alt'
-                    className='text-primary text-sm'
+                    className='text-primary text-sm transition-transform group-hover:scale-110'
                   />
                   <span className='text-base-content text-sm font-medium'>
-                    Grand Rapids, MI
+                    {getLocationText()}
                   </span>
-                </div>
+                  <FontAwesomeIcon
+                    icon='fa-solid fa-map'
+                    className='text-primary/60 group-hover:text-primary text-xs transition-all'
+                  />
+                </button>
                 <Link
                   href={`mailto:${userBasicInfo.email}`}
                   className='bg-primary/10 hover:bg-primary/20 border-primary/30 hover:border-primary/40 flex items-center gap-2 rounded-full border-2 px-4 py-2 transition-all'
@@ -123,6 +135,7 @@ const HeroComponent = () => {
         </div>
       </div>
       <ContactInfoModal />
+      <LocationModal />
     </article>
   );
 };

@@ -16,7 +16,10 @@ const Footer = async () => {
       aria-label='Site footer'
     >
       <WebStats />
-      <nav className='grid grid-flow-col gap-4' aria-label='Footer navigation'>
+      <nav
+        className='grid grid-flow-col gap-4 pt-4'
+        aria-label='Footer navigation'
+      >
         {MENU_TABS.slice(1).map((item, index) => (
           <Link
             key={index}
