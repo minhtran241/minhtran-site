@@ -13,9 +13,15 @@ export const GET = async () => {
       all_time_since_today: allTimeSinceTodayResponse.data,
     };
 
-    return NextResponse.json(data);
+    return NextResponse.json(data, { status: 200 });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json(error);
+    console.error('WakaTime API error:', error);
+    return NextResponse.json(
+      {
+        error: 'Failed to fetch WakaTime statistics',
+        message: error.message || 'An unexpected error occurred',
+      },
+      { status: error.response?.status || 500 },
+    );
   }
 };

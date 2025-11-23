@@ -1,10 +1,10 @@
 # Minh Tran - Professional Portfolio Website
 
-A comprehensive, high-performance portfolio website showcasing professional experience, technical expertise, published work, and open-source contributions. Built with modern web technologies and optimized for performance and accessibility.
+A high-performance portfolio website showcasing software engineering, AI architecture, and research in distributed systems. Features technical projects, IEEE publications, and AI-powered solutions.
 
 ## Overview
 
-This is the source repository for minhtran.com, a professional portfolio and knowledge-sharing platform. The website serves as a central hub to highlight professional background, technical projects, research publications, and technical insights through an active blog.
+This is the source repository for minhtran.com, a professional portfolio of a software engineer and researcher specializing in distributed computing, AI systems, and backend architecture.
 
 ## Technical Stack
 
@@ -78,7 +78,11 @@ This is the source repository for minhtran.com, a professional portfolio and kno
 ### Installation
 
 ```bash
-# Install dependencies using Bun
+# Clone the repository
+git clone https://github.com/minhtran241/minhtran.com.git
+cd minhtran.com
+
+# Install dependencies using Bun (recommended)
 bun install
 
 # Or using npm
@@ -87,6 +91,37 @@ npm install
 # Or using yarn
 yarn install
 ```
+
+### Environment Setup
+
+Create a `.env.local` file in the root directory by copying from the example:
+
+```bash
+cp .env.example .env.local
+```
+
+**Required environment variables for basic functionality:**
+
+```env
+# Required for site URL generation
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+
+# Optional: GitHub integration
+GITHUB_TOKEN=your-github-token
+GITHUB_USERNAME=your-username
+
+# Optional: WakaTime coding stats
+WAKATIME_API_KEY=your-api-key
+WAKATIME_USERNAME=your-username
+
+# Optional: AI chatbot feature
+COHERE_API_KEY=your-cohere-api-key
+
+# Optional: Analytics
+UMAMI_WEBSITE_ID=your-website-id
+```
+
+> **Note:** The website will work without these optional services, but features like GitHub stats, WakaTime integration, and AI chatbot will be disabled.
 
 ### Development
 

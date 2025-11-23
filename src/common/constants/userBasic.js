@@ -21,7 +21,8 @@ const EMAIL = 'trqminh24@gmail.com';
 
 export const userBasicInfo = {
   fullName: FULL_NAME,
-  description: 'CS & MATH @ GVSU | SWE/DE @ GVSU Applied Computing Institute.',
+  description:
+    'CS & MATH @ GVSU | Research Assistant @ GVSU College of Computing.',
   about: ABOUT,
   currentJob: CURRENT_JOB,
   currentOrg: CURRENT_ORG,

@@ -16,6 +16,7 @@ import {
   SITE_NAME,
 } from '@/common/constants/site';
 import LLMChat from '@/common/elements/LLMChat';
+import { ToastProvider } from '@/common/elements/Toast';
 // import LetschatBubble from '@/common/elements/LetschatBubble';
 
 const MazzardH = localFont({
@@ -107,14 +108,13 @@ export const metadata = {
     'Minh Tran',
     'minhtran241',
     'Software Engineer',
-    'Full Stack Developer',
-    'Next.js',
-    'React',
-    'TypeScript',
-    'Node.js',
-    'Tailwind CSS',
+    'AI Architect',
+    'Researcher',
+    'Distributed Systems',
+    'Machine Learning',
+    'Edge Computing',
+    'System Design',
     'Portfolio',
-    'Web Development',
   ],
   authors: [{ name: 'Minh Tran', url: SITE_URL }],
   creator: 'Minh Tran',
@@ -205,6 +205,7 @@ export default function RootLayout({ children }) {
               '@type': 'Person',
               name: 'Minh Tran',
               url: SITE_URL,
+              image: `${SITE_URL}/home/headshot.png`,
               sameAs: [
                 'https://github.com/minhtran241',
                 'https://linkedin.com/in/minhtran241',
@@ -212,6 +213,10 @@ export default function RootLayout({ children }) {
               ],
               jobTitle: 'Software Engineer',
               description: SITE_DESCRIPTION,
+              worksFor: {
+                '@type': 'Organization',
+                name: 'Software Engineer',
+              },
             }),
           }}
         />
@@ -243,24 +248,26 @@ export default function RootLayout({ children }) {
         )}
         suppressHydrationWarning
       >
-        {/* Skip to main content link for keyboard navigation */}
-        <a
-          href='#main-content'
-          className='focus:bg-primary focus:text-primary-content focus:ring-primary-focus sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100 focus:rounded-lg focus:px-4 focus:py-2 focus:shadow-lg focus:ring-2 focus:outline-none'
-        >
-          Skip to main content
-        </a>
-        <Navbar />
-        <main
-          id='main-content'
-          className='container mt-24 mb-16 flex-1 px-4 sm:px-6 lg:px-8'
-        >
-          {children}
-        </main>
-        <LLMChat />
-        <SpeedInsights />
-        <Analytics />
-        <Footer />
+        <ToastProvider>
+          {/* Skip to main content link for keyboard navigation */}
+          <a
+            href='#main-content'
+            className='focus:bg-primary focus:text-primary-content focus:ring-primary-focus sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100 focus:rounded-lg focus:px-4 focus:py-2 focus:shadow-lg focus:ring-2 focus:outline-none'
+          >
+            Skip to main content
+          </a>
+          <Navbar />
+          <main
+            id='main-content'
+            className='container mt-24 mb-16 flex-1 px-4 sm:px-6 lg:px-8'
+          >
+            {children}
+          </main>
+          <LLMChat />
+          <SpeedInsights />
+          <Analytics />
+          <Footer />
+        </ToastProvider>
       </body>
     </html>
   );

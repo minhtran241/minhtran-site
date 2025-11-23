@@ -275,9 +275,14 @@ export default function LLMChat() {
 
   // Copy message to clipboard
   const handleCopyMessage = useCallback((text) => {
-    navigator.clipboard.writeText(text).then(() => {
-      // Could add a toast notification here
-    });
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        // Toast notification will be added via context
+      })
+      .catch(() => {
+        // Silent failure - could add error toast in future
+      });
   }, []);
 
   // Retry last message on error

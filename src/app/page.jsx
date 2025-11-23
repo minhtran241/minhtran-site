@@ -10,34 +10,34 @@ export const dynamic = 'force-dynamic'; // Ensures this route is always server-r
 
 export const generateMetadata = async () => {
   return {
-    title: 'Minh Tran - Software Engineer & Data Engineer',
+    title: 'Minh Tran - Software Engineer, AI Architect & Researcher',
     description:
-      "Welcome to Minh Tran's personal website. Explore insights on software engineering, data engineering, and technology.",
+      'Software engineer and researcher specializing in AI systems, distributed computing, and backend architecture.',
     keywords: [
       'minhtran',
       'minh tran',
       'Minh Tran',
       'software engineer',
-      'data engineer',
-      'personal website',
-      'software engineering',
-      'data science',
+      'AI solutions architect',
+      'backend engineer',
+      'distributed systems',
+      'machine learning',
       'portfolio',
-      'web development',
+      'system design',
     ],
     authors: [{ name: 'Minh Tran' }],
     openGraph: {
-      title: 'Minh Tran - Software Engineer & Data Engineer',
+      title: 'Minh Tran - Software Engineer, AI Architect & Researcher',
       description:
-        "Welcome to Minh Tran's personal website. Explore insights on software engineering, data engineering, and technology.",
+        'Software engineer and researcher specializing in AI systems, distributed computing, and backend architecture.',
       type: 'website',
       images: ['/og-image.jpg'],
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Minh Tran - Software Engineer & Data Engineer',
+      title: 'Minh Tran - Software Engineer, AI Architect & Researcher',
       description:
-        "Welcome to Minh Tran's personal website. Explore insights on software engineering, data engineering, and technology.",
+        'Software engineer and researcher specializing in AI systems, distributed computing, and backend architecture.',
       images: ['/og-image.jpg'],
     },
   };

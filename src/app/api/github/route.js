@@ -15,10 +15,14 @@ export const GET = async (request) => {
     if (searchParams.get('reposNum')) {
       reposNum = parseInt(searchParams.get('reposNum'));
       if (reposNum < 1 || reposNum > 100) {
-        return NextResponse.json({
-          error:
-            'Invalid number of repositories. Please provide a number between 1 and 100.',
-        });
+        return NextResponse.json(
+          {
+            error: 'Invalid repository count',
+            message:
+              'Please provide a number between 1 and 100 for reposNum parameter',
+          },
+          { status: 400 },
+        );
       }
     }
 
@@ -122,12 +126,21 @@ export const GET = async (request) => {
 
     // console.error('GitHub API response:', queryResult.data);
 
-    return NextResponse.json({
-      user: queryResult.data.user,
-      rateLimit: queryResult.data.rateLimit,
-    });
+    return NextResponse.json(
+      {
+        user: queryResult.data.user,
+        rateLimit: queryResult.data.rateLimit,
+      },
+      { status: 200 },
+    );
   } catch (error) {
-    console.error(error);
-    return NextResponse.json(error);
+    console.error('GitHub API error:', error);
+    return NextResponse.json(
+      {
+        error: 'Failed to fetch GitHub data',
+        message: error.message || 'An unexpected error occurred',
+      },
+      { status: error.graphQLErrors ? 400 : 500 },
+    );
   }
 };

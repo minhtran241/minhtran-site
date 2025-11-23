@@ -18,10 +18,12 @@ const Navbar = () => {
             aria-label='Open navigation menu'
             aria-haspopup='true'
             aria-expanded='false'
+            aria-controls='mobile-menu'
           >
-            <FontAwesomeIcon icon='fa-duotone fa-bars' />
+            <FontAwesomeIcon icon='fa-duotone fa-bars' aria-hidden='true' />
           </button>
           <ul
+            id='mobile-menu'
             tabIndex={0}
             className='menu dropdown-content rounded-box border-base-200 bg-base-100 text-base-content z-1 mt-3 min-w-52 border p-2 shadow-lg'
             role='menu'

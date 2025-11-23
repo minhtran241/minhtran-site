@@ -4,9 +4,10 @@ export const SITE_URL =
     : 'http://localhost:3000';
 
 export const SITE_NAME = 'Minh Tran';
-export const SITE_TITLE = 'Minh Tran - Software Engineer / Data Engineer';
+export const SITE_TITLE =
+  'Minh Tran - Software Engineer, AI Architect & Researcher';
 export const SITE_DESCRIPTION =
-  'Personal website of Minh Tran, a software engineer and data engineer.';
+  'Software engineer and researcher specializing in AI systems, distributed computing, and backend architecture.';
 
 export const TECHSTACK = {
   'Next.js': 'https://nextjs.org/',

@@ -12,6 +12,7 @@ import Breadcrumbs from '@/common/elements/Breadcrumbs';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 import MarkdownRender from '@/common/elements/MarkdownRenderer';
 import { getBase64 } from '@/common/libs/plaiceholder';
+import { SITE_URL } from '@/common/constants/site';
 
 export const dynamic = 'force-dynamic'; // Ensures this route is always server-rendered
 
@@ -25,20 +26,32 @@ export const generateMetadata = async (props) => {
     image: p.thumbnail,
     author: 'Minh Tran',
     keywords: p.tags,
-    canonical: process.env.NEXT_PUBLIC_BASE_URL + `/blogs/${p.slug}`,
+    canonical: `${SITE_URL}/blogs/${p.slug}`,
     openGraph: {
       type: 'article',
       article: {
         publishedTime: p?.created_at,
+        modifiedTime: p?.updated_at || p?.created_at,
         authors: ['Minh Tran'],
+        tags: p.tags,
       },
-      url: process.env.NEXT_PUBLIC_BASE_URL + `/blogs/${p?.slug}`,
+      url: `${SITE_URL}/blogs/${p?.slug}`,
       images: [
         {
           url: p?.thumbnail,
+          width: 1200,
+          height: 630,
+          alt: p?.title,
         },
       ],
-      siteName: 'Blog Minh Tran',
+      siteName: 'Minh Tran',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: p.title,
+      description: p.description,
+      images: [p?.thumbnail],
+      creator: '@minhtran241',
     },
   };
 };
@@ -96,8 +109,38 @@ const SinglePostContent = ({ post }) => {
     day: 'numeric',
   });
 
+  const blogPostSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.description,
+    image: post.thumbnail,
+    datePublished: post.created_at,
+    dateModified: post.updated_at || post.created_at,
+    author: {
+      '@type': 'Person',
+      name: 'Minh Tran',
+      url: SITE_URL,
+    },
+    publisher: {
+      '@type': 'Person',
+      name: 'Minh Tran',
+      url: SITE_URL,
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${SITE_URL}/blogs/${post.slug}`,
+    },
+    keywords: post.tags.join(', '),
+    wordCount: post.word_count,
+  };
+
   return (
     <div className='flex flex-col gap-4'>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostSchema) }}
+      />
       <Breadcrumbs breadcrumbs={BREADCRUMBS} />
 
       <article>

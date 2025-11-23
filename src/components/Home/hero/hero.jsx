@@ -58,19 +58,19 @@ const HeroComponent = () => {
                   onClick={() =>
                     document.getElementById('location_modal')?.showModal()
                   }
-                  className='bg-primary/10 hover:bg-primary/20 border-primary/30 hover:border-primary/40 group flex items-center gap-2 rounded-full border-2 px-4 py-2 transition-all hover:scale-105'
+                  className='bg-primary/10 hover:bg-primary/20 border-primary/30 hover:border-primary/40 group flex items-center gap-2 rounded-full border-2 px-4 py-2 transition-all'
                   aria-label='View location on map'
                 >
                   <FontAwesomeIcon
                     icon='fa-solid fa-map-marker-alt'
-                    className='text-primary text-sm transition-transform group-hover:scale-110'
+                    className='text-primary text-sm'
                   />
                   <span className='text-base-content text-sm font-medium'>
                     {getLocationText()}
                   </span>
                   <FontAwesomeIcon
                     icon='fa-solid fa-map'
-                    className='text-primary/60 group-hover:text-primary text-xs transition-all'
+                    className='text-primary/60 text-xs'
                   />
                 </button>
                 <Link

@@ -9,6 +9,7 @@ import {
 import { usePathname } from 'next/navigation';
 import { useState, React } from 'react';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
+import { SITE_URL } from '@/common/constants/site';
 
 const ShareButton = ({ onClick, children }) => (
   <div
@@ -23,7 +24,7 @@ const SharePost = () => {
   const status = 'Check out this blog by Minh Tran';
   const hashtag = '#softwareengineer #dataengineer';
   const path = usePathname();
-  const url = process.env.NEXT_PUBLIC_BASE_URL + path;
+  const url = SITE_URL + path;
 
   const [isLinkCopied, setIsLinkCopied] = useState(false);
 

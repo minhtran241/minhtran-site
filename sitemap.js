@@ -1,8 +1,6 @@
 import { SITE_URL } from '@/common/constants/site';
-
-// Import your data fetching functions if available
-// import { getAllBlogPosts } from '@/lib/blog';
-// import { getAllProjects } from '@/lib/projects';
+import fs from 'fs/promises';
+import path from 'path';
 
 export default async function sitemap() {
   // Static pages
@@ -26,34 +24,38 @@ export default async function sitemap() {
       priority: 0.7,
     },
     {
-      url: `${SITE_URL}/home/minhtran-resume.pdf`,
+      url: `${SITE_URL}/uses`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.8,
+      priority: 0.6,
+    },
+    {
+      url: `${SITE_URL}/github`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
     },
   ];
 
-  // Dynamic blog posts (uncomment when you have blog functionality)
-  // const blogPosts = await getAllBlogPosts();
-  // const blogPages: MetadataRoute.Sitemap = blogPosts.map((post) => ({
-  // 	url: `${SITE_URL}/blog/${post.slug}`,
-  // 	lastModified: new Date(post.updatedAt || post.publishedAt),
-  // 	changeFrequency: 'monthly' as const,
-  // 	priority: 0.6,
-  // }));
+  // Dynamic blog posts
+  let blogPages = [];
+  try {
+    const blogsData = await fs.readFile(
+      path.join(process.cwd(), 'data/blogs/blogs.json'),
+      'utf-8',
+    );
+    const blogs = JSON.parse(blogsData);
+    blogPages = blogs
+      .filter((post) => post.is_published)
+      .map((post) => ({
+        url: `${SITE_URL}/blogs/${post.slug}`,
+        lastModified: new Date(post.updated_at || post.created_at),
+        changeFrequency: 'monthly',
+        priority: 0.6,
+      }));
+  } catch (error) {
+    console.error('Error loading blog posts for sitemap:', error);
+  }
 
-  // Dynamic project pages (uncomment when you have project functionality)
-  // const projects = await getAllProjects();
-  // const projectPages: MetadataRoute.Sitemap = projects.map((project) => ({
-  // 	url: `${SITE_URL}/projects/${project.slug}`,
-  // 	lastModified: new Date(project.updatedAt),
-  // 	changeFrequency: 'monthly' as const,
-  // 	priority: 0.5,
-  // }));
-
-  return [
-    ...staticPages,
-    // ...blogPages,
-    // ...projectPages,
-  ];
+  return [...staticPages, ...blogPages];
 }

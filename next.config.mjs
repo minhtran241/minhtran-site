@@ -57,17 +57,28 @@ const nextConfig = {
       {
         source: '/(.*)',
         headers: [
+          // Prevents clickjacking by blocking iframe embedding
           { key: 'X-Frame-Options', value: 'DENY' },
+          // Prevents MIME type sniffing
           { key: 'X-Content-Type-Options', value: 'nosniff' },
+          // Controls how much referrer information should be included with requests
           { key: 'Referrer-Policy', value: 'origin-when-cross-origin' },
+          // Legacy XSS protection for older browsers
           { key: 'X-XSS-Protection', value: '1; mode=block' },
+          // Controls browser caching with revalidation
           {
             key: 'Cache-Control',
             value: 'public, s-maxage=60, stale-while-revalidate=120',
           },
+          // Enables DNS prefetching for improved performance
           {
             key: 'X-DNS-Prefetch-Control',
             value: 'on',
+          },
+          // Security policy for protecting against various attacks
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
           },
         ],
       },
