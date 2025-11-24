@@ -1,4 +1,4 @@
-# Minh Tran - Professional Portfolio Website
+# Minh Tran: Professional Portfolio Website
 
 A high-performance portfolio website showcasing software engineering, AI architecture, and research in distributed systems. Features technical projects, IEEE publications, and AI-powered solutions.
 

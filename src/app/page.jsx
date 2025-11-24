@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic'; // Ensures this route is always server-r
 
 export const generateMetadata = async () => {
   return {
-    title: 'Minh Tran - Software Engineer, AI Architect & Researcher',
+    title: 'Minh Tran: Software/AI Researcher',
     description:
       'Software engineer and researcher specializing in AI systems, distributed computing, and backend architecture.',
     keywords: [
@@ -27,7 +27,7 @@ export const generateMetadata = async () => {
     ],
     authors: [{ name: 'Minh Tran' }],
     openGraph: {
-      title: 'Minh Tran - Software Engineer, AI Architect & Researcher',
+      title: 'Minh Tran: Software/AI Researcher',
       description:
         'Software engineer and researcher specializing in AI systems, distributed computing, and backend architecture.',
       type: 'website',
@@ -35,7 +35,7 @@ export const generateMetadata = async () => {
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Minh Tran - Software Engineer, AI Architect & Researcher',
+      title: 'Minh Tran: Software/AI Researcher',
       description:
         'Software engineer and researcher specializing in AI systems, distributed computing, and backend architecture.',
       images: ['/og-image.jpg'],
