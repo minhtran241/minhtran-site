@@ -46,7 +46,9 @@ const proseStyles = [
   // Typography and spacing
   'prose-headings:text-primary prose-headings:my-4',
   'prose-p:my-4',
-  'prose-ul:my-2 prose-li:my-0',
+  'prose-ol:my-2 prose-ol:list-decimal prose-ol:pl-6',
+  'prose-ul:my-2 prose-ul:list-disc prose-ul:pl-6',
+  'prose-li:my-1',
   'prose-hr:text-gray',
   'marker:text-primary',
 
@@ -128,7 +130,7 @@ const MarkdownRender = ({ mdString }) => (
               <Link
                 href={props.href}
                 target='_blank'
-                className='text-primary no-underline hover:underline'
+                className='link link-primary link-hover'
               >
                 {props.children}
               </Link>

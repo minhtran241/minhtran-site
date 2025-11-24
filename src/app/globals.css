@@ -207,7 +207,8 @@
 /* Plugin imports - Note: These may need to be updated for v4 compatibility */
 @plugin "daisyui" {
   themes:
-    light --default,
+    gvsu --default,
+    light,
     dark --prefersdark,
     winter,
     night,
@@ -217,5 +218,68 @@
   prefix: '';
   logs: true;
 }
+
+/* GVSU Custom Theme */
+@plugin "daisyui/theme" {
+  name: 'gvsu';
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  /* Base colors - using GVSU White and tints */
+  --color-base-100: oklch(100% 0 0); /* White #FFFFFF */
+  --color-base-200: oklch(98% 0.005 240); /* Very light tint */
+  --color-base-300: oklch(95% 0.01 240); /* Light tint */
+  --color-base-content: oklch(0% 0 0); /* Black #000000 */
+
+  /* Primary - GVSU Blue */
+  --color-primary: oklch(35% 0.175 264); /* GVSU Blue #0032A0 */
+  --color-primary-content: oklch(100% 0 0); /* White for contrast */
+
+  /* Secondary - Midnight */
+  --color-secondary: oklch(25% 0.08 280); /* Midnight #13155C */
+  --color-secondary-content: oklch(100% 0 0); /* White for contrast */
+
+  /* Accent - Link Blue */
+  --color-accent: oklch(78% 0.14 210); /* Link Blue #0ECBF0 */
+  --color-accent-content: oklch(0% 0 0); /* Black for contrast */
+
+  /* Neutral - Midnight */
+  --color-neutral: oklch(25% 0.08 280); /* Midnight #13155C */
+  --color-neutral-content: oklch(100% 0 0); /* White for contrast */
+
+  /* Info - Link Blue (alternative use) */
+  --color-info: oklch(78% 0.14 210); /* Link Blue #0ECBF0 */
+  --color-info-content: oklch(0% 0 0); /* Black for contrast */
+
+  /* Success - Big Lake */
+  --color-success: oklch(78% 0.12 190); /* Big Lake #3DD1CC */
+  --color-success-content: oklch(0% 0 0); /* Black for contrast */
+
+  /* Warning - Archway Tan */
+  --color-warning: oklch(82% 0.06 70); /* Archway #DEC197 */
+  --color-warning-content: oklch(0% 0 0); /* Black for contrast */
+
+  /* Error - Carillon Brick */
+  --color-error: oklch(55% 0.1 40); /* Carillon Brick #BA6F4C */
+  --color-error-content: oklch(100% 0 0); /* White for contrast */
+
+  /* Border radius */
+  --radius-selector: 0;
+  --radius-field: 0;
+  --radius-box: 0;
+
+  /* Base sizes */
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  /* Border size */
+  --border: 1px;
+
+  /* Effects */
+  --depth: 1;
+  --noise: 0;
+}
+
 @plugin 'tailwind-scrollbar';
 @plugin "@tailwindcss/typography";

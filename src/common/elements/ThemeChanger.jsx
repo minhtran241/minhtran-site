@@ -5,6 +5,7 @@ import { themeChange } from 'theme-change';
 
 const ThemeChanger = () => {
   const themeValues = [
+    { value: 'gvsu', label: 'GVSU' },
     { value: 'light', label: 'Light' },
     { value: 'dark', label: 'Dark' },
     { value: 'winter', label: 'Winter' },
@@ -25,8 +26,8 @@ const ThemeChanger = () => {
     const savedTheme =
       localStorage.getItem('theme') ||
       (window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'night'
-        : 'winter');
+        ? 'dark'
+        : 'gvsu');
 
     document.documentElement.setAttribute('data-theme', savedTheme);
     localStorage.setItem('theme', savedTheme);

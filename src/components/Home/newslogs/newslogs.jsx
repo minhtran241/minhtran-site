@@ -110,7 +110,7 @@ const LogLine = ({ log }) => {
               a: ({ href, children }) => (
                 <Link
                   href={href || '#'}
-                  className='link-primary link link-hover font-medium'
+                  className='link link-primary link-hover font-medium'
                   target='_blank'
                   rel='noopener noreferrer'
                 >
