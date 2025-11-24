@@ -59,7 +59,7 @@ const Milestone = ({ milestone }) => {
         {milestone.logo && (
           <div className='shrink-0'>
             <div className='avatar'>
-              <div className='ring-base-300/50 ring-offset-base-100 group-hover/link:ring-primary/30 h-12 w-12 rounded-lg ring-1 ring-offset-1 transition-all'>
+              <div className='ring-base-300/50 ring-offset-base-100 group-hover/link:ring-primary/30 rounded-box h-12 w-12 ring-1 ring-offset-1 transition-all'>
                 <Image
                   src={milestone.logo}
                   alt={`${milestone.title} logo`}

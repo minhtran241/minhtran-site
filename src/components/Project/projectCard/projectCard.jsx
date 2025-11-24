@@ -4,9 +4,9 @@ import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 
 const ProjectCard = ({ project }) => {
   return (
-    <article className='border-base-200/80 bg-base-100 flex h-full flex-col rounded-2xl border shadow-sm'>
+    <article className='border-base-200/80 bg-base-100 rounded-box flex h-full flex-col border shadow-sm'>
       {project.thumbnail && (
-        <div className='bg-base-200 relative overflow-hidden rounded-t-2xl'>
+        <div className='bg-base-200 rounded-t-box relative overflow-hidden'>
           <Image
             src={`/projects/${project.thumbnail}`}
             alt={project.name}
@@ -21,7 +21,7 @@ const ProjectCard = ({ project }) => {
           <div className='absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent' />
 
           {project?.year && (
-            <div className='bg-secondary/90 border-secondary absolute top-3 right-3 rounded-lg border px-2.5 py-1.5 shadow-lg backdrop-blur-sm'>
+            <div className='bg-secondary/90 border-secondary rounded-box absolute top-3 right-3 border px-2.5 py-1.5 shadow-lg backdrop-blur-sm'>
               <div className='text-secondary-content flex items-center gap-1.5'>
                 <FontAwesomeIcon
                   icon='fa-duotone fa-calendar-alt'
@@ -34,7 +34,7 @@ const ProjectCard = ({ project }) => {
 
           {project?.type && (
             <div
-              className={`absolute bottom-3 left-3 rounded-lg border px-2.5 py-1.5 shadow-lg backdrop-blur-sm ${
+              className={`rounded-box absolute bottom-3 left-3 border px-2.5 py-1.5 shadow-lg backdrop-blur-sm ${
                 project.type === 'Startup'
                   ? 'bg-secondary/90 border-secondary'
                   : project.type === 'Contract'
@@ -150,7 +150,7 @@ const ProjectCard = ({ project }) => {
             {project.tech.split(',').map((tech, index) => (
               <span
                 key={index}
-                className='bg-base-200 rounded-md px-2.5 py-1 text-xs font-semibold'
+                className='bg-base-200 rounded-box px-2.5 py-1 text-xs font-semibold'
               >
                 {tech.trim()}
               </span>

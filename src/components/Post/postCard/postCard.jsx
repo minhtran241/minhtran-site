@@ -11,8 +11,8 @@ const PostCard = ({ post }) => {
   });
 
   return (
-    <article className='border-base-200/80 bg-base-100 flex h-full flex-col rounded-2xl border shadow-sm'>
-      <div className='bg-base-200 relative overflow-hidden rounded-t-2xl'>
+    <article className='border-base-200/80 bg-base-100 rounded-box flex h-full flex-col border shadow-sm'>
+      <div className='bg-base-200 rounded-t-box relative overflow-hidden'>
         <Image
           src={post.thumbnail}
           alt={post.title}

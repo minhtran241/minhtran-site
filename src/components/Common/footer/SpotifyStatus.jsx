@@ -61,7 +61,7 @@ const SpotifyStatus = () => {
           alt={`Album cover for ${album}`}
           width={60}
           height={60}
-          className='rounded-md'
+          className='rounded-box'
         />
         <div className='flex w-full flex-col'>
           <Link

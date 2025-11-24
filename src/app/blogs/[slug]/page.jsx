@@ -171,7 +171,7 @@ const SinglePostContent = ({ post }) => {
               alt={post.title}
               width={1200}
               height={600}
-              className='h-auto w-full rounded-lg shadow-lg'
+              className='rounded-box h-auto w-full shadow-lg'
               priority
               placeholder='blur'
               blurDataURL={post.base64}

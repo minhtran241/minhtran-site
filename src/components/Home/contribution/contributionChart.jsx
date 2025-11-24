@@ -278,7 +278,7 @@ const ContributionChart = ({ contributionCollection }) => {
   const stats = getStats();
 
   return (
-    <div className='border-base-300 bg-base-100 flex flex-col gap-3 rounded-lg border p-3'>
+    <div className='border-base-300 bg-base-100 rounded-box flex flex-col gap-3 border p-3'>
       {/* Header */}
       <div className='flex flex-wrap items-center justify-between gap-3'>
         <div className='flex items-center gap-3'>
@@ -357,7 +357,7 @@ const ContributionChart = ({ contributionCollection }) => {
 
       {/* Chart */}
       <div
-        className='rounded-lg p-3'
+        className='rounded-box p-3'
         style={{ height: '220px', width: '100%' }}
       >
         {chartData ? (

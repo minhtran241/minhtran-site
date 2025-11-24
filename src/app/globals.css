@@ -265,9 +265,9 @@
   --color-error-content: oklch(100% 0 0); /* White for contrast */
 
   /* Border radius */
-  --radius-selector: 0;
-  --radius-field: 0;
-  --radius-box: 0;
+  --radius-selector: 3.625px;
+  --radius-field: 3.625px;
+  --radius-box: 3.625px;
 
   /* Base sizes */
   --size-selector: 0.25rem;

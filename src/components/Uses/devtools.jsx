@@ -12,8 +12,8 @@ const DevTools = async () => {
   );
   return (
     <section className='space-y-10'>
-      <div className='flex items-center gap-3'>
-        <div className='bg-success/10 text-success rounded-lg p-3'>
+      <div className='mb-6 flex items-center gap-3'>
+        <div className='bg-success/10 text-success rounded-box p-3'>
           <FontAwesomeIcon icon='fa-duotone fa-terminal' className='text-2xl' />
         </div>
         <h2 className='text-3xl font-bold'>Development Tools</h2>
@@ -32,7 +32,7 @@ const DevTools = async () => {
                   alt={item.name}
                   width={112}
                   height={112}
-                  className='h-16 w-16 rounded-lg object-cover transition-transform duration-300 group-hover:scale-110'
+                  className='rounded-box h-16 w-16 object-cover transition-transform duration-300 group-hover:scale-110'
                   loading='lazy'
                   placeholder='blur'
                   blurDataURL={base64s[index]}

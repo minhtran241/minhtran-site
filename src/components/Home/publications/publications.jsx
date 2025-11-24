@@ -110,7 +110,7 @@ const renderImages = (images, title) => {
           href={img}
           target='_blank'
           rel='noopener noreferrer'
-          className='border-base-300 bg-base-200 relative h-24 w-24 overflow-hidden rounded-lg border sm:h-28 sm:w-28'
+          className='border-base-300 bg-base-200 rounded-box relative h-24 w-24 overflow-hidden border sm:h-28 sm:w-28'
         >
           <Image
             src={img}
@@ -121,7 +121,7 @@ const renderImages = (images, title) => {
         </Link>
       ))}
       {remainingCount > 0 && (
-        <div className='border-base-300 bg-base-200/50 text-base-content/60 flex h-24 w-24 items-center justify-center rounded-lg border text-base font-semibold sm:h-28 sm:w-28'>
+        <div className='border-base-300 bg-base-200/50 text-base-content/60 rounded-box flex h-24 w-24 items-center justify-center border text-base font-semibold sm:h-28 sm:w-28'>
           +{remainingCount}
         </div>
       )}
@@ -234,7 +234,7 @@ const ExpandableAbstract = ({ description }) => {
 // Main Publication Card Component
 const PublicationCard = ({ publication }) => {
   return (
-    <article className='border-base-300 bg-base-100 rounded-xl border p-5'>
+    <article className='border-base-300 bg-base-100 rounded-box border p-5'>
       {/* Header Section */}
       <div className='mb-3 flex flex-wrap items-start justify-between gap-2'>
         <div className='flex flex-wrap items-center gap-2'>
@@ -286,7 +286,7 @@ const PublicationCard = ({ publication }) => {
       )}
 
       {/* Abstract with expand/collapse */}
-      <div className='bg-base-200 mb-4 rounded-lg p-4'>
+      <div className='bg-base-200 rounded-box mb-4 p-4'>
         <div className='mb-2 flex items-center gap-2'>
           <FontAwesomeIcon
             icon='fa-duotone fa-align-left'
@@ -300,7 +300,7 @@ const PublicationCard = ({ publication }) => {
       </div>
 
       {/* Publication Details */}
-      <div className='bg-base-200 mb-4 space-y-2 rounded-lg p-4'>
+      <div className='bg-base-200 rounded-box mb-4 space-y-2 p-4'>
         {publication.published_in && (
           <div className='text-sm'>
             <span className='text-base-content font-semibold'>

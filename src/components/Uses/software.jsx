@@ -12,8 +12,8 @@ const Softwares = async () => {
   );
   return (
     <section className='space-y-10'>
-      <div className='flex items-center gap-3'>
-        <div className='bg-info/10 text-info rounded-lg p-3'>
+      <div className='mb-6 flex items-center gap-3'>
+        <div className='bg-info/10 text-info rounded-box p-3'>
           <FontAwesomeIcon icon='fa-duotone fa-cubes' className='text-2xl' />
         </div>
         <h2 className='text-3xl font-bold'>Software</h2>
@@ -32,7 +32,7 @@ const Softwares = async () => {
                   alt={item.name}
                   width={100}
                   height={100}
-                  className='h-16 w-16 rounded-lg object-cover transition-transform duration-300 group-hover:scale-110'
+                  className='rounded-box h-16 w-16 object-cover transition-transform duration-300 group-hover:scale-110'
                   loading='lazy'
                   placeholder='blur'
                   blurDataURL={base64s[index]}

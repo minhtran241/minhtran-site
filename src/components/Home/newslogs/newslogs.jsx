@@ -84,7 +84,7 @@ const LogLine = ({ log }) => {
 
   return (
     <div
-      className={`${config.borderColor} ${config.bgColor} flex items-start gap-3 rounded-md border-l-4 px-2 py-1 transition-colors hover:brightness-95`}
+      className={`${config.borderColor} ${config.bgColor} rounded-box flex items-start gap-3 border-l-4 px-2 py-1 transition-colors hover:brightness-95`}
     >
       {/* Icon */}
       <div className='shrink-0'>

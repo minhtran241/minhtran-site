@@ -52,7 +52,7 @@ const BibTeXModal = ({ bibtex, title }) => {
 
           {/* BibTeX Content */}
           <div className='relative'>
-            <pre className='bg-base-200 text-base-content overflow-x-auto rounded-lg p-4 text-sm'>
+            <pre className='bg-base-200 text-base-content rounded-box overflow-x-auto p-4 text-sm'>
               <code className='whitespace-pre-wrap'>{bibtex}</code>
             </pre>
 

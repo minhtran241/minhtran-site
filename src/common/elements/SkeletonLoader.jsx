@@ -22,7 +22,7 @@ const SkeletonLoader = ({ variant = 'card', count = 1, className = '' }) => {
     ),
     post: (
       <div className={`animate-pulse space-y-4 ${className}`}>
-        <div className='bg-base-300 h-48 w-full rounded-lg'></div>
+        <div className='bg-base-300 rounded-box h-48 w-full'></div>
         <div className='bg-base-300 h-8 w-3/4 rounded'></div>
         <div className='space-y-2'>
           <div className='bg-base-300 h-4 w-full rounded'></div>

@@ -16,16 +16,16 @@ const HeroComponent = () => {
 
   return (
     <article aria-label='Hero section'>
-      <div className='border-primary/20 bg-base-100/50 relative overflow-hidden rounded-2xl border shadow-sm backdrop-blur-sm'>
+      <div className='border-primary/20 bg-base-100/50 rounded-box relative overflow-hidden border shadow-sm backdrop-blur-sm'>
         <div className='relative p-8 md:p-10'>
           <div className='flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:gap-12'>
             {/* Profile Picture */}
             <div className='group relative shrink-0'>
               <div className='relative'>
                 {/* Simplified accent ring */}
-                <div className='border-primary/15 group-hover:border-primary/30 absolute -inset-3 rounded-2xl border transition-all duration-300 group-hover:scale-105'></div>
+                <div className='border-primary/15 group-hover:border-primary/30 rounded-box absolute -inset-3 border transition-all duration-300 group-hover:scale-105'></div>
 
-                <div className='border-base-100 ring-primary/20 group-hover:ring-primary/40 relative z-10 h-36 w-36 overflow-hidden rounded-2xl border-4 shadow-lg ring-2 transition-all duration-300 group-hover:shadow-xl lg:h-40 lg:w-40'>
+                <div className='border-base-100 ring-primary/20 group-hover:ring-primary/40 rounded-box relative z-10 h-36 w-36 overflow-hidden border-4 shadow-lg ring-2 transition-all duration-300 group-hover:shadow-xl lg:h-40 lg:w-40'>
                   <Image
                     src={headshotSrc}
                     alt={`${userBasicInfo.fullName} headshot`}

@@ -12,8 +12,8 @@ const Devices = async () => {
   );
   return (
     <section className='space-y-10'>
-      <div className='flex items-center gap-3'>
-        <div className='bg-primary/10 text-primary rounded-lg p-3'>
+      <div className='mb-6 flex items-center gap-3'>
+        <div className='bg-primary/10 text-primary rounded-box p-3'>
           <FontAwesomeIcon
             icon='fa-duotone fa-laptop-mobile'
             className='text-2xl'
@@ -36,7 +36,7 @@ const Devices = async () => {
                 alt={DEVICES[0]?.name}
                 width={800}
                 height={400}
-                className='rounded-xl object-cover'
+                className='rounded-box object-cover'
                 priority
                 placeholder='blur'
                 blurDataURL={base64s[0]}
@@ -65,7 +65,7 @@ const Devices = async () => {
                     alt={item.name}
                     width={192}
                     height={192}
-                    className='h-48 w-48 rounded-lg object-cover'
+                    className='rounded-box h-48 w-48 object-cover'
                     priority
                     placeholder='blur'
                     blurDataURL={base64s[index + 1]}

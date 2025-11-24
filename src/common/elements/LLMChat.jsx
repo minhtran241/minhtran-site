@@ -41,7 +41,7 @@ const ChatMessage = memo(
                 <Image
                   src={src}
                   alt={alt}
-                  className='h-auto max-w-full rounded-lg'
+                  className='rounded-box h-auto max-w-full'
                   width={200}
                   height={100}
                 />
@@ -497,7 +497,7 @@ export default function LLMChat() {
               )}
             {error && (
               <div
-                className='bg-error/10 border-error/20 animate-in fade-in slide-in-from-top-2 rounded-lg border p-2'
+                className='bg-error/10 border-error/20 animate-in fade-in slide-in-from-top-2 rounded-box border p-2'
                 role='alert'
                 aria-live='assertive'
               >

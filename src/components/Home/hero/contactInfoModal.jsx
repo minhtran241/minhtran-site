@@ -28,7 +28,7 @@ const ContactInfoModal = () => (
         {SOCIAL_MEDIA.slice(1).map((item, index) => (
           <div
             key={index}
-            className='bg-base-200/50 hover:bg-base-200 flex items-center gap-4 rounded-lg p-3 transition-colors'
+            className='bg-base-200/50 hover:bg-base-200 rounded-box flex items-center gap-4 p-3 transition-colors'
           >
             {/* <div className='text-primary text-lg'>{item.icon}</div> */}
             <Image

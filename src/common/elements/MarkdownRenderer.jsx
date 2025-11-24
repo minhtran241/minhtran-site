@@ -113,7 +113,7 @@ const MarkdownRender = ({ mdString }) => (
                 style={oneDark}
                 language={hasLang[1]}
                 // PreTag="div"
-                className='mockup-code scrollbar-thin scrollbar-track-base-content/5 scrollbar-thumb-base-content/40 scrollbar-track-rounded-md scrollbar-thumb-rounded'
+                className='mockup-code scrollbar-thin scrollbar-track-base-content/5 scrollbar-thumb-base-content/40 scrollbar-track-rounded-box scrollbar-thumb-rounded'
                 // showLineNumbers={true}
                 useInlineStyles={true}
                 components={{}}

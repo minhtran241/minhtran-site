@@ -11,7 +11,7 @@ export default function Map({ position, zoom, popupText }) {
       center={position}
       zoom={zoom}
       scrollWheelZoom={true}
-      className='h-full w-full rounded-lg'
+      className='rounded-box h-full w-full'
       style={{ height: '100%', width: '100%', minHeight: '400px' }}
     >
       <TileLayer
