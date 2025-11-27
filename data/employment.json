@@ -10,7 +10,7 @@
     "employment_type": "Part-time",
     "location": "Allendale, Michigan, United States",
     "location_type": "On-site",
-    "description": "Collaborated with faculty and staff to understand their technology needs and provide appropriate solutions and support.#Provided technical support to faculty, staff, and students in troubleshooting and resolving technology-related issues.",
+    "description": "Provided technical support to faculty, staff, and students, diagnosing and resolving hardware, software, and network issues efficiently.#Collaborated with faculty and staff to understand their technology needs and deliver appropriate solutions.#Troubleshot complex technical problems across Windows, macOS, and Linux environments using systematic problem-solving approaches.#Documented technical procedures and contributed to the internal knowledge base to support team consistency.",
     "created_at": "2024-02-24T09:41:22.055Z",
     "updated_at": "2024-02-24T09:41:22.055Z"
   },
@@ -25,7 +25,7 @@
     "employment_type": "Part-time",
     "location": "Grand Rapids, Michigan, United States",
     "location_type": "On-site",
-    "description": "Winter 2024: Collaborated with Eli Review and GVSU faculty to design and implement an AI-powered writing feedback microservice using Cohere and Mistral LLMs. Integrated with AWS SQS for asynchronous processing and deployed on GPU-backed infrastructure to enhance automated writing assessment within learning platforms.#Fall 2024: Kicked off the Laker Mobile CI/CD Modernization Project. Tasked with automating iOS app build and deployment using Fastlane, integrating modern CI/CD workflows, and creating a developer onboarding tutorial for future student teams.",
+    "description": "Collaborated with Eli Review and GVSU faculty to design and implement an AI-powered writing feedback microservice using Cohere and Mistral LLMs.#Integrated AWS SQS for asynchronous processing and deployed on GPU-backed infrastructure to enhance automated writing assessment.#Led the Laker Mobile CI/CD Modernization Project, automating iOS app build and deployment using Fastlane.#Created developer onboarding documentation and tutorials for future student engineering teams.",
     "created_at": "2024-03-24T09:41:22.056Z",
     "updated_at": "2024-03-24T09:41:22.056Z"
   }

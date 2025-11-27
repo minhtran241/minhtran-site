@@ -36,7 +36,7 @@ const WebStats = async () => {
           className='rounded-box bg-primary/10 border-primary/30 hover:bg-primary/15 hover:border-primary/40 flex flex-col border p-2 transition-colors'
         >
           <span className='text-primary font-mono text-xl font-bold'>
-            {value?.toLocaleString() || '0'}
+            {value ? new Intl.NumberFormat('en-US').format(value) : '0'}
           </span>
           <span className='text-base-content/70 text-xs tracking-wide uppercase opacity-80'>
             {key}

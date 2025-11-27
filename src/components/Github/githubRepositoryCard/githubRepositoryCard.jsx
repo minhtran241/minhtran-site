@@ -5,12 +5,6 @@ import { TIMEZONE } from '@/common/constants/timezone';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 
 const GitHubRepositoryCard = async ({ project }) => {
-  // Format project name
-  const projectName = project?.name
-    ?.split('-')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-
   // Format last updated time
   const getLastUpdated = () => {
     if (!project?.pushedAt) return null;
@@ -38,7 +32,7 @@ const GitHubRepositoryCard = async ({ project }) => {
             rel='noopener noreferrer'
             className='card-title hover:text-primary group/title transition-colors'
           >
-            <span className='line-clamp-2'>{projectName}</span>
+            <span className='line-clamp-2'>{project?.name}</span>
             <FontAwesomeIcon
               icon='fa-duotone fa-arrow-up-right-from-square'
               className='shrink-0 text-xs opacity-0 transition-opacity duration-200 group-hover/title:opacity-100'

@@ -1,33 +1,27 @@
 [
   {
-    "name": "edge-computing-models"
+    "name": "ML-DL-LLM-GenAI"
   },
   {
-    "name": "ML-DL-LLM-GenAI",
-    "thumbnail": "ML-DL-LLM-GenAI.png"
+    "name": "tcp-socket-chat"
   },
   {
-    "name": "nextcorp",
-    "thumbnail": "nextcorp.png"
+    "name": "nextcorp"
   },
   {
-    "name": "minhtran-site",
-    "thumbnail": "minhtran-site.png"
+    "name": "minhtran-site"
   },
   {
-    "name": "gvcourse",
-    "thumbnail": "gvcourse.png"
+    "name": "gvcourse"
   },
   {
-    "name": "video-to-mp3-conveter-microservices",
-    "thumbnail": "video-to-mp3-conveter-microservices.png"
+    "name": "video-to-mp3-conveter-microservices"
   },
   {
     "name": "flexiconnect-architecture"
   },
   {
-    "name": "strapi-plugin-github-projects",
-    "thumbnail": "strapi-plugin-github-projects.png"
+    "name": "strapi-plugin-github-projects"
   },
   {
     "name": "strapi-mdevblog"
@@ -36,11 +30,9 @@
     "name": "gRPC-introduction"
   },
   {
-    "name": "contract-template-truffle",
-    "thumbnail": "contract-template-truffle.png"
+    "name": "mojo-playground"
   },
   {
-    "name": "arxiv-citation-network",
-    "thumbnail": "arxiv-citation-network.png"
+    "name": "arxiv-citation-network"
   }
 ]

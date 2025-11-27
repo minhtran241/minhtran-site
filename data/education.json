@@ -8,13 +8,13 @@
     "logo": "/home/education/lgh.jpg",
     "sub_title": "Primary School Diploma",
     "grade": "Excellent",
-    "location": "Hai Bà Trưng district, Hanoi, Vietnam",
-    "description": "",
+    "location": "Hai Bà Trưng District, Hanoi, Vietnam",
+    "description": "Graduated with Excellent academic standing.",
     "created_at": "2024-02-24T09:41:22.055Z",
     "updated_at": "2024-02-24T09:41:22.055Z"
   },
   {
-    "id": 1,
+    "id": 2,
     "start_date": "2014-08-01T05:00:00.000Z",
     "end_date": "2018-08-01T05:00:00.000Z",
     "title": "Trưng Vương Junior Secondary School",
@@ -22,13 +22,13 @@
     "logo": "/home/education/tvs.jpg",
     "sub_title": "Junior Secondary School Diploma",
     "grade": "Excellent",
-    "location": "Hoàn Kiếm district, Hanoi, Vietnam",
-    "description": "",
+    "location": "Hoàn Kiếm District, Hanoi, Vietnam",
+    "description": "Graduated with Excellent academic standing.",
     "created_at": "2024-02-24T09:41:22.055Z",
     "updated_at": "2024-02-24T09:41:22.055Z"
   },
   {
-    "id": 2,
+    "id": 3,
     "start_date": "2018-08-01T05:00:00.000Z",
     "end_date": "2021-08-01T05:00:00.000Z",
     "title": "Trần Phú - Hoàn Kiếm High School",
@@ -36,13 +36,13 @@
     "logo": "/home/education/tphk.jpg",
     "sub_title": "High School Diploma",
     "grade": "Excellent",
-    "location": "Hoàn Kiếm district, Hanoi, Vietnam",
-    "description": "Awarded Third Prize in District Physics competition for excellent students (10th Grade).#Awarded Second Prize in District Physics competition for excellent students (11th Grade).#IELTS 7.0.",
+    "location": "Hoàn Kiếm District, Hanoi, Vietnam",
+    "description": "Graduated with Excellent academic standing.#Third Prize, District Physics Competition for Excellent Students (10th Grade).#Second Prize, District Physics Competition for Excellent Students (11th Grade).#IELTS 7.0.",
     "created_at": "2024-02-24T09:41:22.055Z",
     "updated_at": "2024-02-24T09:41:22.055Z"
   },
   {
-    "id": 3,
+    "id": 4,
     "start_date": "2021-08-31T05:00:00.000Z",
     "end_date": "2025-12-01T05:00:00.000Z",
     "title": "Grand Valley State University",
@@ -51,7 +51,7 @@
     "sub_title": "Bachelor of Science in Computer and Information Science, Minor in Mathematics",
     "grade": "3.954/4.0",
     "location": "Allendale, Michigan, United States",
-    "description": "Awarded International Merit Award and GVSU International Scholarship.#Awarded Dean's list every semester.",
+    "description": "International Merit Award recipient.#GVSU International Scholarship recipient.#Dean's List honoree every semester.",
     "created_at": "2024-02-24T09:41:22.055Z",
     "updated_at": "2024-02-24T09:41:22.055Z"
   }

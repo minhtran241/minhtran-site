@@ -4,7 +4,7 @@ import PostMetadata from '@/components/Post/postMetadata/postMetadata';
 import fs from 'fs/promises';
 import path from 'path';
 import readingTime from 'reading-time';
-import Loading from '@/app/loading';
+import { SectionLoading } from '@/components/Common/Loading';
 import Image from 'next/image';
 import Link from 'next/link';
 import { fileSystemInfo } from '@/common/constants/fileSystem';
@@ -251,7 +251,7 @@ const SinglePostPage = async (props) => {
   const post = await getPost(slug);
 
   return (
-    <Suspense fallback={<Loading />}>
+    <Suspense fallback={<SectionLoading text='Loading post' />}>
       <SinglePostContent post={post} />
     </Suspense>
   );

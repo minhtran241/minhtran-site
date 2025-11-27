@@ -7,7 +7,7 @@ import { GITHUB_REPOS_NUM } from '@/common/constants/githubAPI';
 import { userBasicInfo } from '@/common/constants/userBasic';
 import CodingActive from '@/components/Home/contribution/wakatime/codingActive';
 import { fetcher } from '@/common/libs/fetcher';
-import Loading from '@/app/loading';
+import { SectionLoading } from '@/components/Common/Loading';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 
 const GitHubStats = () => {
@@ -44,7 +44,7 @@ const GitHubStats = () => {
             <CodingActive data={wkData} />
           </div>
         ) : (
-          <Loading fullPage={false} />
+          <SectionLoading text='Loading stats' />
         )}
       </div>
     </div>
