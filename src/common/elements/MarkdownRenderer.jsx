@@ -19,7 +19,7 @@ import yaml from 'react-syntax-highlighter/dist/esm/languages/prism/yaml';
 import sql from 'react-syntax-highlighter/dist/esm/languages/prism/sql';
 import c from 'react-syntax-highlighter/dist/esm/languages/prism/c';
 
-import Loading from '@/app/loading';
+import { BlogPostSkeleton } from '@/components/Common/Loading';
 import Image from 'next/image';
 import React from 'react';
 import Link from 'next/link';
@@ -72,7 +72,7 @@ const proseStyles = [
 ].join(' ');
 
 const MarkdownRender = ({ mdString }) => (
-  <Suspense fallback={<Loading />}>
+  <Suspense fallback={<BlogPostSkeleton />}>
     <article className={proseStyles}>
       <Markdown
         rehypePlugins={[rehypeRaw]}

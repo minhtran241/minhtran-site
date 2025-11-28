@@ -1,8 +1,13 @@
+import { Suspense } from 'react';
 import Devices from '@/components/Uses/devices';
 import DevTools from '@/components/Uses/devtools';
 import Breadcrumbs from '@/common/elements/Breadcrumbs';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 import Softwares from '@/components/Uses/software';
+import {
+  DeviceGridSkeleton,
+  ToolGridSkeleton,
+} from '@/components/Common/Loading';
 
 export const dynamic = 'force-dynamic'; // Ensures this route is always server-rendered
 
@@ -30,11 +35,17 @@ const UsesPage = () => {
     <div className='container mt-16 py-12'>
       <Breadcrumbs breadcrumbs={BREADCRUMBS} />
       <div className='mt-8 flex flex-col gap-16'>
-        <Devices />
+        <Suspense fallback={<DeviceGridSkeleton count={3} featured={true} />}>
+          <Devices />
+        </Suspense>
         <div className='divider'></div>
-        <DevTools />
+        <Suspense fallback={<ToolGridSkeleton count={10} />}>
+          <DevTools />
+        </Suspense>
         <div className='divider'></div>
-        <Softwares />
+        <Suspense fallback={<ToolGridSkeleton count={10} />}>
+          <Softwares />
+        </Suspense>
       </div>
     </div>
   );

@@ -1,13 +1,16 @@
+import { Suspense } from 'react';
 import fs from 'fs/promises';
 import path from 'path';
-import Image from 'next/image';
-import Link from 'next/link';
 import { fileSystemInfo } from '@/common/constants/fileSystem';
 import Breadcrumbs from '@/common/elements/Breadcrumbs';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 import { getBase64 } from '@/common/libs/plaiceholder';
 import SectionLabel from '@/components/Home/sectionLabel/sectionLabel';
 import BlogSearch from '@/components/Post/BlogSearch';
+import {
+  BlogGridSkeleton,
+  SectionHeaderSkeleton,
+} from '@/components/Common/Loading';
 
 export const dynamic = 'force-dynamic'; // Ensures this route is always server-rendered
 
@@ -56,9 +59,23 @@ const BREADCRUMBS = [
   },
 ];
 
-const BlogPage = async () => {
+// Async component for blog content
+const BlogContent = async () => {
   const posts = await getPosts();
+  return <BlogSearch posts={posts} />;
+};
 
+// Loading fallback for blog content
+const BlogContentSkeleton = () => (
+  <div className='space-y-6'>
+    {/* Search bar skeleton */}
+    <div className='bg-base-200 h-12 w-full animate-pulse rounded-lg' />
+    {/* Blog grid skeleton */}
+    <BlogGridSkeleton count={6} />
+  </div>
+);
+
+const BlogPage = () => {
   return (
     <div className='space-y-12'>
       <Breadcrumbs breadcrumbs={BREADCRUMBS} />
@@ -73,7 +90,9 @@ const BlogPage = async () => {
       </div>
 
       {/* All Posts with Search */}
-      <BlogSearch posts={posts} />
+      <Suspense fallback={<BlogContentSkeleton />}>
+        <BlogContent />
+      </Suspense>
     </div>
   );
 };

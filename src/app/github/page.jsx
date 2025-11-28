@@ -1,7 +1,12 @@
+import { Suspense } from 'react';
 import Breadcrumbs from '@/common/elements/Breadcrumbs';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 import GitHubStats from '@/components/Github/githubStats/githubStats';
 import GitHubProjects from '@/components/Github/githubProjects/githubProjects';
+import {
+  GitHubStatsSkeleton,
+  GitHubRepoGridSkeleton,
+} from '@/components/Common/Loading';
 
 const PAGE_TITLE = 'GitHub';
 const PAGE_DESCRIPTION =
@@ -22,16 +27,20 @@ export const generateMetadata = async () => {
   };
 };
 
-const GitHubPage = async () => {
+const GitHubPage = () => {
   return (
     <div className='flex flex-col gap-8'>
       <Breadcrumbs breadcrumbs={BREADCRUMBS} />
 
       {/* Contribution Stats */}
-      <GitHubStats />
+      <Suspense fallback={<GitHubStatsSkeleton />}>
+        <GitHubStats />
+      </Suspense>
 
       {/* GitHub Projects */}
-      <GitHubProjects />
+      <Suspense fallback={<GitHubRepoGridSkeleton count={6} />}>
+        <GitHubProjects />
+      </Suspense>
     </div>
   );
 };

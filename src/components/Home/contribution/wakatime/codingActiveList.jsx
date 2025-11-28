@@ -1,4 +1,4 @@
-import Loading from '@/app/loading';
+import { CodingActiveSkeleton } from '@/components/Common/Loading';
 import { sumTotalFromArray } from '@/common/helpers';
 import Progress from './progress';
 import Link from 'next/link';
@@ -60,7 +60,7 @@ const CodingActiveList = ({ data }) => {
   ];
 
   if (!data) {
-    return <Loading />;
+    return <CodingActiveSkeleton />;
   }
 
   return (

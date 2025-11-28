@@ -1,8 +1,6 @@
-import Loading from '@/app/loading';
 import Milestone from '../milestone/milestone';
 import fs from 'fs/promises';
 import path from 'path';
-import { Suspense } from 'react';
 import SectionLabel from '../sectionLabel/sectionLabel';
 import { fileSystemInfo } from '@/common/constants/fileSystem';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
@@ -29,7 +27,7 @@ const getMilestones = async () => {
 const SECTION_TITLE = 'Education';
 const SECTION_DESCRIPTION = 'My academic background and qualifications.';
 
-const EducationComponent = async () => {
+const Education = async () => {
   const milestones = await getMilestones();
 
   return (
@@ -84,14 +82,6 @@ const EducationComponent = async () => {
       {/* </div> */}
     </div>
     // </div>
-  );
-};
-
-const Education = () => {
-  return (
-    <Suspense fallback={<Loading />}>
-      <EducationComponent />
-    </Suspense>
   );
 };
 

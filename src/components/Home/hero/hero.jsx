@@ -1,6 +1,5 @@
 'use client';
 
-import { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ContactInfoModal } from '@/components/Home/hero/contactInfoModal';
@@ -9,9 +8,8 @@ import { userBasicInfo } from '@/common/constants/userBasic';
 import { fileSystemInfo } from '@/common/constants/fileSystem';
 import { getLocationText } from '@/common/constants/location';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
-import Loading from '@/app/loading';
 
-const HeroComponent = () => {
+const Hero = () => {
   const headshotSrc = '/home/headshot.png';
 
   return (
@@ -139,11 +137,5 @@ const HeroComponent = () => {
     </article>
   );
 };
-
-const Hero = () => (
-  <Suspense fallback={<Loading fullPage={false} />}>
-    <HeroComponent />
-  </Suspense>
-);
 
 export default Hero;

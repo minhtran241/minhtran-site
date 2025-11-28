@@ -21,9 +21,15 @@ import {
   getMonthlyChartData,
   getWeeklyChartData,
 } from '@/common/helpers';
-import Loading from '@/app/loading';
 import Image from 'next/image';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
+
+// Chart Loading Skeleton
+const ChartSkeleton = () => (
+  <div className='flex h-full animate-pulse items-center justify-center'>
+    <div className='bg-base-300 h-full w-full rounded-lg' />
+  </div>
+);
 
 const GET_CHART_DATA = {
   daily: getDailyChartData,
@@ -360,13 +366,7 @@ const ContributionChart = ({ contributionCollection }) => {
         className='rounded-box p-3'
         style={{ height: '220px', width: '100%' }}
       >
-        {chartData ? (
-          renderChart()
-        ) : (
-          <div className='flex h-full items-center justify-center'>
-            <Loading />
-          </div>
-        )}
+        {chartData ? renderChart() : <ChartSkeleton />}
       </div>
 
       {/* Stats */}

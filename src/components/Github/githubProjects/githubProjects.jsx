@@ -3,7 +3,6 @@ import SectionLabel from '@/components/Home/sectionLabel/sectionLabel';
 import { userBasicInfo } from '@/common/constants/userBasic';
 import axios from 'axios';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
-import { SectionLoading } from '@/components/Common/Loading';
 import gitHubRepos from '../../../../data/gitHubRepos.json';
 
 const SECTION_TITLE = 'GitHub Repositories';
@@ -20,10 +19,6 @@ const GitHubProjects = async () => {
   const repoData = await axios.get(
     `${BASE_URL}/api/github?username=${username}`,
   );
-
-  if (!repoData) {
-    return <SectionLoading text='Loading repositories' />;
-  }
 
   let projects = repoData?.data?.user?.repositories?.nodes?.filter((repo) =>
     gitHubRepos.some((repo_item) => repo_item.name === repo.name),

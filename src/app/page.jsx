@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import Employment from '@/components/Home/employment/employment';
 // import Projects from '@/components/Project/projects/projects';
 import Hero from '@/components/Home/hero/hero';
@@ -5,6 +6,12 @@ import Contribution from '@/components/Home/contribution/contribution';
 import Education from '@/components/Home/education/education';
 import Publications from '@/components/Home/publications/publications';
 import NewsLogs from '@/components/Home/newslogs/newslogs';
+import {
+  HeroSkeleton,
+  NewsLogSkeleton,
+  PublicationSkeleton,
+  TimelineSkeleton,
+} from '@/components/Common/Loading';
 
 export const dynamic = 'force-dynamic'; // Ensures this route is always server-rendered
 
@@ -46,12 +53,22 @@ export const generateMetadata = async () => {
 const Home = () => {
   return (
     <div className='flex flex-col gap-10'>
-      <Hero />
+      <Suspense fallback={<HeroSkeleton />}>
+        <Hero />
+      </Suspense>
       {/* <Skills /> */}
-      <NewsLogs />
-      <Publications />
-      <Employment />
-      <Education />
+      <Suspense fallback={<NewsLogSkeleton count={5} />}>
+        <NewsLogs />
+      </Suspense>
+      <Suspense fallback={<PublicationSkeleton count={2} />}>
+        <Publications />
+      </Suspense>
+      <Suspense fallback={<TimelineSkeleton count={3} />}>
+        <Employment />
+      </Suspense>
+      <Suspense fallback={<TimelineSkeleton count={2} />}>
+        <Education />
+      </Suspense>
       {/* <Contribution /> */}
       {/* <Skills /> */}
       {/* <Projects /> */}

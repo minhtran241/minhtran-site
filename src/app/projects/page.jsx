@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import Breadcrumbs from '@/common/elements/Breadcrumbs';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 import fs from 'fs/promises';
@@ -5,6 +6,7 @@ import path from 'path';
 import { fileSystemInfo } from '@/common/constants/fileSystem';
 import { getBase64 } from '@/common/libs/plaiceholder';
 import ProjectCard from '@/components/Project/projectCard/projectCard';
+import { ProjectGridSkeleton } from '@/components/Common/Loading';
 
 const PAGE_TITLE = 'My Projects';
 const PAGE_DESCRIPTION =
@@ -57,19 +59,28 @@ const getProjects = async () => {
   }
 };
 
-const ProjectPage = async () => {
+// Async component for projects grid
+const ProjectsGrid = async () => {
   const projects = await getProjects();
 
+  return (
+    <div className='grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3'>
+      {projects.map((project) => (
+        <ProjectCard key={project.id} project={project} />
+      ))}
+    </div>
+  );
+};
+
+const ProjectPage = () => {
   return (
     <div className='flex flex-col gap-8'>
       <Breadcrumbs breadcrumbs={BREADCRUMBS} />
 
       {/* Grid Layout */}
-      <div className='grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3'>
-        {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
-      </div>
+      <Suspense fallback={<ProjectGridSkeleton count={6} />}>
+        <ProjectsGrid />
+      </Suspense>
     </div>
   );
 };

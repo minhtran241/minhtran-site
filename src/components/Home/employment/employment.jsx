@@ -1,8 +1,6 @@
-import Loading from '@/app/loading';
 import Milestone from '../milestone/milestone';
 import fs from 'fs/promises';
 import path from 'path';
-import { Suspense } from 'react';
 import SectionLabel from '../sectionLabel/sectionLabel';
 import { fileSystemInfo } from '@/common/constants/fileSystem';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
@@ -30,7 +28,7 @@ const SECTION_TITLE = 'Employment History';
 const SECTION_DESCRIPTION =
   'A timeline of my professional experiences and roles in the tech industry.';
 
-const EmploymentComponent = async () => {
+const Employment = async () => {
   const milestones = await getMilestones();
 
   return (
@@ -77,14 +75,6 @@ const EmploymentComponent = async () => {
       </ul>
       {/* </div> */}
     </div>
-  );
-};
-
-const Employment = () => {
-  return (
-    <Suspense fallback={<Loading />}>
-      <EmploymentComponent />
-    </Suspense>
   );
 };
 

@@ -4,7 +4,11 @@ import PostMetadata from '@/components/Post/postMetadata/postMetadata';
 import fs from 'fs/promises';
 import path from 'path';
 import readingTime from 'reading-time';
-import { SectionLoading } from '@/components/Common/Loading';
+import {
+  SectionLoading,
+  ImageSkeleton,
+  TextSkeleton,
+} from '@/components/Common/Loading';
 import Image from 'next/image';
 import Link from 'next/link';
 import { fileSystemInfo } from '@/common/constants/fileSystem';
@@ -95,6 +99,60 @@ const getPost = async (slug) => {
     throw new Error('Failed to fetch post');
   }
 };
+
+// Blog post skeleton for loading state
+const BlogPostSkeleton = () => (
+  <div className='flex flex-col gap-4'>
+    {/* Breadcrumbs skeleton */}
+    <div className='flex gap-2'>
+      <div className='bg-base-300 h-4 w-16 animate-pulse rounded' />
+      <div className='bg-base-300 h-4 w-4 animate-pulse rounded' />
+      <div className='bg-base-300 h-4 w-48 animate-pulse rounded' />
+    </div>
+
+    <article>
+      <div className='mx-auto max-w-6xl'>
+        {/* Header skeleton */}
+        <header className='mb-8 text-center'>
+          <div className='bg-base-300 mx-auto mb-4 h-10 w-3/4 animate-pulse rounded' />
+          <div className='bg-base-300 mx-auto h-6 w-48 animate-pulse rounded' />
+        </header>
+
+        {/* Metadata skeleton */}
+        <div className='mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center'>
+          <div className='flex gap-4'>
+            <div className='bg-base-300 h-8 w-24 animate-pulse rounded-full' />
+            <div className='bg-base-300 h-8 w-24 animate-pulse rounded-full' />
+            <div className='bg-base-300 h-8 w-24 animate-pulse rounded-full' />
+          </div>
+          <div className='flex gap-2'>
+            <div className='bg-base-300 h-8 w-8 animate-pulse rounded' />
+            <div className='bg-base-300 h-8 w-8 animate-pulse rounded' />
+            <div className='bg-base-300 h-8 w-8 animate-pulse rounded' />
+          </div>
+        </div>
+
+        {/* Featured image skeleton */}
+        <ImageSkeleton
+          className='mb-8 h-64 w-full md:h-96'
+          aspectRatio='16/9'
+        />
+
+        {/* Description skeleton */}
+        <div className='border-base-300 mb-8 border-b pb-6'>
+          <TextSkeleton lines={2} />
+        </div>
+
+        {/* Content skeleton */}
+        <div className='mb-8 space-y-4'>
+          <TextSkeleton lines={4} />
+          <TextSkeleton lines={3} />
+          <TextSkeleton lines={5} />
+        </div>
+      </div>
+    </article>
+  </div>
+);
 
 const SinglePostContent = ({ post }) => {
   const BREADCRUMBS = [
@@ -245,14 +303,19 @@ const SinglePostContent = ({ post }) => {
   );
 };
 
+// Async wrapper component for data fetching
+const SinglePostContentWrapper = async ({ slug }) => {
+  const post = await getPost(slug);
+  return <SinglePostContent post={post} />;
+};
+
 const SinglePostPage = async (props) => {
   const params = await props.params;
   const { slug } = params;
-  const post = await getPost(slug);
 
   return (
-    <Suspense fallback={<SectionLoading text='Loading post' />}>
-      <SinglePostContent post={post} />
+    <Suspense fallback={<BlogPostSkeleton />}>
+      <SinglePostContentWrapper slug={slug} />
     </Suspense>
   );
 };
