@@ -3,24 +3,30 @@
     "date": "2025-07-01",
     "type": "achievement",
     "title": "**Accepted** into [Vingroup AI Engineer Training Program - Cohort 5](https://www.facebook.com/VGR.AIProgram) after passing 5 rounds of selection process among about 1,000 applicants.",
-    "link": "https://www.facebook.com/VGR.AIProgram"
+    "link": ""
   },
   {
     "date": "2025-04-08",
     "type": "publication",
     "title": "Paper [A Distributed Edge Computing Prototype Using Raspberry PIs](https://doi.org/10.1109/AIIoT65859.2025.11105362) has been accepted to 2025 IEEE AIIoT.",
-    "link": "https://doi.org/10.1109/AIIoT65859.2025.11105362"
+    "link": ""
   },
   {
     "date": "2025-04-09",
     "type": "talk",
     "title": "Presented *Coral Image Classification using Underwater Image Enhancement* at [GVSU Student Scholars Day 2025](https://www.gvsu.edu/ssd), co-authored with [Dat Nguyen](https://www.linkedin.com/in/imtiendat0311/) under mentorship of [Dr. Denton Bobeldyk](https://scholar.google.com/citations?user=rF6upEIAAAAJ&hl=en) and [Dr. Jonathan P. Leidig](https://scholar.google.com/citations?user=a0_mOU0AAAAJ&hl=en). The project achieved **94.89% accuracy** on 10 coral species and **82.06%** across 27 species.",
-    "link": "https://www.gvsu.edu/ssd"
+    "link": ""
   },
   {
     "date": "2024-04-12",
     "type": "event",
     "title": "Showcased *Blue Nucleus: Democratization of Experiential Learning in the Computing Disciplines* at the [Reach Higher Showcase 2024](https://www.gvsu.edu/reachhigher/), hosted by the Office of the President at Grand Valley State University, representing the Applied Computing Institute under the direction of [Dr. Jonathan Engelsma](https://scholar.google.com/citations?user=JOAflX8AAAAJ&hl=en).",
-    "link": "https://www.gvsu.edu/reachhigher/"
+    "link": ""
+  },
+  {
+    "date": "2025-12-02",
+    "type": "achievement",
+    "title": "Designated as a **GVSU Undergraduate Research Scholar** by the [Office of Undergraduate Research](https://www.gvsu.edu/ours/). The designation will be added to the official GVSU transcript, along with honor cords and an award certificate.",
+    "link": ""
   }
 ]
