@@ -13,7 +13,7 @@ const getNewsLogs = async () => {
   try {
     const data = await fs.readFile(DATA_FILE, 'utf-8');
     const logs = JSON.parse(data);
-    return logs.sort((a, b) => new Date(b.date) - new Date(a.date));
+    return logs.sort((a, b) => new Date(a.date) - new Date(b.date));
   } catch (error) {
     console.error('Error fetching news/logs:', error);
     return [];
