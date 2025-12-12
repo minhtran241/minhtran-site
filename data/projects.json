@@ -1,10 +1,10 @@
 [
   {
     "id": 1,
-    "name": "mindmeter.ai",
+    "name": "MindMeter AI: Verbal Assessment Platform",
     "type": "Startup",
     "role": "System Architect/Backend Developer",
-    "status": "In Progress",
+    "status": "Completed",
     "thumbnail": "mindmeter.png",
     "description": "Developed an AI-powered verbal assessment platform enabling instructors to evaluate student comprehension through adaptive, spoken examinations. The system analyzes submitted assignments, generates rubric-aligned questions using GPT-5, transcribes audio responses via speech-to-text, and provides detailed scoring with actionable feedback. Designed to address academic integrity challenges in AI-native educational environments by authentically measuring genuine understanding beyond AI-generated written submissions, supporting both individual and classroom-scale assessments.",
     "code": "",

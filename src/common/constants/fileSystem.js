@@ -1,7 +1,7 @@
 import path from 'path';
 
 const DATA_FETCH_DIR = 'data';
-const RESUME_LINK = '/home/minhtran-resume.pdf';
+const RESUME_LINK = '/home/MinhTResume.pdf';
 const HEADSHOT = '/home/headshot.png';
 
 export const fileSystemInfo = {
