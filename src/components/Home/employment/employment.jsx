@@ -19,7 +19,13 @@ const getMilestones = async () => {
     m.base64 = bases64s[index];
   });
   const sortedMilestones = milestones.sort((a, b) => {
-    return new Date(b.end_date) - new Date(a.end_date);
+    // Current/present items go to the top
+    const aIsCurrent = a.current || !a.end_date;
+    const bIsCurrent = b.current || !b.end_date;
+    if (aIsCurrent && !bIsCurrent) return -1;
+    if (!aIsCurrent && bIsCurrent) return 1;
+    // Then sort by start_date descending
+    return new Date(b.start_date) - new Date(a.start_date);
   });
   return sortedMilestones;
 };

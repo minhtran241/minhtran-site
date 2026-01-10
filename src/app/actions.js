@@ -1,6 +1,6 @@
 'use server';
 
-import { JSDOM } from 'jsdom';
+import * as cheerio from 'cheerio';
 import { streamText } from 'ai';
 import { cohere } from '@ai-sdk/cohere';
 import { createStreamableValue } from '@ai-sdk/rsc';
@@ -14,36 +14,30 @@ export const extractMetaTags = async (response) => {
     // const response = await axios.get(url);
     const html = response.data;
 
-    // Parse the HTML using JSDOM
-    const dom = new JSDOM(html);
-    const document = dom.window.document;
+    // Parse the HTML using cheerio
+    const $ = cheerio.load(html);
 
     // Extract meta tags from the document
-    const metaTags = Array.from(document.querySelectorAll('meta')).reduce(
-      (tags, meta) => {
-        // Get the name, property, or itemprop attribute of the meta tag
-        const name =
-          meta.getAttribute('name') ||
-          meta.getAttribute('property') ||
-          meta.getAttribute('itemprop');
+    const metaTags = {};
+    $('meta').each((_, meta) => {
+      const $meta = $(meta);
+      // Get the name, property, or itemprop attribute of the meta tag
+      const name =
+        $meta.attr('name') || $meta.attr('property') || $meta.attr('itemprop');
 
-        // Get the content attribute of the meta tag
-        const content = meta.getAttribute('content');
+      // Get the content attribute of the meta tag
+      const content = $meta.attr('content');
 
-        // If both name and content exist, add them to the tags object
-        if (name && content) {
-          tags[name] = content;
-        }
-
-        return tags;
-      },
-      {},
-    );
+      // If both name and content exist, add them to the tags object
+      if (name && content) {
+        metaTags[name] = content;
+      }
+    });
 
     // Return an object containing title, description, and image
     return {
       title:
-        document.title || metaTags['og:title'] || metaTags['twitter:title'],
+        $('title').text() || metaTags['og:title'] || metaTags['twitter:title'],
       description:
         metaTags.description ||
         metaTags['og:description'] ||

@@ -4,13 +4,17 @@ import Image from 'next/image';
 
 // Helper function to format date
 const formatDate = (date) =>
-  new Date(date).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-  });
+  date
+    ? new Date(date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+      })
+    : null;
 
 // Helper function to calculate exact duration
 const calculateDuration = (startDate, endDate) => {
+  if (!startDate || !endDate) return '';
+
   const start = new Date(startDate);
   const end = new Date(endDate);
 
@@ -31,17 +35,16 @@ const calculateDuration = (startDate, endDate) => {
 
 // Helper function to split description into paragraphs
 const getParagraphs = (description) =>
-  description.split('#').filter((p) => p.trim().length > 0);
+  description ? description.split('#').filter((p) => p.trim().length > 0) : [];
 
 const Milestone = ({ milestone }) => {
   if (!milestone) return null;
 
+  const isCurrent = milestone.current || !milestone.end_date;
   const startTimeStr = formatDate(milestone.start_date);
-  const endTimeStr = milestone.current
-    ? 'Present'
-    : formatDate(milestone.end_date);
+  const endTimeStr = isCurrent ? 'Present' : formatDate(milestone.end_date);
 
-  const durationStr = milestone.current
+  const durationStr = isCurrent
     ? ''
     : calculateDuration(milestone.start_date, milestone.end_date);
 

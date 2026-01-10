@@ -37,8 +37,14 @@
   },
   {
     "date": "2025-12-07",
-    "type": "event",
+    "type": "milestone",
     "title": "Graduated from Grand Valley State University with a **Bachelor of Science in Computer Science, Minor in Mathematics**.",
+    "link": ""
+  },
+  {
+    "date": "2026-01-12",
+    "type": "milestone",
+    "title": "Started new role as **AI Engineer** at [Vingroup - VinSmart Future](https://www.linkedin.com/company/vinsmart-future/) in Hanoi, Vietnam.",
     "link": ""
   }
 ]

@@ -1,11 +1,12 @@
 import { SOCIAL_MEDIA } from '@/common/constants/menu';
-import { userBasicInfo } from '@/common/constants/userBasic';
 import Link from 'next/link';
 import { MENU_TABS } from '@/common/constants/menu';
 import { HOSTED_ON, TECHSTACK } from '@/common/constants/site';
 import SpotifyStatus from './SpotifyStatus';
 import Image from 'next/image';
 import WebStats from './webStats/webStats';
+import Copyright from './Copyright';
+import { Suspense } from 'react';
 
 const Footer = async () => {
   const techStackEntries = Object.entries(TECHSTACK);
@@ -15,7 +16,9 @@ const Footer = async () => {
       role='contentinfo'
       aria-label='Site footer'
     >
-      <WebStats />
+      <Suspense fallback={null}>
+        <WebStats />
+      </Suspense>
       <nav
         className='grid grid-flow-col gap-4 pt-4'
         aria-label='Footer navigation'
@@ -83,9 +86,7 @@ const Footer = async () => {
           </Link>
           .
         </div>
-        <p className='flex items-center'>
-          © {new Date().getFullYear()} {userBasicInfo.fullName}
-        </p>
+        <Copyright />
       </aside>
     </footer>
   );

@@ -8,6 +8,9 @@ import {
   GitHubRepoGridSkeleton,
 } from '@/components/Common/Loading';
 
+// Skip prerendering - fetch data at request time to avoid ECONNREFUSED during build
+export const dynamic = 'force-dynamic';
+
 const PAGE_TITLE = 'GitHub';
 const PAGE_DESCRIPTION =
   'My GitHub contribution stats, analytics, and open-source projects showcase.';

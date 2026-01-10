@@ -3,17 +3,23 @@ import { getClient } from '@umami/api-client';
 import FontAwesomeIcon from '@/common/elements/FontAwesomeIcon';
 
 const WebStats = async () => {
+  const websiteId = process.env.UMAMI_WEBSITE_ID;
+  const shareUrl = process.env.UMAMI_SHARE_URL;
+
+  // Return null if Umami is not configured
+  if (!websiteId || !shareUrl) {
+    return null;
+  }
+
   const client = getClient();
-  const { ok, status, data, error } = await client.getWebsiteStats(
-    process.env.UMAMI_WEBSITE_ID,
-    {
-      startAt: 0,
-      endAt: new Date().getTime(),
-    },
-  );
+  const { ok, status, data, error } = await client.getWebsiteStats(websiteId, {
+    startAt: 0,
+    endAt: new Date().getTime(),
+  });
 
   if (!ok || error) {
     console.error('Error fetching website stats', status, error);
+    return null;
   }
 
   const webstats = {
@@ -24,7 +30,7 @@ const WebStats = async () => {
 
   return (
     <Link
-      href={process.env.UMAMI_SHARE_URL}
+      href={shareUrl}
       target='_blank'
       rel='noopener noreferrer'
       className='grid auto-cols-max grid-flow-col gap-3 text-center transition-opacity hover:opacity-80'
