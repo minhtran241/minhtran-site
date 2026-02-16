@@ -1,47 +1,50 @@
 import { FlatCompat } from '@eslint/eslintrc';
+import { fixupConfigRules, fixupPluginRules } from '@eslint/compat'; // Import the fixup tools
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const compat = new FlatCompat({
-  // import.meta.dirname is available after Node.js v20.11.0
-  baseDirectory: import.meta.dirname,
+  baseDirectory: __dirname,
 });
 
 const eslintConfig = [
-  ...compat.config({
-    extends: ['prettier'],
-    plugins: ['@next/next', 'react'],
-    parserOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
-      ecmaFeatures: {
-        jsx: true,
+  {
+    ignores: ['.next/**', 'node_modules/**', 'dist/**'],
+  },
+  // Wrap the entire compat result in fixupConfigRules
+  ...fixupConfigRules(
+    compat.config({
+      extends: ['prettier'],
+      plugins: ['@next/next', 'react'],
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        ecmaFeatures: { jsx: true },
       },
-    },
-    rules: {
-      // Next.js optimizations
-      '@next/next/no-img-element': 'error',
-      '@next/next/no-html-link-for-pages': 'error',
-
-      // React best practices
-      'react/jsx-curly-brace-presence': [
-        'warn',
-        { props: 'never', children: 'never' },
-      ],
-      'react/self-closing-comp': 'warn',
-
-      // General code quality
-      'prefer-const': 'error',
-
-      // DaisyUI specific - allow data-* attributes
-      'react/no-unknown-property': ['error', { ignore: ['data-theme'] }],
-      'react/react-in-jsx-scope': 'off',
-      'react/prop-types': 'off',
-    },
-    settings: {
-      react: {
-        version: 'detect', // Automatically detect React version
+      rules: {
+        '@next/next/no-img-element': 'error',
+        '@next/next/no-html-link-for-pages': 'error',
+        'react/jsx-curly-brace-presence': [
+          'warn',
+          { props: 'never', children: 'never' },
+        ],
+        'react/self-closing-comp': 'warn',
+        'prefer-const': 'error',
+        'react/no-unknown-property': [
+          'error',
+          { ignore: ['data-theme', 'data-scroll-behavior'] },
+        ],
+        'react/react-in-jsx-scope': 'off',
+        'react/prop-types': 'off',
       },
-    },
-  }),
+      settings: {
+        react: { version: 'detect' },
+      },
+    }),
+  ),
 ];
 
 export default eslintConfig;
