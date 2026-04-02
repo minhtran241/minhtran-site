@@ -178,7 +178,7 @@ const NewsLogs = async () => {
           <p className='mt-2 text-sm sm:text-base'>Check back soon for news!</p>
         </div>
       ) : (
-        <div className='scrollbar-thin scrollbar-thumb-base-content/20 scrollbar-track-transparent hover:scrollbar-thumb-base-content/30 mt-4 max-h-[600px] overflow-y-auto pr-2'>
+        <div className='scroll-thin mt-4 h-88 overflow-y-scroll overscroll-contain pr-2'>
           <div className='flex flex-col gap-3'>
             {logs.map((log, index) => (
               <LogLine key={index} log={log} />

@@ -121,6 +121,34 @@
     scrollbar-width: none; /* Firefox */
   }
 
+  /* Thin scrollbar utility */
+  .scroll-thin {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(
+        in oklch,
+        var(--color-base-content) 25%,
+        transparent
+      )
+      transparent;
+  }
+
+  .scroll-thin::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .scroll-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scroll-thin::-webkit-scrollbar-thumb {
+    background: color-mix(in oklch, var(--color-base-content) 25%, transparent);
+    border-radius: 9999px;
+  }
+
+  .scroll-thin:hover::-webkit-scrollbar-thumb {
+    background: color-mix(in oklch, var(--color-base-content) 40%, transparent);
+  }
+
   /* Focus visible utilities for better keyboard navigation */
   .focus-visible-ring {
     @apply focus-visible:ring-primary focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none;
@@ -205,7 +233,7 @@
 } */
 
 /* Plugin imports - Note: These may need to be updated for v4 compatibility */
-@plugin "daisyui" {
+@plugin 'daisyui' {
   themes:
     gvsu --default,
     light,
@@ -220,7 +248,7 @@
 }
 
 /* GVSU Custom Theme */
-@plugin "daisyui/theme" {
+@plugin 'daisyui/theme' {
   name: 'gvsu';
   default: true;
   prefersdark: false;
@@ -282,4 +310,4 @@
 }
 
 @plugin 'tailwind-scrollbar';
-@plugin "@tailwindcss/typography";
+@plugin '@tailwindcss/typography';

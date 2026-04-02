@@ -8,7 +8,7 @@
   {
     "date": "2025-04-08",
     "type": "publication",
-    "title": "Paper [A Distributed Edge Computing Prototype Using Raspberry PIs](https://doi.org/10.1109/AIIoT65859.2025.11105362) has been accepted to 2025 IEEE AIIoT.",
+    "title": "Paper [A Distributed Edge Computing Prototype Using Raspberry PIs](https://doi.org/10.1109/AIIoT65859.2025.11105362) has been accepted to [2025 IEEE AIIoT](https://www.ieee-aiot.org/).",
     "link": ""
   },
   {
@@ -50,7 +50,13 @@
   {
     "date": "2026-01-28",
     "type": "publication",
-    "title": "Paper **Data Allocation for Performance Improvement in Edge Computing** has been accepted to 2026 IEEE SoutheastCon.",
+    "title": "Paper **Data Allocation for Performance Improvement in Edge Computing** has been accepted to 2026 [IEEE SoutheastCon](https://ieeesoutheastcon.org/).",
+    "link": ""
+  },
+  {
+    "date": "2026-03-31",
+    "type": "publication",
+    "title": "Paper **Efficient Layout-Aware Document Understanding for Educational Transcripts via Systematic Model Compression** has been accepted to [MLCI 2026](https://www.icmlci.com/index.html).",
     "link": ""
   }
 ]
