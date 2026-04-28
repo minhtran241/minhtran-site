@@ -33,5 +33,41 @@
     "code_link": "https://github.com/minhtran241/edge-computing-models",
     "supplementary_link": "",
     "bibtex": "@INPROCEEDINGS{\n 11105362,\n author={Tran, Minh and Cao, Xiang},\n booktitle={2025 IEEE World AI IoT Congress (AIIoT)},\n title={A Distributed Edge Computing Prototype Using Raspberry PIs},\n year={2025},\n volume={},\n number={},\n pages={0662-0668},\n keywords={Performance evaluation;Computational modeling;Prototypes;Parallel processing;Servers;Internet of Things;Time factors;Distributed computing;Artificial intelligence;Edge computing;Edge Computing;Raspberry Pi;Prototype;Distributed Computing},\n doi={10.1109/AIIoT65859.2025.11105362}}"
+  },
+  {
+    "id": 2,
+    "date": "2026-02-20T05:00:00.000Z",
+    "type": "Conference",
+    "title": "Data Allocation for Performance Improvement in Edge Computing",
+    "description": "Edge computing has been a novel computing paradigm that can improve system performance by positioning server resources closer to users. In edge computing, edge servers store data from data sources and provide shorter data access latencies for users. In this paper, we investigate the impact of data allocation on data access latencies by considering multiple factors, including heterogeneous user access frequencies, diverse data sizes, varying numbers of data and users, and data access bandwidth differences. We propose a data allocation approach to improve the performance by reducing the total data access latencies for users in edge computing. We evaluate our approach by implementing it using Raspberry Pi devices and conducting hands-on experiments. We also run extensive simulations for large-scale deployments to show the performance. Both implementation and simulation results demonstrate our approach can effectively reduce the total data access latencies for users.",
+    "collaborators": [
+      {
+        "name": "Minh Tran",
+        "link": "https://scholar.google.com/citations?user=EiLVS6UAAAAJ"
+      },
+      {
+        "name": "Xiang Cao",
+        "link": "https://ieeexplore.ieee.org/author/37087008129"
+      }
+    ],
+    "journal": "",
+    "published_in": "SoutheastCon 2026",
+    "published_in_link": "https://ieeexplore.ieee.org/xpl/conhome/11475917/proceeding",
+    "location": "Huntsville, AL, USA",
+    "doi": "10.1109/SoutheastCon63549.2026.11476452",
+    "citations": 0,
+    "created_at": "2026-02-20T05:00:00.000Z",
+    "updated_at": "2026-02-20T05:00:00.000Z",
+    "images": [
+      "/home/publication/SoutheastCon63549.2026.11476452/image1.png",
+      "/home/publication/SoutheastCon63549.2026.11476452/image2.png",
+      "/home/publication/SoutheastCon63549.2026.11476452/image3.png",
+      "/home/publication/SoutheastCon63549.2026.11476452/image4.png",
+      "/home/publication/SoutheastCon63549.2026.11476452/image5.png"
+    ],
+    "paper_link": "https://ieeexplore.ieee.org/document/11476452",
+    "code_link": "https://github.com/minhtran241/edge-data-placement",
+    "supplementary_link": "",
+    "bibtex": "@INPROCEEDINGS{\n 11476452, \n author={Tran, Minh and Cao, Xiang}, \n booktitle={SoutheastCon 2026}, \n title={Data Allocation for Performance Improvement in Edge Computing}, \n year={2026}, \n volume={}, \n number={}, \n pages={1-6}, \n keywords={Radio broadcasting;Frequency modulation;Communication systems;Internet of Things;Radio access networks;Regional area networks;Internet;Quality of service;Cloud computing;Computer networks;Edge Computing;Data Allocation;Latency;Raspberry Pi}, \n doi={10.1109/SoutheastCon63549 2026.11476452}}"
   }
 ]
